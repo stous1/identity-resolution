@@ -214,3 +214,115 @@ def umbral_min_costo(curva: pd.DataFrame, costo_fp: float = 10.0, costo_fn: floa
     con_costo = agregar_costo(curva, costo_fp, costo_fn)
     minimo = con_costo["costo"].min()
     return float(con_costo.loc[con_costo["costo"] == minimo, "umbral"].max())
+
+
+def pares_inducidos(clusters: pd.DataFrame) -> pd.DataFrame:
+    """Todos los pares de registros que quedan en el mismo clúster predicho."""
+    return pares_verdaderos(clusters, col_id="unique_id", col_grupo="cluster_id")
+
+
+def contribuciones_por_persona(
+    positivos: pd.DataFrame,
+    df: pd.DataFrame,
+    clusters: pd.DataFrame | None = None,
+    col_id: str = "unique_id",
+    col_grupo: str = "cluster",
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Descompone los aciertos y errores de ``positivos`` por persona verdadera.
+
+    ``positivos`` son los pares que el modelo declara iguales (columnas ``id_l``,
+    ``id_r``): los que superan el umbral, o los inducidos por los clústeres. Devuelve:
+
+    - ``por_persona``: ``persona``, ``tp`` (pares de la persona encontrados) y ``fn``
+      (pares de la persona no encontrados). Si se dan ``clusters``, también ``exacto``:
+      1 si la persona quedó reconstruida exactamente en un solo clúster.
+    - ``cruzados``: ``persona_a``, ``persona_b``, ``fp``: falsos positivos entre dos
+      personas distintas.
+
+    Sumando las contribuciones se recuperan TP, FN y FP totales, lo que permite
+    remuestrear personas sin volver a correr el modelo.
+    """
+    persona = df.set_index(col_id)[col_grupo]
+    pos = positivos[["id_l", "id_r"]].assign(
+        persona_a=lambda d: d["id_l"].map(persona).to_numpy(),
+        persona_b=lambda d: d["id_r"].map(persona).to_numpy(),
+    )
+    mismos = pos[pos["persona_a"] == pos["persona_b"]]
+    tp = mismos.groupby("persona_a").size()
+    tamano = df.groupby(col_grupo).size()
+    por_persona = pd.DataFrame({"persona": tamano.index, "pares": tamano * (tamano - 1) // 2})
+    por_persona["tp"] = por_persona["persona"].map(tp).fillna(0).astype(int)
+    por_persona["fn"] = por_persona["pares"] - por_persona["tp"]
+
+    if clusters is not None:
+        asignacion = df[[col_id, col_grupo]].merge(
+            clusters[["unique_id", "cluster_id"]], left_on=col_id, right_on="unique_id"
+        )
+        tamano_pred = asignacion.groupby("cluster_id").size()
+        por_cluster = asignacion.groupby(col_grupo).agg(
+            n_pred=("cluster_id", "nunique"), cluster_id=("cluster_id", "first")
+        )
+        exacto = (por_cluster["n_pred"] == 1) & (
+            por_cluster["cluster_id"].map(tamano_pred).to_numpy() == tamano.loc[por_cluster.index]
+        )
+        por_persona["exacto"] = por_persona["persona"].map(exacto).astype(int)
+
+    distintos = pos[pos["persona_a"] != pos["persona_b"]]
+    a = distintos[["persona_a", "persona_b"]].min(axis=1)
+    b = distintos[["persona_a", "persona_b"]].max(axis=1)
+    cruzados = (
+        pd.DataFrame({"persona_a": a, "persona_b": b})
+        .groupby(["persona_a", "persona_b"])
+        .size()
+        .rename("fp")
+        .reset_index()
+    )
+    return por_persona.drop(columns="pares").reset_index(drop=True), cruzados
+
+
+def bootstrap_por_persona(
+    por_persona: pd.DataFrame,
+    cruzados: pd.DataFrame,
+    n: int = 1000,
+    semilla: int = 0,
+    nivel: float = 0.95,
+) -> dict[str, dict[str, float]]:
+    """Intervalos de confianza por bootstrap remuestreando personas con reemplazo.
+
+    Cada réplica sortea tantas personas como hay, con reemplazo, y les da un peso
+    igual a las veces que salieron. TP y FN de una persona se multiplican por su peso;
+    un falso positivo entre dos personas cuenta el producto de sus pesos (existe solo si
+    ambas están en la réplica). Devuelve, por métrica, el valor observado y el
+    intervalo percentil.
+    """
+    personas = por_persona["persona"].to_numpy()
+    indice = {p: i for i, p in enumerate(personas)}
+    rng = np.random.default_rng(semilla)
+    pesos = rng.multinomial(len(personas), np.full(len(personas), 1 / len(personas)), size=n)
+    pesos = np.vstack([np.ones(len(personas), dtype=int), pesos])  # fila 0: muestra original
+
+    tp = pesos @ por_persona["tp"].to_numpy()
+    fn = pesos @ por_persona["fn"].to_numpy()
+    ia = cruzados["persona_a"].map(indice).to_numpy(dtype=int)
+    ib = cruzados["persona_b"].map(indice).to_numpy(dtype=int)
+    fp = (pesos[:, ia] * pesos[:, ib]) @ cruzados["fp"].to_numpy() if len(cruzados) else 0 * tp
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        precision = np.where(tp + fp > 0, tp / (tp + fp), np.nan)
+        recall = np.where(tp + fn > 0, tp / (tp + fn), np.nan)
+        f1 = np.where(precision + recall > 0, 2 * precision * recall / (precision + recall), 0.0)
+    series = {"precision": precision, "recall": recall, "f1": f1}
+    if "exacto" in por_persona:
+        series["pct_clusters_exactos"] = (pesos @ por_persona["exacto"].to_numpy()) / pesos.sum(
+            axis=1
+        )
+
+    alfa = (1 - nivel) / 2
+    return {
+        nombre: {
+            "valor": float(valores[0]),
+            "ic_inf": float(np.nanquantile(valores[1:], alfa)),
+            "ic_sup": float(np.nanquantile(valores[1:], 1 - alfa)),
+        }
+        for nombre, valores in series.items()
+    }

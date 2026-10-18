@@ -146,3 +146,58 @@ def test_umbral_min_costo_depende_de_los_costos(curva_costos):
     assert evaluacion.umbral_min_costo(curva_costos, costo_fp=1, costo_fn=1) == 0.5
     # Si el FN es mucho más caro: 5, 21, 60, 60 -> 0.2.
     assert evaluacion.umbral_min_costo(curva_costos, costo_fp=1, costo_fn=10) == 0.2
+
+
+def test_contribuciones_por_persona(registros_pequenos):
+    # Positivos: (0,1) acierto de la persona 0; (1,2) error entre personas 0 y 1.
+    positivos = pd.DataFrame({"id_l": [0, 1], "id_r": [1, 2]})
+
+    por_persona, cruzados = evaluacion.contribuciones_por_persona(positivos, registros_pequenos)
+
+    assert por_persona[["persona", "tp", "fn"]].to_numpy().tolist() == [
+        [0, 1, 0],
+        [1, 0, 1],
+        [2, 0, 1],
+    ]
+    assert cruzados.to_numpy().tolist() == [[0, 1, 1]]
+
+
+def test_bootstrap_valor_observado_coincide_con_metricas(pred, verdaderos, registros_pequenos):
+    marcadas = evaluacion.marcar_verdaderos(pred, verdaderos)
+    positivos = marcadas[marcadas["match_probability"] >= 0.9]
+    por_persona, cruzados = evaluacion.contribuciones_por_persona(positivos, registros_pequenos)
+
+    ic = evaluacion.bootstrap_por_persona(por_persona, cruzados, n=200, semilla=1)
+    directas = evaluacion.metricas_pares(pred, verdaderos, umbral=0.9)
+
+    for metrica in ("precision", "recall", "f1"):
+        assert ic[metrica]["valor"] == pytest.approx(directas[metrica])
+        assert 0 <= ic[metrica]["ic_inf"] <= ic[metrica]["ic_sup"] <= 1
+
+
+def test_bootstrap_sin_falsos_positivos_da_precision_uno(registros_pequenos):
+    positivos = pd.DataFrame({"id_l": [0], "id_r": [1]})
+    por_persona, cruzados = evaluacion.contribuciones_por_persona(positivos, registros_pequenos)
+
+    ic = evaluacion.bootstrap_por_persona(por_persona, cruzados, n=200)
+
+    assert cruzados.empty
+    assert ic["precision"]["valor"] == 1.0
+    assert ic["recall"]["valor"] == pytest.approx(1 / 3)
+
+
+def test_bootstrap_clusters_y_exactos(registros_pequenos):
+    # Clústeres: {0,1,2} mezcla; {3}; {4,5} correcto.
+    clusters = pd.DataFrame({"unique_id": [0, 1, 2, 3, 4, 5], "cluster_id": [0, 0, 0, 3, 4, 4]})
+    positivos = evaluacion.pares_inducidos(clusters)
+
+    por_persona, cruzados = evaluacion.contribuciones_por_persona(
+        positivos, registros_pequenos, clusters
+    )
+    ic = evaluacion.bootstrap_por_persona(por_persona, cruzados, n=200)
+    directas = evaluacion.metricas_cluster(clusters, registros_pequenos)
+
+    assert por_persona["exacto"].tolist() == [0, 0, 1]
+    assert ic["pct_clusters_exactos"]["valor"] == pytest.approx(directas["pct_clusters_exactos"])
+    for metrica in ("precision", "recall", "f1"):
+        assert ic[metrica]["valor"] == pytest.approx(directas[metrica])
