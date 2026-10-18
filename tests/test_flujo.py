@@ -106,3 +106,11 @@ def test_candidatos_incluyen_seleccion_y_referencia():
     assert candidatos["exactas"] == modelo.BLOQUEOS_EXACTOS
     assert candidatos["selección"] == modelo.BLOQUEOS_PREDICCION
     assert len(candidatos["todas"]) > len(candidatos["selección"])
+
+
+def test_reglas_candidatas_son_sql_valido():
+    # Todas las reglas que compara comparar_bloqueos deben poder ejecutarse.
+    df = _muestra_sintetica(n_personas=5)
+    for regla in candidatos_bloqueo()["todas"]:
+        linker = modelo.crear_linker(df, modelo.crear_settings([regla]))
+        assert linker.inference.predict().as_pandas_dataframe() is not None, regla

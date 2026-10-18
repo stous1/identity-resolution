@@ -16,7 +16,7 @@ from splink.internals.splink_dataframe import SplinkDataFrame
 COLUMNAS_COMPARACION: list[str] = ["first_name", "surname", "dob", "city", "email"]
 
 # Columnas derivadas que agrega ``preparar`` para el bloqueo aproximado.
-COLUMNAS_DERIVADAS: list[str] = ["surname_soundex", "first_name_metaphone"]
+COLUMNAS_DERIVADAS: list[str] = ["surname_soundex", "surname_metaphone", "first_name_metaphone"]
 
 # Bloqueo para predecir: solo se comparan pares que coinciden en alguna de estas reglas.
 # Cada regla es una tupla de columnas o expresiones SQL que deben coincidir a la vez.
@@ -75,10 +75,12 @@ def preparar(df: pd.DataFrame) -> pd.DataFrame:
     """Agrega las columnas fonéticas que usa el bloqueo aproximado.
 
     - ``surname_soundex``: Soundex del apellido ("Allen" y "Alan" -> "A450").
+    - ``surname_metaphone``: Metaphone del apellido (probada y descartada en el bloqueo).
     - ``first_name_metaphone``: Metaphone del nombre ("Smith" y "Smyth" -> "SM0").
     """
     return df.assign(
         surname_soundex=df["surname"].map(_codigo_fonetico(jellyfish.soundex)),
+        surname_metaphone=df["surname"].map(_codigo_fonetico(jellyfish.metaphone)),
         first_name_metaphone=df["first_name"].map(_codigo_fonetico(jellyfish.metaphone)),
     )
 
