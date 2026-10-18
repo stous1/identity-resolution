@@ -13,6 +13,7 @@ dependencies = [
     "faker",
     "altair",
     "vl-convert-python",
+    "jellyfish>=1.3.0",
 ]
 
 [dependency-groups]

@@ -6,7 +6,8 @@ import pandas as pd
 import pytest
 from faker import Faker
 
-from identidades.flujo import ejecutar_hito1
+from identidades import modelo
+from identidades.flujo import candidatos_bloqueo, comparar_bloqueos, ejecutar_hito1
 
 
 def _muestra_sintetica(n_personas: int = 60, semilla: int = 7) -> pd.DataFrame:
@@ -41,7 +42,7 @@ def _muestra_sintetica(n_personas: int = 60, semilla: int = 7) -> pd.DataFrame:
 def test_flujo_completo_genera_salidas(tmp_path):
     df = _muestra_sintetica()
 
-    metricas = ejecutar_hito1(df, tmp_path, umbral=0.9, capturas=False)
+    metricas = ejecutar_hito1(df, tmp_path, umbral=0.9, capturas=False, comparar=False)
 
     for nombre in [
         "modelo.json",
@@ -65,3 +66,30 @@ def test_flujo_completo_genera_salidas(tmp_path):
             assert 0 <= metricas[seccion][clave] <= 1
     assert 0 <= metricas["bloqueo"]["recall_bloqueo"] <= 1
     assert metricas["dataset"]["registros"] == len(df)
+
+
+@pytest.mark.integracion
+def test_comparar_bloqueos_mide_cada_candidato():
+    df = _muestra_sintetica(n_personas=40)
+    candidatos = {
+        "solo dob": [("dob",)],
+        "dob + email": [("dob",), ("email",)],
+    }
+
+    tabla = comparar_bloqueos(df, candidatos, umbral=0.9)
+
+    assert tabla["candidato"].tolist() == list(candidatos)
+    assert tabla["reglas"].tolist() == [1, 2]
+    # Agregar reglas nunca reduce los pares comparados ni el recall del bloqueo.
+    assert tabla["pares_comparados"].is_monotonic_increasing
+    assert tabla["recall_bloqueo"].is_monotonic_increasing
+    for columna in ("recall_bloqueo", "precision_par", "recall_cluster"):
+        assert tabla[columna].between(0, 1).all()
+
+
+def test_candidatos_incluyen_seleccion_y_referencia():
+    candidatos = candidatos_bloqueo()
+
+    assert candidatos["exactas"] == modelo.BLOQUEOS_EXACTOS
+    assert candidatos["selección"] == modelo.BLOQUEOS_PREDICCION
+    assert len(candidatos["todas"]) > len(candidatos["selección"])
