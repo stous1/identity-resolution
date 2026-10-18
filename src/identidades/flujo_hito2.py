@@ -44,6 +44,7 @@ ARCHIVOS_PUBLICABLES: list[str] = [
     "parametros_mu.png",
     "pesos.html",
     "pesos.png",
+    "modelo.json",
 ]
 
 # Atributo de la persona -> (etiqueta si es verdadero, etiqueta si es falso).
