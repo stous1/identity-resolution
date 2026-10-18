@@ -37,8 +37,8 @@ uv run python scripts/publicar_resultados.py # copia resultados finales -> docs/
 
 - `src/identidades/`: toda la lógica, como funciones reutilizables.
   - `rutas.py`: rutas del proyecto. **Toda ruta se obtiene de aquí.**
-  - `datos.py`, `modelo.py`, `evaluacion.py`, `tableros.py` y `flujo.py` (flujo del hito
-    y publicación de resultados).
+  - `datos.py`, `modelo.py`, `bloqueo.py`, `evaluacion.py`, `tableros.py` y `flujo.py`
+    (flujo del hito y publicación de resultados).
 - `scripts/`: puntos de entrada delgados que orquestan funciones de `src/`.
 - `notebooks/`: solo exploración. Nada en `src/` ni `scripts/` importa de notebooks.
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.
@@ -56,6 +56,15 @@ uv run python scripts/publicar_resultados.py # copia resultados finales -> docs/
 - Documentación, docstrings y mensajes de commit **en español**.
 - Rutas centralizadas en `identidades.rutas`; **nunca rutas absolutas** en el código.
 - Commits pequeños y enfocados. No hacer commit sin mostrar antes qué se va a subir.
+
+## Regla de evaluación
+
+- Toda decisión que mire la verdad conocida (reglas de bloqueo, umbral, parámetros) se toma
+  solo en **desarrollo**. Las métricas principales se reportan en **prueba**, medidas una sola
+  vez y con intervalos de confianza (bootstrap por persona).
+- La partición es por persona: todos los registros de una persona quedan del mismo lado.
+- Métricas medidas sobre los mismos datos con que se eligió algo se presentan solo como
+  referencia y marcadas como optimistas.
 
 ## Regla dura de datos
 

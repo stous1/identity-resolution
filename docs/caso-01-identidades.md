@@ -66,7 +66,9 @@ de casos dudosos con un agente.
 
 1. **fake_1000 de punta a punta** (completado): carga del dataset de demostración de Splink,
    entrenamiento sin etiquetas, evaluación contra los grupos verdaderos (por par, por clúster,
-   por umbral y recall perdido por el bloqueo) y tableros HTML de Splink. Resultados en el
+   por umbral y recall perdido por el bloqueo) y tableros HTML de Splink. Bloqueo y umbral se
+   eligen en desarrollo (60 % de las personas) y las métricas se miden en prueba (40 %), con
+   intervalos de confianza por bootstrap. Resultados en el
    [README](https://github.com/stous1/identity-resolution#hito-1-fake_1000-de-punta-a-punta)
    y en [los tableros publicados](index.md).
 2. Sintéticos colombianos con Faker y estandarización.

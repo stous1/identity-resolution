@@ -3,8 +3,22 @@
     "registros": 1000,
     "personas": 251
   },
+  "particion": {
+    "frac_desarrollo": 0.6,
+    "semilla": 42,
+    "desarrollo": {
+      "registros": 608,
+      "personas": 151
+    },
+    "prueba": {
+      "registros": 392,
+      "personas": 100
+    }
+  },
   "modelo": {
-    "probability_two_random_records_match": 0.0033319033319033323,
+    "entrenado_en": "desarrollo",
+    "lambda_desarrollo": 0.005527616405098414,
+    "lambda_prueba": 0.00816475658586416,
     "bloqueos_prediccion": [
       [
         "first_name"
@@ -19,21 +33,10 @@
         "email"
       ],
       [
-        "surname_soundex"
-      ],
-      [
-        "first_name_metaphone"
-      ],
-      [
-        "substr(dob, 1, 4)",
-        "substr(surname, 1, 1)"
-      ],
-      [
-        "substr(dob, 1, 4)",
-        "substr(first_name, 1, 1)"
-      ],
-      [
         "substr(email, 1, 4)"
+      ],
+      [
+        "surname_soundex"
       ],
       [
         "city",
@@ -52,131 +55,303 @@
   },
   "umbral": {
     "criterio": "min_costo_cluster",
-    "valor": 0.84,
+    "valor": 0.83,
+    "elegido_en": "desarrollo",
     "costo_fp": 10.0,
     "costo_fn": 1.0
   },
-  "umbrales": [
-    {
-      "criterio": "fijo",
-      "umbral": 0.9,
-      "pares": {
-        "tp": 1426,
-        "fp": 0,
-        "fn": 605,
-        "precision": 1.0,
-        "recall": 0.7021171836533727,
-        "f1": 0.8249927682962105
-      },
-      "costo_pares": 605.0,
-      "clusters": {
-        "tp": 1780,
-        "fp": 0,
-        "fn": 251,
-        "precision": 1.0,
-        "recall": 0.8764155588380108,
-        "f1": 0.9341380215166624,
-        "clusters_exactos": 191
-      },
-      "costo_clusters": 251.0
+  "prueba": {
+    "bloqueo": {
+      "pares_comparados": 1262,
+      "pares_verdaderos": 808,
+      "pares_verdaderos_comparados": 734,
+      "recall_bloqueo": 0.9084158415841584,
+      "recall_perdido_por_bloqueo": 0.09158415841584155
     },
-    {
-      "criterio": "max_f1_par",
-      "umbral": 0.19,
-      "pares": {
-        "tp": 1726,
-        "fp": 65,
-        "fn": 305,
-        "precision": 0.9637074260189838,
-        "recall": 0.8498276710979813,
-        "f1": 0.903192046049189
-      },
-      "costo_pares": 955.0,
-      "clusters": {
-        "tp": 1946,
-        "fp": 924,
-        "fn": 85,
-        "precision": 0.6780487804878049,
-        "recall": 0.9581486952240276,
-        "f1": 0.7941236482350541,
-        "clusters_exactos": 181
-      },
-      "costo_clusters": 9325.0
+    "pares": {
+      "umbral": 0.83,
+      "tp": 573,
+      "fp": 1,
+      "fn": 235,
+      "precision": 0.9982578397212544,
+      "recall": 0.7091584158415841,
+      "f1": 0.829232995658466
     },
-    {
-      "criterio": "min_costo_par",
-      "umbral": 0.75,
-      "pares": {
-        "tp": 1541,
-        "fp": 2,
-        "fn": 490,
-        "precision": 0.998703823720026,
-        "recall": 0.758739537173806,
-        "f1": 0.8623391158365977
-      },
-      "costo_pares": 510.0,
-      "clusters": {
-        "tp": 1868,
-        "fp": 15,
-        "fn": 163,
-        "precision": 0.9920339883165162,
-        "recall": 0.9197439684884293,
-        "f1": 0.9545222278998466,
-        "clusters_exactos": 206
-      },
-      "costo_clusters": 313.0
+    "clusters": {
+      "umbral": 0.83,
+      "tp": 688,
+      "fp": 21,
+      "fn": 120,
+      "precision": 0.9703808180535967,
+      "recall": 0.8514851485148515,
+      "f1": 0.9070533948582729,
+      "clusters_predichos": 129,
+      "clusters_reales": 100,
+      "clusters_exactos": 73,
+      "pct_clusters_exactos": 0.73
     },
-    {
-      "criterio": "min_costo_cluster",
-      "umbral": 0.84,
+    "intervalos": {
+      "metodo": "bootstrap percentil remuestreando personas",
+      "nivel": 0.95,
+      "replicas": 1000,
+      "personas": 100,
       "pares": {
-        "tp": 1484,
-        "fp": 0,
-        "fn": 547,
-        "precision": 1.0,
-        "recall": 0.7306745445593303,
-        "f1": 0.8443812233285918
+        "precision": {
+          "valor": 0.9982578397212544,
+          "ic_inf": 0.9909439124487005,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.7091584158415841,
+          "ic_inf": 0.6491218627839783,
+          "ic_sup": 0.7606391087182148
+        },
+        "f1": {
+          "valor": 0.829232995658466,
+          "ic_inf": 0.7861783982330629,
+          "ic_sup": 0.8635441537175027
+        }
       },
-      "costo_pares": 547.0,
       "clusters": {
-        "tp": 1837,
-        "fp": 0,
-        "fn": 194,
-        "precision": 1.0,
-        "recall": 0.9044805514524865,
-        "f1": 0.9498448810754913,
-        "clusters_exactos": 205
-      },
-      "costo_clusters": 194.0
+        "precision": {
+          "valor": 0.9703808180535967,
+          "ic_inf": 0.8635684995340169,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.8514851485148515,
+          "ic_inf": 0.7895498014521017,
+          "ic_sup": 0.9027160111267597
+        },
+        "f1": {
+          "valor": 0.9070533948582729,
+          "ic_inf": 0.845255772177608,
+          "ic_sup": 0.946408974407535
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.73,
+          "ic_inf": 0.64,
+          "ic_sup": 0.81
+        }
+      }
     }
-  ],
-  "bloqueo": {
-    "pares_comparados": 7110,
-    "pares_verdaderos": 2031,
-    "pares_verdaderos_comparados": 1876,
-    "recall_bloqueo": 0.9236829148202855,
-    "recall_perdido_por_bloqueo": 0.07631708517971447
   },
-  "pares": {
-    "umbral": 0.84,
-    "tp": 1484,
-    "fp": 0,
-    "fn": 547,
-    "precision": 1.0,
-    "recall": 0.7306745445593303,
-    "f1": 0.8443812233285918
+  "desarrollo": {
+    "bloqueo": {
+      "pares_comparados": 2544,
+      "pares_verdaderos": 1223,
+      "pares_verdaderos_comparados": 1122,
+      "recall_bloqueo": 0.9174161896974653,
+      "recall_perdido_por_bloqueo": 0.0825838103025347
+    },
+    "pares": {
+      "umbral": 0.83,
+      "tp": 888,
+      "fp": 0,
+      "fn": 335,
+      "precision": 1.0,
+      "recall": 0.7260834014717906,
+      "f1": 0.8413074372335386
+    },
+    "clusters": {
+      "umbral": 0.83,
+      "tp": 1137,
+      "fp": 0,
+      "fn": 86,
+      "precision": 1.0,
+      "recall": 0.9296811120196239,
+      "f1": 0.9635593220338984,
+      "clusters_predichos": 180,
+      "clusters_reales": 151,
+      "clusters_exactos": 127,
+      "pct_clusters_exactos": 0.8410596026490066
+    },
+    "seleccion_bloqueos": [
+      {
+        "regla_agregada": "exactas",
+        "reglas": 4,
+        "pares_comparados": 1771,
+        "recall_bloqueo": 0.8135731807031888,
+        "ganancia_recall": 0.0
+      },
+      {
+        "regla_agregada": "substr(email, 1, 4)",
+        "reglas": 5,
+        "pares_comparados": 2028,
+        "recall_bloqueo": 0.8830744071954211,
+        "ganancia_recall": 0.06950122649223221
+      },
+      {
+        "regla_agregada": "surname_soundex",
+        "reglas": 6,
+        "pares_comparados": 2436,
+        "recall_bloqueo": 0.9067865903515945,
+        "ganancia_recall": 0.023712183156173343
+      },
+      {
+        "regla_agregada": "city & substr(dob, 1, 4)",
+        "reglas": 7,
+        "pares_comparados": 2544,
+        "recall_bloqueo": 0.9174161896974653,
+        "ganancia_recall": 0.01062959934587081
+      }
+    ],
+    "umbrales": [
+      {
+        "criterio": "fijo",
+        "umbral": 0.9,
+        "pares": {
+          "tp": 855,
+          "fp": 0,
+          "fn": 368,
+          "precision": 1.0,
+          "recall": 0.6991005723630417,
+          "f1": 0.8229066410009624
+        },
+        "costo_pares": 368.0,
+        "clusters": {
+          "tp": 1103,
+          "fp": 0,
+          "fn": 120,
+          "precision": 1.0,
+          "recall": 0.901880621422731,
+          "f1": 0.9484092863284609,
+          "clusters_exactos": 120
+        },
+        "costo_clusters": 120.0
+      },
+      {
+        "criterio": "max_f1_par",
+        "umbral": 0.11,
+        "pares": {
+          "tp": 1071,
+          "fp": 44,
+          "fn": 152,
+          "precision": 0.9605381165919282,
+          "recall": 0.8757154538021259,
+          "f1": 0.9161676646706587
+        },
+        "costo_pares": 592.0,
+        "clusters": {
+          "tp": 1192,
+          "fp": 454,
+          "fn": 31,
+          "precision": 0.724179829890644,
+          "recall": 0.9746524938675388,
+          "f1": 0.8309515510630882,
+          "clusters_exactos": 109
+        },
+        "costo_clusters": 4571.0
+      },
+      {
+        "criterio": "min_costo_par",
+        "umbral": 0.82,
+        "pares": {
+          "tp": 893,
+          "fp": 0,
+          "fn": 330,
+          "precision": 1.0,
+          "recall": 0.7301717089125103,
+          "f1": 0.8440453686200378
+        },
+        "costo_pares": 330.0,
+        "clusters": {
+          "tp": 1137,
+          "fp": 0,
+          "fn": 86,
+          "precision": 1.0,
+          "recall": 0.9296811120196239,
+          "f1": 0.9635593220338984,
+          "clusters_exactos": 127
+        },
+        "costo_clusters": 86.0
+      },
+      {
+        "criterio": "min_costo_cluster",
+        "umbral": 0.83,
+        "pares": {
+          "tp": 888,
+          "fp": 0,
+          "fn": 335,
+          "precision": 1.0,
+          "recall": 0.7260834014717906,
+          "f1": 0.8413074372335386
+        },
+        "costo_pares": 335.0,
+        "clusters": {
+          "tp": 1137,
+          "fp": 0,
+          "fn": 86,
+          "precision": 1.0,
+          "recall": 0.9296811120196239,
+          "f1": 0.9635593220338984,
+          "clusters_exactos": 127
+        },
+        "costo_clusters": 86.0
+      }
+    ]
   },
-  "clusters": {
-    "umbral": 0.84,
-    "tp": 1837,
-    "fp": 0,
-    "fn": 194,
-    "precision": 1.0,
-    "recall": 0.9044805514524865,
-    "f1": 0.9498448810754913,
-    "clusters_predichos": 306,
-    "clusters_reales": 251,
-    "clusters_exactos": 205,
-    "pct_clusters_exactos": 0.8167330677290837
+  "referencia_todo_el_dataset": {
+    "advertencia": "Optimista: las reglas de bloqueo, el modelo y el umbral se eligieron con la verdad conocida de los mismos datos con que se mide.",
+    "bloqueos_prediccion": [
+      [
+        "first_name"
+      ],
+      [
+        "surname"
+      ],
+      [
+        "dob"
+      ],
+      [
+        "email"
+      ],
+      [
+        "substr(email, 1, 4)"
+      ],
+      [
+        "surname_soundex"
+      ],
+      [
+        "city",
+        "substr(dob, 1, 4)"
+      ],
+      [
+        "first_name_metaphone"
+      ]
+    ],
+    "umbral": {
+      "criterio": "min_costo_cluster",
+      "valor": 0.84
+    },
+    "bloqueo": {
+      "pares_comparados": 6554,
+      "pares_verdaderos": 2031,
+      "pares_verdaderos_comparados": 1867,
+      "recall_bloqueo": 0.9192516001969473,
+      "recall_perdido_por_bloqueo": 0.0807483998030527
+    },
+    "pares": {
+      "umbral": 0.84,
+      "tp": 1478,
+      "fp": 0,
+      "fn": 553,
+      "precision": 1.0,
+      "recall": 0.7277203348104382,
+      "f1": 0.8424052436591621
+    },
+    "clusters": {
+      "umbral": 0.84,
+      "tp": 1833,
+      "fp": 0,
+      "fn": 198,
+      "precision": 1.0,
+      "recall": 0.9025110782865583,
+      "f1": 0.9487577639751553,
+      "clusters_predichos": 307,
+      "clusters_reales": 251,
+      "clusters_exactos": 204,
+      "pct_clusters_exactos": 0.8127490039840638
+    }
   }
 }
