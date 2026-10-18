@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-ecd621be1816e2f5f32a977a34eec210"}, "facet": {"column": {"field": "metrica", "title": null, "type": "nominal"}}, "spec": {"layer": [{"mark": {"type": "rule", "color": "#6b7280", "strokeWidth": 2}, "encoding": {"tooltip": [{"field": "grupo", "type": "nominal"}, {"field": "metrica", "type": "nominal"}, {"field": "valor", "format": ".3f", "type": "quantitative"}, {"field": "ic_inf", "format": ".3f", "title": "IC 95 % inferior", "type": "quantitative"}, {"field": "ic_sup", "format": ".3f", "title": "IC 95 % superior", "type": "quantitative"}], "x": {"field": "ic_inf", "scale": {"zero": false}, "title": "Valor (IC 95 %)", "type": "quantitative"}, "x2": {"field": "ic_sup"}, "y": {"field": "grupo", "sort": null, "title": null, "type": "nominal"}}}, {"mark": {"type": "point", "color": "#2563eb", "filled": true, "size": 70}, "encoding": {"tooltip": [{"field": "grupo", "type": "nominal"}, {"field": "metrica", "type": "nominal"}, {"field": "valor", "format": ".3f", "type": "quantitative"}, {"field": "ic_inf", "format": ".3f", "title": "IC 95 % inferior", "type": "quantitative"}, {"field": "ic_sup", "format": ".3f", "title": "IC 95 % superior", "type": "quantitative"}], "x": {"field": "valor", "type": "quantitative"}, "y": {"field": "grupo", "sort": null, "title": null, "type": "nominal"}}}], "height": {"step": 26}, "width": 260}, "resolve": {"scale": {"x": "independent"}}, "title": "Modelos v1, v2 y v3 congelados, por cl\u00faster (IC 95 %)", "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json", "datasets": {"data-ecd621be1816e2f5f32a977a34eec210": [{"grupo": "prueba normal \u00b7 v3", "metrica": "Precisi\u00f3n", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "prueba normal \u00b7 v3", "metrica": "Recall", "valor": 0.9922867513611615, "ic_inf": 0.9847823896493312, "ic_sup": 0.998474229538007}, {"grupo": "prueba normal \u00b7 v3", "metrica": "F1", "valor": 0.9961284445456616, "ic_inf": 0.992332857027058, "ic_sup": 0.9992365323220289}, {"grupo": "prueba normal \u00b7 v3", "metrica": "Personas exactas", "valor": 0.9925, "ic_inf": 0.98625, "ic_sup": 0.9975}, {"grupo": "prueba normal \u00b7 v2", "metrica": "Precisi\u00f3n", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "prueba normal \u00b7 v2", "metrica": "Recall", "valor": 0.9863883847549909, "ic_inf": 0.9751126111507755, "ic_sup": 0.9954356865615638}, {"grupo": "prueba normal \u00b7 v2", "metrica": "F1", "valor": 0.9931475559616264, "ic_inf": 0.9873995088464849, "ic_sup": 0.9977126230929729}, {"grupo": "prueba normal \u00b7 v2", "metrica": "Personas exactas", "valor": 0.99, "ic_inf": 0.98375, "ic_sup": 0.99625}, {"grupo": "prueba normal \u00b7 v1", "metrica": "Precisi\u00f3n", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "prueba normal \u00b7 v1", "metrica": "Recall", "valor": 0.9219600725952813, "ic_inf": 0.900583346751581, "ic_sup": 0.9429406041927759}, {"grupo": "prueba normal \u00b7 v1", "metrica": "F1", "valor": 0.9593956562795091, "ic_inf": 0.947691502724517, "ic_sup": 0.9706324549033047}, {"grupo": "prueba normal \u00b7 v1", "metrica": "Personas exactas", "valor": 0.9225, "ic_inf": 0.905, "ic_sup": 0.93875}, {"grupo": "ciega 3 \u00b7 v3", "metrica": "Precisi\u00f3n", "valor": 0.9969102425459602, "ic_inf": 0.9868030346092731, "ic_sup": 1.0}, {"grupo": "ciega 3 \u00b7 v3", "metrica": "Recall", "valor": 0.9661625991914957, "ic_inf": 0.9580951495017486, "ic_sup": 0.9735061925121239}, {"grupo": "ciega 3 \u00b7 v3", "metrica": "F1", "valor": 0.9812956204379562, "ic_inf": 0.9750851480141126, "ic_sup": 0.9861206154847367}, {"grupo": "ciega 3 \u00b7 v3", "metrica": "Personas exactas", "valor": 0.9445, "ic_inf": 0.9345, "ic_sup": 0.954}, {"grupo": "ciega 3 \u00b7 v2", "metrica": "Precisi\u00f3n", "valor": 0.9934570906877663, "ic_inf": 0.9789043798686287, "ic_sup": 1.0}, {"grupo": "ciega 3 \u00b7 v2", "metrica": "Recall", "valor": 0.9775415481359485, "ic_inf": 0.9709740326170557, "ic_sup": 0.9829186488309768}, {"grupo": "ciega 3 \u00b7 v2", "metrica": "F1", "valor": 0.9854350615047921, "ic_inf": 0.9776763693880763, "ic_sup": 0.9903164447268097}, {"grupo": "ciega 3 \u00b7 v2", "metrica": "Personas exactas", "valor": 0.956, "ic_inf": 0.947, "ic_sup": 0.965}, {"grupo": "ciega 3 \u00b7 v1", "metrica": "Precisi\u00f3n", "valor": 0.9888865142124386, "ic_inf": 0.9650477519927707, "ic_sup": 1.0}, {"grupo": "ciega 3 \u00b7 v1", "metrica": "Recall", "valor": 0.6927683784997755, "ic_inf": 0.6707567927573399, "ic_sup": 0.715098428624556}, {"grupo": "ciega 3 \u00b7 v1", "metrica": "F1", "valor": 0.8147561190350415, "ic_inf": 0.797343815796597, "ic_sup": 0.8313591084268814}, {"grupo": "ciega 3 \u00b7 v1", "metrica": "Personas exactas", "valor": 0.665, "ic_inf": 0.6459875, "ic_sup": 0.6865125}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+unique_id,tipo_documento,numero_documento,nombres,apellidos,fecha_nacimiento,celular,correo,direccion,ciudad,departamento,cluster
+4395,TI,84813950,juan,guerrero ortiz,2007-08-14,3129930265,jguerrero85@outlook.com,cr 10 no. 102a - 62,CALI,Valle del Cauca,81
+2056,CC,,Tatiana,Mesa Figueroa,1950-06-06,573159325182,tmesa3@outlook.com,Av. 48 # 63b-50 Este,Cali,Valle Del Cauca,103
+2159,CC,76303253,Rafael Nesor,Lopes Franco,17/5/1953,3117998126,rafaellopez32@hotmail.com,Area Rural,Cartagena De Indias,Bolivar,112
+3259,CC,44742893,Ricardo Cristobal,Gómez Pulido,1979-04-11,3110665741,ricardo.gomez38@hotmail.com,Cl. 30B No. 61 - 10,"Bogotá, D.C.","Bogotá, D.C.",160
+467,cc,1047419510,ANDRÉS,MOSQUERA CAICEDO,1984-05-14,3218353013,amosquera59@hotmail.com,CALLE 20 75-80,BARRANQUILLA,,252
+1125,ti,97797504,Tania Carmen,Salas,21/11/2003,3508847656,tania.salas36@gmail.com,K 35 28-58,YARUMAL,Antioquia,269
+3658,CC,93953608,CARLOS,IBARRA,08/09/1984,3019974354,cibarra68@outlook.com,KR 138 NO. 126 - 80,ANZOÃ¡TEGUI,TOLIMA,340
+1594,CC,1145853202,juan fernando,montes,1976-08-15,3508141322,,,Cartagena de Indias,Bolívar,432
+4939,CC,1028494058,ALBERTO LUIS,SIERRA CIFUENTES,1949-01-22,9828967,asierra88@hotmail.com,CL. 6 B N° 44-31 APTO 1014 B/ LA ESMERALDA,Medellin,Antioquia,442
+4166,CC,53210612,julieth,moreno,1963-03-20,350-755-6759,julieth.moreno36@hotmail.com,calle 124 69b-92 este,cali,valle del cauca,447
+1245,CC,11104028872,Enrique,Ospina,1988-04-14,3153961964,enrique.ospina6@outlook.com,CL 37 60A-55 Barrio Ciudad Jardín,"Bogotá, D.C.","Bogotá, D.C.",489
+4028,CC,19187131,ANA,GARCIA OCHOA,2004-03-19,3127972612,ana.garcia90@hotmail.com,TV 119 # 70-41,Medellín,Antioquia,605
+3286,CC,1122327269,Ana,Santos Moreno,2003-10-17,3209139547,anasantos54@hotmail.com,VDA Alto Bonito Fca. La Ceiba,Cali,VALLE,619
+3755,CC,1 039 511 815,ARTUFO ÁLVARO,MORENO CHÁVEZ,1985-12-25,3122129522,Arturomoreno14@hotmail.com,DG 96B # 34-15,"BOGOTÁ, D.C.","BOGOTÁ, D.C.",726
+640,CC,1141669875,Guillermo,Morales Escobar,1974-10-23,3112310235,,Cl. 24 86A 87,Medellín,Antioquia,753
+4702,CC,98912752,YESID,GARCÍA SILVA,2003-05-01,3122026409,ygarcia70@hotmail.com,CORR QUEBRADA HONDA,BARRANQUILLA,Atlantico,762
+4683,CC,61234436,ZAUL,AMAYA GERRA,1999-08-09,1234567,saul.amaya32@hotmail.com,KRA 5 NO. 24 - 94,B/QUILLA,ATLÁNTICO,840
+3328,CC,1129241519,Wendy,Ramirez Alarcon,1953-12-13,3111628826,wendyramirez45@hotmail.es,Tr 112 102 70,Sandoná,Nariño,845
+3405,CC,1.202.974.107,WILSON GERM�N,DUKE ZAMBRANO,19730530,3011881364,wilsonduque44@gmail.com,,,"BOGOTÁ, D.C.",955
+340,CC,64386482,María Dora,Suárez Morales,1999-12-31,,mariasuarez28@outlook.com,Vda Los Naranjos Hacienda El Recreo,Medellín,Antioquia,1132
+2950,CC,1093821780,Leticia Amparo,Cardona,1963-03-15,322 220 0348,lcardona83@outlook.com,CL 41a No. 111A - 39,Saldaña,Tolima,1142
+2291,CC,10061217,Luis J.,Montoya Pena,1980-03-01,0000000000,luis.montoya62@gmail.com,Cl. 68 74 19,Mosquera,Nariño,1164
+227,1,1065564147,AUGUSTO OSCAR,GOMEZ,1966-08-02,3155554327,,CL 20 NO. 118 - 67,MEDELLÍN,ANTIOQUIA,1193
+4764,CE,7406104,CRISTINA,ROMERO VALENCIA,1946-07-28,573203652617,cristina.romero61@outlook.com,FINCA LOS GUADUALES,CALI,VALLE DEL CAUCA,1223
+4655,CC,1099352383,Clemencia,Uribe Ortega,1963-07-23,3208608334,clemenciauribe72@outlook.com,Cra. 111 No. 42B - 50,Barranquilla,Atlántico,1431
+2123,CC,10270190,Daniela,Guevara Acosta,1959-06-24,304 773 0461,dguevara68@yahoo.com,Diag137C #55B-15,Cartagena de Indias,Bolívar,1451
+3097,CE,6408167,Alonso Carlos,Ballesteros,28/1/1947,3211192588,alonso.ballesteros29@hotmail.com,Lote 30 Vda El Rosal,Cajamarca,Tolima,1463
+2902,CC,1044824,DARY,PÉREZ,1969-01-14,3005182589,cliente@correo.com,CLL 47 14B-57,VIANI,,1556
+4686,CC,1014224446,Perez,Gerson,1969-01-08,(304) 5741630,gperez53@yahoo.com,Cra 62 A 16B 51 Este Barrio El Poblado,Cali,Valle del Cauca,1580
+4493,TI,91111641096,Jorge Luis,Gonzalez Marin,1991-11-16,3122820870,JORGE_870@YAHOO.COM,KR 131b No. 112 - 13 Casa 18 Edif. Portal del Norte,,Cauca,1595
+2932,CC,1077605078,claudia luz,martinez,1983/07/27,3107334568,CMARTINEZ76@GMAIL.COM,cl 128 n° 97-80,San Bernardo,Cundinamarca,1607
+3266,CC,30967250,Liliana,de Rentería,12-11-1948,3156396843,lhernandez48@gmail.com,CL 117B No. 46A - 6 SUR,Risaralda,Caldas,1615
+4627,CC,41802848,Hernan,Zolano Loaiza,1996/01/11,3158591336,hernan.sollano6@hotmail.com,Calle21 #60-70,Santiago de Cali,Valle,1625
+2205,CC,1093501700,YOLANDA MARTA,MANTILLA OSORIO,1988-02-15,0000000000,yolanda.mantilla59@outlook.com,CLL 4 N° 116-73,Sitionuevo,Magdalena,1756
+2226,CE,1023728750,MAURICIO,ORTIZ CORTES,1946-09-20,,Mortiz46@gmail.com,CL. 64 # 82-84 ESTE,CALI,,1786
+3203,CC,1003034492,Camilo Sneider,Serrano,1999-12-20,320-268-7023,,Calle 127 # 74A-27,Barranquilla,Atlántico,1880
+1381,CC,56923959,yulieth,barbosa de ceballos,1949-04-12,3049711850,yulieethbarbosa31@outlook.com,avda 20 39 28,Teruel,,1888
+3532,CC,31819092,maegoth,ocampo castanio,1977-09-02,3204128376,margoth.ocampo11@hotmail.com,cra. 144 c bis 20a-88,cali,,1908
+2183,CC,1005808635,SOCORRO P.,POLO VERA,1981-12-01,3104150285,,CALLE 13 # 89B-13 SUR APTO 2005 B/ LA FLORESTA,CARTAGENA DE INDIAS,BOLÍVAR,1940
+4367,CC,77209187,JOSE ADOLFO,RANGEL GORRES,1950-05-25,3119249582,joserangel41@gmail.com,CL. 34 N° 76-5 CASA 74 CONJUNTO ALTOS DE SAN JUAN,Candelaria,Atlántico,1983

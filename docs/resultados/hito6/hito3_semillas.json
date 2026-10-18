@@ -1,0 +1,597 @@
+{
+  "semillas": [
+    [
+      3030,
+      3131
+    ],
+    [
+      3011,
+      3111
+    ],
+    [
+      3022,
+      3122
+    ],
+    [
+      3033,
+      3133
+    ],
+    [
+      3044,
+      3144
+    ],
+    [
+      3055,
+      3155
+    ],
+    [
+      3066,
+      3166
+    ],
+    [
+      3077,
+      3177
+    ]
+  ],
+  "corridas": {
+    "v2": [
+      {
+        "semillas": [
+          3030,
+          3131
+        ],
+        "reglas": {
+          "documento": "fuente_confiable",
+          "nombres": "fuente_confiable",
+          "apellidos": "fuente_confiable",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 1.0,
+        "union_recall": 0.9977993764900055,
+        "oro_max_brecha_al_techo": 0.047334329845540646,
+        "grafo_exactitud": 1.0,
+        "grafo_grupos": 432,
+        "mezclados_umbral_congelado": 0,
+        "mezclados_0_9": 18,
+        "evitados_0_9": 7,
+        "fraccion_evitada_0_9": 0.3888888888888889
+      },
+      {
+        "semillas": [
+          3011,
+          3111
+        ],
+        "reglas": {
+          "documento": "fuente_confiable",
+          "nombres": "fuente_confiable",
+          "apellidos": "frecuente",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "fuente_confiable"
+        },
+        "union_precision": 0.9982541899441341,
+        "union_recall": 0.9979057591623036,
+        "oro_max_brecha_al_techo": 0.03742514970059874,
+        "grafo_exactitud": 0.9925925925925926,
+        "grafo_grupos": 405,
+        "mezclados_umbral_congelado": 2,
+        "mezclados_0_9": 18,
+        "evitados_0_9": 3,
+        "fraccion_evitada_0_9": 0.16666666666666666
+      },
+      {
+        "semillas": [
+          3022,
+          3122
+        ],
+        "reglas": {
+          "documento": "validado",
+          "nombres": "frecuente",
+          "apellidos": "fuente_confiable",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "mas_reciente",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 0.998526974774443,
+        "union_recall": 0.9983431516936672,
+        "oro_max_brecha_al_techo": 0.04845154845154853,
+        "grafo_exactitud": 0.9924812030075187,
+        "grafo_grupos": 399,
+        "mezclados_umbral_congelado": 1,
+        "mezclados_0_9": 16,
+        "evitados_0_9": 2,
+        "fraccion_evitada_0_9": 0.125
+      },
+      {
+        "semillas": [
+          3033,
+          3133
+        ],
+        "reglas": {
+          "documento": "validado",
+          "nombres": "fuente_confiable",
+          "apellidos": "fuente_confiable",
+          "fecha_nacimiento": "frecuente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 0.997738409347908,
+        "union_recall": 0.9981146304675717,
+        "oro_max_brecha_al_techo": 0.042935596605092274,
+        "grafo_exactitud": 0.9782608695652174,
+        "grafo_grupos": 414,
+        "mezclados_umbral_congelado": 2,
+        "mezclados_0_9": 15,
+        "evitados_0_9": 2,
+        "fraccion_evitada_0_9": 0.13333333333333333
+      },
+      {
+        "semillas": [
+          3044,
+          3144
+        ],
+        "reglas": {
+          "documento": "fuente_confiable",
+          "nombres": "frecuente",
+          "apellidos": "frecuente",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 0.9989727786337956,
+        "union_recall": 0.9976064284493076,
+        "oro_max_brecha_al_techo": 0.03736920777279529,
+        "grafo_exactitud": 0.977116704805492,
+        "grafo_grupos": 437,
+        "mezclados_umbral_congelado": 2,
+        "mezclados_0_9": 16,
+        "evitados_0_9": 3,
+        "fraccion_evitada_0_9": 0.1875
+      },
+      {
+        "semillas": [
+          3055,
+          3155
+        ],
+        "reglas": {
+          "documento": "validado",
+          "nombres": "frecuente",
+          "apellidos": "fuente_confiable",
+          "fecha_nacimiento": "frecuente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 0.9965431150374496,
+        "union_recall": 0.9975009611687813,
+        "oro_max_brecha_al_techo": 0.03594608087868201,
+        "grafo_exactitud": 0.9829683698296837,
+        "grafo_grupos": 411,
+        "mezclados_umbral_congelado": 4,
+        "mezclados_0_9": 15,
+        "evitados_0_9": 7,
+        "fraccion_evitada_0_9": 0.4666666666666667
+      },
+      {
+        "semillas": [
+          3066,
+          3166
+        ],
+        "reglas": {
+          "documento": "fuente_confiable",
+          "nombres": "frecuente",
+          "apellidos": "frecuente",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "fuente_confiable"
+        },
+        "union_precision": 0.9994703389830508,
+        "union_recall": 0.9989412387506618,
+        "oro_max_brecha_al_techo": 0.03946053946053951,
+        "grafo_exactitud": 0.9835294117647059,
+        "grafo_grupos": 425,
+        "mezclados_umbral_congelado": 1,
+        "mezclados_0_9": 21,
+        "evitados_0_9": 10,
+        "fraccion_evitada_0_9": 0.47619047619047616
+      },
+      {
+        "semillas": [
+          3077,
+          3177
+        ],
+        "reglas": {
+          "documento": "validado",
+          "nombres": "frecuente",
+          "apellidos": "fuente_confiable",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 1.0,
+        "union_recall": 0.997308451462408,
+        "oro_max_brecha_al_techo": 0.03982080637132912,
+        "grafo_exactitud": 0.9788235294117648,
+        "grafo_grupos": 425,
+        "mezclados_umbral_congelado": 0,
+        "mezclados_0_9": 18,
+        "evitados_0_9": 10,
+        "fraccion_evitada_0_9": 0.5555555555555556
+      }
+    ],
+    "v3": [
+      {
+        "semillas": [
+          3030,
+          3131
+        ],
+        "reglas": {
+          "documento": "fuente_confiable",
+          "nombres": "frecuente",
+          "apellidos": "fuente_confiable",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 1.0,
+        "union_recall": 0.9977993764900055,
+        "oro_max_brecha_al_techo": 0.047334329845540646,
+        "grafo_exactitud": 1.0,
+        "grafo_grupos": 432,
+        "mezclados_umbral_congelado": 0,
+        "mezclados_0_9": 24,
+        "evitados_0_9": 8,
+        "fraccion_evitada_0_9": 0.3333333333333333
+      },
+      {
+        "semillas": [
+          3011,
+          3111
+        ],
+        "reglas": {
+          "documento": "fuente_confiable",
+          "nombres": "fuente_confiable",
+          "apellidos": "frecuente",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "fuente_confiable"
+        },
+        "union_precision": 0.9982541899441341,
+        "union_recall": 0.9979057591623036,
+        "oro_max_brecha_al_techo": 0.03742514970059874,
+        "grafo_exactitud": 0.9925925925925926,
+        "grafo_grupos": 405,
+        "mezclados_umbral_congelado": 2,
+        "mezclados_0_9": 28,
+        "evitados_0_9": 8,
+        "fraccion_evitada_0_9": 0.2857142857142857
+      },
+      {
+        "semillas": [
+          3022,
+          3122
+        ],
+        "reglas": {
+          "documento": "validado",
+          "nombres": "frecuente",
+          "apellidos": "fuente_confiable",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "mas_reciente",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 1.0,
+        "union_recall": 0.998159057437408,
+        "oro_max_brecha_al_techo": 0.04840319361277445,
+        "grafo_exactitud": 0.9925187032418953,
+        "grafo_grupos": 401,
+        "mezclados_umbral_congelado": 0,
+        "mezclados_0_9": 19,
+        "evitados_0_9": 2,
+        "fraccion_evitada_0_9": 0.10526315789473684
+      },
+      {
+        "semillas": [
+          3033,
+          3133
+        ],
+        "reglas": {
+          "documento": "validado",
+          "nombres": "fuente_confiable",
+          "apellidos": "fuente_confiable",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 0.9984908507828711,
+        "union_recall": 0.9979260935143288,
+        "oro_max_brecha_al_techo": 0.04289276807980047,
+        "grafo_exactitud": 0.9759615384615384,
+        "grafo_grupos": 416,
+        "mezclados_umbral_congelado": 1,
+        "mezclados_0_9": 23,
+        "evitados_0_9": 5,
+        "fraccion_evitada_0_9": 0.21739130434782608
+      },
+      {
+        "semillas": [
+          3044,
+          3144
+        ],
+        "reglas": {
+          "documento": "fuente_confiable",
+          "nombres": "frecuente",
+          "apellidos": "frecuente",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 0.9996573582319684,
+        "union_recall": 0.9976064284493076,
+        "oro_max_brecha_al_techo": 0.03735059760956172,
+        "grafo_exactitud": 0.9772209567198178,
+        "grafo_grupos": 439,
+        "mezclados_umbral_congelado": 1,
+        "mezclados_0_9": 25,
+        "evitados_0_9": 8,
+        "fraccion_evitada_0_9": 0.32
+      },
+      {
+        "semillas": [
+          3055,
+          3155
+        ],
+        "reglas": {
+          "documento": "validado",
+          "nombres": "frecuente",
+          "apellidos": "fuente_confiable",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 0.9976927513939627,
+        "union_recall": 0.9975009611687813,
+        "oro_max_brecha_al_techo": 0.03592814371257491,
+        "grafo_exactitud": 0.9830097087378641,
+        "grafo_grupos": 412,
+        "mezclados_umbral_congelado": 3,
+        "mezclados_0_9": 19,
+        "evitados_0_9": 9,
+        "fraccion_evitada_0_9": 0.47368421052631576
+      },
+      {
+        "semillas": [
+          3066,
+          3166
+        ],
+        "reglas": {
+          "documento": "fuente_confiable",
+          "nombres": "frecuente",
+          "apellidos": "frecuente",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "fuente_confiable"
+        },
+        "union_precision": 1.0,
+        "union_recall": 0.9989412387506618,
+        "oro_max_brecha_al_techo": 0.039440838741887196,
+        "grafo_exactitud": 0.9836065573770492,
+        "grafo_grupos": 427,
+        "mezclados_umbral_congelado": 0,
+        "mezclados_0_9": 33,
+        "evitados_0_9": 12,
+        "fraccion_evitada_0_9": 0.36363636363636365
+      },
+      {
+        "semillas": [
+          3077,
+          3177
+        ],
+        "reglas": {
+          "documento": "validado",
+          "nombres": "frecuente",
+          "apellidos": "fuente_confiable",
+          "fecha_nacimiento": "mas_reciente",
+          "celular": "validado",
+          "correo": "validado",
+          "direccion": "frecuente"
+        },
+        "union_precision": 1.0,
+        "union_recall": 0.9962318320473712,
+        "oro_max_brecha_al_techo": 0.04027846842366978,
+        "grafo_exactitud": 0.9719626168224299,
+        "grafo_grupos": 428,
+        "mezclados_umbral_congelado": 0,
+        "mezclados_0_9": 24,
+        "evitados_0_9": 13,
+        "fraccion_evitada_0_9": 0.5416666666666666
+      }
+    ]
+  },
+  "resumen": {
+    "v2": {
+      "union_precision": {
+        "media": 0.9986882258400975,
+        "de": 0.001186363889224354,
+        "min": 0.9965431150374496,
+        "max": 1.0
+      },
+      "union_recall": {
+        "media": 0.9979399997055882,
+        "de": 0.0005236318445994297,
+        "min": 0.997308451462408,
+        "max": 0.9989412387506618
+      },
+      "oro_max_brecha_al_techo": {
+        "media": 0.041092907385765765,
+        "de": 0.004699415322119877,
+        "min": 0.03594608087868201,
+        "max": 0.04845154845154853
+      },
+      "grafo_exactitud": {
+        "media": 0.9857215851221219,
+        "de": 0.008336250801545573,
+        "min": 0.977116704805492,
+        "max": 1.0
+      },
+      "grafo_grupos": {
+        "media": 418.5,
+        "de": 13.352367366340482,
+        "min": 399.0,
+        "max": 437.0
+      },
+      "mezclados_umbral_congelado": {
+        "media": 1.5,
+        "de": 1.3093073414159542,
+        "min": 0.0,
+        "max": 4.0
+      },
+      "mezclados_0_9": {
+        "media": 17.125,
+        "de": 2.03100960115899,
+        "min": 15.0,
+        "max": 21.0
+      },
+      "evitados_0_9": {
+        "media": 5.5,
+        "de": 3.4226138716316967,
+        "min": 2.0,
+        "max": 10.0
+      },
+      "fraccion_evitada_0_9": {
+        "media": 0.31247519841269844,
+        "de": 0.17712888736465338,
+        "min": 0.125,
+        "max": 0.5555555555555556
+      },
+      "reglas": {
+        "documento": {
+          "fuente_confiable": 4,
+          "validado": 4
+        },
+        "nombres": {
+          "frecuente": 5,
+          "fuente_confiable": 3
+        },
+        "apellidos": {
+          "fuente_confiable": 5,
+          "frecuente": 3
+        },
+        "fecha_nacimiento": {
+          "mas_reciente": 6,
+          "frecuente": 2
+        },
+        "celular": {
+          "validado": 7,
+          "mas_reciente": 1
+        },
+        "correo": {
+          "validado": 8
+        },
+        "direccion": {
+          "frecuente": 6,
+          "fuente_confiable": 2
+        }
+      }
+    },
+    "v3": {
+      "union_precision": {
+        "media": 0.9992618937941171,
+        "de": 0.0009567637006880861,
+        "min": 0.9976927513939627,
+        "max": 1.0
+      },
+      "union_recall": {
+        "media": 0.997758843377521,
+        "de": 0.000758845650386797,
+        "min": 0.9962318320473712,
+        "max": 0.9989412387506618
+      },
+      "oro_max_brecha_al_techo": {
+        "media": 0.04113168621580099,
+        "de": 0.0046774208629479916,
+        "min": 0.03592814371257491,
+        "max": 0.04840319361277445
+      },
+      "grafo_exactitud": {
+        "media": 0.9846090842441484,
+        "de": 0.009680904937032116,
+        "min": 0.9719626168224299,
+        "max": 1.0
+      },
+      "grafo_grupos": {
+        "media": 420.0,
+        "de": 13.543580450847235,
+        "min": 401.0,
+        "max": 439.0
+      },
+      "mezclados_umbral_congelado": {
+        "media": 0.875,
+        "de": 1.1259916264596033,
+        "min": 0.0,
+        "max": 3.0
+      },
+      "mezclados_0_9": {
+        "media": 24.375,
+        "de": 4.596194077712559,
+        "min": 19.0,
+        "max": 33.0
+      },
+      "evitados_0_9": {
+        "media": 8.125,
+        "de": 3.5228843701879127,
+        "min": 2.0,
+        "max": 13.0
+      },
+      "fraccion_evitada_0_9": {
+        "media": 0.330086165264941,
+        "de": 0.13723753018150683,
+        "min": 0.10526315789473684,
+        "max": 0.5416666666666666
+      },
+      "reglas": {
+        "documento": {
+          "fuente_confiable": 4,
+          "validado": 4
+        },
+        "nombres": {
+          "frecuente": 6,
+          "fuente_confiable": 2
+        },
+        "apellidos": {
+          "fuente_confiable": 5,
+          "frecuente": 3
+        },
+        "fecha_nacimiento": {
+          "mas_reciente": 8
+        },
+        "celular": {
+          "validado": 7,
+          "mas_reciente": 1
+        },
+        "correo": {
+          "validado": 8
+        },
+        "direccion": {
+          "frecuente": 6,
+          "fuente_confiable": 2
+        }
+      }
+    }
+  }
+}
