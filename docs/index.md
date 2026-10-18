@@ -10,15 +10,19 @@ medir su precisión contra la verdad conocida.
 ## Hito 1: fake_1000
 
 1.000 registros de 251 personas (dataset de demostración de Splink). Modelo Fellegi-Sunter
-entrenado sin etiquetas; umbral de `match_probability` = 0,9.
+entrenado sin etiquetas, con bloqueo exacto y aproximado (fonético, por prefijos y por año de
+nacimiento). Umbral de operación: 0,84, el que minimiza el costo de errores por clúster con un
+falso positivo 10 veces más costoso que un falso negativo.
 
 | Nivel | Precisión | Recall | F1 |
 |---|---|---|---|
-| Por par | 1,000 | 0,638 | 0,779 |
-| Por clúster | 1,000 | 0,826 | 0,905 |
+| Por par | 1,000 | 0,731 | 0,844 |
+| Por clúster | 1,000 | 0,904 | 0,950 |
 
-El bloqueo compara 3.989 pares y cubre el 81,2 % de los pares verdaderos.
-Detalle en [metricas.json](resultados/metricas.json).
+El bloqueo compara 7.110 pares (de ~500.000) y cubre el 92,4 % de los pares verdaderos; 205 de
+las 251 personas (81,7 %) quedan reconstruidas exactamente. Detalle en
+[metricas.json](resultados/metricas.json) y
+[comparacion_bloqueos.csv](resultados/comparacion_bloqueos.csv).
 
 ## Tableros
 
@@ -29,9 +33,10 @@ Detalle en [metricas.json](resultados/metricas.json).
 - [Comparison viewer](resultados/comparison_viewer.html): ejemplos por patrón de comparación.
 - [Parámetros m/u](resultados/parametros_mu.html) y
   [pesos de coincidencia](resultados/pesos.html) del modelo entrenado.
-- [Curva por umbral](resultados/curva_umbral.html): precisión, recall y F1 por par.
+- Curvas por umbral: [por par](resultados/curva_umbral.html),
+  [por clúster](resultados/curva_umbral_clusters.html) y [costo](resultados/costo_umbral.html).
 
-![Curva por umbral](resultados/curva_umbral.png)
+![Costo según el umbral](resultados/costo_umbral.png)
 
 ## Regla de datos
 

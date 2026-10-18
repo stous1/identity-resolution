@@ -17,6 +17,27 @@
       ],
       [
         "email"
+      ],
+      [
+        "surname_soundex"
+      ],
+      [
+        "first_name_metaphone"
+      ],
+      [
+        "substr(dob, 1, 4)",
+        "substr(surname, 1, 1)"
+      ],
+      [
+        "substr(dob, 1, 4)",
+        "substr(first_name, 1, 1)"
+      ],
+      [
+        "substr(email, 1, 4)"
+      ],
+      [
+        "city",
+        "substr(dob, 1, 4)"
       ]
     ],
     "bloqueos_em": [
@@ -29,42 +50,133 @@
       ]
     ]
   },
+  "umbral": {
+    "criterio": "min_costo_cluster",
+    "valor": 0.84,
+    "costo_fp": 10.0,
+    "costo_fn": 1.0
+  },
+  "umbrales": [
+    {
+      "criterio": "fijo",
+      "umbral": 0.9,
+      "pares": {
+        "tp": 1426,
+        "fp": 0,
+        "fn": 605,
+        "precision": 1.0,
+        "recall": 0.7021171836533727,
+        "f1": 0.8249927682962105
+      },
+      "costo_pares": 605.0,
+      "clusters": {
+        "tp": 1780,
+        "fp": 0,
+        "fn": 251,
+        "precision": 1.0,
+        "recall": 0.8764155588380108,
+        "f1": 0.9341380215166624,
+        "clusters_exactos": 191
+      },
+      "costo_clusters": 251.0
+    },
+    {
+      "criterio": "max_f1_par",
+      "umbral": 0.19,
+      "pares": {
+        "tp": 1726,
+        "fp": 65,
+        "fn": 305,
+        "precision": 0.9637074260189838,
+        "recall": 0.8498276710979813,
+        "f1": 0.903192046049189
+      },
+      "costo_pares": 955.0,
+      "clusters": {
+        "tp": 1946,
+        "fp": 924,
+        "fn": 85,
+        "precision": 0.6780487804878049,
+        "recall": 0.9581486952240276,
+        "f1": 0.7941236482350541,
+        "clusters_exactos": 181
+      },
+      "costo_clusters": 9325.0
+    },
+    {
+      "criterio": "min_costo_par",
+      "umbral": 0.75,
+      "pares": {
+        "tp": 1541,
+        "fp": 2,
+        "fn": 490,
+        "precision": 0.998703823720026,
+        "recall": 0.758739537173806,
+        "f1": 0.8623391158365977
+      },
+      "costo_pares": 510.0,
+      "clusters": {
+        "tp": 1868,
+        "fp": 15,
+        "fn": 163,
+        "precision": 0.9920339883165162,
+        "recall": 0.9197439684884293,
+        "f1": 0.9545222278998466,
+        "clusters_exactos": 206
+      },
+      "costo_clusters": 313.0
+    },
+    {
+      "criterio": "min_costo_cluster",
+      "umbral": 0.84,
+      "pares": {
+        "tp": 1484,
+        "fp": 0,
+        "fn": 547,
+        "precision": 1.0,
+        "recall": 0.7306745445593303,
+        "f1": 0.8443812233285918
+      },
+      "costo_pares": 547.0,
+      "clusters": {
+        "tp": 1837,
+        "fp": 0,
+        "fn": 194,
+        "precision": 1.0,
+        "recall": 0.9044805514524865,
+        "f1": 0.9498448810754913,
+        "clusters_exactos": 205
+      },
+      "costo_clusters": 194.0
+    }
+  ],
   "bloqueo": {
-    "pares_comparados": 3989,
+    "pares_comparados": 7110,
     "pares_verdaderos": 2031,
-    "pares_verdaderos_comparados": 1650,
-    "recall_bloqueo": 0.8124076809453471,
-    "recall_perdido_por_bloqueo": 0.1875923190546529
+    "pares_verdaderos_comparados": 1876,
+    "recall_bloqueo": 0.9236829148202855,
+    "recall_perdido_por_bloqueo": 0.07631708517971447
   },
   "pares": {
-    "umbral": 0.9,
-    "tp": 1296,
+    "umbral": 0.84,
+    "tp": 1484,
     "fp": 0,
-    "fn": 735,
+    "fn": 547,
     "precision": 1.0,
-    "recall": 0.638109305760709,
-    "f1": 0.7790802524797115
-  },
-  "pares_umbral_max_f1": {
-    "umbral": 0.1,
-    "tp": 1560,
-    "fp": 55,
-    "fn": 471,
-    "precision": 0.9659442724458205,
-    "recall": 0.7680945347119645,
-    "f1": 0.8557323093801427
+    "recall": 0.7306745445593303,
+    "f1": 0.8443812233285918
   },
   "clusters": {
-    "umbral": 0.9,
-    "tp": 1678,
+    "umbral": 0.84,
+    "tp": 1837,
     "fp": 0,
-    "fn": 353,
+    "fn": 194,
     "precision": 1.0,
-    "recall": 0.8261939931068439,
-    "f1": 0.9048260986788893,
-    "clusters_predichos": 345,
+    "recall": 0.9044805514524865,
+    "f1": 0.9498448810754913,
+    "clusters_predichos": 306,
     "clusters_reales": 251,
-    "clusters_exactos": 174,
-    "pct_clusters_exactos": 0.6932270916334662
+    "clusters_exactos": 205,
+    "pct_clusters_exactos": 0.8167330677290837
   }
 }

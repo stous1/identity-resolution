@@ -30,31 +30,82 @@ para evaluar**.
   nacimiento (niveles por distancia), ciudad (exacta con ajuste por frecuencia) y correo.
 - Entrenamiento sin etiquetas: λ con reglas determinísticas, *u* por muestreo aleatorio y *m*
   con EM en dos pasadas (bloqueo por nombre+apellido y por fecha de nacimiento).
-- Bloqueo de predicción: coincidencia exacta en nombre, apellido, fecha de nacimiento o
-  correo. Se comparan 3.989 pares en vez de ~500.000.
+- Bloqueo de predicción: 4 reglas exactas (nombre, apellido, fecha de nacimiento, correo) y
+  6 aproximadas (ver abajo). Se comparan 7.110 pares en vez de ~500.000.
 
-**Resultados** (umbral de `match_probability` = 0,9)
+**Resultados** (umbral de operación 0,84, el de menor costo por clúster)
 
 | Nivel | Precisión | Recall | F1 |
 |---|---|---|---|
-| Por par | 1,000 | 0,638 | 0,779 |
-| Por clúster (pares inducidos) | 1,000 | 0,826 | 0,905 |
+| Por par | 1,000 | 0,731 | 0,844 |
+| Por clúster (pares inducidos) | 1,000 | 0,904 | 0,950 |
 
-- **Recall del bloqueo:** 81,2 % de los 2.031 pares verdaderos llegan a compararse; el 18,8 %
-  restante no comparte ningún campo exacto y solo se recupera si la agrupación los une de
-  forma transitiva.
-- **Clústeres:** 345 predichos frente a 251 personas reales; 174 personas (69,3 %) quedan
-  reconstruidas exactamente. No hay clústeres que mezclen personas distintas: los errores son
-  personas divididas en varios clústeres.
-- **Umbral:** el F1 por par es máximo con umbral 0,1 (precisión 0,966, recall 0,768, F1
-  0,856). Se reporta 0,9 porque en banca unir por error a dos clientes distintos es más
-  costoso que dejar un duplicado sin unir; la curva completa está abajo.
+- **Recall del bloqueo:** 92,4 % de los 2.031 pares verdaderos llegan a compararse.
+- **Clústeres:** 306 predichos frente a 251 personas reales; 205 personas (81,7 %) quedan
+  reconstruidas exactamente. Ningún clúster mezcla personas distintas: los errores que quedan
+  son personas divididas en varios clústeres.
 
 Métricas completas: [docs/resultados/metricas.json](docs/resultados/metricas.json).
 
-### Curva por umbral
+### Bloqueo aproximado
 
-![Precisión, recall y F1 por par según el umbral](docs/resultados/curva_umbral.png)
+Con solo reglas exactas, el 18,8 % de los pares verdaderos nunca se compara porque no comparte
+ningún campo idéntico (por ejemplo, un apellido mal escrito y una fecha con un dígito
+cambiado, con el correo vacío). Las reglas aproximadas recuperan parte de esos pares:
+
+- Soundex del apellido y Metaphone del nombre (calculados con
+  [jellyfish](https://github.com/jamesturk/jellyfish)).
+- Año de nacimiento + inicial del apellido, y año de nacimiento + inicial del nombre.
+- Primeros 4 caracteres del correo.
+- Ciudad + año de nacimiento.
+
+Cada regla se midió sumada a las exactas y en conjunto
+([comparacion_bloqueos.csv](docs/resultados/comparacion_bloqueos.csv)), con el umbral de
+operación:
+
+| Bloqueo | Comparaciones | Recall del bloqueo | Precisión por clúster | Recall por clúster | Personas exactas |
+|---|---|---|---|---|---|
+| Solo exactas | 3.989 | 0,812 | 1,000 | 0,853 | 185 |
+| Exactas + inicio del correo | 4.520 | 0,884 | 1,000 | 0,885 | 197 |
+| Exactas + Soundex del apellido | 5.107 | 0,840 | 1,000 | 0,865 | 188 |
+| **Selección (10 reglas)** | **7.110** | **0,924** | **1,000** | **0,904** | **205** |
+| Todas las probadas (12 reglas) | 8.536 | 0,925 | 1,000 | 0,904 | 205 |
+
+Se descartaron Metaphone del apellido (no aporta nada sobre Soundex) y las tres primeras
+letras del nombre (+0,1 puntos de recall del bloqueo por ~1.400 comparaciones más). La
+selección compara 1,8 veces más pares que las exactas y ninguna combinación bajó la precisión.
+
+### Umbral por costo
+
+Elegir el umbral es una decisión de negocio. En banca, **unir por error a dos clientes
+distintos** (falso positivo) mezcla sus productos, datos de contacto y riesgo, y es mucho más
+grave que **dejar un duplicado sin unir** (falso negativo), que se puede corregir después. Por
+eso se asigna un costo de 10 a cada falso positivo y de 1 a cada falso negativo (ambos
+configurables con `--costo-fp` y `--costo-fn`) y se busca el umbral que minimiza
+`10 × FP + 1 × FN`.
+
+| Criterio | Umbral | Precisión por par | Recall por par | Precisión por clúster | Recall por clúster | Costo por clúster |
+|---|---|---|---|---|---|---|
+| Fijo | 0,90 | 1,000 | 0,702 | 1,000 | 0,876 | 251 |
+| Mejor F1 por par | 0,19 | 0,964 | 0,850 | 0,678 | 0,958 | 9.325 |
+| Menor costo por par | 0,75 | 0,999 | 0,759 | 0,992 | 0,920 | 313 |
+| **Menor costo por clúster (en uso)** | **0,84** | **1,000** | **0,731** | **1,000** | **0,904** | **194** |
+
+**Se usa el de menor costo por clúster (0,84)** porque la decisión que de verdad une clientes
+es el clúster, no el par. La agrupación es transitiva: si A se parece a B y B a C, A y C quedan
+juntos aunque no se parezcan. Por eso unos pocos falsos positivos por par se multiplican al
+agrupar. El umbral de menor costo por par (0,75) acepta solo 2 pares falsos, pero al unir
+sus clústeres quedan 15 pares de registros juntos por error; con el de mejor F1 por par
+(0,19) son 924. Con 0,84 no hay ningún par unido por error y se recuperan 57 pares
+verdaderos más que con 0,9.
+
+> Limitación: el umbral se eligió con la verdad conocida del dataset de demostración, así que
+> las métricas a 0,84 son optimistas. Con datos reales se elegiría sobre una muestra etiquetada
+> manualmente y se validaría en otra.
+
+![Costo según el umbral](docs/resultados/costo_umbral.png)
+
+![Precisión, recall y F1 por clúster según el umbral](docs/resultados/curva_umbral_clusters.png)
 
 ### Cascada por par
 
@@ -77,7 +128,9 @@ errores.
 - [Comparison viewer](https://stous1.github.io/identity-resolution/resultados/comparison_viewer.html)
 - [Parámetros m/u](https://stous1.github.io/identity-resolution/resultados/parametros_mu.html)
   y [pesos de coincidencia](https://stous1.github.io/identity-resolution/resultados/pesos.html)
-- [Curva por umbral](https://stous1.github.io/identity-resolution/resultados/curva_umbral.html)
+- Curvas por umbral: [por par](https://stous1.github.io/identity-resolution/resultados/curva_umbral.html),
+  [por clúster](https://stous1.github.io/identity-resolution/resultados/curva_umbral_clusters.html)
+  y [costo](https://stous1.github.io/identity-resolution/resultados/costo_umbral.html)
 
 ## Cómo correrlo
 
@@ -87,7 +140,7 @@ Requiere [uv](https://docs.astral.sh/uv/). uv instala Python 3.11 si hace falta.
 uv sync                                       # entorno y dependencias
 uv run playwright install chromium            # una sola vez, para las capturas PNG
 uv run pytest                                 # pruebas (sin internet)
-uv run python scripts/hito1_fake1000.py       # hito 1 completo -> reports/
+uv run python scripts/hito1_fake1000.py       # hito 1 completo -> reports/ (~1 min)
 uv run python scripts/publicar_resultados.py  # copia los resultados a docs/resultados/
 ```
 
