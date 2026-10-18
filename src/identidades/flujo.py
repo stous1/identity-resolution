@@ -243,7 +243,15 @@ def aplicar_modelo(
     priori (lambda) depende del tamaño del conjunto, así que se vuelve a estimar en
     ``df`` con las mismas reglas determinísticas, que no usan etiquetas.
     """
-    configuracion = linker_entrenado.misc.save_model_to_json()
+    return aplicar_configuracion(linker_entrenado.misc.save_model_to_json(), df, esquema)
+
+
+def aplicar_configuracion(
+    configuracion: dict[str, Any],
+    df: pd.DataFrame,
+    esquema: modelo.Esquema = modelo.ESQUEMA_FAKE_1000,
+) -> Linker:
+    """Como ``aplicar_modelo``, pero desde un modelo guardado (``modelo.json``)."""
     linker = Linker(esquema.preparar(df), configuracion, db_api=DuckDBAPI())
     linker.training.estimate_probability_two_random_records_match(
         esquema.reglas_deterministicas, recall=modelo.RECALL_DETERMINISTICO
