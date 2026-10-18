@@ -77,14 +77,26 @@ def _relleno_predicho(grupos: pd.DataFrame, prediccion: pd.Series) -> dict[str, 
 
 
 def ejecutar_hito3(
-    directorio: Path, n_personas: int = 2000, n_bootstrap: int = 1000
+    directorio: Path,
+    n_personas: int = 2000,
+    n_bootstrap: int = 1000,
+    semillas: tuple[int, int] = (SEMILLA_DESARROLLO, SEMILLA_PRUEBA),
+    modelo_congelado: tuple[dict, float] | None = None,
+    completo: bool = True,
 ) -> dict[str, Any]:
+    """Corre el hito 3 y escribe sus salidas en ``directorio``.
+
+    ``semillas`` son las de los escenarios de desarrollo y prueba; ``modelo_congelado``,
+    la configuración y el umbral (por defecto, el v2 congelado). Con ``completo`` falso se
+    omiten los casos externos de puentes y el universo para Cosmograph (para repetir el
+    flujo con otras semillas).
+    """
     directorio.mkdir(parents=True, exist_ok=True)
-    configuracion, umbral = flujo_hito2b.cargar_congelado_v2()
+    configuracion, umbral = modelo_congelado or flujo_hito2b.cargar_congelado_v2()
 
     escenarios = {
-        "desarrollo": generar_escenario(n_personas, SEMILLA_DESARROLLO),
-        "prueba": generar_escenario(n_personas, SEMILLA_PRUEBA),
+        "desarrollo": generar_escenario(n_personas, semillas[0]),
+        "prueba": generar_escenario(n_personas, semillas[1]),
     }
     aplicados = {k: Aplicado(r, configuracion, umbral) for k, (r, _, _) in escenarios.items()}
     calidad_union = {
@@ -169,7 +181,8 @@ def ejecutar_hito3(
     pd.concat(politicas).to_csv(
         directorio / "politicas_puentes_desarrollo.csv", index=False, lineterminator="\n"
     )
-    puentes_resultado["casos_externos"] = casos_externos_puentes(configuracion, umbral)
+    if completo:
+        puentes_resultado["casos_externos"] = casos_externos_puentes(configuracion, umbral)
 
     # ---- Cola de revisión (entrada del agente del hito 4) ----
     cola = cola_de_revision(a_prueba, clasificados["prueba"], puentes_resultado)
@@ -196,12 +209,13 @@ def ejecutar_hito3(
         "Registro de oro en prueba: acierto por campo y regla de supervivencia",
         directorio / "registro_oro.html",
     )
-    exportar_universo(a_prueba, clasificados["prueba"], puentes_resultado, directorio)
+    if completo:
+        exportar_universo(a_prueba, clasificados["prueba"], puentes_resultado, directorio)
 
     metricas = {
         "escenarios": {
             k: {
-                "semilla": SEMILLA_DESARROLLO if k == "desarrollo" else SEMILLA_PRUEBA,
+                "semilla": semillas[0] if k == "desarrollo" else semillas[1],
                 "registros": len(r),
                 "personas": int(r["cluster"].nunique()),
                 "grupos_compartidos_verdaderos": v["etiqueta"].value_counts().to_dict(),

@@ -150,6 +150,58 @@ def correr(n_registros: int, umbral: float = 0.9999) -> tuple[list[Medicion], di
     return mediciones, artefactos
 
 
+def correr_congelado(
+    n_registros: int, configuracion: dict[str, Any], umbral: float
+) -> tuple[list[Medicion], dict[str, Any]]:
+    """Como ``correr``, pero con m y u congelados: solo se vuelve a estimar lambda.
+
+    La auditoría (hallazgo A2) mostró que reentrenar en cada tamaño degrada la precisión:
+    el u de los campos casi únicos baja con el volumen y los familiares que comparten
+    teléfono y dirección acumulan evidencia. Con los parámetros congelados no pasa. El
+    bloqueo de predicción es el exacto del esquema, igual que en ``correr``, para que las
+    dos corridas comparen lo mismo. Además de la calidad, mide la línea base
+    determinística y el híbrido (sin intervalos: el bootstrap no cabe en memoria a esta
+    escala).
+    """
+    from identidades import linea_base
+    from identidades.modelo_co_v3 import ESQUEMA_V3
+
+    mediciones: list[Medicion] = []
+    registros = generar(n_registros)
+
+    with medir("preparacion", mediciones) as m:
+        preparado = preparar(registros)
+        m.detalle["registros"] = len(preparado)
+
+    with medir("lambda", mediciones) as m:
+        congelada = {
+            **configuracion,
+            "blocking_rules_to_generate_predictions": [
+                block_on(*cols).get_blocking_rule("duckdb").as_dict()
+                for cols in ESQUEMA_V3.bloqueos_exactos
+            ],
+        }
+        linker = Linker(preparado, congelada, db_api=DuckDBAPI())
+        linker.training.estimate_probability_two_random_records_match(
+            ESQUEMA_V3.reglas_deterministicas, recall=modelo.RECALL_DETERMINISTICO
+        )
+
+    with medir("prediccion", mediciones) as m:
+        df_pred = linker.inference.predict(threshold_match_probability=UMBRAL_PREDICCION)
+        pares = df_pred.as_pandas_dataframe()[
+            ["unique_id_l", "unique_id_r", "match_probability", "match_weight"]
+        ]
+        m.detalle["pares_desde_0_9"] = len(pares)
+
+    with medir("agrupacion", mediciones) as m:
+        clusters = modelo.agrupar(linker, df_pred, umbral).as_pandas_dataframe()
+        m.detalle["clientes"] = int(clusters["cluster_id"].nunique())
+
+    calidad = evaluacion.metricas_cluster(clusters, registros)
+    base = linea_base.comparar(preparado, registros, pares, umbral, n_bootstrap=0)
+    return mediciones, {"calidad": calidad, "linea_base": base}
+
+
 def exportar_universo(
     artefactos: dict[str, Any],
     directorio: Path,

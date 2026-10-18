@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import json
+import math
 from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import jellyfish
 import pandas as pd
@@ -190,6 +192,63 @@ def agrupar(linker: Linker, df_pred: SplinkDataFrame, umbral: float) -> SplinkDa
     return linker.clustering.cluster_pairwise_predictions_at_threshold(
         df_pred, threshold_match_probability=umbral
     )
+
+
+def aplicar_piso_m(configuracion: dict, max_bits_en_contra: float) -> dict:
+    """Copia del modelo guardado donde ningún nivel resta más de ``max_bits_en_contra`` bits.
+
+    El peso de un nivel es log2(m/u). EM puede dejar una m casi en cero cuando un
+    desacuerdo nunca se vio en la misma persona durante el entrenamiento (por ejemplo,
+    "municipio distinto" si los datos no tienen mudanzas), y ese nivel veta el par sin
+    importar cuántos campos coincidan. El piso es m >= u * 2^-max_bits_en_contra; las m
+    de los demás niveles de la comparación se reescalan para que sigan sumando 1.
+    """
+    piso = 2.0**-max_bits_en_contra
+    nuevo = json.loads(json.dumps(configuracion))
+    for comparacion in nuevo["comparisons"]:
+        niveles = [
+            n
+            for n in comparacion["comparison_levels"]
+            if not n.get("is_null_level")
+            and n.get("m_probability") is not None
+            and n.get("u_probability") is not None
+        ]
+        fijos: set[int] = set()
+        for _ in range(len(niveles) + 1):
+            nuevos = {
+                i
+                for i, n in enumerate(niveles)
+                if i not in fijos and n["m_probability"] < n["u_probability"] * piso * (1 - 1e-12)
+            }
+            if not nuevos:
+                break
+            fijos |= nuevos
+            for i in fijos:
+                niveles[i]["m_probability"] = niveles[i]["u_probability"] * piso
+            resto = sum(n["m_probability"] for i, n in enumerate(niveles) if i not in fijos)
+            libre = 1 - sum(niveles[i]["m_probability"] for i in fijos)
+            if resto > 0 and libre > 0:
+                for i, n in enumerate(niveles):
+                    if i not in fijos:
+                        n["m_probability"] *= libre / resto
+    return nuevo
+
+
+def pesos_extremos(configuracion: dict) -> list[dict[str, Any]]:
+    """Peso (log2 m/u) del nivel más negativo de cada comparación, de menor a mayor."""
+    filas = []
+    for comparacion in configuracion["comparisons"]:
+        niveles = [
+            (n.get("label_for_charts", ""), math.log2(n["m_probability"] / n["u_probability"]))
+            for n in comparacion["comparison_levels"]
+            if not n.get("is_null_level") and n.get("m_probability") and n.get("u_probability")
+        ]
+        if niveles:
+            nivel, peso = min(niveles, key=lambda x: x[1])
+            filas.append(
+                {"comparacion": comparacion["output_column_name"], "nivel": nivel, "peso": peso}
+            )
+    return sorted(filas, key=lambda f: f["peso"])
 
 
 def guardar_modelo(linker: Linker, ruta: Path) -> None:

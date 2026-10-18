@@ -314,6 +314,48 @@ def guardar_intervalos(tabla: pd.DataFrame, titulo: str, ruta_html: Path) -> Non
     _guardar_grafico(grafico_intervalos(tabla, titulo), ruta_html)
 
 
+def grafico_confiabilidad(tabla: pd.DataFrame, titulo: str) -> alt.FacetChart:
+    """Diagrama de confiabilidad: probabilidad predicha contra frecuencia observada.
+
+    ``tabla`` tiene ``predicha``, ``observada``, ``ic_inf``, ``ic_sup``, ``pares``,
+    ``version`` (sin calibrar o calibrada) y ``conjunto`` (un panel por conjunto).
+    """
+    colores = alt.Scale(
+        domain=["sin calibrar", "calibrada"],
+        range=[COLORES_METRICAS["recall"], COLORES_METRICAS["precision"]],
+    )
+    eje = alt.Scale(domain=[0, 1])
+    base = alt.Chart(tabla).encode(
+        x=alt.X("predicha:Q", title="Probabilidad predicha (media del intervalo)", scale=eje),
+        color=alt.Color("version:N", title=None, scale=colores),
+        tooltip=[
+            "version:N",
+            alt.Tooltip("predicha:Q", format=".4f"),
+            alt.Tooltip("observada:Q", format=".3f"),
+            alt.Tooltip("ic_inf:Q", format=".3f", title="IC 95 % inferior"),
+            alt.Tooltip("ic_sup:Q", format=".3f", title="IC 95 % superior"),
+            "pares:Q",
+        ],
+    )
+    # Calibración perfecta (predicha = observada), dibujada sobre los mismos puntos.
+    diagonal = base.mark_line(strokeDash=[4, 4], color="#9ca3af").encode(
+        y="predicha:Q", color=alt.value("#9ca3af"), detail="version:N"
+    )
+    barras = base.mark_rule(strokeWidth=1.5).encode(
+        y=alt.Y("ic_inf:Q", title="Frecuencia observada de verdaderos", scale=eje), y2="ic_sup:Q"
+    )
+    puntos = base.mark_line(point=alt.OverlayMarkDef(filled=True, size=60)).encode(y="observada:Q")
+    return (
+        alt.layer(diagonal, barras, puntos)
+        .properties(width=280, height=280)
+        .facet(column=alt.Column("conjunto:N", title=None), title=titulo)
+    )
+
+
+def guardar_confiabilidad(tabla: pd.DataFrame, titulo: str, ruta_html: Path) -> None:
+    _guardar_grafico(grafico_confiabilidad(tabla, titulo), ruta_html)
+
+
 def capturar_pagina_servida(
     raiz: Path,
     pagina: str,

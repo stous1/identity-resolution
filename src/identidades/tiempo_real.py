@@ -260,16 +260,21 @@ def preparar_evaluacion(
     semilla: int = 5050,
     frac_existentes: float = 0.7,
     max_consultas: int = 1000,
-) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    registros: pd.DataFrame | None = None,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame | None]:
     """Registros de la base y consultas con verdad: personas existentes y nuevas.
 
     De cada persona existente (con dos o más registros) se aparta un registro como
     consulta; el resto va a la base. De cada persona nueva se toma un registro.
     Devuelve ``(registros_base, consultas, personas)``; ``consultas`` tiene ``existe``.
+    Si se dan ``registros`` (por ejemplo, de una prueba ciega), se usan en lugar de
+    generarlos y ``personas`` es ``None``.
     """
     from identidades import sinteticos
 
-    registros, personas = sinteticos.generar(n_personas, semilla)
+    personas = None
+    if registros is None:
+        registros, personas = sinteticos.generar(n_personas, semilla)
     rng = np.random.default_rng(semilla)
     por_persona = registros.groupby("cluster")
     con_varios = [c for c, g in por_persona if len(g) >= 2]
@@ -301,10 +306,8 @@ def preparar_evaluacion(
     )
 
 
-def evaluar(
-    vinculador: Vinculador, consultas: pd.DataFrame, n_bootstrap: int = 1000, semilla: int = 0
-) -> dict[str, Any]:
-    """Precisión y recall de "ya es cliente", decisiones y latencia por consulta.
+def resultados_por_consulta(vinculador: Vinculador, consultas: pd.DataFrame) -> pd.DataFrame:
+    """Decisión de cada consulta con ``tp``, ``fp`` y ``fn``.
 
     Un acierto exige decir ``cliente`` **y** encontrar al cliente correcto (el de la
     misma persona verdadera). ``revisar`` y ``nuevo`` cuentan como "no es cliente".
@@ -330,6 +333,66 @@ def evaluar(
     t["tp"] = (t["decision"] == "cliente") & t["existe"] & t["correcto"]
     t["fp"] = (t["decision"] == "cliente") & ~(t["existe"] & t["correcto"])
     t["fn"] = t["existe"] & ~t["tp"]
+    return t
+
+
+def precision_por_prevalencia(
+    t: pd.DataFrame,
+    prevalencias: tuple[float, ...] = (0.01, 0.10, 0.50),
+    n_bootstrap: int = 1000,
+    semilla: int = 0,
+) -> dict[str, Any]:
+    """Precisión esperada si una fracción ``prevalencia`` de las consultas son clientes.
+
+    La evaluación mezcla consultas de clientes existentes y de personas nuevas en una
+    proporción fija. Con las tasas de cada grupo (aciertos y clientes equivocados entre
+    las existentes, falsas alarmas entre las nuevas) se recalcula la precisión para otra
+    mezcla: π·a / (π·(a + e) + (1 − π)·f). El recall no depende de la mezcla. El
+    intervalo remuestrea por separado existentes y nuevas.
+    """
+    existentes, nuevas = t[t["existe"]], t[~t["existe"]]
+
+    def tasas(e: pd.DataFrame, n: pd.DataFrame) -> tuple[float, float, float]:
+        return e["tp"].mean(), e["fp"].mean(), n["fp"].mean()
+
+    def precision(a: float, e: float, f: float, pi: float) -> float:
+        positivos = pi * (a + e) + (1 - pi) * f
+        return pi * a / positivos if positivos else 0.0
+
+    rng = np.random.default_rng(semilla)
+    replicas = [
+        tasas(
+            existentes.iloc[rng.integers(0, len(existentes), len(existentes))],
+            nuevas.iloc[rng.integers(0, len(nuevas), len(nuevas))],
+        )
+        for _ in range(n_bootstrap)
+    ]
+    a, e, f = tasas(existentes, nuevas)
+    resultado: dict[str, Any] = {
+        "tasas": {
+            "aciertos_entre_existentes": a,
+            "cliente_equivocado_entre_existentes": e,
+            "falsa_alarma_entre_nuevas": f,
+            "falsas_alarmas": int(nuevas["fp"].sum()),
+            "nuevas": len(nuevas),
+        },
+        "precision": {},
+    }
+    for pi in prevalencias:
+        valores = [precision(*r, pi) for r in replicas]
+        resultado["precision"][str(pi)] = {
+            "valor": precision(a, e, f, pi),
+            "ic_inf": float(np.quantile(valores, 0.025)),
+            "ic_sup": float(np.quantile(valores, 0.975)),
+        }
+    return resultado
+
+
+def evaluar(
+    vinculador: Vinculador, consultas: pd.DataFrame, n_bootstrap: int = 1000, semilla: int = 0
+) -> dict[str, Any]:
+    """Precisión y recall de "ya es cliente", decisiones y latencia por consulta."""
+    t = resultados_por_consulta(vinculador, consultas)
 
     def metricas(muestra: pd.DataFrame) -> tuple[float, float]:
         tp, fp, fn = muestra["tp"].sum(), muestra["fp"].sum(), muestra["fn"].sum()
