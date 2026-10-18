@@ -617,6 +617,55 @@ umbral congelado y débiles entre 0,9 y ese umbral), los puentes débiles en nar
 estrellas de datos compartidos (relleno en morado, hogares en verde, sospechosos en rojo).
 Cosmograph tiene licencia CC-BY-NC-4.0: libre para uso no comercial, como este portafolio.
 
+## Hito 5: vinculación en tiempo real y escala
+
+**Página:** [hito 5 en GitHub Pages](https://stous1.github.io/identity-resolution/hito5.html) ·
+[universo grande en Cosmograph](https://stous1.github.io/identity-resolution/hito5_universo.html)
+
+### ¿Ya es cliente?
+
+[`tiempo_real.py`](src/identidades/tiempo_real.py) compara un registro nuevo contra la base
+de registros de oro con el modelo v2 congelado y decide **cliente** (probabilidad sobre el
+umbral congelado 0,9999), **revisar** (entre 0,9 y el umbral) o **nuevo**, con el cliente
+encontrado y el peso de cada campo. La probabilidad previa se fija en 1 / número de
+clientes y los umbrales no se ajustan: las cifras son de prueba, medidas una vez.
+
+Base de 1.351 clientes (3.000 personas sintéticas) y 2.000 consultas, 1.000 de clientes
+existentes (con un registro apartado) y 1.000 de personas nuevas; un acierto exige el
+cliente correcto. IC 95 % por bootstrap.
+
+| Precisión | Recall | Cliente equivocado | Latencia mediana | p95 |
+|---|---|---|---|---|
+| 0,999 (0,997 – 1,000) | 0,993 (0,987 – 0,998) | 0 | 60 ms | 74 ms |
+
+De las personas nuevas, 993 quedan como nuevas, 6 van a revisión y 1 se confunde con un
+cliente. Splink genera el SQL una vez y luego solo se reejecuta en DuckDB (sin esto, ~280 ms).
+`uv run python scripts/servicio_local.py` levanta el servicio local con FastAPI
+(`POST /consultar`); no se publica ningún servicio.
+
+### Escala con DuckDB
+
+[`escala.py`](src/identidades/escala.py) corre el esquema v2 completo sobre 100 mil y 1
+millón de registros en una máquina (24 núcleos, 63 GB), sin Spark, cada tamaño en un proceso
+propio. Memoria = pico del proceso, acumulada entre etapas.
+
+| Registros | Preparación | Entrenamiento | Predicción | Agrupación | Memoria pico | Precisión | Recall |
+|---|---|---|---|---|---|---|---|
+| 99.088 | 8,3 s | 13,1 s | 1,1 s | 0,8 s | 1,5 GB | 0,982 | 0,997 |
+| 995.688 | 90,6 s | 35,6 s | 1,9 s | 5,8 s | **9,1 GB** | 0,971 | 0,996 |
+
+![Tiempo por etapa](docs/resultados/hito5/escala_tiempo.png)
+
+- La preparación (estandarización en Python) es el cuello de botella: 91 de 134 s.
+- **5 millones no cabe en esta máquina:** con 1 millón el pico ya es de 9,1 GB y la corrida
+  de 5 millones se detuvo por falta de memoria; no se reporta.
+- A escala se anulan los correos de relleno antes de bloquear y los bloques de EM evitan la
+  fecha de nacimiento sola, para que el bloqueo no crezca con el cuadrado.
+
+El [universo grande](https://stous1.github.io/identity-resolution/hito5_universo.html)
+carga desde Parquet una muestra de 200 mil registros del conjunto de 1 millón (40 mil en
+el celular). Los datos de escala no se versionan; solo esas muestras.
+
 ## Trabajo futuro
 
 - **Tercera prueba ciega:** con un generador nuevo que incluya a propósito el apellido de
@@ -643,7 +692,11 @@ uv run python scripts/hito2b.py desarrollar   # hito 2b: modelo v2 -> reports/hi
 uv run python scripts/hito2b.py evaluar       # v2 congelado en prueba normal y ciegas
 uv run python scripts/hito3.py                # hito 3 -> reports/hito3/
 uv run python scripts/hito3.py --captura-universo  # PNG de Cosmograph (tras publicar)
-uv run python scripts/publicar_resultados.py --hito 1   # o 2, validacion, 2b, 3: a docs/resultados/
+uv run python scripts/hito5.py tiempo-real    # hito 5: "¿ya es cliente?" -> reports/hito5/
+uv run python scripts/escala.py --todos       # escala: 100 mil y 1 millón (~10 GB de RAM)
+uv run python scripts/hito5.py escala         # tabla y gráficos de escala
+uv run python scripts/servicio_local.py       # servicio local en http://127.0.0.1:8000/docs
+uv run python scripts/publicar_resultados.py --hito 1   # o 2, validacion, 2b, 3, 5: a docs/resultados/
 ```
 
 La primera ejecución del hito descarga fake_1000 y lo guarda en `data/raw/`.
@@ -655,7 +708,8 @@ src/identidades/   datos, modelo, bloqueo, evaluación, tableros y flujo del hit
                    sinteticos, estandarizacion, modelo_co y flujo_hito2 (hito 2);
                    errores_ciegos, modelo_febrl y flujo_validacion (validación);
                    estandarizacion_v2, modelo_co_v2, errores_ciegos_2 y flujo_hito2b (2b);
-                   escenario_hito3, registro_oro, grafo_compartido, puentes y flujo_hito3 (3)
+                   escenario_hito3, registro_oro, grafo_compartido, puentes y flujo_hito3 (3);
+                   tiempo_real, servicio, escala y flujo_hito5 (5); demo (exporta el modelo)
 scripts/           puntos de entrada
 tests/             pruebas con pytest
 notebooks/         solo exploración

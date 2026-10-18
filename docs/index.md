@@ -22,6 +22,10 @@ medir su precisión contra la verdad conocida.
   oro a menos de 5 puntos del techo alcanzable, grupos de datos compartidos clasificados
   en relleno, hogar o sospechoso, puentes que evitan 4 de cada 10 mezclas sin perder
   recall, y el [universo de registros en Cosmograph](hito3_universo.html).
+- [Hito 5: vinculación en tiempo real y escala](hito5.md): "¿ya es cliente?" contra la base
+  de registros de oro con precisión 0,999, recall 0,993 y 60 ms de mediana por consulta;
+  1 millón de registros en DuckDB en 134 s con 9,1 GB de pico, y el
+  [universo grande en Cosmograph](hito5_universo.html) (200 mil registros desde Parquet).
 
 ## Hito 1: fake_1000
 

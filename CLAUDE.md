@@ -36,6 +36,9 @@ uv run python scripts/hito2b.py desarrollar   # hito 2b: modelo v2 -> reports/hi
 uv run python scripts/hito2b.py evaluar       # v2 congelado en prueba normal y ciegas
 uv run python scripts/hito3.py                # hito 3 -> reports/hito3/
 uv run python scripts/hito3.py --captura-universo  # PNG de Cosmograph (tras publicar --hito 3)
+uv run python scripts/hito5.py tiempo-real    # hito 5: "¿ya es cliente?" -> reports/hito5/
+uv run python scripts/escala.py --todos       # escala 100 mil y 1 millón (~10 GB de RAM)
+uv run python scripts/hito5.py escala         # tabla y gráficos de escala
 uv run python scripts/publicar_resultados.py --hito 1  # o 2, o validacion -> docs/resultados/
 ```
 
@@ -63,6 +66,13 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, o validacion -> do
     `puentes.py` y `flujo_hito3.py`. Desarrollo = escenario semilla 3030; prueba = 3131.
     `docs/hito3_universo.html` (Cosmograph desde esm.sh; jsdelivr carga dos versiones de
     luma.gl y falla) lee `docs/resultados/hito3/universo_*.json`.
+  - Hito 5: `tiempo_real.py` (vinculación contra registros de oro, SQL compilado una vez),
+    `servicio.py` (FastAPI local), `escala.py` y `flujo_hito5.py`. Los datos de escala van
+    a `data/escala/` (no versionados); solo se publican muestras en Parquet. 5 millones no
+    cabe en la máquina de referencia (pico de 9,1 GB con 1 millón).
+  - Demo: `demo.py` exporta el modelo v2 a `docs/demo/modelo_demo.json`; `docs/demo/motor.js`
+    lo reimplementa en JavaScript y `tests/test_demo.py` (con Node.js) verifica que da los
+    mismos niveles y pesos que Splink.
 - `scripts/`: puntos de entrada delgados que orquestan funciones de `src/`.
 - `notebooks/`: solo exploración. Nada en `src/` ni `scripts/` importa de notebooks.
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.

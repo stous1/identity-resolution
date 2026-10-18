@@ -86,6 +86,10 @@ de casos dudosos con un agente.
    universo de registros en Cosmograph; cola de revisión para el agente. Resultados en
    [hito3.md](hito3.md).
 4. Agente para la zona gris.
+5. **Tiempo real y escala** (completado): "¿ya es cliente?" contra la base de registros de
+   oro con el modelo congelado y un servicio local con FastAPI; tiempo y memoria con 100 mil
+   y 1 millón de registros en DuckDB; universo grande en Cosmograph desde Parquet.
+   Resultados en [hito5.md](hito5.md).
 
 ## Notas
 
