@@ -7,6 +7,13 @@ medir su precisión contra la verdad conocida.
 - [Descripción del caso](caso-01-identidades.md)
 - Código: [github.com/stous1/identity-resolution](https://github.com/stous1/identity-resolution)
 
+## Hitos
+
+- [Hito 1: fake_1000](#hito-1-fake_1000): dataset de demostración de Splink.
+- [Hito 2: clientes sintéticos colombianos y estandarización](hito2.md): precisión 1,000 y
+  recall 0,998 por clúster en prueba; la estandarización suma +3,6 puntos de personas
+  reconstruidas exactamente y el modelo no falla más con ningún grupo.
+
 ## Hito 1: fake_1000
 
 1.000 registros de 251 personas (dataset de demostración de Splink), divididas por persona en

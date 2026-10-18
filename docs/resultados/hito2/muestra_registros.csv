@@ -1,0 +1,41 @@
+unique_id,tipo_documento,numero_documento,nombres,apellidos,fecha_nacimiento,celular,correo,direccion,ciudad,departamento,cluster
+8,CC,99913412,Carlos Alejandro,Castro Rojas,1992-10-01,3112160733,ccastro45@yahoo.com,Kra 85 # 36A 9,La Peña,Cundinamarca,5
+472,CC,,MAIRTZA,alvarez,1941-09-22,,maritzaalvarez26@hotmail.com,CL 148A NO. 29A-15,HATILLO DE LOBA,Bolívar,205
+491,CC,1 147 993 754,Sergio Andres,Sánchez Pérez,1994-05-26,3150396702,ANDRES.SANCHEZ90@OUTLOOK.COM,Cra. 102C No 41 - 38,Barranquilla,Atlántico,211
+501,CC,64784195,Enrique,CASTELLANOS,2004-04-11,304-359-6053,enrique.castellanos87@gmail.com,cl. 125b # 105 - 72,BARRANQUILLA,Atlántico,215
+555,CC,13769354,Leonárdo David,Cruz,2001-12-12,3105345819,dcruz55@yahoo.com,Calle 62 # 32-75,Cartagena De Indias,Bolívar,233
+633,CC,95112080,luis edison,duque vásquez,2007-05-04,(304) 9335984,eduque16@outlook.com,CLL 107B NO. 88B - 54,CALI,Valle del Cauca,264
+787,CC,61214343,Lucero,Ospina Acevedo,1983-04-18,3042339982,sincorreo@hotmail.com,Calle 32 # 68A-20,Bucaramanga,Santander,326
+1034,CC,1166354142,Maria Luz,Sánchez,1962-10-02,573203824382,maria.sanchez36@outlook.com,Cl 58 No 26B - 67,Socorro,Santander,418
+1044,CE,5810436,César,OJEDA IBARRA,1951-04-16,3000509083,cesar.ojeda75@yahoo.com,Cll 62 N° 76A 15,El Tambo,Nariño,422
+1144,CC,96.001.570,Ricádo,RAMÍREZ VARGAS,1978-10-10,3101200859,ricardo.ramirez40@gmail.com,avenida 116 no 5-28,Ipiales,Nariño,466
+1497,CC,38056680,Arbey Luis,Ibarra Hernandez,1962-08-01,,,av. 114b # 28 1,Bucaramanga,Santander,622
+1519,CC,86518020,Pilar,GRANADOS MENA,1975-11-29,311-043-6545,pilar.granados76@gmail.com,Cr 39A N° 55 - 88,Medellín,Antioquia,627
+1538,CC,1094732616,vivicna,Fernandez Romero,1998-05-02,350-123-3160,viviana.fernandez7@hotmail.com,CARRERA 23C # 38-3,Suárez,Tolima,636
+1629,CC,1008513912,Ernesto,Medina Bolanos,1996-12-04,3042501775,ERNESTOMEDINA10@OUTLOOK.COM,Cra 46B No. 26B-73,Barranquilla,Atlántico,669
+1684,CC,21496635,Dávid,flórez,1984-03-20,3509217696,david.florez30@hotmail.com,Cl 109B N° 101-11,San José Del Fragua,Caquetá,695
+1756,CC,,Sergio,Ardila Vásquez,1994-12-18,,sergio.ardila97@yahoo.com,CL 145 Sur No 21B - 52,"Bogotá, D.C.","Bogotá, D.C.",727
+1803,CC,10.255.916,José,Barreto Uribe,1991-09-14,3503563277,josebarreto61@yahoo.com,Transversal 78 N° 96A-80,Paratebueno,Cundinamarca,746
+2098,CC,1.106.956.595,Sebastian,Serna Fajardo,1986-07-08,3157656406,sebastian.serna2@hotmail.com,calle 112a # 83-29,Santa Rosa de Cabal,Risaralda,864
+2107,CC,,David Freddy,salazar,2001-02-22,3002901818,,Cra 53 Sur No. 9B-68,la victoria,Valle del Cauca,869
+2651,CC,40637465,Angel Jose,RAMOS BELTRAN,1974-04-20,(301) 2062552,ANGELRAMOS97@GMAIL.COM,CL 16B N° 75 - 90,Supía,Caldas,1110
+2750,CC,1045482256,LÚISCRISTIAN,Parra Gómez,1965-01-29,573103408683,lparra46@gmail.com,Cl 16 Sur No 81 33,El Bagre,Antioquia,1147
+2886,CC,1029847799,Angelica,Gonzáles,1983-04-04,3115288210,agonzales87@hotmail.com,Transversal 119A # 2-27,jericó,Boyacá,1201
+2988,CC,"17,452,049",Maribel,Ramírez,1992-05-11,3202560519,mramirez57@outlook.com,cra 50c no. 110b-19,regidor,Bolívar,1246
+3209,CC,13 377 232,Amparo Urth,cortés,1980-02-02,3113357632,amparo.cortes81@outlook.com,KR 42 Sur N° 52 86,TOGÜÍ,Boyacá,1337
+3309,CC,1025004596,Constanza Liliana,Zapata Durán,6946-12-16,3104500204,czapata77@outlook.com,Cl 11 No. 21A-72,El Carmen de Atrato,Chocó,1382
+3573,CC,,patricia,Pérez Martínez,1961-09-16,3113703615,patricia.perez40@outlook.com,,Cartagena de Indias,Bolívar,1474
+3603,CC,1067766404,Erika,BELTRÁN BEDOYA,1976-05-23,300-027-4169,erikabeltran87@hotmail.com,Cra 79C # 65 7,Bucaramanga,Santander,1488
+3710,CC,1014074481,NUBIÁ,Beltrán Quintero,2004-03-25,304-092-6531,NUBIABELTRAN45@GMAIL.COM,CL 101 NO 70A - 50,El Litoral Del San Juan,Chocó,1527
+3989,CC,58371204,marcelá elizabetth,García,1992-12-14,(300) 1343390,mgarcia20@outlook.com,Carrera 130C Este # 24-37,Puerto Rico,Meta,1647
+4084,CC,11 856 642,Flor,corredor,2004-07-22,3204116721,,Av. 51 # 31A 58,cali,Valle del Cauca,1694
+4102,CC,1039457275,Milena,Estrada Pérez,1970-08-29,3155804430,milena.estrada61@outlook.com,Cl. 141 No. 47-9,El Rosal,Cundinamarca,1703
+4262,CC,1015848549,Teresa,ANGARITA,1962-11-27,300-767-4393,teresa.angarita11@hotmail.com,Cl 38B No. 20-2,"Bogotá, D.C.","Bogotá, D.C.",1760
+4449,CC,27860063,Alejandra,Duarte,1961-07-03,3117139520,ALEJANDRADUARTE73@OUTLOOK.COM,Diagonal 71C Este No 115A-60,Puerto Santander,Amazonas,1838
+4477,CE,889514,gloría eugenia,Pinzón,1949-04-14,3005139942,epinzon82@yahoo.com,Cra 50C BIS # 8B-30,Bucaramanga,Santander,1850
+4612,CC,"35,583,286",chrsitian,CARDENAS RODRIGUEZ,1972-05-31,3011988441,christian.cardenas94@hotmail.com,Cll 40A N° 33A - 57,Cartagena De Indias,Bolívar,1900
+4671,CC,73 969 737,yadria,Yepes,1990-05-25,3010462292,yadira.yepes40@yahoo.com,DIAG 103B ESTE # 111-25,BUCARAMANGA,Santander,1927
+4704,CC,6076877342,Eugenia,gómez mejía,1942-06-07,3019838761,sincorreo@hotmail.com,Calle 119 # 76-86,Cali,Valle del Cauca,1939
+4705,CC,56560120,Elizabéth,Pineda Quintero,1957-11-01,3124916906,elizabeth.pineda84@hotmail.com,Carrera 74 Este # 38B-93,"Bogotá, D.C.","Bogotá, D.C.",1940
+4750,CC,1039359482,Patricia,Álvarez Herrera,1965-11-23,3010224896,palvarez8@hotmail.com,Carrera 57 # 82A-1,Cartagena de Indias,Bolívar,1958
+4811,CC,1.090.324.157,ANDRÉS,Rosero,2000-03-11,3115194116,ANDRESROSERO82@OUTLOOK.COM,Calle 129B # 106A-1,Bucaramanga,Santander,1984

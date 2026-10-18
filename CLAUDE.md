@@ -30,7 +30,8 @@ uv run pytest                               # todas las pruebas
 uv run pytest -m "not integracion"          # solo pruebas rápidas
 uv run ruff check . && uv run ruff format . # lint y formato
 uv run python scripts/hito1_fake1000.py     # flujo completo del hito 1 -> reports/
-uv run python scripts/publicar_resultados.py # copia resultados finales -> docs/resultados/
+uv run python scripts/hito2_colombia.py      # hito 2 (sintéticos colombianos) -> reports/hito2/
+uv run python scripts/publicar_resultados.py --hito 1  # o --hito 2 -> docs/resultados/
 ```
 
 ## Estructura
@@ -38,7 +39,10 @@ uv run python scripts/publicar_resultados.py # copia resultados finales -> docs/
 - `src/identidades/`: toda la lógica, como funciones reutilizables.
   - `rutas.py`: rutas del proyecto. **Toda ruta se obtiene de aquí.**
   - `datos.py`, `modelo.py`, `bloqueo.py`, `evaluacion.py`, `tableros.py` y `flujo.py`
-    (flujo del hito y publicación de resultados).
+    (flujo del hito 1 y publicación de resultados).
+  - Hito 2: `sinteticos.py` (generador), `estandarizacion.py`, `modelo_co.py` (esquema
+    colombiano) y `flujo_hito2.py`. Un `modelo.Esquema` agrupa comparaciones, preparación
+    y reglas de cada conjunto de datos.
 - `scripts/`: puntos de entrada delgados que orquestan funciones de `src/`.
 - `notebooks/`: solo exploración. Nada en `src/` ni `scripts/` importa de notebooks.
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.

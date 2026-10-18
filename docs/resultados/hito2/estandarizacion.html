@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-35599a79ecee90fbc4c3dbe9f358442a"}, "facet": {"column": {"field": "metrica", "title": null, "type": "nominal"}}, "spec": {"layer": [{"mark": {"type": "rule", "color": "#6b7280", "strokeWidth": 2}, "encoding": {"tooltip": [{"field": "grupo", "type": "nominal"}, {"field": "metrica", "type": "nominal"}, {"field": "valor", "format": ".3f", "type": "quantitative"}, {"field": "ic_inf", "format": ".3f", "title": "IC 95 % inferior", "type": "quantitative"}, {"field": "ic_sup", "format": ".3f", "title": "IC 95 % superior", "type": "quantitative"}], "x": {"field": "ic_inf", "scale": {"zero": false}, "title": "Valor (IC 95 %)", "type": "quantitative"}, "x2": {"field": "ic_sup"}, "y": {"field": "grupo", "sort": null, "title": null, "type": "nominal"}}}, {"mark": {"type": "point", "color": "#2563eb", "filled": true, "size": 70}, "encoding": {"tooltip": [{"field": "grupo", "type": "nominal"}, {"field": "metrica", "type": "nominal"}, {"field": "valor", "format": ".3f", "type": "quantitative"}, {"field": "ic_inf", "format": ".3f", "title": "IC 95 % inferior", "type": "quantitative"}, {"field": "ic_sup", "format": ".3f", "title": "IC 95 % superior", "type": "quantitative"}], "x": {"field": "valor", "type": "quantitative"}, "y": {"field": "grupo", "sort": null, "title": null, "type": "nominal"}}}], "height": {"step": 26}, "width": 260}, "resolve": {"scale": {"x": "independent"}}, "title": "Aporte de la estandarizaci\u00f3n en prueba (por cl\u00faster)", "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json", "datasets": {"data-35599a79ecee90fbc4c3dbe9f358442a": [{"grupo": "estandarizado", "metrica": "Precisi\u00f3n", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "estandarizado", "metrica": "Recall", "valor": 0.9977313974591652, "ic_inf": 0.9933848924891912, "ic_sup": 1.0}, {"grupo": "estandarizado", "metrica": "F1", "valor": 0.9988644106291166, "ic_inf": 0.9966814699898848, "ic_sup": 1.0}, {"grupo": "estandarizado", "metrica": "Personas exactas", "valor": 0.9975, "ic_inf": 0.99375, "ic_sup": 1.0}, {"grupo": "sin estandarizar", "metrica": "Precisi\u00f3n", "valor": 0.9890460976722958, "ic_inf": 0.9597247544343156, "ic_sup": 1.0}, {"grupo": "sin estandarizar", "metrica": "Recall", "valor": 0.9832123411978222, "ic_inf": 0.9746655640449963, "ic_sup": 0.9902113225510245}, {"grupo": "sin estandarizar", "metrica": "F1", "valor": 0.9861205915813425, "ic_inf": 0.9714020376204515, "ic_sup": 0.9936750220722137}, {"grupo": "sin estandarizar", "metrica": "Personas exactas", "valor": 0.96125, "ic_inf": 0.9475, "ic_sup": 0.97375}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

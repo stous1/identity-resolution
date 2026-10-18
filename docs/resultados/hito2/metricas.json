@@ -1,0 +1,1414 @@
+{
+  "datos": {
+    "generador": "sinteticos.generar (Faker es_CO)",
+    "semilla": 42,
+    "personas": 2000,
+    "registros": 4851,
+    "familiares": 0.248,
+    "tasas_error": {
+      "documento_transpuesto": 0.08,
+      "documento_digito_faltante": 0.05,
+      "documento_digito_errado": 0.06,
+      "documento_vacio": 0.05,
+      "documento_con_puntos": 0.25,
+      "digitacion_nombre": 0.1,
+      "digitacion_apellido": 0.1,
+      "fecha_errada": 0.06,
+      "tilde_cambiada": 0.3,
+      "nombres_invertidos": 0.2,
+      "segundo_apellido_omitido": 0.25,
+      "direccion_otra_escritura": 0.7,
+      "telefono_cambiado": 0.12,
+      "correo_cambiado": 0.1,
+      "telefono_otro_formato": 0.4,
+      "mayusculas_distintas": 0.5,
+      "campo_vacio": 0.05,
+      "relleno_telefono": 0.04,
+      "relleno_correo": 0.04,
+      "relleno_direccion": 0.03
+    }
+  },
+  "particion": {
+    "frac_desarrollo": 0.6,
+    "desarrollo": {
+      "registros": 2920,
+      "personas": 1200
+    },
+    "prueba": {
+      "registros": 1931,
+      "personas": 800,
+      "nombre_compuesto": 343,
+      "dos_apellidos": 667,
+      "con_tilde": 548
+    }
+  },
+  "umbral": {
+    "costo_fp": 10.0,
+    "costo_fn": 1.0,
+    "elegido_en": "desarrollo"
+  },
+  "variantes": {
+    "estandarizado": {
+      "bloqueos_prediccion": [
+        [
+          "documento"
+        ],
+        [
+          "telefono"
+        ],
+        [
+          "email"
+        ],
+        [
+          "primer_apellido",
+          "fecha_nacimiento"
+        ],
+        [
+          "domicilio_clave"
+        ]
+      ],
+      "umbral": {
+        "criterio": "min_costo_cluster",
+        "valor": 0.999999
+      },
+      "desarrollo": {
+        "seleccion_bloqueos": [
+          {
+            "regla_agregada": "exactas",
+            "reglas": 4,
+            "pares_comparados": 7132,
+            "recall_bloqueo": 0.9892933618843683,
+            "ganancia_recall": 0.0
+          },
+          {
+            "regla_agregada": "domicilio_clave",
+            "reglas": 5,
+            "pares_comparados": 9157,
+            "recall_bloqueo": 0.9990822881615172,
+            "ganancia_recall": 0.009788926277148976
+          }
+        ],
+        "umbrales": [
+          {
+            "criterio": "fijo",
+            "umbral": 0.9,
+            "pares": {
+              "tp": 3266,
+              "fp": 45,
+              "fn": 3,
+              "precision": 0.986408939897312,
+              "recall": 0.9990822881615172,
+              "f1": 0.9927051671732523
+            },
+            "costo_pares": 453.0,
+            "clusters": {
+              "tp": 3269,
+              "fp": 159,
+              "fn": 0,
+              "precision": 0.9536172695449242,
+              "recall": 1.0,
+              "f1": 0.976258025981783,
+              "clusters_exactos": 1152
+            },
+            "costo_clusters": 1590.0
+          },
+          {
+            "criterio": "max_f1_par",
+            "umbral": 0.9999,
+            "pares": {
+              "tp": 3262,
+              "fp": 2,
+              "fn": 7,
+              "precision": 0.9993872549019608,
+              "recall": 0.9978586723768736,
+              "f1": 0.9986223786927904
+            },
+            "costo_pares": 27.0,
+            "clusters": {
+              "tp": 3269,
+              "fp": 4,
+              "fn": 0,
+              "precision": 0.9987778796211427,
+              "recall": 1.0,
+              "f1": 0.9993885661877102,
+              "clusters_exactos": 1198
+            },
+            "costo_clusters": 40.0
+          },
+          {
+            "criterio": "min_costo_par",
+            "umbral": 0.9999,
+            "pares": {
+              "tp": 3262,
+              "fp": 2,
+              "fn": 7,
+              "precision": 0.9993872549019608,
+              "recall": 0.9978586723768736,
+              "f1": 0.9986223786927904
+            },
+            "costo_pares": 27.0,
+            "clusters": {
+              "tp": 3269,
+              "fp": 4,
+              "fn": 0,
+              "precision": 0.9987778796211427,
+              "recall": 1.0,
+              "f1": 0.9993885661877102,
+              "clusters_exactos": 1198
+            },
+            "costo_clusters": 40.0
+          },
+          {
+            "criterio": "min_costo_cluster",
+            "umbral": 0.999999,
+            "pares": {
+              "tp": 3249,
+              "fp": 2,
+              "fn": 20,
+              "precision": 0.9993848046754845,
+              "recall": 0.9938819210767819,
+              "f1": 0.9966257668711657
+            },
+            "costo_pares": 40.0,
+            "clusters": {
+              "tp": 3269,
+              "fp": 4,
+              "fn": 0,
+              "precision": 0.9987778796211427,
+              "recall": 1.0,
+              "f1": 0.9993885661877102,
+              "clusters_exactos": 1198
+            },
+            "costo_clusters": 40.0
+          }
+        ]
+      },
+      "prueba": {
+        "bloqueo": {
+          "pares_comparados": 5120,
+          "pares_verdaderos": 2204,
+          "pares_verdaderos_comparados": 2201,
+          "recall_bloqueo": 0.9986388384754991,
+          "recall_perdido_por_bloqueo": 0.0013611615245009423
+        },
+        "pares": {
+          "umbral": 0.999999,
+          "tp": 2191,
+          "fp": 0,
+          "fn": 13,
+          "precision": 1.0,
+          "recall": 0.9941016333938294,
+          "f1": 0.997042093287827
+        },
+        "clusters": {
+          "umbral": 0.999999,
+          "tp": 2199,
+          "fp": 0,
+          "fn": 5,
+          "precision": 1.0,
+          "recall": 0.9977313974591652,
+          "f1": 0.9988644106291166,
+          "clusters_predichos": 802,
+          "clusters_reales": 800,
+          "clusters_exactos": 798,
+          "pct_clusters_exactos": 0.9975
+        },
+        "intervalos": {
+          "metodo": "bootstrap percentil remuestreando personas",
+          "nivel": 0.95,
+          "replicas": 1000,
+          "personas": 800,
+          "pares": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9941016333938294,
+              "ic_inf": 0.9889297772544067,
+              "ic_sup": 0.998197608505427
+            },
+            "f1": {
+              "valor": 0.997042093287827,
+              "ic_inf": 0.9944340806155946,
+              "ic_sup": 0.9990979913658857
+            }
+          },
+          "clusters": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9977313974591652,
+              "ic_inf": 0.9933848924891912,
+              "ic_sup": 1.0
+            },
+            "f1": {
+              "valor": 0.9988644106291166,
+              "ic_inf": 0.9966814699898848,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9975,
+              "ic_inf": 0.99375,
+              "ic_sup": 1.0
+            }
+          }
+        }
+      }
+    },
+    "crudo": {
+      "bloqueos_prediccion": [
+        [
+          "documento"
+        ],
+        [
+          "telefono"
+        ],
+        [
+          "email"
+        ],
+        [
+          "primer_apellido",
+          "fecha_nacimiento"
+        ],
+        [
+          "fecha_nacimiento"
+        ],
+        [
+          "nombre_metaphone",
+          "apellido_soundex"
+        ]
+      ],
+      "umbral": {
+        "criterio": "min_costo_cluster",
+        "valor": 0.98
+      },
+      "desarrollo": {
+        "seleccion_bloqueos": [
+          {
+            "regla_agregada": "exactas",
+            "reglas": 4,
+            "pares_comparados": 6462,
+            "recall_bloqueo": 0.8204343836035485,
+            "ganancia_recall": 0.0
+          },
+          {
+            "regla_agregada": "fecha_nacimiento",
+            "reglas": 5,
+            "pares_comparados": 7164,
+            "recall_bloqueo": 0.9736922606301621,
+            "ganancia_recall": 0.15325787702661364
+          },
+          {
+            "regla_agregada": "nombre_metaphone & apellido_soundex",
+            "reglas": 6,
+            "pares_comparados": 7655,
+            "recall_bloqueo": 0.9944937289691037,
+            "ganancia_recall": 0.020801468338941573
+          }
+        ],
+        "umbrales": [
+          {
+            "criterio": "fijo",
+            "umbral": 0.9,
+            "pares": {
+              "tp": 3008,
+              "fp": 5,
+              "fn": 261,
+              "precision": 0.9983405243942914,
+              "recall": 0.9201590700520037,
+              "f1": 0.9576567971983446
+            },
+            "costo_pares": 311.0,
+            "clusters": {
+              "tp": 3199,
+              "fp": 17,
+              "fn": 70,
+              "precision": 0.9947139303482587,
+              "recall": 0.9785867237687366,
+              "f1": 0.9865844255975328,
+              "clusters_exactos": 1143
+            },
+            "costo_clusters": 240.0
+          },
+          {
+            "criterio": "max_f1_par",
+            "umbral": 0.07,
+            "pares": {
+              "tp": 3211,
+              "fp": 34,
+              "fn": 58,
+              "precision": 0.9895223420647149,
+              "recall": 0.9822575711226674,
+              "f1": 0.9858765735339269
+            },
+            "costo_pares": 398.0,
+            "clusters": {
+              "tp": 3259,
+              "fp": 176,
+              "fn": 10,
+              "precision": 0.9487627365356623,
+              "recall": 0.996940960538391,
+              "f1": 0.972255369928401,
+              "clusters_exactos": 1147
+            },
+            "costo_clusters": 1770.0
+          },
+          {
+            "criterio": "min_costo_par",
+            "umbral": 0.63,
+            "pares": {
+              "tp": 3111,
+              "fp": 10,
+              "fn": 158,
+              "precision": 0.9967958987504005,
+              "recall": 0.951667176506577,
+              "f1": 0.9737089201877934
+            },
+            "costo_pares": 258.0,
+            "clusters": {
+              "tp": 3235,
+              "fp": 56,
+              "fn": 34,
+              "precision": 0.9829838954725008,
+              "recall": 0.9895992658305293,
+              "f1": 0.9862804878048781,
+              "clusters_exactos": 1160
+            },
+            "costo_clusters": 594.0
+          },
+          {
+            "criterio": "min_costo_cluster",
+            "umbral": 0.98,
+            "pares": {
+              "tp": 2941,
+              "fp": 2,
+              "fn": 328,
+              "precision": 0.99932042133877,
+              "recall": 0.899663505659223,
+              "f1": 0.9468770122343853
+            },
+            "costo_pares": 348.0,
+            "clusters": {
+              "tp": 3186,
+              "fp": 4,
+              "fn": 83,
+              "precision": 0.9987460815047022,
+              "recall": 0.9746099724686449,
+              "f1": 0.9865304226660474,
+              "clusters_exactos": 1140
+            },
+            "costo_clusters": 123.0
+          }
+        ]
+      },
+      "prueba": {
+        "bloqueo": {
+          "pares_comparados": 4566,
+          "pares_verdaderos": 2204,
+          "pares_verdaderos_comparados": 2188,
+          "recall_bloqueo": 0.9927404718693285,
+          "recall_perdido_por_bloqueo": 0.007259528130671544
+        },
+        "pares": {
+          "umbral": 0.98,
+          "tp": 1999,
+          "fp": 3,
+          "fn": 205,
+          "precision": 0.9985014985014985,
+          "recall": 0.9069872958257713,
+          "f1": 0.9505468378506895
+        },
+        "clusters": {
+          "umbral": 0.98,
+          "tp": 2167,
+          "fp": 24,
+          "fn": 37,
+          "precision": 0.9890460976722958,
+          "recall": 0.9832123411978222,
+          "f1": 0.9861205915813425,
+          "clusters_predichos": 823,
+          "clusters_reales": 800,
+          "clusters_exactos": 769,
+          "pct_clusters_exactos": 0.96125
+        },
+        "intervalos": {
+          "metodo": "bootstrap percentil remuestreando personas",
+          "nivel": 0.95,
+          "replicas": 1000,
+          "personas": 800,
+          "pares": {
+            "precision": {
+              "valor": 0.9985014985014985,
+              "ic_inf": 0.994553436952174,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9069872958257713,
+              "ic_inf": 0.892757180931581,
+              "ic_sup": 0.9213745301110924
+            },
+            "f1": {
+              "valor": 0.9505468378506895,
+              "ic_inf": 0.9425091888620134,
+              "ic_sup": 0.9584378329340912
+            }
+          },
+          "clusters": {
+            "precision": {
+              "valor": 0.9890460976722958,
+              "ic_inf": 0.9597247544343156,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9832123411978222,
+              "ic_inf": 0.9746655640449963,
+              "ic_sup": 0.9902113225510245
+            },
+            "f1": {
+              "valor": 0.9861205915813425,
+              "ic_inf": 0.9714020376204515,
+              "ic_sup": 0.9936750220722137
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.96125,
+              "ic_inf": 0.9475,
+              "ic_sup": 0.97375
+            }
+          }
+        }
+      }
+    }
+  },
+  "aporte_estandarizacion": {
+    "descripcion": "estandarizado - crudo, en prueba, bootstrap pareado por persona",
+    "clusters": {
+      "precision": {
+        "valor": 0.010953902327704212,
+        "ic_inf": 0.0,
+        "ic_sup": 0.040275245565684376,
+        "significativa": false
+      },
+      "recall": {
+        "valor": 0.014519056261342977,
+        "ic_inf": 0.0062988775513065295,
+        "ic_sup": 0.023637394092054082,
+        "significativa": true
+      },
+      "f1": {
+        "valor": 0.012743819047774108,
+        "ic_inf": 0.004649854845866539,
+        "ic_sup": 0.02718099551193496,
+        "significativa": true
+      },
+      "pct_clusters_exactos": {
+        "valor": 0.036250000000000004,
+        "ic_inf": 0.02375000000000005,
+        "ic_sup": 0.050000000000000044,
+        "significativa": true
+      }
+    },
+    "pares": {
+      "precision": {
+        "valor": 0.0014985014985015033,
+        "ic_inf": 0.0,
+        "ic_sup": 0.0054465630478259825,
+        "significativa": false
+      },
+      "recall": {
+        "valor": 0.08711433756805809,
+        "ic_inf": 0.0731484609376937,
+        "ic_sup": 0.10153643759825234,
+        "significativa": true
+      },
+      "f1": {
+        "valor": 0.046495255437137506,
+        "ic_inf": 0.03872596589156677,
+        "ic_sup": 0.05491316499850157,
+        "significativa": true
+      }
+    }
+  },
+  "equidad": {
+    "grupos": {
+      "nombre_compuesto": [
+        "nombre compuesto",
+        "nombre simple"
+      ],
+      "dos_apellidos": [
+        "dos apellidos",
+        "un apellido"
+      ],
+      "con_tilde": [
+        "con tilde o ñ",
+        "sin tilde"
+      ]
+    },
+    "detalle": {
+      "estandarizado": {
+        "nombre_compuesto": {
+          "clusters": {
+            "grupos": {
+              "nombre simple": {
+                "personas": 457,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9991532599491956,
+                  "ic_inf": 0.9971879144489045,
+                  "ic_sup": 1.0
+                },
+                "f1": {
+                  "valor": 0.9995764506565015,
+                  "ic_inf": 0.998591977482457,
+                  "ic_sup": 1.0
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.9978118161925602,
+                  "ic_inf": 0.9931658969638344,
+                  "ic_sup": 1.0
+                }
+              },
+              "nombre compuesto": {
+                "personas": 343,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9960899315738025,
+                  "ic_inf": 0.9872420943791825,
+                  "ic_sup": 1.0
+                },
+                "f1": {
+                  "valor": 0.9980411361410382,
+                  "ic_inf": 0.9935800946157471,
+                  "ic_sup": 1.0
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.9970845481049563,
+                  "ic_inf": 0.990909090909091,
+                  "ic_sup": 1.0
+                }
+              }
+            },
+            "diferencias": {
+              "nombre simple - nombre compuesto": {
+                "precision": {
+                  "valor": 0.0,
+                  "ic_inf": 0.0,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": 0.0030633283753930263,
+                  "ic_inf": -0.0024855527664082028,
+                  "ic_sup": 0.012171936158202574,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": 0.001535314515463293,
+                  "ic_inf": -0.0012443227982167986,
+                  "ic_sup": 0.006123233908948155,
+                  "significativa": false
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.0007272680876039272,
+                  "ic_inf": -0.0065502183406113135,
+                  "ic_sup": 0.008623831305921342,
+                  "significativa": false
+                }
+              }
+            }
+          },
+          "pares": {
+            "grupos": {
+              "nombre simple": {
+                "personas": 457,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9966130397967824,
+                  "ic_inf": 0.991856271465739,
+                  "ic_sup": 1.0
+                },
+                "f1": {
+                  "valor": 0.9983036471586091,
+                  "ic_inf": 0.9959114878647796,
+                  "ic_sup": 1.0
+                }
+              },
+              "nombre compuesto": {
+                "personas": 343,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9912023460410557,
+                  "ic_inf": 0.9816174860925105,
+                  "ic_sup": 0.9980623881932021
+                },
+                "f1": {
+                  "valor": 0.9955817378497791,
+                  "ic_inf": 0.990723480168591,
+                  "ic_sup": 0.999030254600176
+                }
+              }
+            },
+            "diferencias": {
+              "nombre simple - nombre compuesto": {
+                "precision": {
+                  "valor": 0.0,
+                  "ic_inf": 0.0,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": 0.00541069375572667,
+                  "ic_inf": -0.0028370222459251733,
+                  "ic_sup": 0.015761002797423162,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": 0.002721909308829984,
+                  "ic_inf": -0.0014273190830489438,
+                  "ic_sup": 0.00795733054445099,
+                  "significativa": false
+                }
+              }
+            }
+          }
+        },
+        "dos_apellidos": {
+          "clusters": {
+            "grupos": {
+              "dos apellidos": {
+                "personas": 667,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9971509971509972,
+                  "ic_inf": 0.9916867499508164,
+                  "ic_sup": 1.0
+                },
+                "f1": {
+                  "valor": 0.9985734664764622,
+                  "ic_inf": 0.9958260253129072,
+                  "ic_sup": 1.0
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.9970014992503748,
+                  "ic_inf": 0.9924922102553682,
+                  "ic_sup": 1.0
+                }
+              },
+              "un apellido": {
+                "personas": 133,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "f1": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "pct_clusters_exactos": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                }
+              }
+            },
+            "diferencias": {
+              "dos apellidos - un apellido": {
+                "precision": {
+                  "valor": 0.0,
+                  "ic_inf": 0.0,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": -0.002849002849002802,
+                  "ic_inf": -0.008313250049183556,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": -0.0014265335235378318,
+                  "ic_inf": -0.004173974687092813,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                },
+                "pct_clusters_exactos": {
+                  "valor": -0.0029985007496251548,
+                  "ic_inf": -0.007507789744631848,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                }
+              }
+            }
+          },
+          "pares": {
+            "grupos": {
+              "dos apellidos": {
+                "personas": 667,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9931623931623932,
+                  "ic_inf": 0.9869503132048493,
+                  "ic_sup": 0.998112356614278
+                },
+                "f1": {
+                  "valor": 0.9965694682675815,
+                  "ic_inf": 0.9934323032714256,
+                  "ic_sup": 0.9990552866434511
+                }
+              },
+              "un apellido": {
+                "personas": 133,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9977728285077951,
+                  "ic_inf": 0.9927003963223422,
+                  "ic_sup": 1.0
+                },
+                "f1": {
+                  "valor": 0.9988851727982163,
+                  "ic_inf": 0.9963368283093053,
+                  "ic_sup": 1.0
+                }
+              }
+            },
+            "diferencias": {
+              "dos apellidos - un apellido": {
+                "precision": {
+                  "valor": 0.0,
+                  "ic_inf": 0.0,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": -0.004610435345401953,
+                  "ic_inf": -0.011616104375410396,
+                  "ic_sup": 0.002474643100817964,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": -0.002315704530634788,
+                  "ic_inf": -0.0058419827305194625,
+                  "ic_sup": 0.001246802906137293,
+                  "significativa": false
+                }
+              }
+            }
+          }
+        },
+        "con_tilde": {
+          "clusters": {
+            "grupos": {
+              "con tilde o ñ": {
+                "personas": 548,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9971014492753624,
+                  "ic_inf": 0.9907610530320485,
+                  "ic_sup": 1.0
+                },
+                "f1": {
+                  "valor": 0.9985486211901305,
+                  "ic_inf": 0.9953590879344939,
+                  "ic_sup": 1.0
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.9981751824817519,
+                  "ic_inf": 0.99436010276163,
+                  "ic_sup": 1.0
+                }
+              },
+              "sin tilde": {
+                "personas": 252,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9987864077669902,
+                  "ic_inf": 0.9958720137206264,
+                  "ic_sup": 1.0
+                },
+                "f1": {
+                  "valor": 0.9993928354584092,
+                  "ic_inf": 0.9979317379613857,
+                  "ic_sup": 1.0
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.996031746031746,
+                  "ic_inf": 0.9871781115879829,
+                  "ic_sup": 1.0
+                }
+              }
+            },
+            "diferencias": {
+              "con tilde o ñ - sin tilde": {
+                "precision": {
+                  "valor": 0.0,
+                  "ic_inf": 0.0,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": -0.0016849584916278637,
+                  "ic_inf": -0.008824998911481658,
+                  "ic_sup": 0.0035760061248581386,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": -0.0008442142682786313,
+                  "ic_inf": -0.0044320559213235486,
+                  "ic_sup": 0.00179120574479317,
+                  "significativa": false
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.002143436450005809,
+                  "ic_inf": -0.0053483123454660655,
+                  "ic_sup": 0.012449429460580868,
+                  "significativa": false
+                }
+              }
+            }
+          },
+          "pares": {
+            "grupos": {
+              "con tilde o ñ": {
+                "personas": 548,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9920289855072464,
+                  "ic_inf": 0.9843405193545027,
+                  "ic_sup": 0.997797638393245
+                },
+                "f1": {
+                  "valor": 0.9959985449254274,
+                  "ic_inf": 0.9921084710423913,
+                  "ic_sup": 0.9988976052599223
+                }
+              },
+              "sin tilde": {
+                "personas": 252,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9975728155339806,
+                  "ic_inf": 0.9937620807758826,
+                  "ic_sup": 1.0
+                },
+                "f1": {
+                  "valor": 0.9987849331713243,
+                  "ic_inf": 0.9968712820347921,
+                  "ic_sup": 1.0
+                }
+              }
+            },
+            "diferencias": {
+              "con tilde o ñ - sin tilde": {
+                "precision": {
+                  "valor": 0.0,
+                  "ic_inf": 0.0,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": -0.005543830026734198,
+                  "ic_inf": -0.013362310333898383,
+                  "ic_sup": 0.001243340750236463,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": -0.0027863882458969425,
+                  "ic_inf": -0.006733759755103197,
+                  "ic_sup": 0.000623514803632874,
+                  "significativa": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "crudo": {
+        "nombre_compuesto": {
+          "clusters": {
+            "grupos": {
+              "nombre simple": {
+                "personas": 457,
+                "precision": {
+                  "valor": 0.989804587935429,
+                  "ic_inf": 0.9552903655046415,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9864521591871296,
+                  "ic_inf": 0.9746298251312869,
+                  "ic_sup": 0.9950818422371233
+                },
+                "f1": {
+                  "valor": 0.9881255301102629,
+                  "ic_inf": 0.9703123684162837,
+                  "ic_sup": 0.9969179279192072
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.9693654266958425,
+                  "ic_inf": 0.9527820521139425,
+                  "ic_sup": 0.984304932735426
+                }
+              },
+              "nombre compuesto": {
+                "personas": 343,
+                "precision": {
+                  "valor": 0.9881656804733728,
+                  "ic_inf": 0.9368905148683513,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9794721407624634,
+                  "ic_inf": 0.9664883662761283,
+                  "ic_sup": 0.9896269734308817
+                },
+                "f1": {
+                  "valor": 0.98379970544919,
+                  "ic_inf": 0.9592455521987244,
+                  "ic_sup": 0.994029984318819
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.9504373177842566,
+                  "ic_inf": 0.9260327635327635,
+                  "ic_sup": 0.9721364385073777
+                }
+              }
+            },
+            "diferencias": {
+              "nombre simple - nombre compuesto": {
+                "precision": {
+                  "valor": 0.0016389074620561939,
+                  "ic_inf": -0.04092484421118606,
+                  "ic_sup": 0.0532749026630367,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": 0.006980018424666223,
+                  "ic_inf": -0.008722457679989444,
+                  "ic_sup": 0.021941645134465105,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": 0.004325824661072897,
+                  "ic_inf": -0.018235013886340593,
+                  "ic_sup": 0.03509191555494064,
+                  "significativa": false
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.018928108911585917,
+                  "ic_inf": -0.007807763952982767,
+                  "ic_sup": 0.04715754649540866,
+                  "significativa": false
+                }
+              }
+            }
+          },
+          "pares": {
+            "grupos": {
+              "nombre simple": {
+                "personas": 457,
+                "precision": {
+                  "valor": 0.9981464318813716,
+                  "ic_inf": 0.9920862567369659,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9119390347163421,
+                  "ic_inf": 0.8914623972645066,
+                  "ic_sup": 0.9320890649430814
+                },
+                "f1": {
+                  "valor": 0.9530973451327432,
+                  "ic_inf": 0.9414557641460571,
+                  "ic_sup": 0.9637926924138622
+                }
+              },
+              "nombre compuesto": {
+                "personas": 343,
+                "precision": {
+                  "valor": 0.9989165763813651,
+                  "ic_inf": 0.9938640839203212,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9012707722385142,
+                  "ic_inf": 0.8787850064627316,
+                  "ic_sup": 0.9207819169744458
+                },
+                "f1": {
+                  "valor": 0.947584789311408,
+                  "ic_inf": 0.9345340219443928,
+                  "ic_sup": 0.9583941416574661
+                }
+              }
+            },
+            "diferencias": {
+              "nombre simple - nombre compuesto": {
+                "precision": {
+                  "valor": -0.0007701444999934637,
+                  "ic_inf": -0.007456824647416908,
+                  "ic_sup": 0.004950617707955141,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": 0.010668262477827928,
+                  "ic_inf": -0.01769714065632176,
+                  "ic_sup": 0.04170047755439162,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": 0.005512555821335252,
+                  "ic_inf": -0.010951590215700729,
+                  "ic_sup": 0.023184068436120607,
+                  "significativa": false
+                }
+              }
+            }
+          }
+        },
+        "dos_apellidos": {
+          "clusters": {
+            "grupos": {
+              "dos apellidos": {
+                "personas": 667,
+                "precision": {
+                  "valor": 0.9862700228832952,
+                  "ic_inf": 0.9498817192561052,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9823361823361824,
+                  "ic_inf": 0.9720095582560832,
+                  "ic_sup": 0.990520955310838
+                },
+                "f1": {
+                  "valor": 0.9842991721381672,
+                  "ic_inf": 0.9653261068295033,
+                  "ic_sup": 0.9939357229952542
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.9610194902548725,
+                  "ic_inf": 0.9461356995107857,
+                  "ic_sup": 0.9755005042393456
+                }
+              },
+              "un apellido": {
+                "personas": 133,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9866369710467706,
+                  "ic_inf": 0.9708994708994709,
+                  "ic_sup": 0.9975247524752475
+                },
+                "f1": {
+                  "valor": 0.9932735426008968,
+                  "ic_inf": 0.9852348993288591,
+                  "ic_sup": 0.9987608426270136
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.9624060150375939,
+                  "ic_inf": 0.927007299270073,
+                  "ic_sup": 0.9922480620155039
+                }
+              }
+            },
+            "diferencias": {
+              "dos apellidos - un apellido": {
+                "precision": {
+                  "valor": -0.013729977116704761,
+                  "ic_inf": -0.05011828074389481,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": -0.004300788710588255,
+                  "ic_inf": -0.01968286203156816,
+                  "ic_sup": 0.012964633637737063,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": -0.008974370462729642,
+                  "ic_inf": -0.02867334660512984,
+                  "ic_sup": 0.004198489045851617,
+                  "significativa": false
+                },
+                "pct_clusters_exactos": {
+                  "valor": -0.0013865247827213878,
+                  "ic_inf": -0.03420501590149212,
+                  "ic_sup": 0.036464929817639186,
+                  "significativa": false
+                }
+              }
+            }
+          },
+          "pares": {
+            "grupos": {
+              "dos apellidos": {
+                "personas": 667,
+                "precision": {
+                  "valor": 0.9981108312342569,
+                  "ic_inf": 0.9930679520524213,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9031339031339032,
+                  "ic_inf": 0.8863046809231465,
+                  "ic_sup": 0.9200018028846154
+                },
+                "f1": {
+                  "valor": 0.948250074783129,
+                  "ic_inf": 0.9382865853173588,
+                  "ic_sup": 0.9573895033857781
+                }
+              },
+              "un apellido": {
+                "personas": 133,
+                "precision": {
+                  "valor": 1.0,
+                  "ic_inf": 1.0,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9220489977728286,
+                  "ic_inf": 0.8934413121744905,
+                  "ic_sup": 0.9484559145736755
+                },
+                "f1": {
+                  "valor": 0.9594438006952491,
+                  "ic_inf": 0.9437222124722124,
+                  "ic_sup": 0.9735461884715616
+                }
+              }
+            },
+            "diferencias": {
+              "dos apellidos - un apellido": {
+                "precision": {
+                  "valor": -0.0018891687657430767,
+                  "ic_inf": -0.006932047947578708,
+                  "ic_sup": 0.0,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": -0.018915094638925378,
+                  "ic_inf": -0.05084196477202478,
+                  "ic_sup": 0.014727792730914947,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": -0.0111937259121202,
+                  "ic_inf": -0.028440036393006504,
+                  "ic_sup": 0.0072587167690820594,
+                  "significativa": false
+                }
+              }
+            }
+          }
+        },
+        "con_tilde": {
+          "clusters": {
+            "grupos": {
+              "con tilde o ñ": {
+                "personas": 548,
+                "precision": {
+                  "valor": 0.9854967367657723,
+                  "ic_inf": 0.9408099854246191,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9847826086956522,
+                  "ic_inf": 0.9749626779298244,
+                  "ic_sup": 0.9923147978768504
+                },
+                "f1": {
+                  "valor": 0.9851395433127945,
+                  "ic_inf": 0.9612435220565443,
+                  "ic_sup": 0.9951771104627147
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.9653284671532847,
+                  "ic_inf": 0.948339483394834,
+                  "ic_sup": 0.9797794117647058
+                }
+              },
+              "sin tilde": {
+                "personas": 252,
+                "precision": {
+                  "valor": 0.9950738916256158,
+                  "ic_inf": 0.9700738789729795,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9805825242718447,
+                  "ic_inf": 0.9641804097951024,
+                  "ic_sup": 0.9932443769272628
+                },
+                "f1": {
+                  "valor": 0.9877750611246944,
+                  "ic_inf": 0.9737251035298758,
+                  "ic_sup": 0.9958850150247999
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.9523809523809523,
+                  "ic_inf": 0.9264677382580939,
+                  "ic_sup": 0.9766613172192437
+                }
+              }
+            },
+            "diferencias": {
+              "con tilde o ñ - sin tilde": {
+                "precision": {
+                  "valor": -0.00957715485984345,
+                  "ic_inf": -0.05474642659303471,
+                  "ic_sup": 0.02215985678753161,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": 0.004200084423807482,
+                  "ic_inf": -0.011739202384665342,
+                  "ic_sup": 0.022403141113239173,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": -0.002635517811899857,
+                  "ic_inf": -0.02665451359972854,
+                  "ic_sup": 0.015029499282928729,
+                  "significativa": false
+                },
+                "pct_clusters_exactos": {
+                  "valor": 0.012947514772332358,
+                  "ic_inf": -0.016128321551046987,
+                  "ic_sup": 0.042390548897105654,
+                  "significativa": false
+                }
+              }
+            }
+          },
+          "pares": {
+            "grupos": {
+              "con tilde o ñ": {
+                "personas": 548,
+                "precision": {
+                  "valor": 0.9984126984126984,
+                  "ic_inf": 0.9933449208914278,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.9115942028985508,
+                  "ic_inf": 0.8949577202292442,
+                  "ic_sup": 0.9276425810697015
+                },
+                "f1": {
+                  "valor": 0.953030303030303,
+                  "ic_inf": 0.9436586578293289,
+                  "ic_sup": 0.9620432089414062
+                }
+              },
+              "sin tilde": {
+                "personas": 252,
+                "precision": {
+                  "valor": 0.9986522911051213,
+                  "ic_inf": 0.9916306255024735,
+                  "ic_sup": 1.0
+                },
+                "recall": {
+                  "valor": 0.8992718446601942,
+                  "ic_inf": 0.8706642832410555,
+                  "ic_sup": 0.9253276531161146
+                },
+                "f1": {
+                  "valor": 0.946360153256705,
+                  "ic_inf": 0.9294174298383249,
+                  "ic_sup": 0.9612157717936466
+                }
+              }
+            },
+            "diferencias": {
+              "con tilde o ñ - sin tilde": {
+                "precision": {
+                  "valor": -0.00023959269242290748,
+                  "ic_inf": -0.005793812283652301,
+                  "ic_sup": 0.007447557593917551,
+                  "significativa": false
+                },
+                "recall": {
+                  "valor": 0.01232235823835659,
+                  "ic_inf": -0.019849453838749205,
+                  "ic_sup": 0.04554105404003986,
+                  "significativa": false
+                },
+                "f1": {
+                  "valor": 0.006670149773598033,
+                  "ic_inf": -0.01105963508139912,
+                  "ic_sup": 0.025603750520899183,
+                  "significativa": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "diferencias_significativas": {
+      "estandarizado": [],
+      "crudo": []
+    }
+  }
+}

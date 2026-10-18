@@ -71,7 +71,10 @@ de casos dudosos con un agente.
    intervalos de confianza por bootstrap. Resultados en el
    [README](https://github.com/stous1/identity-resolution#hito-1-fake_1000-de-punta-a-punta)
    y en [los tableros publicados](index.md).
-2. Sintéticos colombianos con Faker y estandarización.
+2. **Sintéticos colombianos y estandarización** (completado): generador con Faker es_CO
+   (errores de captura, familiares y datos de relleno), estandarización de nombres,
+   documento, celular, correo y direcciones, modelo con documento por niveles, aporte de la
+   estandarización y equidad entre grupos. Resultados en [hito2.md](hito2.md).
 3. Registro de oro y grafo de identidad compartida.
 4. Agente para la zona gris.
 

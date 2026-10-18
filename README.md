@@ -5,6 +5,11 @@ dato y resolución de identidades**.
 
 **Tableros interactivos:** [stous1.github.io/identity-resolution](https://stous1.github.io/identity-resolution/)
 
+| Hito | Datos | Resultado principal (prueba) |
+|---|---|---|
+| [1. fake_1000](#hito-1-fake_1000-de-punta-a-punta) | Demo de Splink, 251 personas | Precisión 0,970 y recall 0,851 por clúster |
+| [2. Colombia](#hito-2-clientes-sintéticos-colombianos-y-estandarización) | Sintéticos es_CO, 2.000 personas | Precisión 1,000 y recall 0,998 por clúster; estandarizar suma +3,6 puntos de personas exactas |
+
 ## Qué problema resuelve
 
 En una base de clientes, la misma persona aparece varias veces con pequeñas diferencias: un
@@ -178,6 +183,128 @@ modelo y la selección hechos en desarrollo.
   [por clúster](https://stous1.github.io/identity-resolution/resultados/curva_umbral_clusters.html)
   y [costo](https://stous1.github.io/identity-resolution/resultados/costo_umbral.html)
 
+## Hito 2: clientes sintéticos colombianos y estandarización
+
+**Tableros:** [stous1.github.io/identity-resolution/hito2.html](https://stous1.github.io/identity-resolution/hito2.html)
+
+### Datos sintéticos
+
+`identidades.sinteticos` genera, con Faker `es_CO` y semilla fija, 2.000 personas y 4.851
+registros ([muestra](docs/resultados/hito2/muestra_registros.csv)):
+
+- **Personas:** CC o CE, nombres simples y compuestos (40 %), dos apellidos (85 %) o uno,
+  fecha de nacimiento, celular de 10 dígitos que empieza por 3, correo, dirección colombiana
+  ("Cra 45 # 10-20", "Calle 10 Sur # 43A-15") y ciudad con su departamento.
+- **Registros:** de 1 a 6 por persona, con errores a tasas configurables (`TasasError`):
+  dígitos transpuestos, faltantes o errados en el documento, documento con puntos o vacío,
+  errores de digitación, tildes quitadas o puestas, nombres en otro orden, segundo apellido
+  omitido, otras abreviaturas de dirección (Cra, Carrera, KR, Cl, Calle, No., N°), celular en
+  otro formato, teléfono o correo cambiados con el tiempo, y fechas con día y mes
+  intercambiados.
+- **Familiares:** una cuarta parte de las personas son hermanos o padres e hijos de otra.
+  Comparten apellidos y dirección, y a veces el teléfono: es la fuente típica de falsos
+  positivos.
+- **Relleno compartido** por personas distintas, para el hito 3: teléfonos como 3000000000,
+  correos genéricos (notiene@gmail.com) y direcciones vagas ("CENTRO").
+- La columna `cluster` es la verdad (el id de la persona).
+
+### Estandarización
+
+`identidades.estandarizacion`, con una prueba por regla:
+
+- **Nombres y apellidos:** mayúsculas, columna auxiliar sin tildes (la Ñ pasa a N), y
+  separación de compuestos respetando partículas ("MARÍA DE LOS ÁNGELES", "DE LA HOZ").
+- **Documento:** solo dígitos. **Celular:** 10 dígitos que empiezan por 3, sin el
+  indicativo 57. **Correo:** minúsculas y validación.
+- **Dirección:** tipo de vía, número, cuadrante, placa y consecutivo, con forma canónica:
+  "Cra 45 No. 10 - 20" y "KR 45 10 20" quedan "KR 45 # 10-20".
+
+### Modelo
+
+El mismo esquema de evaluación del hito 1: bloqueo y umbral elegidos en desarrollo (1.200
+personas, 2.920 registros) y métricas en prueba (800 personas, 1.931 registros) con
+intervalos del 95 % por bootstrap de personas. Comparaciones:
+
+- **Documento por niveles:** exacto, un dígito distinto, dos dígitos transpuestos, un dígito
+  de más o de menos.
+- **Nombres:** iguales, los mismos en otro orden, mismo primer nombre o parecidos.
+- **Primer y segundo apellido** (Jaro-Winkler), fecha de nacimiento, celular, correo,
+  dirección (igual, misma vía, número y placa, o parecida) y ciudad. Celular, correo y
+  dirección llevan ajuste por frecuencia, que le baja el peso a los datos de relleno.
+
+Para medir cuánto aporta la estandarización se entrena **el mismo modelo** dos veces: con
+los datos estandarizados y con los textos tal cual (solo partidos por espacios). Cada
+variante elige su bloqueo y su umbral en desarrollo.
+
+### Resultados en prueba
+
+| Variante | Umbral | Precisión por clúster | Recall por clúster | Personas exactas | Recall por par |
+|---|---|---|---|---|---|
+| **Estandarizado** | 0,999999 | **1,000** [1,000 – 1,000] | **0,998** [0,993 – 1,000] | **99,8 %** [99,4 – 100] | 0,994 [0,989 – 0,998] |
+| Sin estandarizar | 0,98 | 0,989 [0,960 – 1,000] | 0,983 [0,975 – 0,990] | 96,1 % [94,8 – 97,4] | 0,907 [0,893 – 0,921] |
+
+**Aporte de la estandarización** (diferencia pareada en prueba, estandarizado − sin
+estandarizar):
+
+| Métrica | Diferencia | IC 95 % | ¿Significativa? |
+|---|---|---|---|
+| Recall por clúster | +0,015 | [+0,006, +0,024] | Sí |
+| Personas exactas | +3,6 puntos | [+2,4, +5,0] | Sí |
+| Recall por par | +0,087 | [+0,073, +0,102] | Sí |
+| Precisión por clúster | +0,011 | [0,000, +0,040] | No |
+
+Sin estandarizar, el bloqueo exacto solo cubre el 82 % de los pares verdaderos en desarrollo
+(frente al 99 % estandarizado), porque "1.023.456" y "1023456", o "+57 300…" y "300…", ya
+no coinciden. Además, 24 pares de registros de personas distintas quedan unidos por error.
+
+![Aporte de la estandarización](docs/resultados/hito2/estandarizacion.png)
+
+### Equidad
+
+Precisión, recall y personas reconstruidas exactamente en prueba, por clúster, según
+atributos verdaderos de la persona. Las diferencias son pareadas (mismas réplicas del
+bootstrap) y se consideran significativas si su intervalo no incluye el cero.
+
+| Grupo (personas en prueba) | Recall, estandarizado | Exactas, estandarizado | Recall, sin estandarizar | Exactas, sin estandarizar |
+|---|---|---|---|---|
+| Nombre simple (457) | 0,999 | 99,8 % | 0,986 | 96,9 % |
+| Nombre compuesto (343) | 0,996 | 99,7 % | 0,979 | 95,0 % |
+| Dos apellidos (667) | 0,997 | 99,7 % | 0,982 | 96,1 % |
+| Un apellido (133) | 1,000 | 100 % | 0,987 | 96,2 % |
+| Con tilde o ñ (548) | 0,997 | 99,8 % | 0,985 | 96,5 % |
+| Sin tilde (252) | 0,999 | 99,6 % | 0,981 | 95,2 % |
+
+- **Con estandarización, el modelo no falla más con ningún grupo:** ninguna diferencia es
+  significativa y la precisión es 1,000 en todos.
+- **Sin estandarizar,** las personas con nombre compuesto quedan reconstruidas exactamente
+  un poco menos (95,0 % frente a 96,9 %), pero la diferencia no es significativa
+  (+1,9 puntos, IC [−0,8, +4,7]). Tampoco lo son las demás.
+- Ojo: el generador aplica las mismas tasas de error a todos, así que los grupos solo
+  difieren en la estructura del nombre. Con datos reales, donde la calidad de captura
+  puede variar entre poblaciones, este análisis es más necesario.
+
+![Equidad por grupo](docs/resultados/hito2/equidad.png)
+
+### Casos difíciles: familiares con el mismo nombre
+
+Los errores que quedan vienen de familiares que viven juntos. En prueba, el par más difícil
+son dos hermanas que se llaman igual (MARÍA ZAPATA ROMERO, nacidas en 1975 y 2006): misma
+dirección (factor ×647), mismo nombre (×263) y mismos apellidos superan la evidencia en
+contra del documento y la fecha, y el par queda con peso 18,0 (probabilidad 0,999996), justo
+por debajo del umbral. La suposición de independencia entre campos de Fellegi-Sunter no se
+cumple dentro de un hogar. En desarrollo, el umbral de menor costo deja todavía 4 pares de
+ese tipo. Son los casos para el agente de la zona gris (hito 4).
+
+### Limitaciones
+
+- Los datos son sintéticos y el generador y la estandarización los escribió la misma
+  persona: la estandarización conoce los errores que se inyectaron. Las métricas son una
+  cota optimista de lo que se lograría con datos reales.
+- El bloqueo elegido en desarrollo para la variante estandarizada agrega solo
+  `domicilio_clave` (vía, número y placa) a las reglas exactas.
+- [Comparación de bloqueos](docs/resultados/hito2/comparacion_bloqueos.csv) y
+  [selección](docs/resultados/hito2/seleccion_bloqueos.csv) en desarrollo.
+
 ## Cómo correrlo
 
 Requiere [uv](https://docs.astral.sh/uv/). uv instala Python 3.11 si hace falta.
@@ -187,7 +314,8 @@ uv sync                                       # entorno y dependencias
 uv run playwright install chromium            # una sola vez, para las capturas PNG
 uv run pytest                                 # pruebas (sin internet)
 uv run python scripts/hito1_fake1000.py       # hito 1 completo -> reports/ (~1,5 min)
-uv run python scripts/publicar_resultados.py  # copia los resultados a docs/resultados/
+uv run python scripts/hito2_colombia.py       # hito 2 completo -> reports/hito2/ (~2,5 min)
+uv run python scripts/publicar_resultados.py --hito 1   # o --hito 2: copia a docs/resultados/
 ```
 
 La primera ejecución del hito descarga fake_1000 y lo guarda en `data/raw/`.
@@ -195,7 +323,8 @@ La primera ejecución del hito descarga fake_1000 y lo guarda en `data/raw/`.
 ## Estructura
 
 ```
-src/identidades/   datos, modelo, bloqueo, evaluación, tableros y flujo del hito
+src/identidades/   datos, modelo, bloqueo, evaluación, tableros y flujo del hito 1;
+                   sinteticos, estandarizacion, modelo_co y flujo_hito2 (hito 2)
 scripts/           puntos de entrada
 tests/             pruebas con pytest
 notebooks/         solo exploración
