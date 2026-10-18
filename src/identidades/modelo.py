@@ -4,13 +4,17 @@ from __future__ import annotations
 
 import json
 from collections.abc import Callable
+from dataclasses import dataclass
 from pathlib import Path
 
 import jellyfish
 import pandas as pd
 import splink.comparison_library as cl
 from splink import DuckDBAPI, Linker, SettingsCreator, block_on
+from splink.internals.comparison_creator import ComparisonCreator
 from splink.internals.splink_dataframe import SplinkDataFrame
+
+Regla = tuple[str, ...]
 
 # Columnas que usan las comparaciones del modelo.
 COLUMNAS_COMPARACION: list[str] = ["first_name", "surname", "dob", "city", "email"]
@@ -85,50 +89,94 @@ def preparar(df: pd.DataFrame) -> pd.DataFrame:
     )
 
 
-def crear_settings(bloqueos: list[tuple[str, ...]] | None = None) -> SettingsCreator:
-    """Construye la configuración del modelo de deduplicación.
+def _comparaciones_fake_1000() -> list[ComparisonCreator]:
+    return [
+        cl.NameComparison("first_name").configure(term_frequency_adjustments=True),
+        cl.NameComparison("surname").configure(term_frequency_adjustments=True),
+        cl.DateOfBirthComparison("dob", input_is_string=True),
+        cl.ExactMatch("city").configure(term_frequency_adjustments=True),
+        cl.EmailComparison("email"),
+    ]
 
-    ``bloqueos`` son las reglas de predicción (por defecto, solo ``BLOQUEOS_EXACTOS``).
+
+@dataclass(frozen=True)
+class Esquema:
+    """Todo lo que cambia entre conjuntos de datos: columnas, comparaciones y reglas.
+
+    - ``preparar``: agrega las columnas derivadas que usan comparaciones y bloqueos.
+    - ``bloqueos_exactos``: reglas de predicción que siempre se usan.
+    - ``bloqueos_candidatos``: reglas aproximadas entre las que se elige en desarrollo.
+    - ``bloqueos_em``: un bloqueo por pasada de EM.
+    - ``reglas_deterministicas``: reglas de alta precisión para estimar lambda.
     """
-    bloqueos = BLOQUEOS_EXACTOS if bloqueos is None else bloqueos
+
+    nombre: str
+    comparaciones: Callable[[], list[ComparisonCreator]]
+    preparar: Callable[[pd.DataFrame], pd.DataFrame]
+    bloqueos_exactos: list[Regla]
+    bloqueos_candidatos: list[Regla]
+    bloqueos_em: list[Regla]
+    reglas_deterministicas: list[str]
+
+
+ESQUEMA_FAKE_1000 = Esquema(
+    nombre="fake_1000",
+    comparaciones=_comparaciones_fake_1000,
+    preparar=preparar,
+    bloqueos_exactos=BLOQUEOS_EXACTOS,
+    bloqueos_candidatos=BLOQUEOS_CANDIDATOS,
+    bloqueos_em=BLOQUEOS_EM,
+    reglas_deterministicas=REGLAS_DETERMINISTICAS,
+)
+
+
+def crear_settings(
+    bloqueos: list[Regla] | None = None, esquema: Esquema = ESQUEMA_FAKE_1000
+) -> SettingsCreator:
+    """Construye la configuración del modelo de deduplicación para ``esquema``.
+
+    ``bloqueos`` son las reglas de predicción (por defecto, las exactas del esquema).
+    """
+    bloqueos = esquema.bloqueos_exactos if bloqueos is None else bloqueos
     return SettingsCreator(
         link_type="dedupe_only",
         unique_id_column_name="unique_id",
-        comparisons=[
-            cl.NameComparison("first_name").configure(term_frequency_adjustments=True),
-            cl.NameComparison("surname").configure(term_frequency_adjustments=True),
-            cl.DateOfBirthComparison("dob", input_is_string=True),
-            cl.ExactMatch("city").configure(term_frequency_adjustments=True),
-            cl.EmailComparison("email"),
-        ],
+        comparisons=esquema.comparaciones(),
         blocking_rules_to_generate_predictions=[block_on(*cols) for cols in bloqueos],
         retain_matching_columns=True,
         retain_intermediate_calculation_columns=True,
     )
 
 
-def crear_linker(df: pd.DataFrame, settings: SettingsCreator | None = None) -> Linker:
-    """Crea un ``Linker`` de Splink sobre DuckDB en memoria, aplicando ``preparar`` a ``df``."""
-    return Linker(preparar(df), settings or crear_settings(), db_api=DuckDBAPI())
+def crear_linker(
+    df: pd.DataFrame,
+    settings: SettingsCreator | None = None,
+    esquema: Esquema = ESQUEMA_FAKE_1000,
+) -> Linker:
+    """Crea un ``Linker`` de Splink sobre DuckDB en memoria, aplicando ``esquema.preparar``."""
+    return Linker(
+        esquema.preparar(df), settings or crear_settings(esquema=esquema), db_api=DuckDBAPI()
+    )
 
 
 def entrenar(
     linker: Linker,
+    esquema: Esquema = ESQUEMA_FAKE_1000,
     recall_deterministico: float = RECALL_DETERMINISTICO,
     max_pares_u: float = 1e6,
     semilla: int = 42,
 ) -> None:
     """Entrena el modelo sin etiquetas.
 
-    1. lambda por reglas determinísticas, suponiendo su recall.
+    1. lambda por las reglas determinísticas del esquema, suponiendo su recall.
     2. u por muestreo aleatorio de pares (casi todos son no coincidentes).
-    3. m por EM, con una pasada por cada bloqueo de ``BLOQUEOS_EM``.
+    3. m por EM, con una pasada por cada bloqueo de ``esquema.bloqueos_em``.
     """
     linker.training.estimate_probability_two_random_records_match(
-        REGLAS_DETERMINISTICAS, recall=recall_deterministico
+        esquema.reglas_deterministicas, recall=recall_deterministico
     )
     linker.training.estimate_u_using_random_sampling(max_pairs=max_pares_u, seed=semilla)
-    for cols in BLOQUEOS_EM:
+    for cols in esquema.bloqueos_em:
         linker.training.estimate_parameters_using_expectation_maximisation(block_on(*cols))
 
 

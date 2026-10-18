@@ -7,6 +7,8 @@ usa etiquetas, así que solo debe correr sobre el conjunto de desarrollo.
 
 from __future__ import annotations
 
+from collections.abc import Callable
+
 import duckdb
 import pandas as pd
 
@@ -19,8 +21,8 @@ Par = tuple[int, int]
 def pares_de_regla(df: pd.DataFrame, regla: Regla) -> set[Par]:
     """Pares ``(id menor, id mayor)`` que coinciden en todas las expresiones de ``regla``.
 
-    ``df`` debe tener las columnas derivadas de ``modelo.preparar``. Como en Splink, un
-    valor nulo nunca coincide.
+    ``df`` debe tener las columnas que usa ``regla`` (las que agrega ``preparar``).
+    Como en Splink, un valor nulo nunca coincide.
     """
     claves = ", ".join(f"{expr} as k{i}" for i, expr in enumerate(regla))
     condicion = " and ".join(f"a.k{i} = b.k{i}" for i in range(len(regla)))
@@ -41,6 +43,7 @@ def seleccionar_reglas(
     exactas: list[Regla],
     candidatas: list[Regla],
     min_ganancia: float = 0.005,
+    preparar: Callable[[pd.DataFrame], pd.DataFrame] = modelo.preparar,
 ) -> tuple[list[Regla], pd.DataFrame]:
     """Agrega reglas candidatas de forma voraz mientras suban el recall del bloqueo.
 
@@ -51,7 +54,7 @@ def seleccionar_reglas(
     Devuelve las reglas elegidas y el historial de pasos (reglas, comparaciones y
     recall del bloqueo acumulados).
     """
-    preparado = modelo.preparar(df)
+    preparado = preparar(df)
     verdaderos = {
         tuple(p) for p in evaluacion.pares_verdaderos(df)[["id_l", "id_r"]].to_numpy().tolist()
     }

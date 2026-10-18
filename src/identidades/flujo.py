@@ -66,18 +66,20 @@ ADVERTENCIA_REFERENCIA: str = (
 )
 
 
-def candidatos_bloqueo(seleccion: list[Regla]) -> dict[str, list[Regla]]:
+def candidatos_bloqueo(
+    seleccion: list[Regla], esquema: modelo.Esquema = modelo.ESQUEMA_FAKE_1000
+) -> dict[str, list[Regla]]:
     """Conjuntos de reglas de bloqueo a comparar.
 
     Las exactas solas, las exactas más cada candidata por separado, la ``seleccion``
     hecha en desarrollo y todas las reglas.
     """
-    exactas = modelo.BLOQUEOS_EXACTOS
+    exactas = esquema.bloqueos_exactos
     candidatos = {"exactas": exactas}
-    for regla in modelo.BLOQUEOS_CANDIDATOS:
+    for regla in esquema.bloqueos_candidatos:
         candidatos["exactas + " + " & ".join(regla)] = exactas + [regla]
     candidatos["selección"] = seleccion
-    candidatos["todas"] = exactas + modelo.BLOQUEOS_CANDIDATOS
+    candidatos["todas"] = exactas + esquema.bloqueos_candidatos
     return candidatos
 
 
@@ -85,6 +87,7 @@ def comparar_bloqueos(
     df: pd.DataFrame,
     candidatos: dict[str, list[Regla]],
     umbral: float,
+    esquema: modelo.Esquema = modelo.ESQUEMA_FAKE_1000,
 ) -> pd.DataFrame:
     """Entrena y evalúa el modelo con cada conjunto de reglas de bloqueo.
 
@@ -95,8 +98,8 @@ def comparar_bloqueos(
     verdaderos = evaluacion.pares_verdaderos(df)
     filas = []
     for nombre, bloqueos in candidatos.items():
-        linker = modelo.crear_linker(df, modelo.crear_settings(bloqueos))
-        modelo.entrenar(linker)
+        linker = modelo.crear_linker(df, modelo.crear_settings(bloqueos, esquema), esquema)
+        modelo.entrenar(linker, esquema)
         df_pred = modelo.predecir(linker)
         pred = df_pred.as_pandas_dataframe()
         recall_bloqueo = evaluacion.recall_bloqueo(pred, verdaderos)
@@ -161,6 +164,7 @@ def desarrollar(
     costo_fn: float = 1.0,
     min_ganancia: float = 0.005,
     umbral: float | None = None,
+    esquema: modelo.Esquema = modelo.ESQUEMA_FAKE_1000,
 ) -> Desarrollo:
     """Elige bloqueo, entrena y elige umbral usando la verdad conocida de ``df``.
 
@@ -169,10 +173,14 @@ def desarrollar(
     costo por par, para compararlos.
     """
     bloqueos, historial = bloqueo.seleccionar_reglas(
-        df, modelo.BLOQUEOS_EXACTOS, modelo.BLOQUEOS_CANDIDATOS, min_ganancia
+        df,
+        esquema.bloqueos_exactos,
+        esquema.bloqueos_candidatos,
+        min_ganancia,
+        esquema.preparar,
     )
-    linker = modelo.crear_linker(df, modelo.crear_settings(bloqueos))
-    modelo.entrenar(linker)
+    linker = modelo.crear_linker(df, modelo.crear_settings(bloqueos, esquema), esquema)
+    modelo.entrenar(linker, esquema)
 
     df_pred = modelo.predecir(linker)
     pred = df_pred.as_pandas_dataframe()
@@ -225,7 +233,11 @@ def desarrollar(
     )
 
 
-def aplicar_modelo(linker_entrenado: Linker, df: pd.DataFrame) -> Linker:
+def aplicar_modelo(
+    linker_entrenado: Linker,
+    df: pd.DataFrame,
+    esquema: modelo.Esquema = modelo.ESQUEMA_FAKE_1000,
+) -> Linker:
     """Aplica un modelo entrenado a otro conjunto, deduplicando dentro de ``df``.
 
     Conserva las comparaciones, el bloqueo y los parámetros m y u. La probabilidad a
@@ -233,9 +245,9 @@ def aplicar_modelo(linker_entrenado: Linker, df: pd.DataFrame) -> Linker:
     ``df`` con las mismas reglas determinísticas, que no usan etiquetas.
     """
     configuracion = linker_entrenado.misc.save_model_to_json()
-    linker = Linker(modelo.preparar(df), configuracion, db_api=DuckDBAPI())
+    linker = Linker(esquema.preparar(df), configuracion, db_api=DuckDBAPI())
     linker.training.estimate_probability_two_random_records_match(
-        modelo.REGLAS_DETERMINISTICAS, recall=modelo.RECALL_DETERMINISTICO
+        esquema.reglas_deterministicas, recall=modelo.RECALL_DETERMINISTICO
     )
     return linker
 
