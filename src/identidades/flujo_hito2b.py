@@ -23,10 +23,12 @@ import pandas as pd
 from identidades import (
     datos,
     errores_ciegos,
+    evaluacion,
     flujo,
     flujo_hito2,
     flujo_validacion,
     modelo,
+    modelo_co,
     rutas,
     sinteticos,
     tableros,
@@ -176,6 +178,27 @@ def evaluar_congelado_v2(
     ev_2 = flujo.evaluar(linker_2, registros_2, umbral, n_bootstrap, semilla_ciega_2)
     equidad_2 = _equidad(ev_2, registros_2, personas_2, condiciones_2, n_bootstrap, semilla_ciega_2)
 
+    # Control: el modelo v1 congelado sobre la misma ciega 2. Separa cuánto mejoró el
+    # modelo de cuánto más fácil (o difícil) es el generador nuevo.
+    flujo_validacion.verificar_congelado()
+    configuracion_v1, umbral_v1 = flujo_validacion.cargar_congelado()
+    linker_2_v1 = flujo.aplicar_configuracion(
+        configuracion_v1, registros_2, modelo_co.esquema(True)
+    )
+    ev_2_v1 = flujo.evaluar(linker_2_v1, registros_2, umbral_v1, n_bootstrap, semilla_ciega_2)
+    equidad_2_v1 = _equidad(
+        ev_2_v1, registros_2, personas_2, condiciones_2, n_bootstrap, semilla_ciega_2
+    )
+    mejora_v2 = {
+        nivel: evaluacion.bootstrap_diferencia(
+            flujo_hito2._contribuciones(ev_2_v1, registros_2, nivel),
+            flujo_hito2._contribuciones(ev_2, registros_2, nivel),
+            n=n_bootstrap,
+            semilla=semilla_ciega_2,
+        )
+        for nivel in ("clusters", "pares")
+    }
+
     anterior = json.loads(
         (rutas.DOCS_RESULTADOS_VALIDACION / "metricas.json").read_text(encoding="utf-8")
     )
@@ -189,11 +212,13 @@ def evaluar_congelado_v2(
         "prueba normal · modelo v2": ev_hito2.metricas["intervalos"]["clusters"],
         "ciega 1 · modelo v1": anterior["prueba_ciega"]["prueba"]["intervalos"]["clusters"],
         "ciega 1 · modelo v2 (desarrollo)": ev_1.metricas["intervalos"]["clusters"],
+        "ciega 2 · modelo v1 (control)": ev_2_v1.metricas["intervalos"]["clusters"],
         "ciega 2 · modelo v2": ev_2.metricas["intervalos"]["clusters"],
     }
     brechas = {
         atributo: {
             "antes (ciega 1, modelo v1)": brecha(equidad_antes, atributo),
+            "control (ciega 2, modelo v1)": brecha(equidad_2_v1, atributo),
             "después (ciega 2, modelo v2)": brecha(equidad_2, atributo),
         }
         for atributo in ("apellido_casada", "con_apodo", *flujo_hito2.GRUPOS_EQUIDAD, "rural")
@@ -208,7 +233,7 @@ def evaluar_congelado_v2(
     filas_brecha = {}
     for momentos in brechas.values():
         for momento, b in momentos.items():
-            etiqueta = "antes" if momento.startswith("antes") else "después"
+            etiqueta = momento.split(" (")[0]
             for grupo, v in b["grupos"].items():
                 filas_brecha[f"{grupo} · {etiqueta}"] = {
                     "pct_clusters_exactos": v["pct_clusters_exactos"],
@@ -253,6 +278,16 @@ def evaluar_congelado_v2(
             "nota": "Desarrollo del modelo v2: optimista, solo referencia.",
             **ev_1.metricas,
             "equidad": equidad_1,
+        },
+        "ciega_2_control_v1": {
+            "nota": "Modelo v1 congelado (hito2-congelado-r1) sobre la misma ciega 2.",
+            "umbral": umbral_v1,
+            **ev_2_v1.metricas,
+            "equidad": equidad_2_v1,
+        },
+        "mejora_v2_sobre_v1_en_ciega_2": {
+            "descripcion": "v2 - v1 sobre las mismas personas de la ciega 2 (pareado)",
+            **mejora_v2,
         },
         "ciega_2": {
             "datos": {
