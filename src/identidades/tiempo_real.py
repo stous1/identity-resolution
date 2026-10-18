@@ -97,7 +97,7 @@ def construir_base(registros: pd.DataFrame, configuracion: dict, umbral: float) 
         cluster=("cluster", lambda s: s.mode().iloc[0]),
         ciudad=("ciudad", lambda s: s.mode().iloc[0] if s.notna().any() else None),
         departamento=("departamento", lambda s: s.mode().iloc[0] if s.notna().any() else None),
-        tipo_documento=("tipo_documento", lambda s: s.mode().iloc[0]),
+        tipo_documento=("tipo_documento", lambda s: s.mode().iloc[0] if s.notna().any() else None),
     )
     base = moda.join(ancho).reset_index()
     return pd.DataFrame(

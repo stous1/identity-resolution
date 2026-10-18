@@ -39,7 +39,12 @@ uv run python scripts/hito3.py --captura-universo  # PNG de Cosmograph (tras pub
 uv run python scripts/hito5.py tiempo-real    # hito 5: "¿ya es cliente?" -> reports/hito5/
 uv run python scripts/escala.py --todos       # escala 100 mil y 1 millón (~10 GB de RAM)
 uv run python scripts/hito5.py escala         # tabla y gráficos de escala
-uv run python scripts/publicar_resultados.py --hito 1  # o 2, o validacion -> docs/resultados/
+uv run python scripts/hito6.py desarrollar   # hito 6: modelo v3 -> reports/hito6/
+uv run python scripts/hito6.py evaluar       # v3 congelado: prueba normal y ciega 3
+uv run python scripts/hito6.py tiempo-real   # precisión con 1 %, 10 % y 50 % de clientes
+uv run python scripts/hito6.py hito3         # hito 3 con 8 pares de semillas (v2 y v3)
+uv run python scripts/hito6.py escala        # 100 mil y 1 millón con el v3 congelado
+uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3, 5, 6 -> docs/resultados/
 ```
 
 ## Estructura
@@ -70,6 +75,15 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, o validacion -> do
     `servicio.py` (FastAPI local), `escala.py` y `flujo_hito5.py`. Los datos de escala van
     a `data/escala/` (no versionados); solo se publican muestras en Parquet. 5 millones no
     cabe en la máquina de referencia (pico de 9,1 GB con 1 millón).
+  - Hito 6 (correcciones post-auditoría, ver `audit/INFORME.md`): `sinteticos.agregar_historia`
+    (mudanzas y apellido de casada, sin cambiar `generar`), `modelo.aplicar_piso_m` (ningún
+    nivel resta más de B bits), `modelo_co_v3.py`, `linea_base.py` (reglas, híbrido y
+    segmentos), `calibracion.py` (isotónica sobre el peso y bandas de zona gris) y
+    `flujo_hito6.py`. El v3 está congelado en `hito6-congelado` junto con
+    `docs/resultados/hito6/{modelo,desarrollo,calibracion}.json` (lo verifica
+    `tests/test_hito6.py`). `errores_ciegos_3.py` es la tercera prueba ciega, escrita después
+    de congelar. Las ciegas 1, 2 y 3 ya se miraron: la próxima corrección necesita una ciega 4.
+  - `audit/` es el registro de una auditoría independiente: no se modifica.
   - Demo: `demo.py` exporta el modelo v2 a `docs/demo/modelo_demo.json`; `docs/demo/motor.js`
     lo reimplementa en JavaScript y `tests/test_demo.py` (con Node.js) verifica que da los
     mismos niveles y pesos que Splink.

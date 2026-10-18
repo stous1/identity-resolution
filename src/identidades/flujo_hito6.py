@@ -278,10 +278,9 @@ GRUPOS_DIAGNOSTICO_HITO6: dict[str, tuple[str, str]] = {
     "documento_alterado": ("documento alterado", "documento sin alterar"),
 }
 
+# Salidas de la evaluación. modelo.json, desarrollo.json y calibracion.json se publicaron
+# al congelar (``--solo``) y no se vuelven a copiar.
 ARCHIVOS_PUBLICABLES: list[str] = [
-    "modelo.json",
-    "desarrollo.json",
-    "calibracion.json",
     "metricas.json",
     "evolucion.html",
     "evolucion.png",
