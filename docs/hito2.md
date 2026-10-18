@@ -37,9 +37,17 @@ por un subagente que no conocía la estandarización. Esa es la cifra honesta:
 | **Prueba ciega** | **0,997** [0,987 – 1,000] | **0,636** [0,616 – 0,657] | **60,2 %** |
 | FEBRL3 | 1,000 [1,000 – 1,000] | 0,997 [0,992 – 1,000] | 99,6 % |
 
-La precisión aguanta y el recall se cae. En la prueba ciega, el modelo falla más con
-mujeres con apellido de casada (41 % de personas exactas frente a 62 %) y con personas que
-usan apodo (49 % frente a 62 %).
+La precisión aguanta y el recall se cae.
+
+**Corrección de la auditoría** ([informe](https://github.com/stous1/identity-resolution/blob/main/audit/INFORME.md)):
+la causa principal del recall perdido no son los nombres cruzados ni los documentos, sino
+dos **vetos** que el modelo aprendió (−48 bits por municipio distinto y −43 por dirección
+parecida) porque el generador del hito 2 nunca cambia la ciudad ni la dirección de nadie.
+Sin ellos, el recall sube a 0,943. En esta prueba, la regla "mismo documento" es mejor que
+el modelo (F1 0,931 frente a 0,777). La brecha del apellido de casada (41 % de personas
+exactas frente a 62 %) era casi toda efecto de esos vetos: sin ellos es de −3,6 puntos y no
+es significativa. La de los apodos sí es real (−11,5 puntos). El
+[hito 6](hito6.md) corrige los vetos en el origen.
 
 ![Tres cifras](resultados/validacion/tres_cifras.png)
 

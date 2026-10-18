@@ -10,9 +10,14 @@ dato y resolución de identidades**.
 | Hito | Datos | Resultado principal (prueba) |
 |---|---|---|
 | [1. fake_1000](#hito-1-fake_1000-de-punta-a-punta) | Demo de Splink, 251 personas | Precisión 0,970 y recall 0,851 por clúster |
-| [2. Colombia](#hito-2-clientes-sintéticos-colombianos-y-estandarización) | Sintéticos es_CO, 2.000 personas | Prueba normal: precisión 1,000 y recall 0,998 por clúster. **[Prueba ciega](#validación-prueba-ciega-y-febrl3): precisión 0,997 y recall 0,636** |
+| [2. Colombia](#hito-2-clientes-sintéticos-colombianos-y-estandarización) | Sintéticos es_CO, 2.000 personas | Prueba normal: precisión 1,000 y recall 0,998 por clúster. **[Prueba ciega](#validación-prueba-ciega-y-febrl3): precisión 0,997 y recall 0,636**, sobre todo por dos vetos aprendidos (auditoría) |
 | [2b. Corrección](#hito-2b-corregir-y-volver-a-medir-a-ciegas) | Ciega 1 como desarrollo; ciega 2 nueva | **Ciega 2: precisión 0,998 y recall 1,000 por clúster** (v1 en la misma ciega 2: 0,995 y 0,920) |
-| [3. Registro de oro y grafo](#hito-3-registro-de-oro-grafo-de-identidad-compartida-y-puentes) | Escenario con historia, metadatos y patrones sospechosos | Registro de oro a menos de 5 puntos del techo alcanzable; 432 grupos compartidos bien clasificados; puentes que evitan 4 de cada 10 mezclas sin perder recall |
+| [3. Registro de oro y grafo](#hito-3-registro-de-oro-grafo-de-identidad-compartida-y-puentes) | Escenario con historia, metadatos y patrones sospechosos | En 8 pares de semillas: registro de oro a 4,1 ± 0,5 puntos del techo (peor campo); grafo con exactitud 98,6 % ± 0,8; puentes que evitan en promedio 3 de cada 10 mezclas (entre 1 y 6 según la semilla) sin perder recall |
+| [5. Tiempo real y escala](#hito-5-vinculación-en-tiempo-real-y-escala) | Base de registros de oro; 100 mil y 1 millón de registros | "¿Ya es cliente?": precisión 0,999 con 50 % de clientes, **0,94 con 1 %**; 1 millón de registros en DuckDB en 134 s |
+| [6. Correcciones post-auditoría](#hito-6-correcciones-post-auditoría) | Generador con mudanzas; **prueba ciega 3** nueva | Modelo v3 sin vetos. **Ciega 3: v3 precisión 0,997 y recall 0,966** (v2: 0,994 y 0,978; v1: 0,989 y 0,693). Splink aporta +0,065 de F1 sobre reglas donde el documento falla |
+
+**Auditoría independiente:** [audit/INFORME.md](audit/INFORME.md) ·
+[qué encontró y qué cambió](#qué-encontró-la-auditoría-y-qué-cambió)
 
 ## Qué problema resuelve
 
@@ -355,7 +360,8 @@ es lo que le pasa a un modelo en producción cuando llega un canal o un sistema 
 **Lo que muestra:**
 
 - **La precisión aguanta:** 0,997. El modelo casi nunca une personas distintas, que en
-  banca es el error caro.
+  banca es el error caro. Pero *corrección de la auditoría:* en esta misma prueba la regla
+  de una línea "mismo documento" es mejor en todo lo demás (F1 0,931 frente a 0,777).
 - **El recall se cae:** de 0,998 a 0,636. Una de cada tres duplicaciones queda sin unir, y
   solo el 60 % de las personas queda reconstruida exactamente (3.128 clústeres para 2.000
   personas).
@@ -366,7 +372,13 @@ es lo que le pasa a un modelo en producción cuando llega un canal o un sistema 
 - **Dónde falla** (personas reconstruidas exactamente, diagnóstico por tipo de error):
   nombres en otro campo 29,7 % (frente a 62,8 %), documento alterado 45,4 % (frente a
   63,4 %) y celular cambiado por un fijo 49,1 % (frente a 61,5 %). Todas las diferencias
-  son significativas.
+  son significativas, **pero no son la causa principal.** *Corrección de la auditoría
+  ([§5](audit/INFORME.md#5-ablación-a5_ablacionpy)):* el modelo v1 aprendió dos **vetos**
+  de −48 bits (municipio distinto) y −43 bits (dirección parecida pero no igual), porque el
+  generador del hito 2 nunca cambia la ciudad ni la dirección de una persona. Al
+  neutralizarlos, el recall en esta prueba sube de 0,636 a **0,943** con precisión 1,000.
+  Los nombres cruzados, el documento y los fijos son causas secundarias. El hito 6 lo
+  corrige en el origen (mudanzas en el generador y un piso a los pesos negativos).
 - **Primer hallazgo:** con el tag original, el modelo **se caía** con 66 registros sin
   apellidos (pandas convierte el `None` en `NaN` y la estandarización no lo esperaba). Se
   corrigió la robustez sin cambiar ningún resultado del hito 2 (métricas idénticas) y se
@@ -383,12 +395,15 @@ es lo que le pasa a un modelo en producción cuando llega un canal o un sistema 
 | Sin tilde (634) | 59,6 % | 60,4 % con tilde | −0,8 [−5,6, +3,9] | No |
 | Dirección rural (135) | 59,3 % | 60,2 % urbana | −1,0 [−9,9, +7,5] | No |
 
-El hallazgo de equidad más importante: **el modelo falla más con mujeres que usan apellido
-de casada**. La estandarización separa "Ramírez de Vargas" en primer apellido RAMIREZ y
-segundo apellido DE VARGAS, que choca con el segundo apellido verdadero (OSORIO): el campo
-resta evidencia en vez de quedar neutral, y esos registros quedan sin unir. Con los apodos
-pasa algo parecido: "Pepe" no se reconoce como "José". La prueba normal no lo podía mostrar, porque su
-generador no producía esos casos. La precisión no difiere entre grupos.
+~~El hallazgo de equidad más importante: el modelo falla más con mujeres que usan apellido
+de casada.~~ **Corrección de la auditoría:** esta brecha era casi toda una interacción con
+los vetos de municipio y dirección. Sin ellos baja de −20,4 a **−3,6 puntos [−9,0, +1,1] y
+deja de ser significativa**. El choque del apellido de casada con el segundo apellido
+existe, pero por sí solo pesa poco. La brecha de los **apodos sí es real** (−11,5 puntos sin
+los vetos, significativa): "Pepe" no se reconoce como "José". No hay base para hablar de
+una brecha de género del modelo: en la prueba ciega 3 del [hito 6](#hito-6-correcciones-post-auditoría),
+mujeres y hombres quedan sin diferencia significativa con el v3. La precisión no difiere
+entre grupos.
 
 ![Equidad en la prueba ciega](docs/resultados/validacion/ciega_equidad.png)
 
@@ -461,7 +476,9 @@ comparación justa es sobre las mismas personas de la ciega 2 (diferencia paread
 | Precisión | +0,004 | [−0,003, +0,021] | No |
 
 - **El modelo v2 mejora a ciegas:** recuperó todos los pares verdaderos de la ciega 2 sin
-  perder precisión. Quedan 3 uniones erróneas (1.997 clústeres para 2.000 personas).
+  perder precisión. *Matiz de la auditoría:* ese recall de 1,000 sale del umbral
+  publicado; con cualquiera de 5 desarrollos repetidos queda en 0,998. Y en esta prueba
+  Splink aporta poco sobre la regla "documento o nombre+fecha" (+0,010 de F1). Quedan 3 uniones erróneas (1.997 clústeres para 2.000 personas).
 - **En la prueba normal empeora un poco:** el recall baja de 0,998 a 0,993 (15 pares
   faltantes en vez de 5). Los intervalos se solapan; es el costo de los niveles más
   tolerantes.
@@ -478,6 +495,12 @@ Personas reconstruidas exactamente, por grupo:
 | Con apodo | 49,3 % | 90,8 % | 100 % |
 | Sin apodo | 62,4 % | 91,1 % | 99,7 % |
 | **Brecha** | **−13,1 puntos [−19,0, −7,4]** | −0,3 [−4,5, +3,8] | +0,3 [+0,1, +0,6] |
+
+*Nota del hito 6:* la brecha "antes" de esta tabla está inflada por los vetos del v1 (ver
+la corrección en la [validación](#validación-prueba-ciega-y-febrl3)). Y el v2 trae un veto
+nuevo de −72,6 bits en el apellido de casada: dos registros de la misma mujer con apellidos
+de casada distintos (divorcio, nuevo matrimonio) no se unirían nunca. La prueba ciega 3
+lo mide.
 
 **¿Se cerró la brecha?** En la ciega 2 no hay brecha en contra de las mujeres con apellido
 de casada ni de las personas con apodo: con v2 quedan reconstruidas al 100 %, y el
@@ -548,8 +571,13 @@ eligió en desarrollo:
 El **techo alcanzable** es la fracción de clientes con el valor correcto en al menos uno de
 sus registros: si alguien cambió de celular después de su última actualización, ningún
 registro trae el número vigente y ninguna regla puede acertar. Las reglas elegidas quedan a
-menos de 5 puntos de ese techo. En la identidad (documento, nombres) gana la fuente más
-confiable; en el contacto, el dato validado más reciente. Usar siempre "el más reciente"
+menos de 5 puntos de ese techo, y eso **se sostiene entre semillas**: con 8 pares de
+escenarios, la peor brecha al techo es 4,1 ± 0,5 puntos (de 3,6 a 4,9). Lo que **no** es
+robusto es qué regla gana: el documento sale "fuente más confiable" en 4 de 8 y "validado"
+en 4; los nombres, "más frecuente" en 5 y "fuente más confiable" en 3; la dirección, "más
+frecuente" en 6. El correo ("validado", 8 de 8) y el celular ("validado", 7 de 8) son
+estables. Ojo además (auditoría, M4): el orden de confiabilidad de los canales coincide con
+el que usa el generador, así que el registro de oro es optimista por construcción. Usar siempre "el más reciente"
 sería igual o peor en todos los campos: por ejemplo, documento 92,1 % y nombres 89,4 %.
 
 ![Registro de oro por regla](docs/resultados/hito3/registro_oro.png)
@@ -568,8 +596,9 @@ desarrollo:
    errores de digitación).
 4. **Sospechoso** en otro caso: personas sin relación que comparten un dato de contacto.
 
-En prueba, los 432 grupos quedan bien clasificados (386 de hogar, 36 sospechosos y 10 de
-relleno); en desarrollo, la exactitud fue 98,4 %. Este resultado es optimista, por la misma
+Con la semilla publicada, los 432 grupos de prueba quedan bien clasificados (386 de hogar,
+36 sospechosos y 10 de relleno). **Esa semilla fue favorable:** con 8 pares de escenarios la
+exactitud es **98,6 % ± 0,8** (de 97,7 % a 100 %). Este resultado es optimista, por la misma
 razón que en el hito 2: el escenario y el clasificador los escribió la misma persona, y en
 este escenario los anillos no tienen apellidos en común con nadie. Con datos reales, un
 anillo puede usar familiares o testaferros con apellidos parecidos.
@@ -580,16 +609,28 @@ Una arista es puente si al quitarla el clúster se parte en dos (métricas de gr
 Splink). En un clúster de dos registros la única arista siempre es puente, así que no basta
 con eso: la política mira además el peso del puente y el tamaño del lado más chico.
 
+Semilla publicada (3030/3131):
+
 | Umbral de operación | Política (elegida en desarrollo) | Clientes mezclados (prueba) | Pares unidos por error | Recall perdido |
 |---|---|---|---|---|
 | 0,9999 (congelado) | No cortar | 0 → 0 | 0 → 0 | 0 |
 | 0,99 | Cortar puentes con peso < 15 | 8 → 5 | 46 → 35 | 0 |
 | 0,9 | Cortar puentes con peso < 15 | 18 → 11 | 88 → 63 | 0 |
 
-- **Con el umbral congelado, el modelo v2 no deja uniones erróneas en este escenario**, así
-  que la mejor política es no tocar nada. Los puentes sirven cuando se opera con un umbral
-  más bajo: cortarlos evita cerca de 4 de cada 10 mezclas **sin perder recall**. Las demás
-  mezclas son clústeres densos, que no cuelgan de un solo enlace.
+**Entre semillas** (8 pares de escenarios, v2 congelado; media ± DE y rango):
+
+| Cifra | Semilla publicada | Media ± DE | Rango |
+|---|---|---|---|
+| Clientes mezclados al umbral congelado | 0 | 1,5 ± 1,3 | 0 – 4 |
+| Clientes mezclados al umbral 0,9 | 18 | 17,1 ± 2,0 | 15 – 21 |
+| Mezclas evitadas al cortar puentes (umbral 0,9) | 7 de 18 (39 %) | 31 % ± 18 % | 13 % – 56 % |
+
+- **Con la semilla publicada, el modelo v2 no deja uniones erróneas al umbral congelado**;
+  en otras semillas deja de 1 a 4. Los puentes sirven sobre todo con un umbral más bajo:
+  cortarlos evita en promedio **3 de cada 10 mezclas** (no 4: esa cifra era de una semilla
+  favorable), **sin perder recall**. Las demás mezclas son clústeres densos, que no cuelgan
+  de un solo enlace. Detalle en
+  [hito3_semillas.json](docs/resultados/hito6/hito3_semillas.json).
 - **Las uniones erróneas conocidas cuelgan de puentes:** el caso 109-844 del hito 1 es el
   segundo puente más débil de 35 (peso 2,5, une 3 registros), y las 3 uniones erróneas del
   modelo v2 en la prueba ciega 2 cuelgan cada una de un puente (pesos 13,8, 16,9 y 20,9).
@@ -647,7 +688,8 @@ cliente. Splink genera el SQL una vez y luego solo se reejecuta en DuckDB (sin e
 
 [`escala.py`](src/identidades/escala.py) corre el esquema v2 completo sobre 100 mil y 1
 millón de registros en una máquina (24 núcleos, 63 GB), sin Spark, cada tamaño en un proceso
-propio. Memoria = pico del proceso, acumulada entre etapas.
+propio. Memoria = pico del proceso durante cada etapa (los picos no se acumulan entre
+etapas, como se decía antes).
 
 | Registros | Preparación | Entrenamiento | Predicción | Agrupación | Memoria pico | Precisión | Recall |
 |---|---|---|---|---|---|---|---|
@@ -657,6 +699,10 @@ propio. Memoria = pico del proceso, acumulada entre etapas.
 ![Tiempo por etapa](docs/resultados/hito5/escala_tiempo.png)
 
 - La preparación (estandarización en Python) es el cuello de botella: 91 de 134 s.
+- **La precisión baja con el tamaño porque el flujo reentrena en cada tamaño, no por
+  homónimos** (auditoría, A2): todos los falsos positivos son familiares, y con los
+  parámetros congelados la precisión queda plana. Ver
+  [escala con el modelo congelado](#escala-con-el-modelo-congelado) en el hito 6.
 - **5 millones no cabe en esta máquina:** con 1 millón el pico ya es de 9,1 GB y la corrida
   de 5 millones se detuvo por falta de memoria; no se reporta.
 - A escala se anulan los correos de relleno antes de bloquear y los bloques de EM evitan la
@@ -666,11 +712,221 @@ El [universo grande](https://stous1.github.io/identity-resolution/hito5_universo
 carga desde Parquet una muestra de 200 mil registros del conjunto de 1 millón (40 mil en
 el celular). Los datos de escala no se versionan; solo esas muestras.
 
+## Qué encontró la auditoría y qué cambió
+
+Una sesión de auditoría independiente, que no había escrito el código, revisó los hitos 1 a
+5. Su informe completo está en [audit/INFORME.md](audit/INFORME.md), con sus scripts y
+resultados, y se versiona sin cambios como registro independiente.
+
+**Lo que se sostiene:** no hay fugas de etiquetas (los parámetros y métricas son idénticos
+con la verdad barajada), todas las cifras publicadas se reproducen al dígito (114 de 115
+coinciden; la otra es un redondeo) y la metodología de partición por persona, medición
+única y bootstrap es correcta.
+
+**Lo que no se sostenía, y qué cambió:**
+
+| Hallazgo de la auditoría | Qué decía el README | Qué cambió (hito 6) |
+|---|---|---|
+| **A1. Vetos de −43 a −73 bits.** El generador del hito 2 nunca cambia la ciudad ni la dirección, así que el v1 aprendió que "municipio distinto" veta el par. Sin esos vetos, el recall de la ciega 1 sube de 0,636 a 0,943. | El fallo de la ciega 1 venía de nombres cruzados, documentos y fijos; el "hallazgo de equidad más importante" era la brecha del apellido de casada (−20,4 puntos). | Generador con mudanzas y apellidos de casada; modelo v3 con un piso a las m (ningún campo resta más de 10 bits). Corregida la interpretación: sin los vetos, la brecha del apellido de casada es de −3,6 puntos y **no es significativa**; la de los apodos sí es real. No había base para hablar de brecha de género. |
+| **A2. La precisión cae a escala por reentrenar, no por homónimos.** Todos los falsos positivos son familiares. | "Hay más homónimos con datos parecidos." | Escala con el modelo congelado y documentado que reentrenar en cada tamaño degrada la precisión. |
+| **A3. Probabilidades sobreconfiadas** donde se decide: p ≈ 0,98 era verdadero el 0–11 % de las veces. | La zona gris era p ∈ [0,9, 0,9999). | Calibración isotónica en desarrollo, bandas de peso para la zona gris y diagrama de confiabilidad fuera de muestra. |
+| **M1. Sin línea base:** en algunas pruebas, Splink aportaba solo +0,01 de F1 sobre reglas simples. | No se comparaba con reglas. | Reglas determinísticas e híbrido en todas las evaluaciones, con aporte por segmento. |
+| **M2. Umbral inestable** entre desarrollos repetidos. | "Umbral elegido en desarrollo." | Se reporta; la grilla se amplió hasta 1 − 10⁻¹¹. Explica por qué el v3 pierde recall frente al v2 (sección siguiente). |
+| **M3. Hito 3 con una semilla favorable.** | Puentes que evitan 4 de cada 10 mezclas, 0 uniones erróneas, 432 grupos bien clasificados. | Cifras como media ± DE de 8 pares de semillas. |
+| **M5. Tiempo real con 50 % de clientes existentes.** | Precisión 0,999. | Precisión con prevalencias de 1 %, 10 % y 50 %. |
+| B3. "240 mil enlaces" y "memoria acumulada entre etapas". | | Corregido: 241 mil y picos que no se acumulan. |
+
+## Hito 6: correcciones post-auditoría
+
+**Página:** [hito 6 en GitHub Pages](https://stous1.github.io/identity-resolution/hito6.html)
+
+Mismas reglas de siempre: todo se decide en desarrollo, el modelo se congela (tag
+`hito6-congelado`) y se mide una sola vez en una prueba ciega nueva.
+
+1. **Generador con historia** ([`sinteticos.agregar_historia`](src/identidades/sinteticos.py)):
+   mudanzas (20 % de las personas con dos o más registros; la mitad cambia de ciudad) y
+   apellido de casada (30 % de las mujeres; una de cada cinco cambia de apellido de casada
+   por divorcio o nuevo matrimonio). `generar` no cambia, así que los hitos anteriores se
+   reproducen igual.
+2. **Modelo v3** ([`modelo_co_v3.py`](src/identidades/modelo_co_v3.py)): la estandarización
+   v2 sin cambios, apellido de casada con un nivel intermedio y un **piso a las
+   probabilidades m** ([`modelo.aplicar_piso_m`](src/identidades/modelo.py)): m ≥ u · 2⁻ᴮ,
+   así que ningún nivel resta más de B bits. B se eligió en desarrollo entre 5 y 20:
+   **10 bits** (de 10 a 20 empatan en costo y se toma el más estricto). El peor peso pasa
+   de −47,9 (v1, municipio) y −72,6 (v2, apellido de casada) a **−10,0** (v3). Con mudanzas
+   en los datos, EM ya no aprende vetos (el peor era −10,3); el piso es la red de seguridad.
+3. **Desarrollo:** el del hito 2 con historia más las ciegas 1 y 2 completas (13.919
+   registros de 5.200 personas). Umbral de menor costo: 0,999999.
+4. **Prueba ciega 3** ([`errores_ciegos_3.py`](src/identidades/errores_ciegos_3.py)): la
+   escribió un subagente nuevo **después de congelar el v3**, sin acceso a la
+   estandarización, los modelos, los generadores anteriores, la documentación ni la
+   auditoría. 2.000 personas y 5.286 registros, con mudanzas, apellido de casada en varias
+   posiciones, separaciones, registros sin documento, documentos alterados y datos de otras
+   personas digitados por error.
+
+### Prueba ciega 3 (por clúster, IC 95 % por bootstrap de personas)
+
+| Modelo congelado | Precisión | Recall | Personas exactas |
+|---|---|---|---|
+| v1 (`hito2-congelado-r1`) | 0,989 [0,965 – 1,000] | 0,693 [0,671 – 0,715] | 66,5 % |
+| v2 (`hito2b-congelado`) | 0,994 [0,979 – 1,000] | **0,978** [0,971 – 0,983] | **95,6 %** |
+| **v3 (`hito6-congelado`)** | **0,997** [0,987 – 1,000] | 0,966 [0,958 – 0,974] | 94,5 % |
+
+![Evolución v1, v2 y v3](docs/resultados/hito6/evolucion.png)
+
+- **El v1 se vuelve a caer por los vetos:** 1.456 pares verdaderos quedan bajo el umbral
+  solo por el municipio o la dirección de personas que se mudaron.
+- **El v3 no mejora al v2 en esta prueba.** Diferencia pareada v3 − v2: recall −1,1 puntos
+  [−1,8, −0,6] (significativa); precisión +0,35 [−0,01, +1,5] y F1 −0,4 [−0,8, +0,2], no
+  significativas. La causa principal es el umbral: el desarrollo del v3 eligió 0,999999,
+  6,6 bits más alto que el 0,9999 del v2. Es el hallazgo M2 de la auditoría: el umbral
+  "elegido en desarrollo" depende bastante de la muestra.
+- **Lo que sí gana el v3 es robustez:** en la prueba normal con historia (800 personas), el
+  veto del v2 en el apellido de casada deja 28 pares verdaderos sin unir; el v3, ninguno
+  (recall 0,992 contra 0,986; precisión 1,000 los dos).
+
+**Equidad en la ciega 3 (v3, personas exactas):**
+
+| Grupo | Exactas | Frente a | Diferencia [IC 95 %] | ¿Significativa? |
+|---|---|---|---|---|
+| Mujer (976) | 93,8 % | 95,1 % hombre | −1,4 [−3,4, +0,7] | No |
+| Apellido de casada (181) | 90,1 % | 94,9 % sin él | −4,8 [−9,4, −0,5] | **Sí** |
+| Con apodo (137) | 90,5 % | 94,7 % sin apodo | −4,2 [−9,7, +0,3] | No |
+| Con mudanza (356) | 93,0 % | 94,8 % sin mudanza | −1,8 [−4,7, +0,9] | No |
+| Dirección rural (195) | 95,4 % | 94,3 % urbana | +1,0 [−2,5, +4,0] | No |
+
+- **Con el v3 no hay brecha de género.** Con el v2 había una pequeña (−2,2 puntos
+  [−4,2, −0,4]).
+- **Queda una brecha con el apellido de casada** (−4,8 puntos en personas exactas; en
+  recall, −2,6 y no significativa). El v2 tiene una parecida (−5,5). La corrección del
+  hito 2b no la cerró del todo a ciegas.
+
+### Línea base: dónde aporta Splink
+
+Reglas con la misma estandarización y unión transitiva. El **híbrido** une primero con las
+reglas ("documento o nombre+fecha") y deja a Splink el resto; el **híbrido estricto** además
+prohíbe unir registros con documentos distintos.
+
+| Ciega 3 (por clúster) | Precisión | Recall | F1 | Personas exactas |
+|---|---|---|---|---|
+| Regla: mismo documento | 0,992 | 0,684 | 0,810 | 67,0 % |
+| Regla: documento o nombre+fecha | 0,977 | 0,863 | 0,916 | 81,6 % |
+| **Splink v3** | **0,997** | 0,966 | **0,981** | 94,5 % |
+| Híbrido | 0,965 | **0,986** | 0,975 | **95,6 %** |
+| Híbrido estricto | 0,977 | 0,914 | 0,945 | 87,2 % |
+
+| Recall por segmento (ciega 3) | Regla | Splink v3 | Híbrido |
+|---|---|---|---|
+| Documento siempre igual (1.327 personas) | 1,000 | 0,978 | 1,000 |
+| Algún registro sin documento (190) | 0,749 | 0,970 | 0,979 |
+| Documento alterado (483) | 0,762 | 0,953 | 0,973 |
+
+- **Splink aporta donde el documento falla:** +0,065 de F1 [+0,053, +0,079] sobre la mejor
+  regla en la ciega 3 y +0,055 en la prueba normal. Sin documento o con documento alterado
+  recupera el 95–97 % de los pares; la regla, el 75–76 %.
+- **Donde el documento es igual, la regla es mejor** y más barata. Pero el híbrido, en la
+  ciega 3, pierde 3,2 puntos de precisión (significativo) para ganar 2,0 de recall: la regla
+  de nombre+fecha une homónimos y registros con datos ajenos, y el híbrido los hereda. En
+  la prueba normal no pierde nada (F1 0,998 contra 0,996). Como el falso positivo cuesta 10
+  veces más, **Splink solo sigue siendo la opción por defecto**; un híbrido solo con
+  "mismo documento" es la variante a probar.
+- Línea base de los hitos 1, 2, 2b, FEBRL y 3 en la [auditoría §2](audit/INFORME.md#2-línea-base-determinística-a2_linea_basepy).
+
+![Línea base](docs/resultados/hito6/linea_base.png)
+
+### Calibración y zona gris por bandas de peso
+
+Regresión isotónica de la verdad sobre el peso, ajustada con los pares del bloqueo en
+desarrollo ([`calibracion.py`](src/identidades/calibracion.py)), y tres bandas congeladas
+con el modelo:
+
+| Banda | Peso | Prueba normal | Ciega 3 |
+|---|---|---|---|
+| Rechazar (probabilidad calibrada < 0,1) | < 5,2 bits | 1.198 pares, 0 % verdaderos | 1.717 pares, 4,3 % |
+| **Revisar (zona gris)** | 5,2 a 19,9 bits | 27 pares, **48 %** verdaderos | 479 pares, **91 %** |
+| Aceptar (umbral de operación) | ≥ 19,9 bits | 2.165 pares, 100 % | 6.001 pares, 99,95 % |
+
+![Confiabilidad](docs/resultados/hito6/confiabilidad.png)
+
+- **Sin calibrar,** en la prueba normal los pares con p entre 0,9 y 0,9999 (media 0,982)
+  son verdaderos el 9 % de las veces: son familiares.
+- **Como triaje, las bandas funcionan:** la zona gris de la ciega 3 contiene 438 pares
+  verdaderos que el umbral no acepta. Ese es el trabajo del agente de revisión.
+- **Como probabilidad, la calibración no se transfiere a la ciega 3:** queda subconfiada
+  (pares con probabilidad calibrada 0,3 son verdaderos el 86 % de las veces). En
+  desarrollo, los pesos medios son sobre todo familiares; en la ciega 3, personas reales
+  con errores difíciles. La probabilidad calibrada vale para una población parecida a la
+  de desarrollo; con datos nuevos hay que recalibrar con una muestra etiquetada.
+
+### Tiempo real: precisión según la prevalencia
+
+El hito 5 midió "¿ya es cliente?" con 50 % de consultas de clientes existentes y 50 % de
+personas nuevas. En un canal real, la mayoría de las consultas pueden ser de personas
+nuevas, y entonces una tasa pequeña de falsas alarmas pesa mucho más. Con el v3 congelado
+(base de registros de oro, 1.500 consultas de clientes existentes y 1.500 de personas
+nuevas por población), la precisión para otra mezcla se recalcula con las tasas de cada
+grupo: π·a / (π·a + (1 − π)·f), con a = aciertos entre existentes y f = falsas alarmas
+entre nuevas (IC 95 % remuestreando cada grupo).
+
+| Población | Recall | Falsas alarmas | Precisión con 50 % | con 10 % | con 1 % |
+|---|---|---|---|---|---|
+| Generador del hito 2 (2.705 clientes) | 0,990 | 1 de 1.500 | 0,999 [0,998 – 1,000] | 0,994 [0,982 – 1,000] | **0,938** [0,833 – 1,000] |
+| Generador de la ciega 3 (3.091 clientes) | 0,918 | 0 de 1.500 | 1,000 | 1,000 | 1,000 (≥ 0,82*) |
+
+\* Con 0 falsas alarmas en 1.500 el bootstrap no da intervalo; con la regla del tres
+(tasa ≤ 3/1.500 = 0,2 % con 95 % de confianza), la precisión con 1 % de clientes sería al
+menos 0,82.
+
+- **Con 1 % de clientes existentes, la precisión baja de 0,999 a 0,94**: una sola falsa
+  alarma en 1.500 personas nuevas basta. La cifra de 0,999 del hito 5 solo vale para una
+  mezcla 50/50.
+- **En la población de la ciega 3 el recall baja a 0,918**: de las consultas de clientes
+  existentes, 84 van a revisión y 39 quedan como nuevas. Ninguna se asigna a un cliente
+  equivocado. La latencia mediana es de 115 a 131 ms por consulta (con bases 2 veces más
+  grandes que las del hito 5).
+
+### Escala con el modelo congelado
+
+El hito 5 reentrenaba el modelo en cada tamaño. La auditoría mostró que eso degrada la
+precisión: al crecer los datos, el u de los campos casi únicos (teléfono, documento, correo)
+baja, cada coincidencia suma más bits, y los familiares que comparten teléfono y dirección
+(campos que no son independientes) acumulan más evidencia de la que quita la previa.
+**Reentrenar en cada tamaño degrada la precisión**: de 0,992 con 10 mil registros a 0,976
+con 300 mil (auditoría §6), y a 10 millones se proyectaba ~0,94. Aquí se usa el **v3
+congelado**: solo se vuelve a estimar λ, con el mismo bloqueo exacto y los mismos datos del
+hito 5.
+
+| Registros | Reentrenado (hito 5) P / R | **Congelado (v3)** P / R | Personas exactas (congelado) | Tiempo total | Memoria pico |
+|---|---|---|---|---|---|
+| 99.088 | 0,982 / 0,997 | **0,998 / 0,996** | 99,2 % | 13 s | 0,8 GB |
+| 995.688 | 0,971 / 0,996 | **0,998 / 0,995** | 99,2 % | 129 s | 7,1 GB |
+
+- **Con el modelo congelado, la precisión no cae con el volumen** (0,998 en los dos
+  tamaños), y no hace falta entrenar: el tiempo es casi todo de preparación (100 de 129 s).
+- **Recomendación:** entrenar m y u una vez con una muestra y congelarlos. Si se reentrena,
+  hay que recalibrar el umbral con una muestra etiquetada en cada orden de magnitud.
+- **Línea base a escala:** la regla "documento o nombre+fecha" pierde precisión con el
+  volumen (0,994 con 100 mil, 0,942 con 1 millón: más personas distintas con el mismo
+  nombre y fecha), y el híbrido la hereda (0,939). Splink congelado mantiene 0,998. La
+  regla "mismo documento" sigue en 0,997 de precisión, pero con recall 0,62.
+
+### Hito 3 con varias semillas
+
+Ver las tablas corregidas en el [hito 3](#puentes). Con el v3 congelado las cifras son
+parecidas: precisión de la unión 0,999 ± 0,001, exactitud del grafo 98,5 % ± 1,0 y mezclas
+evitadas con puentes 33 % ± 14 %.
+
+Métricas completas en [docs/resultados/hito6/](docs/resultados/hito6/).
+
 ## Trabajo futuro
 
-- **Tercera prueba ciega:** con un generador nuevo que incluya a propósito el apellido de
-  casada en la posición del segundo apellido y apodos fuera del diccionario, para confirmar
-  a ciegas la corrección del hito 2b.
+- **Cuarta prueba ciega:** las ciegas 1, 2 y 3 ya se miraron. Cualquier corrección nueva
+  (por ejemplo, la brecha del apellido de casada que queda en la ciega 3, o un umbral más
+  estable) necesita otra prueba que nadie haya visto.
+- **Umbral estable:** elegirlo con remuestreo del desarrollo (por ejemplo, la mediana de
+  los umbrales de menor costo) en lugar de un solo mínimo, que varía con la muestra.
+- **Híbrido solo con "mismo documento"** y recalibración con una muestra etiquetada de la
+  población real.
 - **Escenario ciego para el hito 3:** un generador de patrones sospechosos escrito sin
   conocer el clasificador (anillos con familiares o testaferros, contactos reutilizados en
   el tiempo).
@@ -696,7 +952,12 @@ uv run python scripts/hito5.py tiempo-real    # hito 5: "¿ya es cliente?" -> re
 uv run python scripts/escala.py --todos       # escala: 100 mil y 1 millón (~10 GB de RAM)
 uv run python scripts/hito5.py escala         # tabla y gráficos de escala
 uv run python scripts/servicio_local.py       # servicio local en http://127.0.0.1:8000/docs
-uv run python scripts/publicar_resultados.py --hito 1   # o 2, validacion, 2b, 3, 5: a docs/resultados/
+uv run python scripts/hito6.py desarrollar    # hito 6: modelo v3 -> reports/hito6/
+uv run python scripts/hito6.py evaluar        # v3 congelado: prueba normal y ciega 3
+uv run python scripts/hito6.py tiempo-real    # precisión con 1 %, 10 % y 50 % de clientes
+uv run python scripts/hito6.py hito3          # hito 3 con 8 pares de semillas
+uv run python scripts/hito6.py escala         # 100 mil y 1 millón con el v3 congelado
+uv run python scripts/publicar_resultados.py --hito 1   # o 2, validacion, 2b, 3, 5, 6: a docs/resultados/
 ```
 
 La primera ejecución del hito descarga fake_1000 y lo guarda en `data/raw/`.
@@ -709,11 +970,13 @@ src/identidades/   datos, modelo, bloqueo, evaluación, tableros y flujo del hit
                    errores_ciegos, modelo_febrl y flujo_validacion (validación);
                    estandarizacion_v2, modelo_co_v2, errores_ciegos_2 y flujo_hito2b (2b);
                    escenario_hito3, registro_oro, grafo_compartido, puentes y flujo_hito3 (3);
-                   tiempo_real, servicio, escala y flujo_hito5 (5); demo (exporta el modelo)
+                   tiempo_real, servicio, escala y flujo_hito5 (5); demo (exporta el modelo);
+                   modelo_co_v3, linea_base, calibracion, errores_ciegos_3 y flujo_hito6 (6)
 scripts/           puntos de entrada
 tests/             pruebas con pytest
 notebooks/         solo exploración
 docs/              descripción del caso y GitHub Pages (docs/resultados/)
+audit/             informe de la auditoría independiente (registro, no se modifica)
 data/, reports/    datos y salidas de trabajo (no versionados)
 ```
 

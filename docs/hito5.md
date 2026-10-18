@@ -37,6 +37,11 @@ correcto**.
 | Latencia p95 | 74 ms | |
 | Latencia máxima | 162 ms | |
 
+*Corrección de la auditoría:* esa precisión supone 50 % de consultas de clientes
+existentes. Con 10 % de clientes, la precisión esperada es 0,994, y con 1 %, **0,94**: una
+falsa alarma cada 1.500 personas nuevas pesa mucho más cuando casi todas las consultas son
+nuevas. Ver el [hito 6](hito6.md).
+
 | Decisión | Existentes | Nuevas |
 |---|---|---|
 | cliente | 993 | 1 |
@@ -56,8 +61,9 @@ comparación). Es solo para uso local: no se publica ningún servicio.
 
 Mismo esquema v2 sobre 100 mil y 1 millón de registros sintéticos, en una sola máquina (24
 núcleos, 63 GB de RAM) y sin Spark. Cada tamaño corre en un proceso propio. La memoria es el
-pico del proceso (incluye DuckDB) y es acumulada: lo de una etapa sigue en memoria en la
-siguiente.
+pico del proceso (incluye DuckDB) medido durante cada etapa. *Corrección de la auditoría:*
+los picos no se acumulan entre etapas (con 100 mil, la predicción usa 1,03 GB y el
+entrenamiento 1,54 GB).
 
 | Registros | Etapa | Segundos | Memoria pico (GB) |
 |---|---|---|---|
@@ -87,8 +93,13 @@ siguiente.
 - A escala, el modelo se reentrena sin etiquetas con dos ajustes respecto al hito 2b: los
   correos de relleno se anulan antes de bloquear (como ya se hacía con los teléfonos) y los
   bloques de EM no usan la fecha de nacimiento sola. Si no, el bloqueo crece con el cuadrado.
-- La precisión baja un punto con 10 veces más registros: hay más homónimos con datos
-  parecidos. Precisión y recall son por clúster (pares implicados por los clientes).
+- ~~La precisión baja un punto con 10 veces más registros: hay más homónimos.~~
+  **Corrección de la auditoría:** el 100 % de los falsos positivos son **familiares**
+  (hogares que comparten teléfono y dirección), no homónimos, y la caída se debe a
+  **reentrenar en cada tamaño**: el u de los campos casi únicos se divide por 10 cada vez
+  que los datos crecen 10 veces y la evidencia de los familiares crece más rápido que lo
+  que baja la previa. Con los parámetros congelados la precisión queda plana (ver el
+  [hito 6](hito6.md#escala-con-el-modelo-congelado)). Precisión y recall son por clúster.
 
 Tabla completa: [escala.csv](resultados/hito5/escala.csv). Resultados de tiempo real:
 [tiempo_real.json](resultados/hito5/tiempo_real.json).
@@ -96,7 +107,7 @@ Tabla completa: [escala.csv](resultados/hito5/escala.csv). Resultados de tiempo 
 ## Universo grande
 
 La [página de Cosmograph](hito5_universo.html) carga desde Parquet una muestra de personas
-del conjunto de 1 millón: **200 mil registros** (240 mil enlaces, 1,8 MB) o una versión
+del conjunto de 1 millón: **200 mil registros** (241 mil enlaces, 1,8 MB) o una versión
 liviana de **40 mil** (0,4 MB), que es la que abre por defecto en el celular. En gris los
 registros de clientes bien reconstruidos, en naranja las personas divididas en varios
 clientes, en rojo los clientes que mezclan personas y en morado los teléfonos y correos de

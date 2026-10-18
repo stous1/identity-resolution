@@ -13,7 +13,21 @@ hogares y patrones sospechosos (anillos y suplantaciones). Reglas y umbrales ele
 escenario de desarrollo y medidos en otro de prueba (2.000 personas, 4.839 registros), con
 los clientes del modelo v2 congelado.
 
-## Registro de oro (prueba)
+**Las cifras de esta página son de un par de semillas (3030/3131), que resultó favorable.**
+Repetido con 8 pares (hito 6, media ± DE):
+
+| Cifra | Semilla publicada | 8 semillas |
+|---|---|---|
+| Peor brecha del registro de oro al techo | 4,7 puntos | 4,1 ± 0,5 (3,6 – 4,9) |
+| Exactitud del grafo compartido | 100 % | 98,6 % ± 0,8 (97,7 – 100) |
+| Clientes mezclados al umbral congelado | 0 | 1,5 ± 1,3 (0 – 4) |
+| Mezclas evitadas cortando puentes (umbral 0,9) | 39 % | 31 % ± 18 % (13 – 56) |
+
+La regla de supervivencia elegida para documento, nombres, apellidos y dirección cambia con
+la semilla; la de celular y correo ("validado") es estable. Detalle en
+[hito3_semillas.json](resultados/hito6/hito3_semillas.json).
+
+## Registro de oro (prueba, semilla publicada)
 
 | Campo | Regla elegida | Acierto | Techo alcanzable |
 |---|---|---|---|

@@ -36,6 +36,11 @@ En la ciega 2 no hay brecha. Pero tampoco la hay con el modelo v1 en esos datos,
 ciega 2 no confirma por sí sola la corrección del caso de la ciega 1. Lo que sí muestra es
 que en datos nunca vistos no aparece una brecha nueva.
 
+*Corrección de la auditoría:* la brecha "antes" estaba inflada por vetos del v1 (municipio
+y dirección); y el v2 trae un veto nuevo de −72,6 bits en el apellido de casada. Además, el
+recall de 1,000 sale del umbral publicado: con otros desarrollos queda en 0,998. Ver el
+[hito 6](hito6.md).
+
 ![Brecha de equidad](resultados/hito2b/brecha_equidad.png)
 
 ## Tableros

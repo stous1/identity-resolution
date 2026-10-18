@@ -5,6 +5,8 @@ registros de una base de clientes corresponden a la misma persona, explicar cada
 medir su precisión contra la verdad conocida.
 
 - [Descripción del caso](caso-01-identidades.md)
+- [Informe de la auditoría independiente](https://github.com/stous1/identity-resolution/blob/main/audit/INFORME.md)
+  y [qué cambió por ella](hito6.md)
 - Código: [github.com/stous1/identity-resolution](https://github.com/stous1/identity-resolution)
 
 ## Hitos
@@ -13,19 +15,29 @@ medir su precisión contra la verdad conocida.
 - [Hito 2: clientes sintéticos colombianos y estandarización](hito2.md): en la prueba
   normal, precisión 1,000 y recall 0,998 por clúster. En la **prueba ciega** (modelo
   congelado, errores de un generador independiente), precisión 0,997 y recall 0,636: la
-  cifra honesta. FEBRL3: precisión 1,000 y recall 0,997.
+  cifra honesta. FEBRL3: precisión 1,000 y recall 0,997. *La auditoría mostró que ese
+  recall se perdió sobre todo por dos vetos aprendidos (municipio y dirección), no por los
+  errores de nombre, y que la brecha del apellido de casada no era significativa sin
+  ellos.*
 - [Hito 2b: corregir y volver a medir a ciegas](hito2b.md): con las correcciones (apellido
   de casada, apodos, nombres cruzados, documento, teléfonos y fechas), en una **segunda
   prueba ciega**, precisión 0,998 y recall 1,000 por clúster; el modelo anterior, en esos
   mismos datos, 0,995 y 0,920.
 - [Hito 3: registro de oro, grafo de identidad compartida y puentes](hito3.md): registro de
   oro a menos de 5 puntos del techo alcanzable, grupos de datos compartidos clasificados
-  en relleno, hogar o sospechoso, puentes que evitan 4 de cada 10 mezclas sin perder
-  recall, y el [universo de registros en Cosmograph](hito3_universo.html).
+  en relleno, hogar o sospechoso (98,6 % ± 0,8 en 8 semillas), puentes que evitan en
+  promedio 3 de cada 10 mezclas sin perder recall, y el
+  [universo de registros en Cosmograph](hito3_universo.html).
 - [Hito 5: vinculación en tiempo real y escala](hito5.md): "¿ya es cliente?" contra la base
   de registros de oro con precisión 0,999, recall 0,993 y 60 ms de mediana por consulta;
   1 millón de registros en DuckDB en 134 s con 9,1 GB de pico, y el
   [universo grande en Cosmograph](hito5_universo.html) (200 mil registros desde Parquet).
+  *Con 1 % de clientes existentes en las consultas, la precisión baja a 0,94.*
+- [Hito 6: correcciones post-auditoría](hito6.md): modelo v3 sin vetos (ningún campo resta
+  más de 10 bits), generador con mudanzas, **prueba ciega 3** (v3: precisión 0,997 y recall
+  0,966; v2: 0,994 y 0,978; v1: 0,989 y 0,693), línea base determinística (Splink aporta
+  +0,065 de F1 donde el documento falla), calibración y zona gris por bandas de peso,
+  escala con el modelo congelado y hito 3 con varias semillas.
 
 ## Hito 1: fake_1000
 
