@@ -37,7 +37,8 @@ uv run python scripts/publicar_resultados.py # copia resultados finales -> docs/
 
 - `src/identidades/`: toda la lógica, como funciones reutilizables.
   - `rutas.py`: rutas del proyecto. **Toda ruta se obtiene de aquí.**
-  - `datos.py`, `modelo.py`, `evaluacion.py`, `tableros.py`.
+  - `datos.py`, `modelo.py`, `evaluacion.py`, `tableros.py` y `flujo.py` (flujo del hito
+    y publicación de resultados).
 - `scripts/`: puntos de entrada delgados que orquestan funciones de `src/`.
 - `notebooks/`: solo exploración. Nada en `src/` ni `scripts/` importa de notebooks.
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.

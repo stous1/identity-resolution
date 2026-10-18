@@ -3,12 +3,30 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 
 from identidades import evaluacion, modelo, tableros
+
+# Salidas del hito 1 que se versionan en docs/resultados/ para GitHub Pages.
+ARCHIVOS_PUBLICABLES: list[str] = [
+    "metricas.json",
+    "cascada.html",
+    "cascada.png",
+    "cluster_studio.html",
+    "cluster_studio.png",
+    "comparison_viewer.html",
+    "comparison_viewer.png",
+    "curva_umbral.html",
+    "curva_umbral.png",
+    "parametros_mu.html",
+    "parametros_mu.png",
+    "pesos.html",
+    "pesos.png",
+]
 
 
 def ejecutar_hito1(
@@ -84,3 +102,15 @@ def ejecutar_hito1(
         )
 
     return metricas
+
+
+def publicar_resultados(origen: Path, destino: Path) -> list[Path]:
+    """Copia las salidas publicables de ``origen`` a ``destino``.
+
+    Falla si falta alguna, para no publicar un conjunto incompleto.
+    """
+    faltantes = [n for n in ARCHIVOS_PUBLICABLES if not (origen / n).exists()]
+    if faltantes:
+        raise FileNotFoundError(f"Faltan salidas en {origen}: {faltantes}")
+    destino.mkdir(parents=True, exist_ok=True)
+    return [Path(shutil.copy2(origen / n, destino / n)) for n in ARCHIVOS_PUBLICABLES]
