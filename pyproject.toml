@@ -14,6 +14,9 @@ dependencies = [
     "altair",
     "vl-convert-python",
     "jellyfish>=1.3.0",
+    "fastapi>=0.146.0",
+    "uvicorn>=0.54.0",
+    "psutil>=7.2.2",
 ]
 
 [dependency-groups]
@@ -22,6 +25,8 @@ dev = [
     "ruff",
     "ipykernel",
     "playwright",
+    "pillow>=13.0.0",
+    "httpx>=0.28.1",
 ]
 
 [build-system]
