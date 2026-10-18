@@ -1,0 +1,2836 @@
+{
+  "hito1_prueba": {
+    "registros": 392,
+    "personas": 100,
+    "metodos": {
+      "Splink (hito 1)": {
+        "precision": 0.9703808180535967,
+        "recall": 0.8514851485148515,
+        "f1": 0.9070533948582729,
+        "pct_clusters_exactos": 0.73,
+        "fp": 21,
+        "fn": 120,
+        "tp": 688,
+        "intervalos": {
+          "precision": {
+            "valor": 0.9703808180535967,
+            "ic_inf": 0.8513707671004638,
+            "ic_sup": 1.0
+          },
+          "recall": {
+            "valor": 0.8514851485148515,
+            "ic_inf": 0.793873990851377,
+            "ic_sup": 0.9073159767942746
+          },
+          "f1": {
+            "valor": 0.9070533948582729,
+            "ic_inf": 0.8456279143059744,
+            "ic_sup": 0.9482793992804301
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.73,
+            "ic_inf": 0.65,
+            "ic_sup": 0.8102499999999998
+          }
+        }
+      },
+      "R1 correo (no hay documento)": {
+        "precision": 1.0,
+        "recall": 0.3316831683168317,
+        "f1": 0.49814126394052044,
+        "pct_clusters_exactos": 0.32,
+        "fp": 0,
+        "fn": 540,
+        "tp": 268,
+        "intervalos": {
+          "precision": {
+            "valor": 1.0,
+            "ic_inf": 1.0,
+            "ic_sup": 1.0
+          },
+          "recall": {
+            "valor": 0.3316831683168317,
+            "ic_inf": 0.27142206400244984,
+            "ic_sup": 0.394466794840623
+          },
+          "f1": {
+            "valor": 0.49814126394052044,
+            "ic_inf": 0.4269582393845804,
+            "ic_sup": 0.5657600383368239
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.32,
+            "ic_inf": 0.24,
+            "ic_sup": 0.41
+          }
+        }
+      },
+      "R2 correo + apellido": {
+        "precision": 1.0,
+        "recall": 0.10272277227722772,
+        "f1": 0.18630751964085296,
+        "pct_clusters_exactos": 0.24,
+        "fp": 0,
+        "fn": 725,
+        "tp": 83,
+        "intervalos": {
+          "precision": {
+            "valor": 1.0,
+            "ic_inf": 1.0,
+            "ic_sup": 1.0
+          },
+          "recall": {
+            "valor": 0.10272277227722772,
+            "ic_inf": 0.07103962333272278,
+            "ic_sup": 0.1408013353551164
+          },
+          "f1": {
+            "valor": 0.18630751964085296,
+            "ic_inf": 0.13265545098426398,
+            "ic_sup": 0.24684636452779998
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.24,
+            "ic_inf": 0.16,
+            "ic_sup": 0.32
+          }
+        }
+      },
+      "R3 nombre + apellido + fecha": {
+        "precision": 1.0,
+        "recall": 0.043316831683168314,
+        "f1": 0.0830367734282325,
+        "pct_clusters_exactos": 0.2,
+        "fp": 0,
+        "fn": 773,
+        "tp": 35,
+        "intervalos": {
+          "precision": {
+            "valor": 1.0,
+            "ic_inf": 1.0,
+            "ic_sup": 1.0
+          },
+          "recall": {
+            "valor": 0.043316831683168314,
+            "ic_inf": 0.0246150061500615,
+            "ic_sup": 0.06498808522567984
+          },
+          "f1": {
+            "valor": 0.0830367734282325,
+            "ic_inf": 0.04804732703892367,
+            "ic_sup": 0.12204471780441664
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.2,
+            "ic_inf": 0.13,
+            "ic_sup": 0.28
+          }
+        }
+      },
+      "R1 ∪ R3": {
+        "precision": 1.0,
+        "recall": 0.400990099009901,
+        "f1": 0.5724381625441697,
+        "pct_clusters_exactos": 0.34,
+        "fp": 0,
+        "fn": 484,
+        "tp": 324,
+        "intervalos": {
+          "precision": {
+            "valor": 1.0,
+            "ic_inf": 1.0,
+            "ic_sup": 1.0
+          },
+          "recall": {
+            "valor": 0.400990099009901,
+            "ic_inf": 0.32549492816928755,
+            "ic_sup": 0.4735867823997493
+          },
+          "f1": {
+            "valor": 0.5724381625441697,
+            "ic_inf": 0.49112964712512225,
+            "ic_sup": 0.6427674052344943
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.34,
+            "ic_inf": 0.25,
+            "ic_sup": 0.43
+          }
+        }
+      }
+    },
+    "diferencias": {
+      "Splink (hito 1) − R1 correo (no hay documento)": {
+        "precision": {
+          "valor": -0.02961918194640334,
+          "ic_inf": -0.1486292328995362,
+          "ic_sup": 0.0,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.5198019801980198,
+          "ic_inf": 0.42309034314832944,
+          "ic_sup": 0.6043133753501401,
+          "significativa": true
+        },
+        "f1": {
+          "valor": 0.4089121309177524,
+          "ic_inf": 0.31423963482979583,
+          "ic_sup": 0.4951265618786533,
+          "significativa": true
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.41,
+          "ic_inf": 0.31999999999999995,
+          "ic_sup": 0.51,
+          "significativa": true
+        }
+      },
+      "Splink (hito 1) − R2 correo + apellido": {
+        "precision": {
+          "valor": -0.02961918194640334,
+          "ic_inf": -0.1486292328995362,
+          "ic_sup": 0.0,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.7487623762376238,
+          "ic_inf": 0.6871312950246309,
+          "ic_sup": 0.8100039298669891,
+          "significativa": true
+        },
+        "f1": {
+          "valor": 0.7207458752174198,
+          "ic_inf": 0.6415063526111,
+          "ic_sup": 0.7873132453067246,
+          "significativa": true
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.49,
+          "ic_inf": 0.38999999999999996,
+          "ic_sup": 0.6,
+          "significativa": true
+        }
+      },
+      "Splink (hito 1) − R3 nombre + apellido + fecha": {
+        "precision": {
+          "valor": -0.02961918194640334,
+          "ic_inf": -0.1486292328995362,
+          "ic_sup": 0.0,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.8081683168316831,
+          "ic_inf": 0.745387285462358,
+          "ic_sup": 0.8675853584811118,
+          "significativa": true
+        },
+        "f1": {
+          "valor": 0.8240166214300404,
+          "ic_inf": 0.7519534526261153,
+          "ic_sup": 0.8811430285758688,
+          "significativa": true
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.53,
+          "ic_inf": 0.4397500000000002,
+          "ic_sup": 0.63,
+          "significativa": true
+        }
+      },
+      "Splink (hito 1) − R1 ∪ R3": {
+        "precision": {
+          "valor": -0.02961918194640334,
+          "ic_inf": -0.1486292328995362,
+          "ic_sup": 0.0,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.45049504950495045,
+          "ic_inf": 0.35772545755522694,
+          "ic_sup": 0.5470286885245901,
+          "significativa": true
+        },
+        "f1": {
+          "valor": 0.3346152323141032,
+          "ic_inf": 0.23568231569648027,
+          "ic_sup": 0.428110138412001,
+          "significativa": true
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.38999999999999996,
+          "ic_inf": 0.3,
+          "ic_sup": 0.49,
+          "significativa": true
+        }
+      }
+    }
+  },
+  "hito2_prueba_normal": {
+    "estandarizacion_v1": {
+      "registros": 1931,
+      "personas": 800,
+      "metodos": {
+        "Splink v1": {
+          "precision": 1.0,
+          "recall": 0.9977313974591652,
+          "f1": 0.9988644106291166,
+          "pct_clusters_exactos": 0.9975,
+          "fp": 0,
+          "fn": 5,
+          "tp": 2199,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9977313974591652,
+              "ic_inf": 0.993875641782401,
+              "ic_sup": 1.0
+            },
+            "f1": {
+              "valor": 0.9988644106291166,
+              "ic_inf": 0.9969284151480857,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9975,
+              "ic_inf": 0.99375,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "R1 documento": {
+          "precision": 1.0,
+          "recall": 0.6107078039927405,
+          "f1": 0.7583098591549295,
+          "pct_clusters_exactos": 0.6825,
+          "fp": 0,
+          "fn": 858,
+          "tp": 1346,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.6107078039927405,
+              "ic_inf": 0.578682203597401,
+              "ic_sup": 0.6436326893957917
+            },
+            "f1": {
+              "valor": 0.7583098591549295,
+              "ic_inf": 0.7331205733339649,
+              "ic_sup": 0.7831831194089542
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.6825,
+              "ic_inf": 0.65125,
+              "ic_sup": 0.71375
+            }
+          }
+        },
+        "R2 documento + 1er apellido": {
+          "precision": 1.0,
+          "recall": 0.5136116152450091,
+          "f1": 0.6786570743405276,
+          "pct_clusters_exactos": 0.615,
+          "fp": 0,
+          "fn": 1072,
+          "tp": 1132,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.5136116152450091,
+              "ic_inf": 0.48104102547936295,
+              "ic_sup": 0.5504307365573434
+            },
+            "f1": {
+              "valor": 0.6786570743405276,
+              "ic_inf": 0.6495985142658798,
+              "ic_sup": 0.7100358901271429
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.615,
+              "ic_inf": 0.5825,
+              "ic_sup": 0.6475
+            }
+          }
+        },
+        "R3 nombre completo + fecha": {
+          "precision": 1.0,
+          "recall": 0.31488203266787657,
+          "f1": 0.47895100069013113,
+          "pct_clusters_exactos": 0.475,
+          "fp": 0,
+          "fn": 1510,
+          "tp": 694,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.31488203266787657,
+              "ic_inf": 0.28711042142096455,
+              "ic_sup": 0.3428922833389667
+            },
+            "f1": {
+              "valor": 0.47895100069013113,
+              "ic_inf": 0.44613176403745936,
+              "ic_sup": 0.5106772686740875
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.475,
+              "ic_inf": 0.44,
+              "ic_sup": 0.5075312499999999
+            }
+          }
+        },
+        "R1 ∪ R3": {
+          "precision": 1.0,
+          "recall": 0.8008166969147006,
+          "f1": 0.889392794154699,
+          "pct_clusters_exactos": 0.81,
+          "fp": 0,
+          "fn": 439,
+          "tp": 1765,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.8008166969147006,
+              "ic_inf": 0.7696020564099979,
+              "ic_sup": 0.8301493757728052
+            },
+            "f1": {
+              "valor": 0.889392794154699,
+              "ic_inf": 0.8698023981827225,
+              "ic_sup": 0.9071930265436585
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.81,
+              "ic_inf": 0.785,
+              "ic_sup": 0.83625
+            }
+          }
+        }
+      },
+      "diferencias": {
+        "Splink v1 − R1 documento": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.3870235934664247,
+            "ic_inf": 0.3524732263260686,
+            "ic_sup": 0.4195106548149364,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.24055455147418703,
+            "ic_inf": 0.21525570965761132,
+            "ic_sup": 0.2659226765051277,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.31500000000000006,
+            "ic_inf": 0.28375000000000006,
+            "ic_sup": 0.3450000000000001,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R2 documento + 1er apellido": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.4841197822141561,
+            "ic_inf": 0.44754663081834983,
+            "ic_sup": 0.5162165787355808,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.320207336288589,
+            "ic_inf": 0.2888533152209307,
+            "ic_sup": 0.3488923478021665,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.38250000000000006,
+            "ic_inf": 0.34996875,
+            "ic_sup": 0.41378125000000004,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R3 nombre completo + fecha": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.6828493647912885,
+            "ic_inf": 0.6543935698834547,
+            "ic_sup": 0.7105766028562747,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.5199134099389855,
+            "ic_inf": 0.4879426463841532,
+            "ic_sup": 0.5526645363962936,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.5225000000000001,
+            "ic_inf": 0.48875,
+            "ic_sup": 0.5575,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R1 ∪ R3": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.19691470054446458,
+            "ic_inf": 0.1670954265611258,
+            "ic_sup": 0.2284633189952416,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.10947161647441761,
+            "ic_inf": 0.09141984972475466,
+            "ic_sup": 0.12919777349531936,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.1875,
+            "ic_inf": 0.16125,
+            "ic_sup": 0.21250000000000002,
+            "significativa": true
+          }
+        }
+      }
+    },
+    "estandarizacion_v2": {
+      "registros": 1931,
+      "personas": 800,
+      "metodos": {
+        "Splink v2": {
+          "precision": 1.0,
+          "recall": 0.9931941923774955,
+          "f1": 0.9965854768950603,
+          "pct_clusters_exactos": 0.995,
+          "fp": 0,
+          "fn": 15,
+          "tp": 2189,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9931941923774955,
+              "ic_inf": 0.9856092320713564,
+              "ic_sup": 0.9990771075788857
+            },
+            "f1": {
+              "valor": 0.9965854768950603,
+              "ic_inf": 0.9927524672030439,
+              "ic_sup": 0.9995383407585177
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.995,
+              "ic_inf": 0.99,
+              "ic_sup": 0.99875
+            }
+          }
+        },
+        "R1 documento": {
+          "precision": 1.0,
+          "recall": 0.6107078039927405,
+          "f1": 0.7583098591549295,
+          "pct_clusters_exactos": 0.6825,
+          "fp": 0,
+          "fn": 858,
+          "tp": 1346,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.6107078039927405,
+              "ic_inf": 0.578682203597401,
+              "ic_sup": 0.6436326893957917
+            },
+            "f1": {
+              "valor": 0.7583098591549295,
+              "ic_inf": 0.7331205733339649,
+              "ic_sup": 0.7831831194089542
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.6825,
+              "ic_inf": 0.65125,
+              "ic_sup": 0.71375
+            }
+          }
+        },
+        "R2 documento + 1er apellido": {
+          "precision": 1.0,
+          "recall": 0.5136116152450091,
+          "f1": 0.6786570743405276,
+          "pct_clusters_exactos": 0.615,
+          "fp": 0,
+          "fn": 1072,
+          "tp": 1132,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.5136116152450091,
+              "ic_inf": 0.48104102547936295,
+              "ic_sup": 0.5504307365573434
+            },
+            "f1": {
+              "valor": 0.6786570743405276,
+              "ic_inf": 0.6495985142658798,
+              "ic_sup": 0.7100358901271429
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.615,
+              "ic_inf": 0.5825,
+              "ic_sup": 0.6475
+            }
+          }
+        },
+        "R3 nombre completo + fecha": {
+          "precision": 1.0,
+          "recall": 0.31488203266787657,
+          "f1": 0.47895100069013113,
+          "pct_clusters_exactos": 0.475,
+          "fp": 0,
+          "fn": 1510,
+          "tp": 694,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.31488203266787657,
+              "ic_inf": 0.28711042142096455,
+              "ic_sup": 0.3428922833389667
+            },
+            "f1": {
+              "valor": 0.47895100069013113,
+              "ic_inf": 0.44613176403745936,
+              "ic_sup": 0.5106772686740875
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.475,
+              "ic_inf": 0.44,
+              "ic_sup": 0.5075312499999999
+            }
+          }
+        },
+        "R1 ∪ R3": {
+          "precision": 1.0,
+          "recall": 0.8008166969147006,
+          "f1": 0.889392794154699,
+          "pct_clusters_exactos": 0.81,
+          "fp": 0,
+          "fn": 439,
+          "tp": 1765,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.8008166969147006,
+              "ic_inf": 0.7696020564099979,
+              "ic_sup": 0.8301493757728052
+            },
+            "f1": {
+              "valor": 0.889392794154699,
+              "ic_inf": 0.8698023981827225,
+              "ic_sup": 0.9071930265436585
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.81,
+              "ic_inf": 0.785,
+              "ic_sup": 0.83625
+            }
+          }
+        }
+      },
+      "diferencias": {
+        "Splink v2 − R1 documento": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.382486388384755,
+            "ic_inf": 0.3498989042236553,
+            "ic_sup": 0.4144559228650137,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.23827561774013073,
+            "ic_inf": 0.2132867083697738,
+            "ic_sup": 0.2636596156721453,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.3125,
+            "ic_inf": 0.2825,
+            "ic_sup": 0.3425,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R2 documento + 1er apellido": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.4795825771324864,
+            "ic_inf": 0.4419013870368532,
+            "ic_sup": 0.5114636786864858,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.3179284025545327,
+            "ic_inf": 0.286219713944695,
+            "ic_sup": 0.34667439434467423,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.38,
+            "ic_inf": 0.34875,
+            "ic_sup": 0.4125,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R3 nombre completo + fecha": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.6783121597096189,
+            "ic_inf": 0.6498850621092022,
+            "ic_sup": 0.7055728331090292,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.5176344762049292,
+            "ic_inf": 0.4863812140748197,
+            "ic_sup": 0.549619961376639,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.52,
+            "ic_inf": 0.48621875,
+            "ic_sup": 0.5537500000000001,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R1 ∪ R3": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.19237749546279492,
+            "ic_inf": 0.16345992430253822,
+            "ic_sup": 0.22168108455819077,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.10719268274036131,
+            "ic_inf": 0.08962456649719187,
+            "ic_sup": 0.12609501638799853,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.18499999999999994,
+            "ic_inf": 0.15875000000000006,
+            "ic_sup": 0.20999999999999996,
+            "significativa": true
+          }
+        }
+      }
+    }
+  },
+  "ciega_1": {
+    "estandarizacion_v1": {
+      "registros": 6032,
+      "personas": 2000,
+      "metodos": {
+        "Splink v1": {
+          "precision": 0.9966865473823724,
+          "recall": 0.6364790520524757,
+          "f1": 0.7768595041322314,
+          "pct_clusters_exactos": 0.6015,
+          "fp": 20,
+          "fn": 3436,
+          "tp": 6016,
+          "intervalos": {
+            "precision": {
+              "valor": 0.9966865473823724,
+              "ic_inf": 0.9865859245946312,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.6364790520524757,
+              "ic_inf": 0.6165839425050371,
+              "ic_sup": 0.6568190331275702
+            },
+            "f1": {
+              "valor": 0.7768595041322314,
+              "ic_inf": 0.7615582391339495,
+              "ic_sup": 0.7920463621899414
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.6015,
+              "ic_inf": 0.5824875,
+              "ic_sup": 0.623
+            }
+          }
+        },
+        "R1 documento": {
+          "precision": 1.0,
+          "recall": 0.8716673719847652,
+          "f1": 0.9314340625176644,
+          "pct_clusters_exactos": 0.8415,
+          "fp": 0,
+          "fn": 1213,
+          "tp": 8239,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.8716673719847652,
+              "ic_inf": 0.8578302761793046,
+              "ic_sup": 0.8839301526943613
+            },
+            "f1": {
+              "valor": 0.9314340625176644,
+              "ic_inf": 0.9234753972203457,
+              "ic_sup": 0.9383895164249502
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.8415,
+              "ic_inf": 0.8245,
+              "ic_sup": 0.856
+            }
+          }
+        },
+        "R2 documento + 1er apellido": {
+          "precision": 1.0,
+          "recall": 0.7730639018197207,
+          "f1": 0.8720090697535653,
+          "pct_clusters_exactos": 0.735,
+          "fp": 0,
+          "fn": 2145,
+          "tp": 7307,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.7730639018197207,
+              "ic_inf": 0.7570094224201884,
+              "ic_sup": 0.789178123236693
+            },
+            "f1": {
+              "valor": 0.8720090697535653,
+              "ic_inf": 0.8617021767807961,
+              "ic_sup": 0.8821683128975457
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.735,
+              "ic_inf": 0.7155,
+              "ic_sup": 0.7535
+            }
+          }
+        },
+        "R3 nombre completo + fecha": {
+          "precision": 1.0,
+          "recall": 0.196360558611934,
+          "f1": 0.32826317651220377,
+          "pct_clusters_exactos": 0.381,
+          "fp": 0,
+          "fn": 7596,
+          "tp": 1856,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.196360558611934,
+              "ic_inf": 0.1825235154095685,
+              "ic_sup": 0.21107986028293566
+            },
+            "f1": {
+              "valor": 0.32826317651220377,
+              "ic_inf": 0.30870170956888415,
+              "ic_sup": 0.34858124089754183
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.381,
+              "ic_inf": 0.3599875,
+              "ic_sup": 0.4025
+            }
+          }
+        },
+        "R1 ∪ R3": {
+          "precision": 1.0,
+          "recall": 0.9224502750740584,
+          "f1": 0.9596609982939849,
+          "pct_clusters_exactos": 0.9,
+          "fp": 0,
+          "fn": 733,
+          "tp": 8719,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9224502750740584,
+              "ic_inf": 0.9118307277378722,
+              "ic_sup": 0.9326256530354121
+            },
+            "f1": {
+              "valor": 0.9596609982939849,
+              "ic_inf": 0.9538822810022761,
+              "ic_sup": 0.9651384388523978
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9,
+              "ic_inf": 0.8875,
+              "ic_sup": 0.912
+            }
+          }
+        }
+      },
+      "diferencias": {
+        "Splink v1 − R1 documento": {
+          "precision": {
+            "valor": -0.0033134526176276102,
+            "ic_inf": -0.01341407540536873,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": -0.2351883199322895,
+            "ic_inf": -0.2585150242756328,
+            "ic_sup": -0.2114183335744773,
+            "significativa": true
+          },
+          "f1": {
+            "valor": -0.154574558385433,
+            "ic_inf": -0.171022406404863,
+            "ic_sup": -0.13806389726010673,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": -0.24,
+            "ic_inf": -0.261,
+            "ic_sup": -0.21498749999999997,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R2 documento + 1er apellido": {
+          "precision": {
+            "valor": -0.0033134526176276102,
+            "ic_inf": -0.01341407540536873,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": -0.13658484976724505,
+            "ic_inf": -0.1599119569505485,
+            "ic_sup": -0.1116919670682571,
+            "significativa": true
+          },
+          "f1": {
+            "valor": -0.09514956562133392,
+            "ic_inf": -0.11173887691049912,
+            "ic_sup": -0.07772256644692493,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": -0.13349999999999995,
+            "ic_inf": -0.15599999999999992,
+            "ic_sup": -0.1090000000000001,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R3 nombre completo + fecha": {
+          "precision": {
+            "valor": -0.0033134526176276102,
+            "ic_inf": -0.01341407540536873,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.44011849344054166,
+            "ic_inf": 0.41616728692125954,
+            "ic_sup": 0.46470422171303716,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.4485963276200276,
+            "ic_inf": 0.4236398615915054,
+            "ic_sup": 0.4721946085077395,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.22050000000000003,
+            "ic_inf": 0.2004875,
+            "ic_sup": 0.2415,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R1 ∪ R3": {
+          "precision": {
+            "valor": -0.0033134526176276102,
+            "ic_inf": -0.01341407540536873,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": -0.28597122302158273,
+            "ic_inf": -0.30823083175003785,
+            "ic_sup": -0.2641407562549011,
+            "significativa": true
+          },
+          "f1": {
+            "valor": -0.1828014941617535,
+            "ic_inf": -0.1989175309148587,
+            "ic_sup": -0.16745569938938226,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": -0.2985,
+            "ic_inf": -0.3185125,
+            "ic_sup": -0.27498750000000005,
+            "significativa": true
+          }
+        }
+      }
+    },
+    "estandarizacion_v2": {
+      "registros": 6032,
+      "personas": 2000,
+      "metodos": {
+        "Splink v2": {
+          "precision": 1.0,
+          "recall": 0.9995768091409225,
+          "f1": 0.9997883597883598,
+          "pct_clusters_exactos": 0.9995,
+          "fp": 0,
+          "fn": 4,
+          "tp": 9448,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9995768091409225,
+              "ic_inf": 0.998706662842291,
+              "ic_sup": 1.0
+            },
+            "f1": {
+              "valor": 0.9997883597883598,
+              "ic_inf": 0.9993529129702086,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9995,
+              "ic_inf": 0.9985,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "R1 documento": {
+          "precision": 1.0,
+          "recall": 0.9271053745239103,
+          "f1": 0.9621740323908867,
+          "pct_clusters_exactos": 0.906,
+          "fp": 0,
+          "fn": 689,
+          "tp": 8763,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9271053745239103,
+              "ic_inf": 0.9170505915314907,
+              "ic_sup": 0.9368007553444203
+            },
+            "f1": {
+              "valor": 0.9621740323908867,
+              "ic_inf": 0.9567307149626464,
+              "ic_sup": 0.9673692582739322
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.906,
+              "ic_inf": 0.893,
+              "ic_sup": 0.9185
+            }
+          }
+        },
+        "R2 documento + 1er apellido": {
+          "precision": 1.0,
+          "recall": 0.8308294540837918,
+          "f1": 0.907598959838197,
+          "pct_clusters_exactos": 0.7925,
+          "fp": 0,
+          "fn": 1599,
+          "tp": 7853,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.8308294540837918,
+              "ic_inf": 0.8162735778959548,
+              "ic_sup": 0.8454112131767263
+            },
+            "f1": {
+              "valor": 0.907598959838197,
+              "ic_inf": 0.8988443015056662,
+              "ic_sup": 0.9162307101422413
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.7925,
+              "ic_inf": 0.775,
+              "ic_sup": 0.8095125
+            }
+          }
+        },
+        "R3 nombre completo + fecha": {
+          "precision": 1.0,
+          "recall": 0.4512272534913246,
+          "f1": 0.6218560909819931,
+          "pct_clusters_exactos": 0.5,
+          "fp": 0,
+          "fn": 5187,
+          "tp": 4265,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.4512272534913246,
+              "ic_inf": 0.4319143174726968,
+              "ic_sup": 0.4698199183302257
+            },
+            "f1": {
+              "valor": 0.6218560909819931,
+              "ic_inf": 0.603268382434961,
+              "ic_sup": 0.6392890888580814
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.5,
+              "ic_inf": 0.479,
+              "ic_sup": 0.522
+            }
+          }
+        },
+        "R1 ∪ R3": {
+          "precision": 1.0,
+          "recall": 0.9810622090562844,
+          "f1": 0.9904405874499332,
+          "pct_clusters_exactos": 0.974,
+          "fp": 0,
+          "fn": 179,
+          "tp": 9273,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9810622090562844,
+              "ic_inf": 0.975364813754249,
+              "ic_sup": 0.986090060997185
+            },
+            "f1": {
+              "valor": 0.9904405874499332,
+              "ic_inf": 0.9875287916004506,
+              "ic_sup": 0.9929963201153059
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.974,
+              "ic_inf": 0.9665,
+              "ic_sup": 0.9805
+            }
+          }
+        }
+      },
+      "diferencias": {
+        "Splink v2 − R1 documento": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.07247143461701222,
+            "ic_inf": 0.06278880836464813,
+            "ic_sup": 0.08260583047325624,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.03761432739747306,
+            "ic_inf": 0.03242659227918139,
+            "ic_sup": 0.04310116087977456,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.09350000000000003,
+            "ic_inf": 0.08100000000000007,
+            "ic_sup": 0.10650000000000004,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R2 documento + 1er apellido": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.16874735505713068,
+            "ic_inf": 0.15440224286266668,
+            "ic_sup": 0.183196908855003,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.09218939995016273,
+            "ic_inf": 0.0836965481139531,
+            "ic_sup": 0.10091150967358763,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.20700000000000007,
+            "ic_inf": 0.1895,
+            "ic_sup": 0.22451250000000003,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R3 nombre completo + fecha": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.5483495556495979,
+            "ic_inf": 0.5298065523168123,
+            "ic_sup": 0.5674476131100521,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.37793226880636666,
+            "ic_inf": 0.36039237261236123,
+            "ic_sup": 0.3964777907754865,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.49950000000000006,
+            "ic_inf": 0.47750000000000004,
+            "ic_sup": 0.521,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R1 ∪ R3": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.018514600084638122,
+            "ic_inf": 0.013565926885252287,
+            "ic_sup": 0.0241444817596678,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.009347772338426541,
+            "ic_inf": 0.006829573836895248,
+            "ic_sup": 0.01222973101254551,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.025500000000000078,
+            "ic_inf": 0.019000000000000017,
+            "ic_sup": 0.03251250000000007,
+            "significativa": true
+          }
+        }
+      }
+    }
+  },
+  "ciega_2": {
+    "estandarizacion_v1": {
+      "registros": 4967,
+      "personas": 2000,
+      "metodos": {
+        "Splink v1": {
+          "precision": 0.9946944749359679,
+          "recall": 0.9198105227541871,
+          "f1": 0.9557879933198559,
+          "pct_clusters_exactos": 0.911,
+          "fp": 29,
+          "fn": 474,
+          "tp": 5437,
+          "intervalos": {
+            "precision": {
+              "valor": 0.9946944749359679,
+              "ic_inf": 0.9763939435332534,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9198105227541871,
+              "ic_inf": 0.9067961694489016,
+              "ic_sup": 0.9316461448045587
+            },
+            "f1": {
+              "valor": 0.9557879933198559,
+              "ic_inf": 0.9446826151351212,
+              "ic_sup": 0.9634247657124229
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.911,
+              "ic_inf": 0.8994875,
+              "ic_sup": 0.9225
+            }
+          }
+        },
+        "R1 documento": {
+          "precision": 1.0,
+          "recall": 0.8809000169176112,
+          "f1": 0.9366792588595071,
+          "pct_clusters_exactos": 0.873,
+          "fp": 0,
+          "fn": 704,
+          "tp": 5207,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.8809000169176112,
+              "ic_inf": 0.866239718687755,
+              "ic_sup": 0.8964277785284793
+            },
+            "f1": {
+              "valor": 0.9366792588595071,
+              "ic_inf": 0.9283263129461551,
+              "ic_sup": 0.9453856228163745
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.873,
+              "ic_inf": 0.8575,
+              "ic_sup": 0.887
+            }
+          }
+        },
+        "R2 documento + 1er apellido": {
+          "precision": 1.0,
+          "recall": 0.8221959059380816,
+          "f1": 0.9024231733358091,
+          "pct_clusters_exactos": 0.8195,
+          "fp": 0,
+          "fn": 1051,
+          "tp": 4860,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.8221959059380816,
+              "ic_inf": 0.8026304921280242,
+              "ic_sup": 0.8405040955362086
+            },
+            "f1": {
+              "valor": 0.9024231733358091,
+              "ic_inf": 0.890510277261332,
+              "ic_sup": 0.9133411846699355
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.8195,
+              "ic_inf": 0.802,
+              "ic_sup": 0.8365
+            }
+          }
+        },
+        "R3 nombre completo + fecha": {
+          "precision": 1.0,
+          "recall": 0.4763999323295551,
+          "f1": 0.645353500630228,
+          "pct_clusters_exactos": 0.574,
+          "fp": 0,
+          "fn": 3095,
+          "tp": 2816,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.4763999323295551,
+              "ic_inf": 0.45146354393128263,
+              "ic_sup": 0.5
+            },
+            "f1": {
+              "valor": 0.645353500630228,
+              "ic_inf": 0.6220804432330719,
+              "ic_sup": 0.6666666666666666
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.574,
+              "ic_inf": 0.5535,
+              "ic_sup": 0.5955
+            }
+          }
+        },
+        "R1 ∪ R3": {
+          "precision": 1.0,
+          "recall": 0.964134664185417,
+          "f1": 0.9817398794142981,
+          "pct_clusters_exactos": 0.95,
+          "fp": 0,
+          "fn": 212,
+          "tp": 5699,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.964134664185417,
+              "ic_inf": 0.9554247330040043,
+              "ic_sup": 0.9713871060721171
+            },
+            "f1": {
+              "valor": 0.9817398794142981,
+              "ic_inf": 0.977204304383033,
+              "ic_sup": 0.9854859079444731
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.95,
+              "ic_inf": 0.9405,
+              "ic_sup": 0.9585
+            }
+          }
+        }
+      },
+      "diferencias": {
+        "Splink v1 − R1 documento": {
+          "precision": {
+            "valor": -0.005305525064032146,
+            "ic_inf": -0.023606056466746666,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.03891050583657585,
+            "ic_inf": 0.020410490099328826,
+            "ic_sup": 0.05903296107792223,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.019108734460348775,
+            "ic_inf": 0.006117235465858359,
+            "ic_sup": 0.03164669799644808,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.038000000000000034,
+            "ic_inf": 0.020000000000000018,
+            "ic_sup": 0.05699999999999994,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R2 documento + 1er apellido": {
+          "precision": {
+            "valor": -0.005305525064032146,
+            "ic_inf": -0.023606056466746666,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.0976146168161055,
+            "ic_inf": 0.0776633702637123,
+            "ic_sup": 0.12000835407038747,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.05336481998404674,
+            "ic_inf": 0.039521912621691566,
+            "ic_sup": 0.06781016624959055,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.09150000000000003,
+            "ic_inf": 0.07350000000000001,
+            "ic_sup": 0.11099999999999999,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R3 nombre completo + fecha": {
+          "precision": {
+            "valor": -0.005305525064032146,
+            "ic_inf": -0.023606056466746666,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.443410590424632,
+            "ic_inf": 0.41735421168901315,
+            "ic_sup": 0.4725202602872162,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.31043449268962786,
+            "ic_inf": 0.2866193215940957,
+            "ic_sup": 0.3355363914922089,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.3370000000000001,
+            "ic_inf": 0.3139875000000001,
+            "ic_sup": 0.359,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R1 ∪ R3": {
+          "precision": {
+            "valor": -0.005305525064032146,
+            "ic_inf": -0.023606056466746666,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": -0.04432414143122998,
+            "ic_inf": -0.057539007206650575,
+            "ic_sup": -0.029635949710894765,
+            "significativa": true
+          },
+          "f1": {
+            "valor": -0.02595188609444221,
+            "ic_inf": -0.03714542078309578,
+            "ic_sup": -0.01714164057868918,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": -0.038999999999999924,
+            "ic_inf": -0.052512499999999976,
+            "ic_sup": -0.024487499999999975,
+            "significativa": true
+          }
+        }
+      }
+    },
+    "estandarizacion_v2": {
+      "registros": 4967,
+      "personas": 2000,
+      "metodos": {
+        "Splink v2": {
+          "precision": 0.9984797297297298,
+          "recall": 1.0,
+          "f1": 0.9992392866198969,
+          "pct_clusters_exactos": 0.997,
+          "fp": 9,
+          "fn": 0,
+          "tp": 5911,
+          "intervalos": {
+            "precision": {
+              "valor": 0.9984797297297298,
+              "ic_inf": 0.9939728274808233,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "f1": {
+              "valor": 0.9992392866198969,
+              "ic_inf": 0.9969773045870232,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.997,
+              "ic_inf": 0.9945,
+              "ic_sup": 0.999
+            }
+          }
+        },
+        "R1 documento": {
+          "precision": 1.0,
+          "recall": 0.9079681948908814,
+          "f1": 0.9517644972512856,
+          "pct_clusters_exactos": 0.9045,
+          "fp": 0,
+          "fn": 544,
+          "tp": 5367,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9079681948908814,
+              "ic_inf": 0.8940469084266215,
+              "ic_sup": 0.9223561667434198
+            },
+            "f1": {
+              "valor": 0.9517644972512856,
+              "ic_inf": 0.944059942856479,
+              "ic_sup": 0.9596100688303635
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9045,
+              "ic_inf": 0.8915,
+              "ic_sup": 0.9175
+            }
+          }
+        },
+        "R2 documento + 1er apellido": {
+          "precision": 1.0,
+          "recall": 0.8474031466756894,
+          "f1": 0.9173992673992675,
+          "pct_clusters_exactos": 0.846,
+          "fp": 0,
+          "fn": 902,
+          "tp": 5009,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.8474031466756894,
+              "ic_inf": 0.8299725770686543,
+              "ic_sup": 0.8637628805199188
+            },
+            "f1": {
+              "valor": 0.9173992673992675,
+              "ic_inf": 0.9070874475507411,
+              "ic_sup": 0.9269021176871349
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.846,
+              "ic_inf": 0.8294875,
+              "ic_sup": 0.8620125
+            }
+          }
+        },
+        "R3 nombre completo + fecha": {
+          "precision": 1.0,
+          "recall": 0.528844527152766,
+          "f1": 0.6918225074692929,
+          "pct_clusters_exactos": 0.607,
+          "fp": 0,
+          "fn": 2785,
+          "tp": 3126,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.528844527152766,
+              "ic_inf": 0.503642777382607,
+              "ic_sup": 0.5523612921750792
+            },
+            "f1": {
+              "valor": 0.6918225074692929,
+              "ic_inf": 0.6698968464410026,
+              "ic_sup": 0.7116401251622579
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.607,
+              "ic_inf": 0.5865,
+              "ic_sup": 0.629
+            }
+          }
+        },
+        "R1 ∪ R3": {
+          "precision": 1.0,
+          "recall": 0.9791913381830486,
+          "f1": 0.9894862808787076,
+          "pct_clusters_exactos": 0.969,
+          "fp": 0,
+          "fn": 123,
+          "tp": 5788,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9791913381830486,
+              "ic_inf": 0.9732091426389452,
+              "ic_sup": 0.9847051345374211
+            },
+            "f1": {
+              "valor": 0.9894862808787076,
+              "ic_inf": 0.9864226975312878,
+              "ic_sup": 0.9922936333399702
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.969,
+              "ic_inf": 0.961,
+              "ic_sup": 0.976
+            }
+          }
+        }
+      },
+      "diferencias": {
+        "Splink v2 − R1 documento": {
+          "precision": {
+            "valor": -0.0015202702702702409,
+            "ic_inf": -0.006027172519176704,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.09203180510911857,
+            "ic_inf": 0.07764383325658017,
+            "ic_sup": 0.10595309157337847,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.04747478936861127,
+            "ic_inf": 0.039443389581299795,
+            "ic_sup": 0.055276973921995196,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.09250000000000003,
+            "ic_inf": 0.07900000000000007,
+            "ic_sup": 0.10550000000000004,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R2 documento + 1er apellido": {
+          "precision": {
+            "valor": -0.0015202702702702409,
+            "ic_inf": -0.006027172519176704,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.1525968533243106,
+            "ic_inf": 0.13623711948008121,
+            "ic_sup": 0.17002742293134565,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.08184001922062945,
+            "ic_inf": 0.07172830924016012,
+            "ic_sup": 0.09230030474686694,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.15100000000000002,
+            "ic_inf": 0.1349875,
+            "ic_sup": 0.16749999999999998,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R3 nombre completo + fecha": {
+          "precision": {
+            "valor": -0.0015202702702702409,
+            "ic_inf": -0.006027172519176704,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.471155472847234,
+            "ic_inf": 0.4476387078249207,
+            "ic_sup": 0.496357222617393,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.30741677915060406,
+            "ic_inf": 0.2876913033519945,
+            "ic_sup": 0.3294845113130378,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.39,
+            "ic_inf": 0.3684875000000001,
+            "ic_sup": 0.41100000000000003,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R1 ∪ R3": {
+          "precision": {
+            "valor": -0.0015202702702702409,
+            "ic_inf": -0.006027172519176704,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.0208086618169514,
+            "ic_inf": 0.015294865462578904,
+            "ic_sup": 0.026790857361054816,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.009753005741189313,
+            "ic_inf": 0.006335695580847406,
+            "ic_sup": 0.013102160449558987,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.028000000000000025,
+            "ic_inf": 0.02100000000000002,
+            "ic_sup": 0.03649999999999998,
+            "significativa": true
+          }
+        }
+      }
+    }
+  },
+  "febrl3_prueba": {
+    "registros": 2003,
+    "personas": 800,
+    "metodos": {
+      "Splink (FEBRL)": {
+        "precision": 1.0,
+        "recall": 0.9965357967667436,
+        "f1": 0.9982648930017352,
+        "pct_clusters_exactos": 0.99625,
+        "fp": 0,
+        "fn": 9,
+        "tp": 2589,
+        "intervalos": {
+          "precision": {
+            "valor": 1.0,
+            "ic_inf": 1.0,
+            "ic_sup": 1.0
+          },
+          "recall": {
+            "valor": 0.9965357967667436,
+            "ic_inf": 0.9919300929273488,
+            "ic_sup": 1.0
+          },
+          "f1": {
+            "valor": 0.9982648930017352,
+            "ic_inf": 0.9959486996099154,
+            "ic_sup": 1.0
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.99625,
+            "ic_inf": 0.99125,
+            "ic_sup": 1.0
+          }
+        }
+      },
+      "R1 documento (soc_sec_id)": {
+        "precision": 1.0,
+        "recall": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "pct_clusters_exactos": 0.8425,
+        "fp": 0,
+        "fn": 433,
+        "tp": 2165,
+        "intervalos": {
+          "precision": {
+            "valor": 1.0,
+            "ic_inf": 1.0,
+            "ic_sup": 1.0
+          },
+          "recall": {
+            "valor": 0.8333333333333334,
+            "ic_inf": 0.8090809575399857,
+            "ic_sup": 0.8587250069739123
+          },
+          "f1": {
+            "valor": 0.9090909090909091,
+            "ic_inf": 0.8944662799255164,
+            "ic_sup": 0.9239936016400964
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.8425,
+            "ic_inf": 0.8175,
+            "ic_sup": 0.8675
+          }
+        }
+      },
+      "R2 documento + apellido": {
+        "precision": 1.0,
+        "recall": 0.44418783679753654,
+        "f1": 0.6151385927505331,
+        "pct_clusters_exactos": 0.60375,
+        "fp": 0,
+        "fn": 1444,
+        "tp": 1154,
+        "intervalos": {
+          "precision": {
+            "valor": 1.0,
+            "ic_inf": 1.0,
+            "ic_sup": 1.0
+          },
+          "recall": {
+            "valor": 0.44418783679753654,
+            "ic_inf": 0.4136308577267529,
+            "ic_sup": 0.4762654911045635
+          },
+          "f1": {
+            "valor": 0.6151385927505331,
+            "ic_inf": 0.5852034923957911,
+            "ic_sup": 0.6452301350399118
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.60375,
+            "ic_inf": 0.56875,
+            "ic_sup": 0.6350312499999999
+          }
+        }
+      },
+      "R3 nombre + apellido + fecha": {
+        "precision": 1.0,
+        "recall": 0.2913779830638953,
+        "f1": 0.4512667660208643,
+        "pct_clusters_exactos": 0.53625,
+        "fp": 0,
+        "fn": 1841,
+        "tp": 757,
+        "intervalos": {
+          "precision": {
+            "valor": 1.0,
+            "ic_inf": 1.0,
+            "ic_sup": 1.0
+          },
+          "recall": {
+            "valor": 0.2913779830638953,
+            "ic_inf": 0.26217981289652936,
+            "ic_sup": 0.32018914624085054
+          },
+          "f1": {
+            "valor": 0.4512667660208643,
+            "ic_inf": 0.4154397137329216,
+            "ic_sup": 0.4850655636526237
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.53625,
+            "ic_inf": 0.50125,
+            "ic_sup": 0.57128125
+          }
+        }
+      },
+      "R1 ∪ R3": {
+        "precision": 1.0,
+        "recall": 0.918013856812933,
+        "f1": 0.9572546658639374,
+        "pct_clusters_exactos": 0.91875,
+        "fp": 0,
+        "fn": 213,
+        "tp": 2385,
+        "intervalos": {
+          "precision": {
+            "valor": 1.0,
+            "ic_inf": 1.0,
+            "ic_sup": 1.0
+          },
+          "recall": {
+            "valor": 0.918013856812933,
+            "ic_inf": 0.8977992356044288,
+            "ic_sup": 0.9372423606652033
+          },
+          "f1": {
+            "valor": 0.9572546658639374,
+            "ic_inf": 0.9461477470231071,
+            "ic_sup": 0.9676046525188758
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.91875,
+            "ic_inf": 0.9,
+            "ic_sup": 0.9375
+          }
+        }
+      }
+    },
+    "diferencias": {
+      "Splink (FEBRL) − R1 documento (soc_sec_id)": {
+        "precision": {
+          "valor": 0.0,
+          "ic_inf": 0.0,
+          "ic_sup": 0.0,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.16320246343341027,
+          "ic_inf": 0.1366053586603126,
+          "ic_sup": 0.18799655763250195,
+          "significativa": true
+        },
+        "f1": {
+          "valor": 0.0891739839108261,
+          "ic_inf": 0.07374661178544446,
+          "ic_sup": 0.1040703390992326,
+          "significativa": true
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.15374999999999994,
+          "ic_inf": 0.12875000000000003,
+          "ic_sup": 0.17874999999999996,
+          "significativa": true
+        }
+      },
+      "Splink (FEBRL) − R2 documento + apellido": {
+        "precision": {
+          "valor": 0.0,
+          "ic_inf": 0.0,
+          "ic_sup": 0.0,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.5523479599692072,
+          "ic_inf": 0.5186558571778672,
+          "ic_sup": 0.5842665525327279,
+          "significativa": true
+        },
+        "f1": {
+          "valor": 0.3831263002512021,
+          "ic_inf": 0.353123028456978,
+          "ic_sup": 0.41357936016282837,
+          "significativa": true
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.39249999999999996,
+          "ic_inf": 0.36,
+          "ic_sup": 0.4275,
+          "significativa": true
+        }
+      },
+      "Splink (FEBRL) − R3 nombre + apellido + fecha": {
+        "precision": {
+          "valor": 0.0,
+          "ic_inf": 0.0,
+          "ic_sup": 0.0,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.7051578137028484,
+          "ic_inf": 0.6763225895411232,
+          "ic_sup": 0.733955557255146,
+          "significativa": true
+        },
+        "f1": {
+          "valor": 0.5469981269808708,
+          "ic_inf": 0.5133675361624717,
+          "ic_sup": 0.5828343063085427,
+          "significativa": true
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.45999999999999996,
+          "ic_inf": 0.42496874999999995,
+          "ic_sup": 0.49375,
+          "significativa": true
+        }
+      },
+      "Splink (FEBRL) − R1 ∪ R3": {
+        "precision": {
+          "valor": 0.0,
+          "ic_inf": 0.0,
+          "ic_sup": 0.0,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.07852193995381063,
+          "ic_inf": 0.05870180525288708,
+          "ic_sup": 0.09916040784613996,
+          "significativa": true
+        },
+        "f1": {
+          "valor": 0.04101022713779778,
+          "ic_inf": 0.030352885949134212,
+          "ic_sup": 0.05236441916149543,
+          "significativa": true
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.07750000000000001,
+          "ic_inf": 0.05750000000000011,
+          "ic_sup": 0.09749999999999992,
+          "significativa": true
+        }
+      }
+    }
+  },
+  "hito3_prueba": {
+    "estandarizacion_v1": {
+      "registros": 4839,
+      "personas": 2000,
+      "metodos": {
+        "Splink v1": {
+          "precision": 1.0,
+          "recall": 0.9460847240051348,
+          "f1": 0.9722955145118732,
+          "pct_clusters_exactos": 0.9445,
+          "fp": 0,
+          "fn": 294,
+          "tp": 5159,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9460847240051348,
+              "ic_inf": 0.9349627669961286,
+              "ic_sup": 0.9567408881935191
+            },
+            "f1": {
+              "valor": 0.9722955145118732,
+              "ic_inf": 0.9663883801124028,
+              "ic_sup": 0.9778922634967783
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9445,
+              "ic_inf": 0.934,
+              "ic_sup": 0.954
+            }
+          }
+        },
+        "R1 documento": {
+          "precision": 0.9955611921369689,
+          "recall": 0.8637447276728406,
+          "f1": 0.9249803613511389,
+          "pct_clusters_exactos": 0.863,
+          "fp": 21,
+          "fn": 743,
+          "tp": 4710,
+          "intervalos": {
+            "precision": {
+              "valor": 0.9955611921369689,
+              "ic_inf": 0.9875854730846776,
+              "ic_sup": 0.9990062702604328
+            },
+            "recall": {
+              "valor": 0.8637447276728406,
+              "ic_inf": 0.8456691474935173,
+              "ic_sup": 0.8797438663972491
+            },
+            "f1": {
+              "valor": 0.9249803613511389,
+              "ic_inf": 0.9143735971844931,
+              "ic_sup": 0.9341492527571165
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.863,
+              "ic_inf": 0.8475,
+              "ic_sup": 0.8775
+            }
+          }
+        },
+        "R2 documento + 1er apellido": {
+          "precision": 1.0,
+          "recall": 0.7489455345681276,
+          "f1": 0.8564538114711125,
+          "pct_clusters_exactos": 0.7695,
+          "fp": 0,
+          "fn": 1369,
+          "tp": 4084,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.7489455345681276,
+              "ic_inf": 0.7281967177124904,
+              "ic_sup": 0.7692626657271169
+            },
+            "f1": {
+              "valor": 0.8564538114711125,
+              "ic_inf": 0.8427243383152239,
+              "ic_sup": 0.8695855968590002
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.7695,
+              "ic_inf": 0.7514875,
+              "ic_sup": 0.7875
+            }
+          }
+        },
+        "R3 nombre completo + fecha": {
+          "precision": 1.0,
+          "recall": 0.6284613973959289,
+          "f1": 0.7718468468468469,
+          "pct_clusters_exactos": 0.6645,
+          "fp": 0,
+          "fn": 2026,
+          "tp": 3427,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.6284613973959289,
+              "ic_inf": 0.6052675376027274,
+              "ic_sup": 0.6496084213266
+            },
+            "f1": {
+              "valor": 0.7718468468468469,
+              "ic_inf": 0.7541017598861328,
+              "ic_sup": 0.7875910564818871
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.6645,
+              "ic_inf": 0.643,
+              "ic_sup": 0.6845125
+            }
+          }
+        },
+        "R1 ∪ R3": {
+          "precision": 0.9915918211351041,
+          "recall": 0.951586282780121,
+          "f1": 0.971177241250234,
+          "pct_clusters_exactos": 0.9395,
+          "fp": 44,
+          "fn": 264,
+          "tp": 5189,
+          "intervalos": {
+            "precision": {
+              "valor": 0.9915918211351041,
+              "ic_inf": 0.9775363458897796,
+              "ic_sup": 0.9985143405688928
+            },
+            "recall": {
+              "valor": 0.951586282780121,
+              "ic_inf": 0.9409519943114704,
+              "ic_sup": 0.9610186528255923
+            },
+            "f1": {
+              "valor": 0.971177241250234,
+              "ic_inf": 0.9630434912362923,
+              "ic_sup": 0.9773830379636969
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9395,
+              "ic_inf": 0.9285,
+              "ic_sup": 0.9490124999999999
+            }
+          }
+        }
+      },
+      "diferencias": {
+        "Splink v1 − R1 documento": {
+          "precision": {
+            "valor": 0.00443880786303108,
+            "ic_inf": 0.000993729739567286,
+            "ic_sup": 0.012414526915322356,
+            "significativa": true
+          },
+          "recall": {
+            "valor": 0.08233999633229416,
+            "ic_inf": 0.06306407938185984,
+            "ic_sup": 0.10371784831780904,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.04731515316073431,
+            "ic_inf": 0.036479717395635144,
+            "ic_sup": 0.05937705885995858,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.08150000000000002,
+            "ic_inf": 0.06498749999999996,
+            "ic_sup": 0.09899999999999998,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R2 documento + 1er apellido": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.19713918943700715,
+            "ic_inf": 0.17325744480289645,
+            "ic_sup": 0.22089956738786845,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.11584170304076069,
+            "ic_inf": 0.10110646388417187,
+            "ic_sup": 0.13071673617576887,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.17500000000000004,
+            "ic_inf": 0.15549999999999997,
+            "ic_sup": 0.1954999999999999,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R3 nombre completo + fecha": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.3176233266092059,
+            "ic_inf": 0.2923134184183985,
+            "ic_sup": 0.3438092853349481,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.20044866766502634,
+            "ic_inf": 0.1829769680993821,
+            "ic_sup": 0.2195455557204656,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.28,
+            "ic_inf": 0.2599874999999999,
+            "ic_sup": 0.30302500000000004,
+            "significativa": true
+          }
+        },
+        "Splink v1 − R1 ∪ R3": {
+          "precision": {
+            "valor": 0.008408178864895866,
+            "ic_inf": 0.001485659431107184,
+            "ic_sup": 0.02246365411022039,
+            "significativa": true
+          },
+          "recall": {
+            "valor": -0.005501558774986259,
+            "ic_inf": -0.020199973220171447,
+            "ic_sup": 0.008488975856497747,
+            "significativa": false
+          },
+          "f1": {
+            "valor": 0.0011182732616392688,
+            "ic_inf": -0.0071392593091404236,
+            "ic_sup": 0.010586964158343745,
+            "significativa": false
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.0050000000000000044,
+            "ic_inf": -0.007499999999999951,
+            "ic_sup": 0.018012499999999897,
+            "significativa": false
+          }
+        }
+      }
+    },
+    "estandarizacion_v2": {
+      "registros": 4839,
+      "personas": 2000,
+      "metodos": {
+        "Splink v2": {
+          "precision": 1.0,
+          "recall": 0.9977993764900055,
+          "f1": 0.9988984762254451,
+          "pct_clusters_exactos": 0.9965,
+          "fp": 0,
+          "fn": 12,
+          "tp": 5441,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.9977993764900055,
+              "ic_inf": 0.9957886665490869,
+              "ic_sup": 0.9994160581792453
+            },
+            "f1": {
+              "valor": 0.9988984762254451,
+              "ic_inf": 0.9978898900862654,
+              "ic_sup": 0.9997079438176819
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9965,
+              "ic_inf": 0.9939875,
+              "ic_sup": 0.999
+            }
+          }
+        },
+        "R1 documento": {
+          "precision": 0.9955611921369689,
+          "recall": 0.8637447276728406,
+          "f1": 0.9249803613511389,
+          "pct_clusters_exactos": 0.863,
+          "fp": 21,
+          "fn": 743,
+          "tp": 4710,
+          "intervalos": {
+            "precision": {
+              "valor": 0.9955611921369689,
+              "ic_inf": 0.9875854730846776,
+              "ic_sup": 0.9990062702604328
+            },
+            "recall": {
+              "valor": 0.8637447276728406,
+              "ic_inf": 0.8456691474935173,
+              "ic_sup": 0.8797438663972491
+            },
+            "f1": {
+              "valor": 0.9249803613511389,
+              "ic_inf": 0.9143735971844931,
+              "ic_sup": 0.9341492527571165
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.863,
+              "ic_inf": 0.8475,
+              "ic_sup": 0.8775
+            }
+          }
+        },
+        "R2 documento + 1er apellido": {
+          "precision": 1.0,
+          "recall": 0.7489455345681276,
+          "f1": 0.8564538114711125,
+          "pct_clusters_exactos": 0.7695,
+          "fp": 0,
+          "fn": 1369,
+          "tp": 4084,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.7489455345681276,
+              "ic_inf": 0.7281967177124904,
+              "ic_sup": 0.7692626657271169
+            },
+            "f1": {
+              "valor": 0.8564538114711125,
+              "ic_inf": 0.8427243383152239,
+              "ic_sup": 0.8695855968590002
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.7695,
+              "ic_inf": 0.7514875,
+              "ic_sup": 0.7875
+            }
+          }
+        },
+        "R3 nombre completo + fecha": {
+          "precision": 1.0,
+          "recall": 0.6284613973959289,
+          "f1": 0.7718468468468469,
+          "pct_clusters_exactos": 0.6645,
+          "fp": 0,
+          "fn": 2026,
+          "tp": 3427,
+          "intervalos": {
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "recall": {
+              "valor": 0.6284613973959289,
+              "ic_inf": 0.6052675376027274,
+              "ic_sup": 0.6496084213266
+            },
+            "f1": {
+              "valor": 0.7718468468468469,
+              "ic_inf": 0.7541017598861328,
+              "ic_sup": 0.7875910564818871
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.6645,
+              "ic_inf": 0.643,
+              "ic_sup": 0.6845125
+            }
+          }
+        },
+        "R1 ∪ R3": {
+          "precision": 0.9915918211351041,
+          "recall": 0.951586282780121,
+          "f1": 0.971177241250234,
+          "pct_clusters_exactos": 0.9395,
+          "fp": 44,
+          "fn": 264,
+          "tp": 5189,
+          "intervalos": {
+            "precision": {
+              "valor": 0.9915918211351041,
+              "ic_inf": 0.9775363458897796,
+              "ic_sup": 0.9985143405688928
+            },
+            "recall": {
+              "valor": 0.951586282780121,
+              "ic_inf": 0.9409519943114704,
+              "ic_sup": 0.9610186528255923
+            },
+            "f1": {
+              "valor": 0.971177241250234,
+              "ic_inf": 0.9630434912362923,
+              "ic_sup": 0.9773830379636969
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9395,
+              "ic_inf": 0.9285,
+              "ic_sup": 0.9490124999999999
+            }
+          }
+        }
+      },
+      "diferencias": {
+        "Splink v2 − R1 documento": {
+          "precision": {
+            "valor": 0.00443880786303108,
+            "ic_inf": 0.000993729739567286,
+            "ic_sup": 0.012414526915322356,
+            "significativa": true
+          },
+          "recall": {
+            "valor": 0.1340546488171649,
+            "ic_inf": 0.11826102400066967,
+            "ic_sup": 0.1517284083445932,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.07391811487430622,
+            "ic_inf": 0.06480943924344158,
+            "ic_sup": 0.08453993676169193,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.13350000000000006,
+            "ic_inf": 0.11950000000000005,
+            "ic_sup": 0.14850000000000008,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R2 documento + 1er apellido": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.24885384192187787,
+            "ic_inf": 0.22853797619901872,
+            "ic_sup": 0.2700759669115442,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.1424446647543326,
+            "ic_inf": 0.1293212346498774,
+            "ic_sup": 0.1562672104490006,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.2270000000000001,
+            "ic_inf": 0.20850000000000002,
+            "ic_sup": 0.24550000000000005,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R3 nombre completo + fecha": {
+          "precision": {
+            "valor": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0,
+            "significativa": false
+          },
+          "recall": {
+            "valor": 0.3693379790940766,
+            "ic_inf": 0.3486535081907544,
+            "ic_sup": 0.39282536846085303,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.22705162937859824,
+            "ic_inf": 0.21162580126365005,
+            "ic_sup": 0.2447898929259484,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.3320000000000001,
+            "ic_inf": 0.31100000000000005,
+            "ic_sup": 0.3530000000000001,
+            "significativa": true
+          }
+        },
+        "Splink v2 − R1 ∪ R3": {
+          "precision": {
+            "valor": 0.008408178864895866,
+            "ic_inf": 0.001485659431107184,
+            "ic_sup": 0.02246365411022039,
+            "significativa": true
+          },
+          "recall": {
+            "valor": 0.04621309370988447,
+            "ic_inf": 0.03708449262700784,
+            "ic_sup": 0.05714529405393698,
+            "significativa": true
+          },
+          "f1": {
+            "valor": 0.027721234975211173,
+            "ic_inf": 0.021425555417193536,
+            "ic_sup": 0.035766882325086465,
+            "significativa": true
+          },
+          "pct_clusters_exactos": {
+            "valor": 0.05700000000000005,
+            "ic_inf": 0.0475000000000001,
+            "ic_sup": 0.06800000000000006,
+            "significativa": true
+          }
+        }
+      }
+    }
+  },
+  "hito5_tiempo_real": {
+    "base_clientes": 1351,
+    "consultas": 2000,
+    "reglas": {
+      "R1 documento": {
+        "precision": 1.0,
+        "recall": 0.623,
+        "tp": 623,
+        "fp": 0,
+        "fn": 377,
+        "decisiones_existentes": {
+          "cliente": 623,
+          "nuevo": 377
+        },
+        "decisiones_nuevas": {
+          "nuevo": 1000
+        }
+      },
+      "R2 documento + 1er apellido": {
+        "precision": 1.0,
+        "recall": 0.551,
+        "tp": 551,
+        "fp": 0,
+        "fn": 449,
+        "decisiones_existentes": {
+          "cliente": 551,
+          "nuevo": 449
+        },
+        "decisiones_nuevas": {
+          "nuevo": 1000
+        }
+      },
+      "R3 nombre completo + fecha": {
+        "precision": 1.0,
+        "recall": 0.349,
+        "tp": 349,
+        "fp": 0,
+        "fn": 651,
+        "decisiones_existentes": {
+          "nuevo": 651,
+          "cliente": 349
+        },
+        "decisiones_nuevas": {
+          "nuevo": 1000
+        }
+      },
+      "R1 ∪ R3": {
+        "precision": 1.0,
+        "recall": 0.75,
+        "tp": 750,
+        "fp": 0,
+        "fn": 250,
+        "decisiones_existentes": {
+          "cliente": 750,
+          "nuevo": 250
+        },
+        "decisiones_nuevas": {
+          "nuevo": 1000
+        }
+      }
+    }
+  },
+  "escala_100000": {
+    "registros": 99088,
+    "personas": 41322,
+    "metodos": {
+      "R1 documento": {
+        "precision": 0.9997390018269872,
+        "recall": 0.622510337853699,
+        "f1": 0.7672653624446372,
+        "pct_clusters_exactos": 0.6691350854266492,
+        "fp": 18,
+        "fn": 41810,
+        "tp": 68948,
+        "intervalos": null
+      },
+      "R2 documento + 1er apellido": {
+        "precision": 1.0,
+        "recall": 0.5398797378067498,
+        "f1": 0.701197274763418,
+        "pct_clusters_exactos": 0.6116354484294081,
+        "fp": 0,
+        "fn": 50962,
+        "tp": 59796,
+        "intervalos": null
+      },
+      "R3 nombre completo + fecha": {
+        "precision": 1.0,
+        "recall": 0.3496903158236877,
+        "f1": 0.5181785950805745,
+        "pct_clusters_exactos": 0.49382895310004354,
+        "fp": 0,
+        "fn": 72027,
+        "tp": 38731,
+        "intervalos": null
+      },
+      "R1 ∪ R3": {
+        "precision": 0.9994083618196161,
+        "recall": 0.8235793351270337,
+        "f1": 0.9030144038014156,
+        "pct_clusters_exactos": 0.8166352064275688,
+        "fp": 54,
+        "fn": 19540,
+        "tp": 91218,
+        "intervalos": null
+      }
+    },
+    "diferencias": {}
+  },
+  "escala_1000000": {
+    "registros": 995688,
+    "personas": 413223,
+    "metodos": {
+      "R1 documento": {
+        "precision": 0.9973123201299927,
+        "recall": 0.6227788109235967,
+        "f1": 0.7667531399250224,
+        "pct_clusters_exactos": 0.6675911069809763,
+        "fp": 1879,
+        "fn": 422321,
+        "tp": 697237,
+        "intervalos": null
+      },
+      "R2 documento + 1er apellido": {
+        "precision": 0.999995024265001,
+        "recall": 0.5385366367798721,
+        "f1": 0.7000622357014638,
+        "pct_clusters_exactos": 0.6102104674715589,
+        "fp": 3,
+        "fn": 516635,
+        "tp": 602923,
+        "intervalos": null
+      },
+      "R3 nombre completo + fecha": {
+        "precision": 0.9999076989344354,
+        "recall": 0.34834461457110755,
+        "f1": 0.5166873566659999,
+        "pct_clusters_exactos": 0.49067936683098473,
+        "fp": 36,
+        "fn": 729566,
+        "tp": 389992,
+        "intervalos": null
+      },
+      "R1 ∪ R3": {
+        "precision": 0.9966397267627095,
+        "recall": 0.8225808756670043,
+        "f1": 0.9012835255604109,
+        "pct_clusters_exactos": 0.8131904564847552,
+        "fp": 3105,
+        "fn": 198631,
+        "tp": 920927,
+        "intervalos": null
+      }
+    },
+    "diferencias": {}
+  }
+}

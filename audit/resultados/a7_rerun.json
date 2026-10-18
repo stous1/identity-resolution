@@ -1,0 +1,64 @@
+{
+  "hito1": {
+    "metricas.json": {
+      "diferencias": 0,
+      "ejemplos": []
+    }
+  },
+  "hito2": {
+    "metricas.json": {
+      "diferencias": 0,
+      "ejemplos": []
+    },
+    "modelo.json": {
+      "diferencias": 1,
+      "ejemplos": [
+        {
+          "ruta": "/linker_uid",
+          "publicado": "oyjysrxf",
+          "nuevo": "q5z0abnq"
+        }
+      ]
+    }
+  },
+  "validacion": {
+    "metricas.json": {
+      "diferencias": 0,
+      "ejemplos": []
+    }
+  },
+  "hito2b_desarrollo": {
+    "desarrollo.json": {
+      "diferencias": 0,
+      "ejemplos": []
+    },
+    "modelo.json": {
+      "diferencias": 1,
+      "ejemplos": [
+        {
+          "ruta": "/linker_uid",
+          "publicado": "tfp8ubof",
+          "nuevo": "lj9lyonl"
+        }
+      ]
+    }
+  },
+  "hito2b_evaluacion": {
+    "metricas.json": {
+      "diferencias": 0,
+      "ejemplos": []
+    }
+  },
+  "hito3": {
+    "metricas.json": {
+      "diferencias": 0,
+      "ejemplos": []
+    }
+  },
+  "hito5": {
+    "tiempo_real.json": {
+      "diferencias": 0,
+      "ejemplos": []
+    }
+  }
+}

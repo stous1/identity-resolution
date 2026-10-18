@@ -1,0 +1,3057 @@
+{
+  "A": {
+    "v1 (hito2-congelado-r1)": {
+      "extremos": [
+        {
+          "comparacion": "domicilio",
+          "nivel": "Jaro-Winkler distance of domicilio >= 0.9",
+          "m": 3.8179752262163694e-16,
+          "u": 0.0036540982592995074,
+          "peso": -43.12177292080445,
+          "sin_entrenar": false,
+          "extremo": true
+        },
+        {
+          "comparacion": "municipio",
+          "nivel": "All other comparisons",
+          "m": 3.6519993241555294e-15,
+          "u": 0.9517650698460294,
+          "peso": -47.888912338080395,
+          "sin_entrenar": false,
+          "extremo": true
+        }
+      ],
+      "sin_entrenar": [
+        {
+          "comparacion": "email",
+          "nivel": "Exact match on username",
+          "m": null,
+          "u": 1.0632574380174076e-06,
+          "peso": null,
+          "sin_entrenar": true,
+          "extremo": false
+        },
+        {
+          "comparacion": "domicilio",
+          "nivel": "Misma vía, número y placa",
+          "m": null,
+          "u": null,
+          "peso": null,
+          "sin_entrenar": true,
+          "extremo": false
+        }
+      ],
+      "todos": [
+        {
+          "comparacion": "documento",
+          "nivel": "Exact match on documento",
+          "m": 0.6785281594062471,
+          "u": 0.0005631972047028534,
+          "peso": 10.234552800914905,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "documento",
+          "nivel": "Un dígito distinto",
+          "m": 0.09871419380825634,
+          "u": 7.209760134415006e-05,
+          "peso": 10.419090562483635,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "documento",
+          "nivel": "Dos dígitos transpuestos",
+          "m": 0.11027010361804403,
+          "u": 8.045674352897906e-05,
+          "peso": 10.420540734303444,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "documento",
+          "nivel": "Un dígito de más o de menos",
+          "m": 0.067525518326571,
+          "u": 5.433442420138845e-05,
+          "peso": 10.279350569790072,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "documento",
+          "nivel": "All other comparisons",
+          "m": 0.04496202484088162,
+          "u": 0.9992299140262226,
+          "peso": -4.474037754531184,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Exact match on nombre_completo",
+          "m": 0.6995632709124758,
+          "u": 0.002659622569667547,
+          "peso": 8.039089209763537,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Mismos nombres en otro orden",
+          "m": 0.0944663254903619,
+          "u": 8.662335498917208e-05,
+          "peso": 10.090828376453619,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Mismo primer nombre",
+          "m": 0.032790576031262425,
+          "u": 0.0046472002094191,
+          "peso": 2.8188475406461007,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Jaro-Winkler distance of nombre_completo >= 0.92",
+          "m": 0.12239324021227248,
+          "u": 0.0014516551248185431,
+          "peso": 6.39768132231108,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Jaro-Winkler distance of nombre_completo >= 0.8",
+          "m": 0.023495752413350845,
+          "u": 0.006598605459175174,
+          "peso": 1.83216690397113,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "All other comparisons",
+          "m": 0.027290834940276516,
+          "u": 0.9845562932819305,
+          "peso": -5.172985257995218,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "primer_apellido",
+          "nivel": "Exact match on primer_apellido",
+          "m": 0.8544756447192883,
+          "u": 0.007503867114062017,
+          "peso": 6.831261281451269,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "primer_apellido",
+          "nivel": "Jaro-Winkler distance of primer_apellido >= 0.92",
+          "m": 0.11879749325040236,
+          "u": 0.0012612741248423408,
+          "peso": 6.557478719340896,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "primer_apellido",
+          "nivel": "Jaro-Winkler distance of primer_apellido >= 0.8",
+          "m": 0.025857599127822355,
+          "u": 0.005869446229266319,
+          "peso": 2.1392920280386174,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "primer_apellido",
+          "nivel": "All other comparisons",
+          "m": 0.0017385258049740248,
+          "u": 0.9853654125318293,
+          "peso": -9.146650540868906,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "segundo_apellido",
+          "nivel": "Exact match on segundo_apellido",
+          "m": 0.9127516927359616,
+          "u": 0.00657672696093187,
+          "peso": 7.11670885231498,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "segundo_apellido",
+          "nivel": "Jaro-Winkler distance of segundo_apellido >= 0.9",
+          "m": 0.07979118557728156,
+          "u": 0.0012565105948243623,
+          "peso": 5.9887346416061495,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "segundo_apellido",
+          "nivel": "All other comparisons",
+          "m": 0.008412197686645636,
+          "u": 0.9921667624442437,
+          "peso": -6.8819560637742,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "Exact match on date of birth",
+          "m": 0.8774083740102396,
+          "u": 0.0007329668499083792,
+          "peso": 10.225284809534564,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "DamerauLevenshtein distance <= 1",
+          "m": 0.09111444302944352,
+          "u": 0.0013326669998334167,
+          "peso": 6.095291524183385,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "Abs date difference <= 1 month",
+          "m": 0.004887025667379153,
+          "u": 0.0018733490397658313,
+          "peso": 1.383336956309393,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "Abs date difference <= 1 year",
+          "m": 0.02337404805754763,
+          "u": 0.025160752956854906,
+          "peso": -0.10626748641364164,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "Abs date difference <= 10 year",
+          "m": 0.0012158215828166502,
+          "u": 0.23396682611075414,
+          "peso": -7.588228641685605,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "All other comparisons",
+          "m": 0.0020002876525735676,
+          "u": 0.7369334380428834,
+          "peso": -8.52518302404528,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "telefono",
+          "nivel": "Exact match on telefono",
+          "m": 0.7264728718107332,
+          "u": 0.0009744664847939595,
+          "peso": 9.542080642769683,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "telefono",
+          "nivel": "All other comparisons",
+          "m": 0.27352712818926683,
+          "u": 0.9990255335152061,
+          "peso": -1.8688376261081978,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Exact match on email",
+          "m": 0.7496377309280744,
+          "u": 0.000915464654132988,
+          "peso": 9.677473668530594,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Exact match on username",
+          "m": null,
+          "u": 1.0632574380174076e-06,
+          "peso": null,
+          "sin_entrenar": true,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Jaro-Winkler distance of email >= 0.88",
+          "m": 0.07658643326040278,
+          "u": 0.0007963798210750383,
+          "peso": 6.587488375380351,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Jaro-Winkler >0.88 on username",
+          "m": 0.024070021881840875,
+          "u": 0.00019776588347123782,
+          "peso": 6.927300074423402,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "All other comparisons",
+          "m": 0.15461534465179916,
+          "u": 0.9980893263838827,
+          "peso": -2.6904854335173694,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "domicilio",
+          "nivel": "Exact match on domicilio",
+          "m": 0.936438689203244,
+          "u": 0.001446130082544686,
+          "peso": 9.338843399088192,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "domicilio",
+          "nivel": "Misma vía, número y placa",
+          "m": null,
+          "u": null,
+          "peso": null,
+          "sin_entrenar": true,
+          "extremo": false
+        },
+        {
+          "comparacion": "domicilio",
+          "nivel": "Jaro-Winkler distance of domicilio >= 0.9",
+          "m": 3.8179752262163694e-16,
+          "u": 0.0036540982592995074,
+          "peso": -43.12177292080445,
+          "sin_entrenar": false,
+          "extremo": true
+        },
+        {
+          "comparacion": "domicilio",
+          "nivel": "All other comparisons",
+          "m": 0.06356131079675598,
+          "u": 0.9948997716581558,
+          "peso": -3.9683304106102004,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "municipio",
+          "nivel": "Exact match on municipio",
+          "m": 1.0,
+          "u": 0.04823493015397064,
+          "peso": 4.373777912431036,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "municipio",
+          "nivel": "All other comparisons",
+          "m": 3.6519993241555294e-15,
+          "u": 0.9517650698460294,
+          "peso": -47.888912338080395,
+          "sin_entrenar": false,
+          "extremo": true
+        }
+      ]
+    },
+    "v2 (hito2b-congelado)": {
+      "extremos": [
+        {
+          "comparacion": "apellido_casada",
+          "nivel": "All other comparisons",
+          "m": 1.263028907078414e-22,
+          "u": 0.9347826086956522,
+          "peso": -72.6482332275472,
+          "sin_entrenar": false,
+          "extremo": true
+        }
+      ],
+      "sin_entrenar": [],
+      "todos": [
+        {
+          "comparacion": "documento",
+          "nivel": "Exact match on documento",
+          "m": 0.8711439657463855,
+          "u": 0.00027263108683349326,
+          "peso": 11.641745368575448,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "documento",
+          "nivel": "Un dígito distinto",
+          "m": 0.03210247709672407,
+          "u": 9.842277503014198e-06,
+          "peso": 11.671404808840778,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "documento",
+          "nivel": "Dos dígitos transpuestos",
+          "m": 0.03161512332315296,
+          "u": 1.0826505253315617e-05,
+          "peso": 11.51183150910792,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "documento",
+          "nivel": "Un dígito de más o de menos",
+          "m": 0.04003215599326411,
+          "u": 1.8700327255726977e-05,
+          "peso": 11.06388008354076,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "documento",
+          "nivel": "Dos ediciones",
+          "m": 0.015130834532925885,
+          "u": 2.3621466007234072e-05,
+          "peso": 9.323177340694647,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "documento",
+          "nivel": "All other comparisons",
+          "m": 0.00997544330754746,
+          "u": 0.9996643783371472,
+          "peso": -6.6469190477208695,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Exact match on nombre_completo",
+          "m": 0.7302788572030526,
+          "u": 0.0024998151445001222,
+          "peso": 8.190482237614345,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Mismos nombres en otro orden",
+          "m": 0.02122869464692253,
+          "u": 2.0855492293895596e-05,
+          "peso": 9.991372579825375,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Mismo primer nombre",
+          "m": 0.09932251670044143,
+          "u": 0.003963491512762613,
+          "peso": 4.647277025760706,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Nombre y apellido en campos intercambiados",
+          "m": 0.017624669806534272,
+          "u": 0.00011186127684907638,
+          "peso": 7.299741715751665,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Primer nombre y otra palabra en común (cualquier campo)",
+          "m": 0.013082104066244937,
+          "u": 9.290173840008039e-05,
+          "peso": 7.137673287759217,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Jaro-Winkler distance of nombre_completo >= 0.92",
+          "m": 0.06491067216844976,
+          "u": 0.0009394451301477516,
+          "peso": 6.110502984437554,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "Jaro-Winkler distance of nombre_completo >= 0.8",
+          "m": 0.022383606255601554,
+          "u": 0.00686904078007125,
+          "peso": 1.7042619351528019,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "nombres",
+          "nivel": "All other comparisons",
+          "m": 0.03116887915275282,
+          "u": 0.9855025889249752,
+          "peso": -4.982681480217075,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "primer_apellido",
+          "nivel": "Exact match on primer_apellido",
+          "m": 0.9043637041684561,
+          "u": 0.006793279556787974,
+          "peso": 7.056651056605283,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "primer_apellido",
+          "nivel": "Jaro-Winkler distance of primer_apellido >= 0.92",
+          "m": 0.05336836411886593,
+          "u": 0.0007981410482507329,
+          "peso": 6.063197255942175,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "primer_apellido",
+          "nivel": "Jaro-Winkler distance of primer_apellido >= 0.8",
+          "m": 0.013254413502273433,
+          "u": 0.005822128293287682,
+          "peso": 1.1868542980825896,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "primer_apellido",
+          "nivel": "Apellido en otro campo de nombre del otro registro",
+          "m": 0.024823994074392508,
+          "u": 0.00904336821257507,
+          "peso": 1.4568031463811286,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "primer_apellido",
+          "nivel": "All other comparisons",
+          "m": 0.0041895241360120255,
+          "u": 0.9775430828890985,
+          "peso": -7.8662300911671315,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "segundo_apellido",
+          "nivel": "Exact match on segundo_apellido",
+          "m": 0.9205369706516912,
+          "u": 0.006863603134234615,
+          "peso": 7.067365718052909,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "segundo_apellido",
+          "nivel": "Jaro-Winkler distance of segundo_apellido >= 0.9",
+          "m": 0.04840871021775584,
+          "u": 0.0011634970809608633,
+          "peso": 5.378727159767624,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "segundo_apellido",
+          "nivel": "All other comparisons",
+          "m": 0.0294884320387145,
+          "u": 0.9919728997848045,
+          "peso": -5.072079688971895,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "apellido_casada",
+          "nivel": "Exact match on apellido_casada",
+          "m": 1.0,
+          "u": 0.06521739130434782,
+          "peso": 3.938599455335857,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "apellido_casada",
+          "nivel": "All other comparisons",
+          "m": 1.263028907078414e-22,
+          "u": 0.9347826086956522,
+          "peso": -72.6482332275472,
+          "sin_entrenar": false,
+          "extremo": true
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "Exact match on date of birth",
+          "m": 0.954165222735933,
+          "u": 0.0003262975425716325,
+          "peso": 11.513835266646794,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "DamerauLevenshtein distance <= 1",
+          "m": 0.020287789828401136,
+          "u": 0.0012460487406954217,
+          "peso": 4.025179297720713,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "Abs date difference <= 1 month",
+          "m": 0.00662296579860258,
+          "u": 0.0019220964617110228,
+          "peso": 1.7847966675306213,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "Abs date difference <= 1 year",
+          "m": 0.018333578729867378,
+          "u": 0.02599469766493321,
+          "peso": -0.5037289472017688,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "Abs date difference <= 10 year",
+          "m": 0.0002751074964533212,
+          "u": 0.2393881921076782,
+          "peso": -9.765140824900582,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "fecha_nacimiento",
+          "nivel": "All other comparisons",
+          "m": 0.00031533541074247576,
+          "u": 0.7311226674824105,
+          "peso": -11.179010578716177,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "telefonos",
+          "nivel": "Algún teléfono en común",
+          "m": 0.8884215325866639,
+          "u": 0.00027040883123430006,
+          "peso": 11.681886375318495,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "telefonos",
+          "nivel": "Alguno de los dos sin celular (solo fijo)",
+          "m": 0.055438616412658466,
+          "u": 0.05704280412734421,
+          "peso": -0.041153651528761534,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "telefonos",
+          "nivel": "All other comparisons",
+          "m": 0.05613985100067765,
+          "u": 0.9426867870414215,
+          "peso": -4.069681367068279,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Exact match on email",
+          "m": 0.8670953584204485,
+          "u": 0.0003034320289861563,
+          "peso": 11.480601568233766,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Exact match on username",
+          "m": 0.06607025681135324,
+          "u": 1.119675383712754e-05,
+          "peso": 12.526704710305472,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Jaro-Winkler distance of email >= 0.88",
+          "m": 0.027568766405525264,
+          "u": 0.0007244299732621518,
+          "peso": 5.250044664631849,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Jaro-Winkler >0.88 on username",
+          "m": 0.005759941772194052,
+          "u": 0.00019146449061488094,
+          "peso": 4.910905470417652,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "All other comparisons",
+          "m": 0.033505676590478865,
+          "u": 0.9987694767532996,
+          "peso": -4.897674286635132,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "domicilio",
+          "nivel": "Exact match on domicilio",
+          "m": 0.5233198305035951,
+          "u": 0.0003374574726889532,
+          "peso": 10.598771512390465,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "domicilio",
+          "nivel": "Misma vía, número y placa",
+          "m": 0.0033363663936913277,
+          "u": 7.158188814614158e-06,
+          "peso": 8.864467417449536,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "domicilio",
+          "nivel": "Jaro-Winkler distance of domicilio >= 0.9",
+          "m": 0.15867378054828785,
+          "u": 0.0023458407343892687,
+          "peso": 6.079814876791503,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "domicilio",
+          "nivel": "All other comparisons",
+          "m": 0.31456477991480886,
+          "u": 0.9973095436041072,
+          "peso": -1.6646842067075627,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "municipio",
+          "nivel": "Exact match on municipio",
+          "m": 0.7567579238303589,
+          "u": 0.03909870220572799,
+          "peso": 4.274639249851182,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "municipio",
+          "nivel": "All other comparisons",
+          "m": 0.24324207616964125,
+          "u": 0.960901297794272,
+          "peso": -1.9819954386627892,
+          "sin_entrenar": false,
+          "extremo": false
+        }
+      ]
+    },
+    "hito 1": {
+      "extremos": [],
+      "sin_entrenar": [
+        {
+          "comparacion": "email",
+          "nivel": "Jaro-Winkler >0.88 on username",
+          "m": null,
+          "u": 0.00032728881026094646,
+          "peso": null,
+          "sin_entrenar": true,
+          "extremo": false
+        }
+      ],
+      "todos": [
+        {
+          "comparacion": "first_name",
+          "nivel": "Exact match on first_name",
+          "m": 0.49814171847789035,
+          "u": 0.006566475048923679,
+          "peso": 6.245293304111047,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "first_name",
+          "nivel": "Jaro-Winkler distance of first_name >= 0.92",
+          "m": 0.13454773526690395,
+          "u": 0.00309595156555773,
+          "peso": 5.441591395743377,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "first_name",
+          "nivel": "Jaro-Winkler distance of first_name >= 0.88",
+          "m": 0.054385770110980065,
+          "u": 0.0019951687866927594,
+          "peso": 4.7686465182043465,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "first_name",
+          "nivel": "Jaro-Winkler distance of first_name >= 0.7",
+          "m": 0.08839536683238594,
+          "u": 0.022137964774951075,
+          "peso": 1.9974481580503358,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "first_name",
+          "nivel": "All other comparisons",
+          "m": 0.22452940931183973,
+          "u": 0.9662044398238747,
+          "peso": -2.1054240577100547,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "surname",
+          "nivel": "Exact match on surname",
+          "m": 0.44108822123780117,
+          "u": 0.005703576296488609,
+          "peso": 6.273056613393999,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "surname",
+          "nivel": "Jaro-Winkler distance of surname >= 0.92",
+          "m": 0.21340056635544624,
+          "u": 0.003001882261309794,
+          "peso": 6.151552801560259,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "surname",
+          "nivel": "Jaro-Winkler distance of surname >= 0.88",
+          "m": 0.05952702187041217,
+          "u": 0.0010466021938080093,
+          "peso": 5.829759625067096,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "surname",
+          "nivel": "Jaro-Winkler distance of surname >= 0.7",
+          "m": 0.07296495296743505,
+          "u": 0.015366391899785812,
+          "peso": 2.2474252117764575,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "surname",
+          "nivel": "All other comparisons",
+          "m": 0.21301923756890537,
+          "u": 0.9748815473486078,
+          "peso": -2.194243210560063,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "dob",
+          "nivel": "Exact match on date of birth",
+          "m": 0.4143796768191876,
+          "u": 0.002937223619179745,
+          "peso": 7.140356331484522,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "dob",
+          "nivel": "DamerauLevenshtein distance <= 1",
+          "m": 0.14917623858638554,
+          "u": 0.001972600364172375,
+          "peso": 6.240775240021309,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "dob",
+          "nivel": "Abs date difference <= 1 month",
+          "m": 0.05525027408699865,
+          "u": 0.00281800052024625,
+          "peso": 4.293237838377043,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "dob",
+          "nivel": "Abs date difference <= 1 year",
+          "m": 0.11049123576991297,
+          "u": 0.0330681522587358,
+          "peso": 1.7404175989654338,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "dob",
+          "nivel": "Abs date difference <= 10 year",
+          "m": 0.20441591614468765,
+          "u": 0.3062299488424521,
+          "peso": -0.5831078520552919,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "dob",
+          "nivel": "All other comparisons",
+          "m": 0.06628665859282754,
+          "u": 0.6529740743952137,
+          "peso": -3.300235276516525,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "city",
+          "nivel": "Exact match on city",
+          "m": 0.5709330590196966,
+          "u": 0.04718567529427671,
+          "peso": 3.5969007464283496,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "city",
+          "nivel": "All other comparisons",
+          "m": 0.4290669409803034,
+          "u": 0.9528143247057232,
+          "peso": -1.1509923552935102,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Exact match on email",
+          "m": 0.5538511617313968,
+          "u": 0.0036620964175143743,
+          "peso": 7.240684742252043,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Exact match on username",
+          "m": 0.2171682031686907,
+          "u": 0.0016452896948252985,
+          "peso": 7.044327445952347,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Jaro-Winkler distance of email >= 0.88",
+          "m": 0.20967738551667175,
+          "u": 0.0013622291021671827,
+          "peso": 7.2660581007605005,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "Jaro-Winkler >0.88 on username",
+          "m": null,
+          "u": 0.00032728881026094646,
+          "peso": null,
+          "sin_entrenar": true,
+          "extremo": false
+        },
+        {
+          "comparacion": "email",
+          "nivel": "All other comparisons",
+          "m": 0.01930324958324073,
+          "u": 0.9930030959752322,
+          "peso": -5.684882573900751,
+          "sin_entrenar": false,
+          "extremo": false
+        }
+      ]
+    },
+    "FEBRL": {
+      "extremos": [],
+      "sin_entrenar": [
+        {
+          "comparacion": "soc_sec_id",
+          "nivel": "Un dígito de más o de menos",
+          "m": null,
+          "u": null,
+          "peso": null,
+          "sin_entrenar": true,
+          "extremo": false
+        }
+      ],
+      "todos": [
+        {
+          "comparacion": "soc_sec_id",
+          "nivel": "Exact match on soc_sec_id",
+          "m": 0.8688611773093499,
+          "u": 0.0007561726179366059,
+          "peso": 10.166194364581978,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "soc_sec_id",
+          "nivel": "Un dígito distinto",
+          "m": 0.03164833318509327,
+          "u": 3.828722116134714e-05,
+          "peso": 9.691050849269933,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "soc_sec_id",
+          "nivel": "Dos dígitos transpuestos",
+          "m": 0.04092971283012199,
+          "u": 6.125955385815542e-05,
+          "peso": 9.383997969185346,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "soc_sec_id",
+          "nivel": "Un dígito de más o de menos",
+          "m": null,
+          "u": null,
+          "peso": null,
+          "sin_entrenar": true,
+          "extremo": false
+        },
+        {
+          "comparacion": "soc_sec_id",
+          "nivel": "All other comparisons",
+          "m": 0.0602576247339129,
+          "u": 0.9991442806070439,
+          "peso": -4.051477313980752,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "given_name",
+          "nivel": "Exact match on given_name",
+          "m": 0.5855141421557508,
+          "u": 0.003590004522840344,
+          "peso": 7.349574545290649,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "given_name",
+          "nivel": "Jaro-Winkler distance of given_name >= 0.92",
+          "m": 0.1516592191938992,
+          "u": 0.0014406457969890806,
+          "peso": 6.717973717952513,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "given_name",
+          "nivel": "Jaro-Winkler distance of given_name >= 0.88",
+          "m": 0.02862950162668074,
+          "u": 0.0011064805840925243,
+          "peso": 4.693452515714956,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "given_name",
+          "nivel": "Jaro-Winkler distance of given_name >= 0.7",
+          "m": 0.014973494950744445,
+          "u": 0.023834762873941977,
+          "peso": -0.6706562735430344,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "given_name",
+          "nivel": "All other comparisons",
+          "m": 0.21922364207292466,
+          "u": 0.9700281062221361,
+          "peso": -2.145623156012913,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "surname",
+          "nivel": "Exact match on surname",
+          "m": 0.5736622691245715,
+          "u": 0.0033731354138921677,
+          "peso": 7.409967585803697,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "surname",
+          "nivel": "Jaro-Winkler distance of surname >= 0.92",
+          "m": 0.21993554523082814,
+          "u": 0.00115091537577731,
+          "peso": 7.578155217007246,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "surname",
+          "nivel": "Jaro-Winkler distance of surname >= 0.88",
+          "m": 0.018371760704509903,
+          "u": 0.00034891115149525626,
+          "peso": 5.718486379184164,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "surname",
+          "nivel": "Jaro-Winkler distance of surname >= 0.7",
+          "m": 0.006756757711536298,
+          "u": 0.014217883711353175,
+          "peso": -1.07330371216955,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "surname",
+          "nivel": "All other comparisons",
+          "m": 0.18127366722855415,
+          "u": 0.980909154347482,
+          "peso": -2.435950162474745,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "date_of_birth",
+          "nivel": "Exact match on date of birth",
+          "m": 0.930621173675571,
+          "u": 0.0008544135216628998,
+          "peso": 10.08904381779557,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "date_of_birth",
+          "nivel": "DamerauLevenshtein distance <= 1",
+          "m": 0.014157627262911358,
+          "u": 0.001122322846252114,
+          "peso": 3.6570198533160356,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "date_of_birth",
+          "nivel": "Abs date difference <= 1 month",
+          "m": 0.0009791500014847499,
+          "u": 0.0013571314048689159,
+          "peso": -0.4709586207032552,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "date_of_birth",
+          "nivel": "Abs date difference <= 1 year",
+          "m": 0.002132950963066374,
+          "u": 0.017845450454876934,
+          "peso": -3.0646336150071796,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "date_of_birth",
+          "nivel": "Abs date difference <= 10 year",
+          "m": 0.010294227718372295,
+          "u": 0.16828429420374555,
+          "peso": -4.030993030793006,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "date_of_birth",
+          "nivel": "All other comparisons",
+          "m": 0.04181487037859416,
+          "u": 0.8105363875685936,
+          "peso": -4.2767889584918874,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "street_number",
+          "nivel": "Exact match on street_number",
+          "m": 0.8057674362154355,
+          "u": 0.013925745333687572,
+          "peso": 5.854537051820782,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "street_number",
+          "nivel": "All other comparisons",
+          "m": 0.19423256378456458,
+          "u": 0.9860742546663124,
+          "peso": -2.343911196399426,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "address_1",
+          "nivel": "Exact match on address_1",
+          "m": 0.5110096286252961,
+          "u": 0.0007539544913069047,
+          "peso": 9.404657314805249,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "address_1",
+          "nivel": "Jaro-Winkler distance of address_1 >= 0.92",
+          "m": 0.3861334155275267,
+          "u": 0.000561947414187413,
+          "peso": 9.424448560951783,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "address_1",
+          "nivel": "Jaro-Winkler distance of address_1 >= 0.8",
+          "m": 0.0008068401567279276,
+          "u": 0.010447798704203547,
+          "peso": -3.694772306707718,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "address_1",
+          "nivel": "All other comparisons",
+          "m": 0.10189499936639623,
+          "u": 0.9882362993903021,
+          "peso": -3.2777727980459472,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "suburb",
+          "nivel": "Exact match on suburb",
+          "m": 0.6301343115852382,
+          "u": 0.0015174792597952246,
+          "peso": 8.697838759551688,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "suburb",
+          "nivel": "Jaro-Winkler distance of suburb >= 0.9",
+          "m": 0.2856260203537865,
+          "u": 0.0008920518182989563,
+          "peso": 8.322784181510212,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "suburb",
+          "nivel": "All other comparisons",
+          "m": 0.08423966806097513,
+          "u": 0.9975904689219058,
+          "peso": -3.5658760249080195,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "postcode",
+          "nivel": "Exact match on postcode",
+          "m": 0.7787965645985273,
+          "u": 0.0014721436536537973,
+          "peso": 9.04718425159389,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "postcode",
+          "nivel": "Levenshtein distance of postcode <= 1",
+          "m": 0.07287109524878493,
+          "u": 0.011040120221874446,
+          "peso": 2.7225907919968964,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "postcode",
+          "nivel": "All other comparisons",
+          "m": 0.1483323401526878,
+          "u": 0.9874877361244717,
+          "peso": -2.734929655454173,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "state",
+          "nivel": "Exact match on state",
+          "m": 0.9364633278719031,
+          "u": 0.22028401846209586,
+          "peso": 2.087857667538193,
+          "sin_entrenar": false,
+          "extremo": false
+        },
+        {
+          "comparacion": "state",
+          "nivel": "All other comparisons",
+          "m": 0.06353667212809698,
+          "u": 0.7797159815379041,
+          "peso": -3.6172872723577023,
+          "sin_entrenar": false,
+          "extremo": false
+        }
+      ]
+    }
+  },
+  "B": {
+    "hito 1 · prueba": {
+      "(modelo completo)": {
+        "precision": 0.9703808180535967,
+        "recall": 0.8514851485148515,
+        "f1": 0.9070533948582729,
+        "pct_clusters_exactos": 0.73,
+        "fp": 21,
+        "fn": 120,
+        "tp": 688
+      },
+      "sin first_name": {
+        "precision": 1.0,
+        "recall": 0.7537128712871287,
+        "f1": 0.8595624558927311,
+        "pct_clusters_exactos": 0.63,
+        "fp": 0,
+        "fn": 199,
+        "tp": 609,
+        "delta_f1": -0.047490938965541796,
+        "delta_precision": 0.02961918194640334,
+        "delta_recall": -0.09777227722772275,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin surname": {
+        "precision": 0.9704918032786886,
+        "recall": 0.7326732673267327,
+        "f1": 0.8349788434414668,
+        "pct_clusters_exactos": 0.61,
+        "fp": 18,
+        "fn": 216,
+        "tp": 592,
+        "delta_f1": -0.07207455141680608,
+        "delta_precision": 0.00011098522509189745,
+        "delta_recall": -0.1188118811881188,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin dob": {
+        "precision": 0.9946043165467626,
+        "recall": 0.6844059405940595,
+        "f1": 0.810850439882698,
+        "pct_clusters_exactos": 0.54,
+        "fp": 3,
+        "fn": 255,
+        "tp": 553,
+        "delta_f1": -0.09620295497557485,
+        "delta_precision": 0.024223498493165962,
+        "delta_recall": -0.167079207920792,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin city": {
+        "precision": 0.9688427299703264,
+        "recall": 0.8081683168316832,
+        "f1": 0.8812415654520918,
+        "pct_clusters_exactos": 0.69,
+        "fp": 21,
+        "fn": 155,
+        "tp": 653,
+        "delta_f1": -0.025811829406181097,
+        "delta_precision": -0.0015380880832702726,
+        "delta_recall": -0.043316831683168244,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin email": {
+        "precision": 1.0,
+        "recall": 0.6534653465346535,
+        "f1": 0.7904191616766467,
+        "pct_clusters_exactos": 0.51,
+        "fp": 0,
+        "fn": 280,
+        "tp": 528,
+        "delta_f1": -0.11663423318162613,
+        "delta_precision": 0.02961918194640334,
+        "delta_recall": -0.19801980198019797,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      }
+    },
+    "FEBRL3 · prueba": {
+      "(modelo completo)": {
+        "precision": 1.0,
+        "recall": 0.9965357967667436,
+        "f1": 0.9982648930017352,
+        "pct_clusters_exactos": 0.99625,
+        "fp": 0,
+        "fn": 9,
+        "tp": 2589
+      },
+      "sin soc_sec_id": {
+        "precision": 1.0,
+        "recall": 0.9930715935334873,
+        "f1": 0.996523754345307,
+        "pct_clusters_exactos": 0.9925,
+        "fp": 0,
+        "fn": 18,
+        "tp": 2580,
+        "delta_f1": -0.0017411386564281095,
+        "delta_precision": 0.0,
+        "delta_recall": -0.0034642032332563577,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin given_name": {
+        "precision": 1.0,
+        "recall": 0.9965357967667436,
+        "f1": 0.9982648930017352,
+        "pct_clusters_exactos": 0.99625,
+        "fp": 0,
+        "fn": 9,
+        "tp": 2589,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin surname": {
+        "precision": 1.0,
+        "recall": 0.9965357967667436,
+        "f1": 0.9982648930017352,
+        "pct_clusters_exactos": 0.99625,
+        "fp": 0,
+        "fn": 9,
+        "tp": 2589,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin date_of_birth": {
+        "precision": 1.0,
+        "recall": 0.9926866820631255,
+        "f1": 0.9963299208035542,
+        "pct_clusters_exactos": 0.9925,
+        "fp": 0,
+        "fn": 19,
+        "tp": 2579,
+        "delta_f1": -0.001934972198180951,
+        "delta_precision": 0.0,
+        "delta_recall": -0.0038491147036181506,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin street_number": {
+        "precision": 1.0,
+        "recall": 0.993841416474211,
+        "f1": 0.996911196911197,
+        "pct_clusters_exactos": 0.99375,
+        "fp": 0,
+        "fn": 16,
+        "tp": 2582,
+        "delta_f1": -0.0013536960905381479,
+        "delta_precision": 0.0,
+        "delta_recall": -0.002694380292532661,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin address_1": {
+        "precision": 1.0,
+        "recall": 0.9919168591224018,
+        "f1": 0.9959420289855072,
+        "pct_clusters_exactos": 0.99125,
+        "fp": 0,
+        "fn": 21,
+        "tp": 2577,
+        "delta_f1": -0.0023228640162279435,
+        "delta_precision": 0.0,
+        "delta_recall": -0.004618937644341847,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin suburb": {
+        "precision": 1.0,
+        "recall": 0.9923017705927637,
+        "f1": 0.9961360123647605,
+        "pct_clusters_exactos": 0.9925,
+        "fp": 0,
+        "fn": 20,
+        "tp": 2578,
+        "delta_f1": -0.002128880636974695,
+        "delta_precision": 0.0,
+        "delta_recall": -0.004234026173979943,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin postcode": {
+        "precision": 1.0,
+        "recall": 0.9965357967667436,
+        "f1": 0.9982648930017352,
+        "pct_clusters_exactos": 0.99625,
+        "fp": 0,
+        "fn": 9,
+        "tp": 2589,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin state": {
+        "precision": 1.0,
+        "recall": 0.9953810623556582,
+        "f1": 0.9976851851851852,
+        "pct_clusters_exactos": 0.995,
+        "fp": 0,
+        "fn": 12,
+        "tp": 2586,
+        "delta_f1": -0.0005797078165499236,
+        "delta_precision": 0.0,
+        "delta_recall": -0.0011547344110854896,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      }
+    },
+    "v1 · hito 2 normal": {
+      "(modelo completo)": {
+        "precision": 1.0,
+        "recall": 0.9977313974591652,
+        "f1": 0.9988644106291166,
+        "pct_clusters_exactos": 0.9975,
+        "fp": 0,
+        "fn": 5,
+        "tp": 2199
+      },
+      "sin documento": {
+        "precision": 0.9963669391462306,
+        "recall": 0.9954627949183303,
+        "f1": 0.9959146618247843,
+        "pct_clusters_exactos": 0.99125,
+        "fp": 8,
+        "fn": 10,
+        "tp": 2194,
+        "delta_f1": -0.0029497488043322972,
+        "delta_precision": -0.0036330608537693543,
+        "delta_recall": -0.00226860254083483,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin nombres": {
+        "precision": 1.0,
+        "recall": 0.9945553539019963,
+        "f1": 0.997270245677889,
+        "pct_clusters_exactos": 0.9925,
+        "fp": 0,
+        "fn": 12,
+        "tp": 2192,
+        "delta_f1": -0.0015941649512275502,
+        "delta_precision": 0.0,
+        "delta_recall": -0.0031760435571688284,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin primer_apellido": {
+        "precision": 1.0,
+        "recall": 0.9963702359346642,
+        "f1": 0.9981818181818182,
+        "pct_clusters_exactos": 0.99625,
+        "fp": 0,
+        "fn": 8,
+        "tp": 2196,
+        "delta_f1": -0.0006825924472984024,
+        "delta_precision": 0.0,
+        "delta_recall": -0.0013611615245009423,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin segundo_apellido": {
+        "precision": 1.0,
+        "recall": 0.9977313974591652,
+        "f1": 0.9988644106291166,
+        "pct_clusters_exactos": 0.9975,
+        "fp": 0,
+        "fn": 5,
+        "tp": 2199,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin fecha_nacimiento": {
+        "precision": 0.9963619827194179,
+        "recall": 0.9941016333938294,
+        "f1": 0.9952305246422893,
+        "pct_clusters_exactos": 0.98875,
+        "fp": 8,
+        "fn": 13,
+        "tp": 2191,
+        "delta_f1": -0.0036338859868272344,
+        "delta_precision": -0.0036380172805821065,
+        "delta_recall": -0.003629764065335772,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin telefono": {
+        "precision": 1.0,
+        "recall": 0.9963702359346642,
+        "f1": 0.9981818181818182,
+        "pct_clusters_exactos": 0.995,
+        "fp": 0,
+        "fn": 8,
+        "tp": 2196,
+        "delta_f1": -0.0006825924472984024,
+        "delta_precision": 0.0,
+        "delta_recall": -0.0013611615245009423,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin email": {
+        "precision": 1.0,
+        "recall": 0.9981851179673321,
+        "f1": 0.9990917347865577,
+        "pct_clusters_exactos": 0.9975,
+        "fp": 0,
+        "fn": 4,
+        "tp": 2200,
+        "delta_f1": 0.00022732415744108891,
+        "delta_precision": 0.0,
+        "delta_recall": 0.00045372050816694376,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin domicilio": {
+        "precision": 1.0,
+        "recall": 0.9977313974591652,
+        "f1": 0.9988644106291166,
+        "pct_clusters_exactos": 0.9975,
+        "fp": 0,
+        "fn": 5,
+        "tp": 2199,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin municipio": {
+        "precision": 1.0,
+        "recall": 0.9977313974591652,
+        "f1": 0.9988644106291166,
+        "pct_clusters_exactos": 0.9975,
+        "fp": 0,
+        "fn": 5,
+        "tp": 2199,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin domicilio y municipio": {
+        "precision": 1.0,
+        "recall": 0.985934664246824,
+        "f1": 0.9929175234178661,
+        "pct_clusters_exactos": 0.9825,
+        "fp": 0,
+        "fn": 31,
+        "tp": 2173,
+        "delta_f1": -0.005946887211250473,
+        "delta_precision": 0.0,
+        "delta_recall": -0.011796733212341204,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      }
+    },
+    "v1 · ciega 1": {
+      "(modelo completo)": {
+        "precision": 0.9966865473823724,
+        "recall": 0.6364790520524757,
+        "f1": 0.7768595041322314,
+        "pct_clusters_exactos": 0.6015,
+        "fp": 20,
+        "fn": 3436,
+        "tp": 6016
+      },
+      "sin documento": {
+        "precision": 0.975043630017452,
+        "recall": 0.5910918324164198,
+        "f1": 0.7360031616387828,
+        "pct_clusters_exactos": 0.561,
+        "fp": 143,
+        "fn": 3865,
+        "tp": 5587,
+        "delta_f1": -0.040856342493448605,
+        "delta_precision": -0.02164291736492041,
+        "delta_recall": -0.04538721963605585,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin nombres": {
+        "precision": 0.9719934102141681,
+        "recall": 0.6242065171392298,
+        "f1": 0.760211312975132,
+        "pct_clusters_exactos": 0.5825,
+        "fp": 170,
+        "fn": 3552,
+        "tp": 5900,
+        "delta_f1": -0.016648191157099368,
+        "delta_precision": -0.024693137168204315,
+        "delta_recall": -0.01227253491324587,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin primer_apellido": {
+        "precision": 1.0,
+        "recall": 0.6239949217096911,
+        "f1": 0.7684690553745929,
+        "pct_clusters_exactos": 0.5915,
+        "fp": 0,
+        "fn": 3554,
+        "tp": 5898,
+        "delta_f1": -0.008390448757638502,
+        "delta_precision": 0.0033134526176276102,
+        "delta_recall": -0.012484130342784616,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin segundo_apellido": {
+        "precision": 0.9994986631016043,
+        "recall": 0.6327761320355481,
+        "f1": 0.7749416947395699,
+        "pct_clusters_exactos": 0.5985,
+        "fp": 3,
+        "fn": 3471,
+        "tp": 5981,
+        "delta_f1": -0.001917809392661507,
+        "delta_precision": 0.0028121157192319,
+        "delta_recall": -0.0037029200169276244,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin fecha_nacimiento": {
+        "precision": 0.996602683879735,
+        "recall": 0.6207151925518409,
+        "f1": 0.7649781602451268,
+        "pct_clusters_exactos": 0.5895,
+        "fp": 20,
+        "fn": 3585,
+        "tp": 5867,
+        "delta_f1": -0.0118813438871046,
+        "delta_precision": -8.3863502637338e-05,
+        "delta_recall": -0.015763859500634747,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin telefono": {
+        "precision": 1.0,
+        "recall": 0.6110876005078291,
+        "f1": 0.7586025742054111,
+        "pct_clusters_exactos": 0.583,
+        "fp": 0,
+        "fn": 3676,
+        "tp": 5776,
+        "delta_f1": -0.018256929926820264,
+        "delta_precision": 0.0033134526176276102,
+        "delta_recall": -0.025391451544646615,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin email": {
+        "precision": 0.9830361779470314,
+        "recall": 0.6008252221752011,
+        "f1": 0.7458139076761442,
+        "pct_clusters_exactos": 0.574,
+        "fp": 98,
+        "fn": 3773,
+        "tp": 5679,
+        "delta_f1": -0.031045596456087177,
+        "delta_precision": -0.013650369435341037,
+        "delta_recall": -0.03565382987727461,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin domicilio": {
+        "precision": 1.0,
+        "recall": 0.7209056284384258,
+        "f1": 0.8378212221812369,
+        "pct_clusters_exactos": 0.6785,
+        "fp": 0,
+        "fn": 2638,
+        "tp": 6814,
+        "delta_f1": 0.06096171804900552,
+        "delta_precision": 0.0033134526176276102,
+        "delta_recall": 0.08442657638595008,
+        "frac_verdaderos_con_veto": 0.1849925705794948,
+        "frac_verdaderos_con_menos_10_bits": 0.1849925705794948
+      },
+      "sin municipio": {
+        "precision": 0.9996251874062968,
+        "recall": 0.8464875158696572,
+        "f1": 0.9167048579285059,
+        "pct_clusters_exactos": 0.797,
+        "fp": 3,
+        "fn": 1451,
+        "tp": 8001,
+        "delta_f1": 0.1398453537962745,
+        "delta_precision": 0.0029386400239244104,
+        "delta_recall": 0.21000846381718152,
+        "frac_verdaderos_con_veto": 0.2915516875398005,
+        "frac_verdaderos_con_menos_10_bits": 0.2915516875398005
+      },
+      "sin domicilio y municipio": {
+        "precision": 1.0,
+        "recall": 0.942551840880237,
+        "f1": 0.9704264473612549,
+        "pct_clusters_exactos": 0.9235,
+        "fp": 0,
+        "fn": 543,
+        "tp": 8909,
+        "delta_f1": 0.19356694322902357,
+        "delta_precision": 0.0033134526176276102,
+        "delta_recall": 0.30607278882776134,
+        "frac_verdaderos_con_veto": 0.42390150711101676,
+        "frac_verdaderos_con_menos_10_bits": 0.42390150711101676
+      }
+    },
+    "v1 · ciega 2": {
+      "(modelo completo)": {
+        "precision": 0.9946944749359679,
+        "recall": 0.9198105227541871,
+        "f1": 0.9557879933198559,
+        "pct_clusters_exactos": 0.911,
+        "fp": 29,
+        "fn": 474,
+        "tp": 5437
+      },
+      "sin documento": {
+        "precision": 0.9929433611884866,
+        "recall": 0.9045846726442226,
+        "f1": 0.9467067988668555,
+        "pct_clusters_exactos": 0.8915,
+        "fp": 38,
+        "fn": 564,
+        "tp": 5347,
+        "delta_f1": -0.009081194453000374,
+        "delta_precision": -0.00175111374748127,
+        "delta_recall": -0.015225850109964467,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin nombres": {
+        "precision": 0.9946435168082749,
+        "recall": 0.9110133649128743,
+        "f1": 0.9509933774834437,
+        "pct_clusters_exactos": 0.9015,
+        "fp": 29,
+        "fn": 526,
+        "tp": 5385,
+        "delta_f1": -0.004794615836412164,
+        "delta_precision": -5.0958127692957156e-05,
+        "delta_recall": -0.008797157841312742,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin primer_apellido": {
+        "precision": 0.9963262307127112,
+        "recall": 0.9176112332938589,
+        "f1": 0.9553500660501981,
+        "pct_clusters_exactos": 0.911,
+        "fp": 20,
+        "fn": 487,
+        "tp": 5424,
+        "delta_f1": -0.0004379272696577452,
+        "delta_precision": 0.0016317557767433488,
+        "delta_recall": -0.002199289460328213,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin segundo_apellido": {
+        "precision": 0.9952337305224565,
+        "recall": 0.9184571138555236,
+        "f1": 0.9553052964983283,
+        "pct_clusters_exactos": 0.9125,
+        "fp": 26,
+        "fn": 482,
+        "tp": 5429,
+        "delta_f1": -0.00048269682152757287,
+        "delta_precision": 0.0005392555864885962,
+        "delta_recall": -0.0013534088986634218,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin fecha_nacimiento": {
+        "precision": 0.990590405904059,
+        "recall": 0.9083065471155473,
+        "f1": 0.9476656958785632,
+        "pct_clusters_exactos": 0.8925,
+        "fp": 51,
+        "fn": 542,
+        "tp": 5369,
+        "delta_f1": -0.00812229744129267,
+        "delta_precision": -0.004104069031908852,
+        "delta_recall": -0.011503975638639807,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin telefono": {
+        "precision": 0.9963051912063551,
+        "recall": 0.9123667738115379,
+        "f1": 0.9524902861179796,
+        "pct_clusters_exactos": 0.9055,
+        "fp": 20,
+        "fn": 518,
+        "tp": 5393,
+        "delta_f1": -0.0032977072018762765,
+        "delta_precision": 0.0016107162703872246,
+        "delta_recall": -0.007443748942649209,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin email": {
+        "precision": 0.9961010025993317,
+        "recall": 0.9076298426662155,
+        "f1": 0.9498096839868991,
+        "pct_clusters_exactos": 0.9005,
+        "fp": 21,
+        "fn": 546,
+        "tp": 5365,
+        "delta_f1": -0.005978309332956733,
+        "delta_precision": 0.001406527663363799,
+        "delta_recall": -0.012180680087971574,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin domicilio": {
+        "precision": 0.9963715529753265,
+        "recall": 0.9291152089324988,
+        "f1": 0.9615687647728268,
+        "pct_clusters_exactos": 0.9255,
+        "fp": 20,
+        "fn": 419,
+        "tp": 5492,
+        "delta_f1": 0.005780771452970956,
+        "delta_precision": 0.0016770780393586815,
+        "delta_recall": 0.009304686178311705,
+        "frac_verdaderos_con_veto": 0.0260840108401084,
+        "frac_verdaderos_con_menos_10_bits": 0.0260840108401084
+      },
+      "sin municipio": {
+        "precision": 0.9965355967434609,
+        "recall": 0.9732701742513957,
+        "f1": 0.9847654912701129,
+        "pct_clusters_exactos": 0.9665,
+        "fp": 20,
+        "fn": 158,
+        "tp": 5753,
+        "delta_f1": 0.02897749795025706,
+        "delta_precision": 0.0018411218074930735,
+        "delta_recall": 0.05345965149720866,
+        "frac_verdaderos_con_veto": 0.06588753387533876,
+        "frac_verdaderos_con_menos_10_bits": 0.06588753387533876
+      },
+      "sin domicilio y municipio": {
+        "precision": 0.9965928449744463,
+        "recall": 0.9896802571476907,
+        "f1": 0.9931245225362871,
+        "pct_clusters_exactos": 0.986,
+        "fp": 20,
+        "fn": 61,
+        "tp": 5850,
+        "delta_f1": 0.03733652921643127,
+        "delta_precision": 0.0018983700384784807,
+        "delta_recall": 0.06986973439350364,
+        "frac_verdaderos_con_veto": 0.08350271002710027,
+        "frac_verdaderos_con_menos_10_bits": 0.08350271002710027
+      }
+    },
+    "v2 · hito 2 normal": {
+      "(modelo completo)": {
+        "precision": 1.0,
+        "recall": 0.9931941923774955,
+        "f1": 0.9965854768950603,
+        "pct_clusters_exactos": 0.995,
+        "fp": 0,
+        "fn": 15,
+        "tp": 2189
+      },
+      "sin documento": {
+        "precision": 0.9909461294703485,
+        "recall": 0.9931941923774955,
+        "f1": 0.9920688873782008,
+        "pct_clusters_exactos": 0.99,
+        "fp": 20,
+        "fn": 15,
+        "tp": 2189,
+        "delta_f1": -0.004516589516859515,
+        "delta_precision": -0.009053870529651453,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin nombres": {
+        "precision": 0.9927437641723356,
+        "recall": 0.9931941923774955,
+        "f1": 0.9929689271943751,
+        "pct_clusters_exactos": 0.9925,
+        "fp": 16,
+        "fn": 15,
+        "tp": 2189,
+        "delta_f1": -0.0036165497006851455,
+        "delta_precision": -0.007256235827664437,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin primer_apellido": {
+        "precision": 1.0,
+        "recall": 0.9931941923774955,
+        "f1": 0.9965854768950603,
+        "pct_clusters_exactos": 0.995,
+        "fp": 0,
+        "fn": 15,
+        "tp": 2189,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin segundo_apellido": {
+        "precision": 1.0,
+        "recall": 0.9931941923774955,
+        "f1": 0.9965854768950603,
+        "pct_clusters_exactos": 0.995,
+        "fp": 0,
+        "fn": 15,
+        "tp": 2189,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin apellido_casada": {
+        "precision": 1.0,
+        "recall": 0.9931941923774955,
+        "f1": 0.9965854768950603,
+        "pct_clusters_exactos": 0.995,
+        "fp": 0,
+        "fn": 15,
+        "tp": 2189,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin fecha_nacimiento": {
+        "precision": 0.9936421435059037,
+        "recall": 0.9927404718693285,
+        "f1": 0.9931911030413073,
+        "pct_clusters_exactos": 0.98125,
+        "fp": 14,
+        "fn": 16,
+        "tp": 2188,
+        "delta_f1": -0.0033943738537529633,
+        "delta_precision": -0.006357856494096259,
+        "delta_recall": -0.0004537205081670548,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0009182736455463728
+      },
+      "sin telefonos": {
+        "precision": 1.0,
+        "recall": 0.9927404718693285,
+        "f1": 0.9963570127504554,
+        "pct_clusters_exactos": 0.99375,
+        "fp": 0,
+        "fn": 16,
+        "tp": 2188,
+        "delta_f1": -0.00022846414460486741,
+        "delta_precision": 0.0,
+        "delta_recall": -0.0004537205081670548,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin email": {
+        "precision": 0.9927437641723356,
+        "recall": 0.9931941923774955,
+        "f1": 0.9929689271943751,
+        "pct_clusters_exactos": 0.9925,
+        "fp": 16,
+        "fn": 15,
+        "tp": 2189,
+        "delta_f1": -0.0036165497006851455,
+        "delta_precision": -0.007256235827664437,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin domicilio": {
+        "precision": 1.0,
+        "recall": 0.9931941923774955,
+        "f1": 0.9965854768950603,
+        "pct_clusters_exactos": 0.995,
+        "fp": 0,
+        "fn": 15,
+        "tp": 2189,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin municipio": {
+        "precision": 1.0,
+        "recall": 0.9931941923774955,
+        "f1": 0.9965854768950603,
+        "pct_clusters_exactos": 0.995,
+        "fp": 0,
+        "fn": 15,
+        "tp": 2189,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin domicilio y municipio": {
+        "precision": 1.0,
+        "recall": 0.9918330308529946,
+        "f1": 0.9958997722095672,
+        "pct_clusters_exactos": 0.9925,
+        "fp": 0,
+        "fn": 18,
+        "tp": 2186,
+        "delta_f1": -0.0006857046854931159,
+        "delta_precision": 0.0,
+        "delta_recall": -0.0013611615245009423,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      }
+    },
+    "v2 · ciega 2": {
+      "(modelo completo)": {
+        "precision": 0.9984797297297298,
+        "recall": 1.0,
+        "f1": 0.9992392866198969,
+        "pct_clusters_exactos": 0.997,
+        "fp": 9,
+        "fn": 0,
+        "tp": 5911
+      },
+      "sin documento": {
+        "precision": 0.9939393939393939,
+        "recall": 0.9988157672136694,
+        "f1": 0.9963716142097714,
+        "pct_clusters_exactos": 0.989,
+        "fp": 36,
+        "fn": 7,
+        "tp": 5904,
+        "delta_f1": -0.0028676724101255324,
+        "delta_precision": -0.004540335790335859,
+        "delta_recall": -0.001184232786330619,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin nombres": {
+        "precision": 0.9971298328549721,
+        "recall": 0.9991541194383353,
+        "f1": 0.9981409498056448,
+        "pct_clusters_exactos": 0.994,
+        "fp": 17,
+        "fn": 5,
+        "tp": 5906,
+        "delta_f1": -0.0010983368142520877,
+        "delta_precision": -0.0013498968747576168,
+        "delta_recall": -0.0008458805616646803,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin primer_apellido": {
+        "precision": 1.0,
+        "recall": 0.9996616477753342,
+        "f1": 0.9998307952622674,
+        "pct_clusters_exactos": 0.9995,
+        "fp": 0,
+        "fn": 2,
+        "tp": 5909,
+        "delta_f1": 0.000591508642370453,
+        "delta_precision": 0.0015202702702702409,
+        "delta_recall": -0.0003383522246658277,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin segundo_apellido": {
+        "precision": 0.9984797297297298,
+        "recall": 1.0,
+        "f1": 0.9992392866198969,
+        "pct_clusters_exactos": 0.997,
+        "fp": 9,
+        "fn": 0,
+        "tp": 5911,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin apellido_casada": {
+        "precision": 0.9984797297297298,
+        "recall": 1.0,
+        "f1": 0.9992392866198969,
+        "pct_clusters_exactos": 0.997,
+        "fp": 9,
+        "fn": 0,
+        "tp": 5911,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.00033846674564224065,
+        "frac_verdaderos_con_menos_10_bits": 0.00033846674564224065
+      },
+      "sin fecha_nacimiento": {
+        "precision": 0.992603798957808,
+        "recall": 0.9989849433260024,
+        "f1": 0.9957841483979764,
+        "pct_clusters_exactos": 0.9855,
+        "fp": 44,
+        "fn": 6,
+        "tp": 5905,
+        "delta_f1": -0.0034551382219205617,
+        "delta_precision": -0.005875930771921722,
+        "delta_recall": -0.0010150566739975941,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin telefonos": {
+        "precision": 1.0,
+        "recall": 0.9993232955506682,
+        "f1": 0.9996615332543577,
+        "pct_clusters_exactos": 0.999,
+        "fp": 0,
+        "fn": 4,
+        "tp": 5907,
+        "delta_f1": 0.0004222466344607767,
+        "delta_precision": 0.0015202702702702409,
+        "delta_recall": -0.0006767044493317664,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin email": {
+        "precision": 0.9984779299847792,
+        "recall": 0.9988157672136694,
+        "f1": 0.9986468200270635,
+        "pct_clusters_exactos": 0.995,
+        "fp": 9,
+        "fn": 7,
+        "tp": 5904,
+        "delta_f1": -0.0005924665928334072,
+        "delta_precision": -1.7997449505147145e-06,
+        "delta_recall": -0.001184232786330619,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin domicilio": {
+        "precision": 1.0,
+        "recall": 0.9998308238876671,
+        "f1": 0.9999154047880889,
+        "pct_clusters_exactos": 0.9995,
+        "fp": 0,
+        "fn": 1,
+        "tp": 5910,
+        "delta_f1": 0.0006761181681920192,
+        "delta_precision": 0.0015202702702702409,
+        "delta_recall": -0.00016917611233291385,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin municipio": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "pct_clusters_exactos": 1.0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 5911,
+        "delta_f1": 0.0007607133801030841,
+        "delta_precision": 0.0015202702702702409,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin domicilio y municipio": {
+        "precision": 1.0,
+        "recall": 0.9998308238876671,
+        "f1": 0.9999154047880889,
+        "pct_clusters_exactos": 0.9995,
+        "fp": 0,
+        "fn": 1,
+        "tp": 5910,
+        "delta_f1": 0.0006761181681920192,
+        "delta_precision": 0.0015202702702702409,
+        "delta_recall": -0.00016917611233291385,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      }
+    },
+    "v2 · hito 3 prueba": {
+      "(modelo completo)": {
+        "precision": 1.0,
+        "recall": 0.9977993764900055,
+        "f1": 0.9988984762254451,
+        "pct_clusters_exactos": 0.9965,
+        "fp": 0,
+        "fn": 12,
+        "tp": 5441
+      },
+      "sin documento": {
+        "precision": 0.9916165482048478,
+        "recall": 0.9977993764900055,
+        "f1": 0.9946983546617916,
+        "pct_clusters_exactos": 0.988,
+        "fp": 46,
+        "fn": 12,
+        "tp": 5441,
+        "delta_f1": -0.004200121563653569,
+        "delta_precision": -0.008383451795152208,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin nombres": {
+        "precision": 0.9941531152932578,
+        "recall": 0.9977993764900055,
+        "f1": 0.9959729086582463,
+        "pct_clusters_exactos": 0.9915,
+        "fp": 32,
+        "fn": 12,
+        "tp": 5441,
+        "delta_f1": -0.0029255675671988612,
+        "delta_precision": -0.005846884706742217,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin primer_apellido": {
+        "precision": 1.0,
+        "recall": 0.9977993764900055,
+        "f1": 0.9988984762254451,
+        "pct_clusters_exactos": 0.9965,
+        "fp": 0,
+        "fn": 12,
+        "tp": 5441,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin segundo_apellido": {
+        "precision": 1.0,
+        "recall": 0.9977993764900055,
+        "f1": 0.9988984762254451,
+        "pct_clusters_exactos": 0.9965,
+        "fp": 0,
+        "fn": 12,
+        "tp": 5441,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin apellido_casada": {
+        "precision": 1.0,
+        "recall": 0.9977993764900055,
+        "f1": 0.9988984762254451,
+        "pct_clusters_exactos": 0.9965,
+        "fp": 0,
+        "fn": 12,
+        "tp": 5441,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin fecha_nacimiento": {
+        "precision": 0.9844343891402715,
+        "recall": 0.9974326059050064,
+        "f1": 0.9908908726543997,
+        "pct_clusters_exactos": 0.9765,
+        "fp": 86,
+        "fn": 14,
+        "tp": 5439,
+        "delta_f1": -0.008007603571045463,
+        "delta_precision": -0.015565610859728518,
+        "delta_recall": -0.00036677058499912096,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin telefonos": {
+        "precision": 1.0,
+        "recall": 0.9977993764900055,
+        "f1": 0.9988984762254451,
+        "pct_clusters_exactos": 0.9965,
+        "fp": 0,
+        "fn": 12,
+        "tp": 5441,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin email": {
+        "precision": 0.998348623853211,
+        "recall": 0.9977993764900055,
+        "f1": 0.9980739246079062,
+        "pct_clusters_exactos": 0.9945,
+        "fp": 9,
+        "fn": 12,
+        "tp": 5441,
+        "delta_f1": -0.0008245516175389156,
+        "delta_precision": -0.0016513761467890076,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin domicilio": {
+        "precision": 1.0,
+        "recall": 0.9981661470750046,
+        "f1": 0.9990822320117475,
+        "pct_clusters_exactos": 0.997,
+        "fp": 0,
+        "fn": 10,
+        "tp": 5443,
+        "delta_f1": 0.00018375578630236422,
+        "delta_precision": 0.0,
+        "delta_recall": 0.00036677058499912096,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin municipio": {
+        "precision": 1.0,
+        "recall": 0.9977993764900055,
+        "f1": 0.9988984762254451,
+        "pct_clusters_exactos": 0.9965,
+        "fp": 0,
+        "fn": 12,
+        "tp": 5441,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      },
+      "sin domicilio y municipio": {
+        "precision": 1.0,
+        "recall": 0.9977993764900055,
+        "f1": 0.9988984762254451,
+        "pct_clusters_exactos": 0.9965,
+        "fp": 0,
+        "fn": 12,
+        "tp": 5441,
+        "delta_f1": 0.0,
+        "delta_precision": 0.0,
+        "delta_recall": 0.0,
+        "frac_verdaderos_con_veto": 0.0,
+        "frac_verdaderos_con_menos_10_bits": 0.0
+      }
+    }
+  },
+  "C": {
+    "hito1": {
+      "(completo)": {
+        "umbral": 0.83,
+        "bloqueos": [
+          "substr(email, 1, 4)",
+          "surname_soundex",
+          "city & substr(dob, 1, 4)"
+        ],
+        "prueba": {
+          "precision": 0.9703808180535967,
+          "recall": 0.8514851485148515,
+          "f1": 0.9070533948582729,
+          "pct_clusters_exactos": 0.73,
+          "fp": 21,
+          "fn": 120,
+          "tp": 688
+        }
+      },
+      "sin first_name": {
+        "umbral": 0.83,
+        "bloqueos": [
+          "substr(email, 1, 4)",
+          "surname_soundex",
+          "city & substr(dob, 1, 4)"
+        ],
+        "prueba": {
+          "precision": 1.0,
+          "recall": 0.7537128712871287,
+          "f1": 0.8595624558927311,
+          "pct_clusters_exactos": 0.63,
+          "fp": 0,
+          "fn": 199,
+          "tp": 609
+        }
+      },
+      "sin surname": {
+        "umbral": 0.89,
+        "bloqueos": [
+          "substr(email, 1, 4)",
+          "surname_soundex",
+          "city & substr(dob, 1, 4)"
+        ],
+        "prueba": {
+          "precision": 1.0,
+          "recall": 0.7128712871287128,
+          "f1": 0.8323699421965318,
+          "pct_clusters_exactos": 0.6,
+          "fp": 0,
+          "fn": 232,
+          "tp": 576
+        }
+      },
+      "sin dob": {
+        "umbral": 0.72,
+        "bloqueos": [
+          "substr(email, 1, 4)",
+          "surname_soundex",
+          "city & substr(dob, 1, 4)"
+        ],
+        "prueba": {
+          "precision": 0.964527027027027,
+          "recall": 0.7066831683168316,
+          "f1": 0.8157142857142856,
+          "pct_clusters_exactos": 0.56,
+          "fp": 21,
+          "fn": 237,
+          "tp": 571
+        }
+      },
+      "sin city": {
+        "umbral": 0.87,
+        "bloqueos": [
+          "substr(email, 1, 4)",
+          "surname_soundex",
+          "city & substr(dob, 1, 4)"
+        ],
+        "prueba": {
+          "precision": 1.0,
+          "recall": 0.7636138613861386,
+          "f1": 0.8659649122807017,
+          "pct_clusters_exactos": 0.64,
+          "fp": 0,
+          "fn": 191,
+          "tp": 617
+        }
+      },
+      "sin email": {
+        "umbral": 0.43,
+        "bloqueos": [
+          "substr(email, 1, 4)",
+          "surname_soundex",
+          "city & substr(dob, 1, 4)"
+        ],
+        "prueba": {
+          "precision": 0.9656301145662848,
+          "recall": 0.7301980198019802,
+          "f1": 0.8315715292459478,
+          "pct_clusters_exactos": 0.56,
+          "fp": 21,
+          "fn": 218,
+          "tp": 590
+        }
+      }
+    },
+    "v2": {
+      "(completo)": {
+        "umbral": 0.9999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 0.9984797297297298,
+          "recall": 1.0,
+          "f1": 0.9992392866198969,
+          "pct_clusters_exactos": 0.997,
+          "fp": 9,
+          "fn": 0,
+          "tp": 5911
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9931941923774955,
+          "f1": 0.9965854768950603,
+          "pct_clusters_exactos": 0.995,
+          "fp": 0,
+          "fn": 15,
+          "tp": 2189
+        }
+      },
+      "sin documento": {
+        "umbral": 0.999999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 0.9971103178650349,
+          "recall": 0.9923870749450178,
+          "f1": 0.9947430897066305,
+          "pct_clusters_exactos": 0.9855,
+          "fp": 17,
+          "fn": 45,
+          "tp": 5866
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9841197822141561,
+          "f1": 0.9919963411845415,
+          "pct_clusters_exactos": 0.98625,
+          "fp": 0,
+          "fn": 35,
+          "tp": 2169
+        }
+      },
+      "sin nombres": {
+        "umbral": 0.999999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 0.999151679674245,
+          "recall": 0.9962781255286753,
+          "f1": 0.997712833545108,
+          "pct_clusters_exactos": 0.9935,
+          "fp": 5,
+          "fn": 22,
+          "tp": 5889
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9909255898366606,
+          "f1": 0.9954421148587055,
+          "pct_clusters_exactos": 0.99125,
+          "fp": 0,
+          "fn": 20,
+          "tp": 2184
+        }
+      },
+      "sin primer_apellido": {
+        "umbral": 0.99999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 1.0,
+          "recall": 0.9996616477753342,
+          "f1": 0.9998307952622674,
+          "pct_clusters_exactos": 0.9995,
+          "fp": 0,
+          "fn": 2,
+          "tp": 5909
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9927404718693285,
+          "f1": 0.9963570127504554,
+          "pct_clusters_exactos": 0.99375,
+          "fp": 0,
+          "fn": 16,
+          "tp": 2188
+        }
+      },
+      "sin segundo_apellido": {
+        "umbral": 0.999999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 1.0,
+          "recall": 0.9994924716630011,
+          "f1": 0.9997461714189018,
+          "pct_clusters_exactos": 0.999,
+          "fp": 0,
+          "fn": 3,
+          "tp": 5908
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9931941923774955,
+          "f1": 0.9965854768950603,
+          "pct_clusters_exactos": 0.995,
+          "fp": 0,
+          "fn": 15,
+          "tp": 2189
+        }
+      },
+      "sin apellido_casada": {
+        "umbral": 0.9999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 0.9984797297297298,
+          "recall": 1.0,
+          "f1": 0.9992392866198969,
+          "pct_clusters_exactos": 0.997,
+          "fp": 9,
+          "fn": 0,
+          "tp": 5911
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9931941923774955,
+          "f1": 0.9965854768950603,
+          "pct_clusters_exactos": 0.995,
+          "fp": 0,
+          "fn": 15,
+          "tp": 2189
+        }
+      },
+      "sin fecha_nacimiento": {
+        "umbral": 0.999999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 0.9977932439314208,
+          "recall": 0.9944171882930131,
+          "f1": 0.9961023555329606,
+          "pct_clusters_exactos": 0.9885,
+          "fp": 13,
+          "fn": 33,
+          "tp": 5878
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9836660617059891,
+          "f1": 0.9917657822506862,
+          "pct_clusters_exactos": 0.98375,
+          "fp": 0,
+          "fn": 36,
+          "tp": 2168
+        }
+      },
+      "sin telefonos": {
+        "umbral": 0.9999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 1.0,
+          "recall": 0.9993232955506682,
+          "f1": 0.9996615332543577,
+          "pct_clusters_exactos": 0.999,
+          "fp": 0,
+          "fn": 4,
+          "tp": 5907
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9927404718693285,
+          "f1": 0.9963570127504554,
+          "pct_clusters_exactos": 0.99375,
+          "fp": 0,
+          "fn": 16,
+          "tp": 2188
+        }
+      },
+      "sin email": {
+        "umbral": 0.999999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 0.999830335934849,
+          "recall": 0.9969548299780071,
+          "f1": 0.9983905124947057,
+          "pct_clusters_exactos": 0.9945,
+          "fp": 1,
+          "fn": 18,
+          "tp": 5893
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9931941923774955,
+          "f1": 0.9965854768950603,
+          "pct_clusters_exactos": 0.995,
+          "fp": 0,
+          "fn": 15,
+          "tp": 2189
+        }
+      },
+      "sin domicilio": {
+        "umbral": 0.99999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 1.0,
+          "recall": 0.9998308238876671,
+          "f1": 0.9999154047880889,
+          "pct_clusters_exactos": 0.9995,
+          "fp": 0,
+          "fn": 1,
+          "tp": 5910
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9922867513611615,
+          "f1": 0.9961284445456616,
+          "pct_clusters_exactos": 0.99375,
+          "fp": 0,
+          "fn": 17,
+          "tp": 2187
+        }
+      },
+      "sin municipio": {
+        "umbral": 0.99999,
+        "bloqueos": [],
+        "ciega 2": {
+          "precision": 1.0,
+          "recall": 0.9998308238876671,
+          "f1": 0.9999154047880889,
+          "pct_clusters_exactos": 0.9995,
+          "fp": 0,
+          "fn": 1,
+          "tp": 5910
+        },
+        "hito 2 normal": {
+          "precision": 1.0,
+          "recall": 0.9922867513611615,
+          "f1": 0.9961284445456616,
+          "pct_clusters_exactos": 0.99375,
+          "fp": 0,
+          "fn": 17,
+          "tp": 2187
+        }
+      }
+    }
+  },
+  "D": {
+    "publicado": {
+      "metricas": {
+        "precision": 0.9966865473823724,
+        "recall": 0.6364790520524757,
+        "f1": 0.7768595041322314,
+        "pct_clusters_exactos": 0.6015,
+        "fp": 20,
+        "fn": 3436,
+        "tp": 6016
+      },
+      "apellido_casada": {
+        "grupos": {
+          "sin apellido de casada": {
+            "valor": 0.615343347639485,
+            "ic_inf": 0.5944809553754613,
+            "ic_sup": 0.63789883427069
+          },
+          "apellido de casada": {
+            "valor": 0.4117647058823529,
+            "ic_inf": 0.3333333333333333,
+            "ic_sup": 0.49580493614768745
+          }
+        },
+        "diferencia": {
+          "sin apellido de casada - apellido de casada": {
+            "precision": {
+              "valor": -0.0037085110328203275,
+              "ic_inf": -0.015072387472791153,
+              "ic_sup": 0.0,
+              "significativa": false
+            },
+            "recall": {
+              "valor": 0.01777043542727952,
+              "ic_inf": -0.05125996919911906,
+              "ic_sup": 0.0913433752169697,
+              "significativa": false
+            },
+            "f1": {
+              "valor": 0.012256035728828607,
+              "ic_inf": -0.03851602429248945,
+              "ic_sup": 0.07058973749700145,
+              "significativa": false
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.20357864175713203,
+              "ic_inf": 0.11319612688464317,
+              "ic_sup": 0.286205922876047,
+              "significativa": true
+            }
+          }
+        }
+      },
+      "con_apodo": {
+        "grupos": {
+          "sin apodo": {
+            "valor": 0.6235718580877931,
+            "ic_inf": 0.6007188852284843,
+            "ic_sup": 0.6467039496736358
+          },
+          "con apodo": {
+            "valor": 0.49258160237388726,
+            "ic_inf": 0.4388815789473684,
+            "ic_sup": 0.5482962534116285
+          }
+        },
+        "diferencia": {
+          "sin apodo - con apodo": {
+            "precision": {
+              "valor": -0.004360148245040385,
+              "ic_inf": -0.017431278358947696,
+              "ic_sup": 0.0,
+              "significativa": false
+            },
+            "recall": {
+              "valor": 0.009288608871580228,
+              "ic_inf": -0.04009883496822771,
+              "ic_sup": 0.05833655659076911,
+              "significativa": false
+            },
+            "f1": {
+              "valor": 0.005628739552614337,
+              "ic_inf": -0.030494734246382084,
+              "ic_sup": 0.0438897194460647,
+              "significativa": false
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.13099025571390588,
+              "ic_inf": 0.06926210988067925,
+              "ic_sup": 0.1891031449284142,
+              "significativa": true
+            }
+          }
+        }
+      }
+    },
+    "sin domicilio ni municipio": {
+      "metricas": {
+        "precision": 1.0,
+        "recall": 0.942551840880237,
+        "f1": 0.9704264473612549,
+        "pct_clusters_exactos": 0.9235,
+        "fp": 0,
+        "fn": 543,
+        "tp": 8909
+      },
+      "apellido_casada": {
+        "grupos": {
+          "sin apellido de casada": {
+            "valor": 0.9259656652360515,
+            "ic_inf": 0.9151952017213556,
+            "ic_sup": 0.9381358040468584
+          },
+          "apellido de casada": {
+            "valor": 0.8897058823529411,
+            "ic_inf": 0.8387046684031256,
+            "ic_sup": 0.9370846394984326
+          }
+        },
+        "diferencia": {
+          "sin apellido de casada - apellido de casada": {
+            "precision": {
+              "valor": 0.0,
+              "ic_inf": 0.0,
+              "ic_sup": 0.0,
+              "significativa": false
+            },
+            "recall": {
+              "valor": -0.007064132301774939,
+              "ic_inf": -0.03247357918472296,
+              "ic_sup": 0.022307344683635735,
+              "significativa": false
+            },
+            "f1": {
+              "valor": -0.0037334709562788504,
+              "ic_inf": -0.01700800273363061,
+              "ic_sup": 0.011956169676253375,
+              "significativa": false
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.03625978288311038,
+              "ic_inf": -0.01111564236085903,
+              "ic_sup": 0.09029034701082526,
+              "significativa": false
+            }
+          }
+        }
+      },
+      "con_apodo": {
+        "grupos": {
+          "sin apodo": {
+            "valor": 0.9428743235117258,
+            "ic_inf": 0.9320096269554753,
+            "ic_sup": 0.9540236834424384
+          },
+          "con apodo": {
+            "valor": 0.827893175074184,
+            "ic_inf": 0.7878720836685438,
+            "ic_sup": 0.8687513666180758
+          }
+        },
+        "diferencia": {
+          "sin apodo - con apodo": {
+            "precision": {
+              "valor": 0.0,
+              "ic_inf": 0.0,
+              "ic_sup": 0.0,
+              "significativa": false
+            },
+            "recall": {
+              "valor": 0.054988365240320025,
+              "ic_inf": 0.029572211953419626,
+              "ic_sup": 0.08074016629580458,
+              "significativa": true
+            },
+            "f1": {
+              "valor": 0.029578243599991838,
+              "ic_inf": 0.01578810932820876,
+              "ic_sup": 0.043630707620966026,
+              "significativa": true
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.11498114843754181,
+              "ic_inf": 0.07269089117213724,
+              "ic_sup": 0.15691926728405467,
+              "significativa": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

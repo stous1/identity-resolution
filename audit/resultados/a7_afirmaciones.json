@@ -1,0 +1,811 @@
+{
+  "total": 115,
+  "con_problema": 1,
+  "detalle": [
+    {
+      "documento": "README",
+      "cifra": "desarrollo** (60 %: 151 personas, 608",
+      "desde_json": "desarrollo** (60 %: 151 personas, 608",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "**prueba** (40 %: 100 personas, 392",
+      "desde_json": "**prueba** (40 %: 100 personas, 392",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(0,0055 en",
+      "desde_json": "(0,0055 en",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "0,0082 en prueba",
+      "desde_json": "0,0082 en prueba",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "Umbral 0,83, elegido",
+      "desde_json": "Umbral 0,83, elegido",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Por par | 0,998 [0,991 – 1,000] | 0,709 [0,649 – 0,761] | 0,829 [0,786 – 0,864] |",
+      "desde_json": "| Por par | 0,998 [0,991 – 1,000] | 0,709 [0,649 – 0,761] | 0,829 [0,786 – 0,864] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Por clúster (pares inducidos) | 0,970 [0,864 – 1,000] | 0,851 [0,790 – 0,903] | 0,907 [0,845 – 0,946] |",
+      "desde_json": "| Por clúster (pares inducidos) | 0,970 [0,864 – 1,000] | 0,851 [0,790 – 0,903] | 0,907 [0,845 – 0,946] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "73 de 100 (73 % [64 % – 81 %]); 129 clústeres",
+      "desde_json": "73 de 100 (73 % [64 % – 81 %]); 129 clústeres",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "90,8 % de los 808 pares verdaderos de prueba llegan a compararse\n  (1.262 comparaciones)",
+      "desde_json": "90,8 % de los 808 pares verdaderos de prueba llegan a compararse\n  (1.262 comparaciones)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "deja 21 pares",
+      "desde_json": "deja 21 pares",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Desarrollo (donde se eligió todo) | 0,83 | 1,000 | 0,930 | 84 % |",
+      "desde_json": "| Desarrollo (donde se eligió todo) | 0,83 | 1,000 | 0,930 | 84 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Todo el dataset (solo referencia, optimista) | 0,84 | 1,000 | 0,903 | 81 % |",
+      "desde_json": "| Todo el dataset (solo referencia, optimista) | 0,84 | 1,000 | 0,903 | 81 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "el 18,6 % de los pares verdaderos de desarrollo nunca se compara",
+      "desde_json": "el 18,6 % de los pares verdaderos de desarrollo nunca se compara",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 0 | Exactas | 1.771 | 0,814 |",
+      "desde_json": "| 0 | Exactas | 1.771 | 0,814 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 1 | Primeros 4 caracteres del correo | 2.028 | 0,883 |",
+      "desde_json": "| 1 | Primeros 4 caracteres del correo | 2.028 | 0,883 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 2 | Soundex del apellido | 2.436 | 0,907 |",
+      "desde_json": "| 2 | Soundex del apellido | 2.436 | 0,907 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 3 | Ciudad + año de nacimiento | 2.544 | 0,917 |",
+      "desde_json": "| 3 | Ciudad + año de nacimiento | 2.544 | 0,917 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "datos",
+      "cifra": "seleccion_bloqueos.csv: 4 pasos",
+      "desde_json": "seleccion_bloqueos.csv: 4 pasos",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "Con las 12 reglas el recall del bloqueo en desarrollo llega a 0,930, pero con 3.547\ncomparaciones y el mismo recall por clúster (0,930)",
+      "desde_json": "Con las 12 reglas el recall del bloqueo en desarrollo llega a 0,930, pero con 3.547\ncomparaciones y el mismo recall por clúster (0,930)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Fijo | 0,90 | 1,000 | 0,902 | 120 |",
+      "desde_json": "| Fijo | 0,90 | 1,000 | 0,902 | 120 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Mejor F1 por par | 0,11 | 0,724 | 0,975 | 4.571 |",
+      "desde_json": "| Mejor F1 por par | 0,11 | 0,724 | 0,975 | 4.571 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Menor costo por par | 0,82 | 1,000 | 0,930 | 86 |",
+      "desde_json": "| Menor costo por par | 0,82 | 1,000 | 0,930 | 86 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| **Menor costo por clúster (en uso)** | **0,83** | **1,000** | **0,930** | **86** |",
+      "desde_json": "| **Menor costo por clúster (en uso)** | **0,83** | **1,000** | **0,930** | **86** |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "454 pares de registros quedan juntos por error",
+      "desde_json": "454 pares de registros quedan juntos por error",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "index.md",
+      "cifra": "| Por clúster | 0,970 [0,864 – 1,000] | 0,851 [0,790 – 0,903] | 0,907 [0,845 – 0,946] |",
+      "desde_json": "| Por clúster | 0,970 [0,864 – 1,000] | 0,851 [0,790 – 0,903] | 0,907 [0,845 – 0,946] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "index.md",
+      "cifra": "(precisión\n1,000 y recall 0,903 por clúster)",
+      "desde_json": "(precisión\n1,000 y recall 0,903 por clúster)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "2.000 personas y 4.851\nregistros",
+      "desde_json": "2.000 personas y 4.851\nregistros",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(1.200\npersonas, 2.920 registros) y métricas en prueba (800 personas, 1.931 registros)",
+      "desde_json": "(1.200\npersonas, 2.920 registros) y métricas en prueba (800 personas, 1.931 registros)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| **Estandarizado** | 0,999999 | **1,000** [1,000 – 1,000] | **0,998** [0,993 – 1,000] | **99,8 %** [99,4 – 100] | 0,994 [0,989 – 0,998] |",
+      "desde_json": "| **Estandarizado** | 0,999999 | **1,000** [1,000 – 1,000] | **0,998** [0,993 – 1,000] | **99,8 %** [99,4 – 100] | 0,994 [0,989 – 0,998] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Sin estandarizar | 0,98 | 0,989 [0,960 – 1,000] | 0,983 [0,975 – 0,990] | 96,1 % [94,8 – 97,4] | 0,907 [0,893 – 0,921] |",
+      "desde_json": "| Sin estandarizar | 0,98 | 0,989 [0,960 – 1,000] | 0,983 [0,975 – 0,990] | 96,1 % [94,8 – 97,4] | 0,907 [0,893 – 0,921] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Recall por clúster | +0,015 | [+0,006, +0,024] | Sí |",
+      "desde_json": "| Recall por clúster | +0,015 | [+0,006, +0,024] | Sí |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Personas exactas | +3,6 puntos | [+2,4, +5,0] | Sí |",
+      "desde_json": "| Personas exactas | +3,6 puntos | [+2,4, +5,0] | Sí |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Recall por par | +0,087 | [+0,073, +0,102] | Sí |",
+      "desde_json": "| Recall por par | +0,087 | [+0,073, +0,102] | Sí |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Precisión por clúster | +0,011 | [0,000, +0,040] | No |",
+      "desde_json": "| Precisión por clúster | +0,011 | [0,000, +0,040] | No |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "solo cubre el 82 % de los pares verdaderos en desarrollo\n(frente al 99 % estandarizado)",
+      "desde_json": "solo cubre el 82 % de los pares verdaderos en desarrollo\n(frente al 99 % estandarizado)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "Además, 24 pares de registros",
+      "desde_json": "Además, 24 pares de registros",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Nombre simple (457) | 0,999 | 99,8 % | 0,986 | 96,9 % |",
+      "desde_json": "| Nombre simple (457) | 0,999 | 99,8 % | 0,986 | 96,9 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Nombre compuesto (343) | 0,996 | 99,7 % | 0,979 | 95,0 % |",
+      "desde_json": "| Nombre compuesto (343) | 0,996 | 99,7 % | 0,979 | 95,0 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Dos apellidos (667) | 0,997 | 99,7 % | 0,982 | 96,1 % |",
+      "desde_json": "| Dos apellidos (667) | 0,997 | 99,7 % | 0,982 | 96,1 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Un apellido (133) | 1,000 | 100 % | 0,987 | 96,2 % |",
+      "desde_json": "| Un apellido (133) | 1,000 | 100 % | 0,987 | 96,2 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Con tilde o ñ (548) | 0,997 | 99,8 % | 0,985 | 96,5 % |",
+      "desde_json": "| Con tilde o ñ (548) | 0,997 | 99,8 % | 0,985 | 96,5 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Sin tilde (252) | 0,999 | 99,6 % | 0,981 | 95,2 % |",
+      "desde_json": "| Sin tilde (252) | 0,999 | 99,6 % | 0,981 | 95,2 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(95,0 % frente a 96,9 %)",
+      "desde_json": "(95,0 % frente a 96,9 %)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(+1,9 puntos, IC [−0,8, +4,7])",
+      "desde_json": "(+1,9 puntos, IC [−0,8, +4,7])",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "deja todavía 4 pares",
+      "desde_json": "deja todavía 4 pares",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "hito2.md",
+      "cifra": "La estandarización suma +1,5 puntos de recall",
+      "desde_json": "La estandarización suma +1,5 puntos de recall",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(6.032\n   registros, otra semilla)",
+      "desde_json": "(6.032\n   registros, otra semilla)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Prueba normal del hito 2 (800 personas) | 1,000 [1,000 – 1,000] | 0,998 [0,993 – 1,000] | 0,999 [0,997 – 1,000] | 99,8 % [99,4 – 100] |",
+      "desde_json": "| Prueba normal del hito 2 (800 personas) | 1,000 [1,000 – 1,000] | 0,998 [0,993 – 1,000] | 0,999 [0,997 – 1,000] | 99,8 % [99,4 – 100] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| FEBRL3 (800 personas) | 1,000 [1,000 – 1,000] | 0,997 [0,992 – 1,000] | 0,998 [0,996 – 1,000] | 99,6 % [99,1 – 100] |",
+      "desde_json": "| FEBRL3 (800 personas) | 1,000 [1,000 – 1,000] | 0,997 [0,992 – 1,000] | 0,998 [0,996 – 1,000] | 99,6 % [99,1 – 100] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| **Prueba ciega (2.000 personas)** | **0,997** [0,987 – 1,000] | **0,636** [0,616 – 0,657] | **0,777** [0,762 – 0,792] | **60,2 %** [58,1 – 62,3] |",
+      "desde_json": "| **Prueba ciega (2.000 personas)** | **0,997** [0,987 – 1,000] | **0,636** [0,616 – 0,657] | **0,777** [0,762 – 0,792] | **60,2 %** [58,1 – 62,3] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(3.128 clústeres para 2.000\n  personas)",
+      "desde_json": "(3.128 clústeres para 2.000\n  personas)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "a umbral 0,5 el recall sube a 0,807, pero la precisión cae a\n  0,803",
+      "desde_json": "a umbral 0,5 el recall sube a 0,807, pero la precisión cae a\n  0,803",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "nombres en otro campo 29,7 % (frente a 62,8 %), documento alterado 45,4 % (frente a\n  63,4 %) y celular cambiado por un fijo 49,1 % (frente a 61,5 %)",
+      "desde_json": "nombres en otro campo 29,7 % (frente a 62,8 %), documento alterado 45,4 % (frente a\n  63,4 %) y celular cambiado por un fijo 49,1 % (frente a 61,5 %)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Apellido de casada (136) | 41,2 % | 61,5 % sin él | −20,4 puntos [−29,1, −11,4] | **Sí** |",
+      "desde_json": "| Apellido de casada (136) | 41,2 % | 61,5 % sin él | −20,4 puntos [−29,1, −11,4] | **Sí** |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Con apodo (337) | 49,3 % | 62,4 % sin apodo | −13,1 puntos [−19,0, −7,4] | **Sí** |",
+      "desde_json": "| Con apodo (337) | 49,3 % | 62,4 % sin apodo | −13,1 puntos [−19,0, −7,4] | **Sí** |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Nombre compuesto (788) | 61,8 % | 59,1 % simple | +2,7 [−1,3, +7,1] | No |",
+      "desde_json": "| Nombre compuesto (788) | 61,8 % | 59,1 % simple | +2,7 [−1,3, +7,1] | No |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Un apellido (301) | 59,1 % | 60,3 % con dos | −1,2 [−7,0, +4,5] | No |",
+      "desde_json": "| Un apellido (301) | 59,1 % | 60,3 % con dos | −1,2 [−7,0, +4,5] | No |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Sin tilde (634) | 59,6 % | 60,4 % con tilde | −0,8 [−5,6, +3,9] | No |",
+      "desde_json": "| Sin tilde (634) | 59,6 % | 60,4 % con tilde | −0,8 [−5,6, +3,9] | No |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Dirección rural (135) | 59,3 % | 60,2 % urbana | −1,0 [−9,9, +7,5] | No |",
+      "desde_json": "| Dirección rural (135) | 59,3 % | 60,2 % urbana | −1,0 [−9,9, +7,5] | No |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(5.000 registros de 2.000 personas)",
+      "desde_json": "(5.000 registros de 2.000 personas)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "eligieron el bloqueo y el umbral (0,9999)",
+      "desde_json": "eligieron el bloqueo y el umbral (0,9999)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Prueba normal · modelo v1 | 1,000 [1,000 – 1,000] | 0,998 [0,993 – 1,000] | 99,8 % |",
+      "desde_json": "| Prueba normal · modelo v1 | 1,000 [1,000 – 1,000] | 0,998 [0,993 – 1,000] | 99,8 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Prueba normal · modelo v2 | 1,000 [1,000 – 1,000] | 0,993 [0,986 – 0,999] | 99,5 % |",
+      "desde_json": "| Prueba normal · modelo v2 | 1,000 [1,000 – 1,000] | 0,993 [0,986 – 0,999] | 99,5 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Ciega 1 · modelo v1 | 0,997 [0,987 – 1,000] | 0,636 [0,616 – 0,657] | 60,2 % |",
+      "desde_json": "| Ciega 1 · modelo v1 | 0,997 [0,987 – 1,000] | 0,636 [0,616 – 0,657] | 60,2 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Ciega 2 · modelo v1 (control) | 0,995 [0,977 – 1,000] | 0,920 [0,907 – 0,932] | 91,1 % |",
+      "desde_json": "| Ciega 2 · modelo v1 (control) | 0,995 [0,977 – 1,000] | 0,920 [0,907 – 0,932] | 91,1 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Ciega 1 · modelo v2 (*es desarrollo: optimista*) | 1,000 | 1,000 | 100 % |",
+      "desde_json": "| Ciega 1 · modelo v2 (*es desarrollo: optimista*) | 1,000 | 1,000 | 100 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| **Ciega 2 · modelo v2** | **0,998** [0,994 – 1,000] | **1,000** [1,000 – 1,000] | **99,7 %** [99,5 – 99,9] |",
+      "desde_json": "| **Ciega 2 · modelo v2** | **0,998** [0,994 – 1,000] | **1,000** [1,000 – 1,000] | **99,7 %** [99,5 – 99,9] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Recall | +0,080 | [+0,068, +0,093] | Sí |",
+      "desde_json": "| Recall | +0,080 | [+0,068, +0,093] | Sí |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Personas exactas | +8,6 puntos | [+7,4, +9,8] | Sí |",
+      "desde_json": "| Personas exactas | +8,6 puntos | [+7,4, +9,8] | Sí |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Precisión | +0,004 | [−0,003, +0,021] | No |",
+      "desde_json": "| Precisión | +0,004 | [−0,003, +0,021] | No |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "Quedan 3 uniones erróneas (1.997 clústeres para 2.000 personas)",
+      "desde_json": "Quedan 3 uniones erróneas (1.997 clústeres para 2.000 personas)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(15 pares\n  faltantes en vez de 5)",
+      "desde_json": "(15 pares\n  faltantes en vez de 5)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Con apellido de casada | 41,2 % | 92,0 % | 100 % |",
+      "desde_json": "| Con apellido de casada | 41,2 % | 92,0 % | 100 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Sin apellido de casada | 61,5 % | 91,0 % | 99,7 % |",
+      "desde_json": "| Sin apellido de casada | 61,5 % | 91,0 % | 99,7 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| **Brecha** | **−20,4 puntos [−29,1, −11,4]** | +1,0 [−2,5, +4,4] | +0,3 [+0,1, +0,6] |",
+      "desde_json": "| **Brecha** | **−20,4 puntos [−29,1, −11,4]** | +1,0 [−2,5, +4,4] | +0,3 [+0,1, +0,6] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Con apodo | 49,3 % | 90,8 % | 100 % |",
+      "desde_json": "| Con apodo | 49,3 % | 90,8 % | 100 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Sin apodo | 62,4 % | 91,1 % | 99,7 % |",
+      "desde_json": "| Sin apodo | 62,4 % | 91,1 % | 99,7 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| **Brecha** | **−13,1 puntos [−19,0, −7,4]** | −0,3 [−4,5, +3,8] | +0,3 [+0,1, +0,6] |",
+      "desde_json": "| **Brecha** | **−13,1 puntos [−19,0, −7,4]** | −0,3 [−4,5, +3,8] | +0,3 [+0,1, +0,6] |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "hito2b.md",
+      "cifra": "**+8,0 puntos de recall y\n+8,6 de personas exactas**",
+      "desde_json": "**+8,0 puntos de recall y\n+8,6 de personas exactas**",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(semilla 3131, 2.000 personas, 4.839\nregistros)",
+      "desde_json": "(semilla 3131, 2.000 personas, 4.839\nregistros)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(en prueba: precisión\n1,000 y recall 0,998 por clúster)",
+      "desde_json": "(en prueba: precisión\n1,000 y recall 0,998 por clúster)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Documento | Fuente más confiable | 95,6 % [94,7 – 96,5] | 97,2 % |",
+      "desde_json": "| Documento | Fuente más confiable | 95,6 % [94,7 – 96,5] | 97,2 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Nombres | Fuente más confiable | 92,8 % [91,6 – 94,0] | 96,1 % |",
+      "desde_json": "| Nombres | Fuente más confiable | 92,8 % [91,6 – 94,0] | 96,1 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Apellidos | Fuente más confiable | 93,6 % [92,5 – 94,6] | 96,6 % |",
+      "desde_json": "| Apellidos | Fuente más confiable | 93,6 % [92,5 – 94,6] | 96,6 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Fecha de nacimiento | Más reciente | 100 % | 100 % |",
+      "desde_json": "| Fecha de nacimiento | Más reciente | 100 % | 100 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Celular | Validado más reciente | 80,4 % [78,8 – 82,2] | 83,7 % |",
+      "desde_json": "| Celular | Validado más reciente | 80,4 % [78,8 – 82,2] | 83,7 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Correo | Validado más reciente | 82,9 % [81,3 – 84,6] | 86,1 % |",
+      "desde_json": "| Correo | Validado más reciente | 82,9 % [81,3 – 84,6] | 86,1 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| Dirección | Más frecuente | 83,9 % [82,3 – 85,5] | 88,6 % |",
+      "desde_json": "| Dirección | Más frecuente | 83,9 % [82,3 – 85,5] | 88,6 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "documento 92,1 % y nombres 89,4 %",
+      "desde_json": "documento 92,1 % y nombres 89,4 %",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "Las reglas elegidas quedan a\nmenos de 5 puntos de ese techo",
+      "desde_json": "Las reglas elegidas quedan a\nmenos de 5 puntos de ese techo",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "o lo comparten más de 15\n   clientes",
+      "desde_json": "o lo comparten más de 15\n   clientes",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "los 432 grupos quedan bien clasificados (386 de hogar, 36 sospechosos y 10 de\nrelleno); en desarrollo, la exactitud fue 98,4 %",
+      "desde_json": "los 432 grupos quedan bien clasificados (386 de hogar, 36 sospechosos y 10 de\nrelleno); en desarrollo, la exactitud fue 98,4 %",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 0,9999 (congelado) | No cortar | 0 → 0 | 0 → 0 | 0 |",
+      "desde_json": "| 0,9999 (congelado) | No cortar | 0 → 0 | 0 → 0 | 0 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 0,99 | Cortar puentes con peso < 15 | 8 → 5 | 46 → 35 | 0 |",
+      "desde_json": "| 0,99 | Cortar puentes con peso < 15 | 8 → 5 | 46 → 35 | 0 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 0,9 | Cortar puentes con peso < 15 | 18 → 11 | 88 → 63 | 0 |",
+      "desde_json": "| 0,9 | Cortar puentes con peso < 15 | 18 → 11 | 88 → 63 | 0 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "segundo puente más débil de 35 (peso 2,5, une 3 registros)",
+      "desde_json": "segundo puente más débil de 35 (peso 2,5, une 3 registros)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "(pesos 13,8, 16,9 y 20,9)",
+      "desde_json": "(pesos 13,8, 16,9 y 20,9)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "7 uniones sostenidas por un puente débil (al umbral 0,9) y 36 grupos\nsospechosos (12 documentos, 11 correos, 7 direcciones y 6 celulares compartidos)",
+      "desde_json": "7 uniones sostenidas por un puente débil (al umbral 0,9) y 36 grupos\nsospechosos (12 documentos, 11 correos, 7 direcciones y 6 celulares compartidos)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "Base de 1.351 clientes (3.000 personas sintéticas) y 2.000 consultas, 1.000 de clientes\nexistentes",
+      "desde_json": "Base de 1.351 clientes (3.000 personas sintéticas) y 2.000 consultas, 1.000 de clientes\nexistentes",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 0,999 (0,997 – 1,000) | 0,993 (0,987 – 0,998) | 0 | 60 ms | 74 ms |",
+      "desde_json": "| 0,999 (0,997 – 1,000) | 0,993 (0,987 – 0,998) | 0 | 60 ms | 74 ms |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "993 quedan como nuevas, 6 van a revisión y 1 se confunde",
+      "desde_json": "993 quedan como nuevas, 6 van a revisión y 1 se confunde",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "hito5.md",
+      "cifra": "(1.351 clientes, a partir de 2.916 registros)",
+      "desde_json": "(1.351 clientes, a partir de 2.916 registros)",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "hito5.md",
+      "cifra": "| Cliente equivocado | 0 de 994 | |",
+      "desde_json": "| Cliente equivocado | 0 de 994 | |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "hito5.md",
+      "cifra": "| Latencia máxima | 162 ms | |",
+      "desde_json": "| Latencia máxima | 162 ms | |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "hito5.md",
+      "cifra": "| cliente | 993 | 1 |\n| revisar | 0 | 6 |\n| nuevo | 7 | 993 |",
+      "desde_json": "| cliente | 993 | 1 |\n| revisar | 0 | 6 |\n| nuevo | 7 | 993 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 99.088 | 8,3 s | 13,1 s | 1,1 s | 0,8 s |",
+      "desde_json": "| 99.088 | 8,3 s | 13,1 s | 1,1 s | 0,8 s |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 995.688 | 90,6 s | 35,6 s | 1,9 s | 5,8 s |",
+      "desde_json": "| 995.688 | 90,6 s | 35,6 s | 1,9 s | 5,8 s |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| 1,5 GB | 0,982 | 0,997 |",
+      "desde_json": "| 1,5 GB | 0,982 | 0,997 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "| **9,1 GB** | 0,971 | 0,996 |",
+      "desde_json": "| **9,1 GB** | 0,971 | 0,996 |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "README",
+      "cifra": "91 de 134 s",
+      "desde_json": "91 de 134 s",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "hito5.md",
+      "cifra": "| 99.088 | 0,982 | 0,997 | 97,8 % |",
+      "desde_json": "| 99.088 | 0,982 | 0,997 | 97,8 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "hito5.md",
+      "cifra": "| 995.688 | 0,971 | 0,996 | 96,6 % |",
+      "desde_json": "| 995.688 | 0,971 | 0,996 | 96,6 % |",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "hito5.md",
+      "cifra": "**200 mil registros** (240 mil enlaces",
+      "desde_json": "**200 mil registros** (241 mil enlaces",
+      "coincide": false,
+      "en_documento": true
+    },
+    {
+      "documento": "index.md",
+      "cifra": "1 millón de registros en DuckDB en 134 s con 9,1 GB de pico",
+      "desde_json": "1 millón de registros en DuckDB en 134 s con 9,1 GB de pico",
+      "coincide": true,
+      "en_documento": true
+    },
+    {
+      "documento": "index.md",
+      "cifra": "con precisión 0,999, recall 0,993 y 60 ms de mediana",
+      "desde_json": "con precisión 0,999, recall 0,993 y 60 ms de mediana",
+      "coincide": true,
+      "en_documento": true
+    }
+  ]
+}

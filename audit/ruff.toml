@@ -1,0 +1,11 @@
+# Configuración de ruff para audit/: hereda la del proyecto.
+# Las tablas de cifras de a7 son literales largos que conviene no partir.
+extend = "../pyproject.toml"
+src = ["../src"]
+
+[lint]
+extend-ignore = ["E501"]
+
+[lint.isort]
+known-first-party = ["identidades"]
+known-local-folder = ["_comun", "a1_fugas", "a7_afirmaciones"]

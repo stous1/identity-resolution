@@ -1,0 +1,218 @@
+{
+  "referencias_estaticas": {
+    "total_lineas": 224,
+    "funciones": {
+      "datos": [
+        "cargar_fake_1000",
+        "cargar_febrl3",
+        "dividir_por_persona",
+        "limpiar_febrl"
+      ],
+      "demo": [
+        "__init__",
+        "exportar_modelo",
+        "puntuar"
+      ],
+      "errores_ciegos": [
+        "_contexto_persona",
+        "_direccion",
+        "capturar",
+        "capturar_persona",
+        "sorteo"
+      ],
+      "errores_ciegos_2": [
+        "_leer_persona",
+        "_registro",
+        "_vacio",
+        "capturar",
+        "capturar_con_traza",
+        "parece_mujer"
+      ],
+      "escala": [
+        "exportar_universo"
+      ],
+      "escenario_hito3": [
+        "__init__",
+        "_anillos",
+        "_familia",
+        "_suplantaciones",
+        "generar",
+        "historia",
+        "registro",
+        "verdad_compartidos"
+      ],
+      "evaluacion": [
+        "_series_bootstrap",
+        "bootstrap_diferencia",
+        "bootstrap_por_grupo",
+        "bootstrap_por_persona",
+        "contribuciones_por_persona",
+        "metricas_cluster",
+        "pares_verdaderos",
+        "umbral_min_costo"
+      ],
+      "flujo": [
+        "_describir",
+        "desarrollar",
+        "ejecutar_hito1",
+        "evaluar"
+      ],
+      "flujo_hito2": [
+        "ejecutar_hito2",
+        "evaluar_equidad"
+      ],
+      "flujo_hito2b": [
+        "_equidad",
+        "brecha",
+        "datos_desarrollo",
+        "desarrollar_v2",
+        "evaluar_congelado_v2",
+        "registros_ciega_1"
+      ],
+      "flujo_hito3": [
+        "casos_externos_puentes",
+        "ejecutar_hito3",
+        "exportar_universo"
+      ],
+      "flujo_validacion": [
+        "ejecutar_febrl",
+        "ejecutar_prueba_ciega",
+        "grupos_de_personas"
+      ],
+      "grafo_compartido": [
+        "elegir_parametros",
+        "intervalos",
+        "metricas",
+        "unir_verdad"
+      ],
+      "modelo_co": [
+        "_finalizar"
+      ],
+      "modelo_co_v2": [
+        "preparar"
+      ],
+      "puentes": [
+        "mezclados",
+        "mezclas_sostenidas_por_puente"
+      ],
+      "registro_oro": [
+        "evaluar"
+      ],
+      "servicio": [
+        "crear_app"
+      ],
+      "sinteticos": [
+        "familiar",
+        "generar",
+        "persona",
+        "registro"
+      ],
+      "tableros": [
+        "seleccionar_clusters"
+      ],
+      "tiempo_real": [
+        "_preparar",
+        "construir_base",
+        "evaluar",
+        "preparar_evaluacion"
+      ]
+    }
+  },
+  "entrenamiento_no_mira_etiquetas": {
+    "v1": {
+      "max_dif_barajada": 2.220446049250313e-16,
+      "max_dif_sin_columna": 1.3877787807814457e-17
+    },
+    "v2": {
+      "max_dif_barajada": 1.1102230246251565e-16,
+      "max_dif_sin_columna": 1.1102230246251565e-16
+    }
+  },
+  "aplicacion_no_mira_etiquetas_ni_orden": {
+    "v1 en prueba normal hito 2": {
+      "pares": 5120,
+      "max_dif_peso_verdad_barajada": 0.0,
+      "mismos_pares_renumerado": true,
+      "max_dif_peso_renumerado": 0.0,
+      "metricas_original": {
+        "precision": 1.0,
+        "recall": 0.9977313974591652,
+        "f1": 0.9988644106291166,
+        "pct_clusters_exactos": 0.9975,
+        "fp": 0,
+        "fn": 5,
+        "tp": 2199
+      },
+      "metricas_renumerado": {
+        "precision": 1.0,
+        "recall": 0.9977313974591652,
+        "f1": 0.9988644106291166,
+        "pct_clusters_exactos": 0.9975,
+        "fp": 0,
+        "fn": 5,
+        "tp": 2199
+      }
+    },
+    "v2 en ciega 2": {
+      "pares": 6315,
+      "max_dif_peso_verdad_barajada": 0.0,
+      "mismos_pares_renumerado": true,
+      "max_dif_peso_renumerado": 0.0,
+      "metricas_original": {
+        "precision": 0.9984797297297298,
+        "recall": 1.0,
+        "f1": 0.9992392866198969,
+        "pct_clusters_exactos": 0.997,
+        "fp": 9,
+        "fn": 0,
+        "tp": 5911
+      },
+      "metricas_renumerado": {
+        "precision": 0.9984797297297298,
+        "recall": 1.0,
+        "f1": 0.9992392866198969,
+        "pct_clusters_exactos": 0.997,
+        "fp": 9,
+        "fn": 0,
+        "tp": 5911
+      }
+    }
+  },
+  "escala_no_mira_etiquetas": {
+    "registros": 9907,
+    "max_dif_barajada": 1.249000902703301e-16
+  },
+  "diseno_a_la_medida_del_generador": {
+    "orden_canales_registro_oro": [
+      "sucursal",
+      "app",
+      "web",
+      "call_center",
+      "corresponsal"
+    ],
+    "orden_confiabilidad_generador": [
+      "sucursal",
+      "app",
+      "web",
+      "call_center",
+      "corresponsal"
+    ],
+    "mismo_orden": true,
+    "relleno_del_generador_marcado_como_generico": {
+      "celular": true,
+      "correo": true,
+      "direccion": true
+    }
+  },
+  "tiempo_real": {
+    "registros_base": 2916,
+    "consultas": 2000,
+    "ids_compartidos": 0,
+    "personas_nuevas_en_base": 0,
+    "existentes_identicas_a_un_registro_de_la_base": 0.0,
+    "existentes_con_mismo_documento_estandarizado_en_la_base": 0.694,
+    "nuevas_con_un_familiar_en_la_base": 0.19,
+    "prevalencia_existentes_en_consultas": 0.5,
+    "nota_previa": "El vinculador fija lambda = 1/N clientes (suma 1 sobre la base), mientras que la mitad de las consultas son personas nuevas."
+  }
+}
