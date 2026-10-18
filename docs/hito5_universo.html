@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Universo grande · Hito 5</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>
+  :root { --fondo: #0b1020; --texto: #e2e8f0; --tenue: #94a3b8; --panel: rgba(15, 23, 42, 0.88); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--fondo); color: var(--texto);
+    font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  #grafo { position: fixed; inset: 0; }
+  .panel { position: fixed; top: 12px; left: 12px; max-width: min(380px, calc(100vw - 24px));
+    background: var(--panel); border: 1px solid #1e293b; border-radius: 10px; padding: 12px 14px; }
+  .panel h1 { font-size: 16px; margin: 0 0 6px; }
+  .panel p { margin: 0 0 8px; color: var(--tenue); }
+  .leyenda { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 3px; }
+  .leyenda li { display: flex; align-items: center; gap: 8px; }
+  .punto { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .botones { display: flex; gap: 6px; flex-wrap: wrap; }
+  button { background: #1e293b; color: var(--texto); border: 1px solid #334155; border-radius: 6px;
+    padding: 6px 10px; font: inherit; cursor: pointer; min-height: 36px; }
+  button[aria-pressed="true"] { background: #2563eb; border-color: #2563eb; }
+  #estado { margin-top: 8px; color: var(--tenue); font-size: 12px; }
+  a { color: #93c5fd; }
+  @media (max-width: 600px) { .panel p.largo { display: none; } }
+</style>
+</head>
+<body>
+<div id="grafo"></div>
+<div class="panel">
+  <h1>Universo grande (1 millón de registros, muestra)</h1>
+  <p class="largo">Muestra de personas del conjunto de 1 millón de registros, cargada desde
+    Parquet. Cada punto es un registro; los enlaces son coincidencias del modelo.</p>
+  <ul class="leyenda">
+    <li><span class="punto" style="background:#94a3b8"></span>Registro de un cliente bien reconstruido</li>
+    <li><span class="punto" style="background:#f97316"></span>Persona dividida en varios clientes</li>
+    <li><span class="punto" style="background:#dc2626"></span>Cliente que mezcla personas</li>
+    <li><span class="punto" style="background:#7c3aed"></span>Teléfono o correo de relleno</li>
+  </ul>
+  <div class="botones">
+    <button id="b-liviano" type="button">40 mil registros</button>
+    <button id="b-completo" type="button">200 mil registros</button>
+  </div>
+  <div id="estado">Cargando…</div>
+  <p style="margin:8px 0 0"><a href="hito5.html">← Volver al hito 5</a></p>
+</div>
+<script type="module">
+  import { Cosmograph, prepareCosmographData } from "https://esm.sh/@cosmograph/cosmograph@2.5.1";
+
+  const COLORES = {
+    registro: "#94a3b8", registro_dividido: "#f97316", registro_mezcla: "#dc2626",
+    valor_relleno: "#7c3aed", enlace_fuerte: "#64748b", enlace_debil: "#cbd5e1",
+    enlace_relleno: "#a78bfa",
+  };
+  const estado = document.getElementById("estado");
+  const contenedor = document.getElementById("grafo");
+  let grafo = null;
+
+  // En pantallas chicas o con poca memoria se empieza por la versión liviana.
+  const esLiviano = window.matchMedia("(max-width: 768px)").matches || (navigator.deviceMemory ?? 8) < 4;
+
+  async function cargar(liviano) {
+    document.getElementById("b-liviano").setAttribute("aria-pressed", String(liviano));
+    document.getElementById("b-completo").setAttribute("aria-pressed", String(!liviano));
+    estado.textContent = "Cargando…";
+    const sufijo = liviano ? "_liviano" : "";
+    const base = new URL(`resultados/hito5/`, window.location.href).href;
+    try {
+      const inicio = performance.now();
+      const preparado = await prepareCosmographData(
+        {
+          points: { pointIdBy: "id", pointColorBy: "categoria", pointSizeBy: "tamano" },
+          links: { linkSourceBy: "origen", linkTargetsBy: ["destino"], linkColorBy: "categoria" },
+        },
+        `${base}universo_grande_puntos${sufijo}.parquet`,
+        `${base}universo_grande_enlaces${sufijo}.parquet`,
+      );
+      const { points, links, cosmographConfig } = preparado;
+      if (grafo) { grafo.destroy?.(); contenedor.innerHTML = ""; }
+      grafo = new Cosmograph(contenedor, {
+        points, links, ...cosmographConfig,
+        pointColorByFn: (v) => COLORES[v] ?? "#94a3b8",
+        linkColorByFn: (v) => COLORES[v] ?? "#475569",
+        pointSizeStrategy: "direct",
+        backgroundColor: "#0b1020",
+        showDynamicLabels: false,
+        fitViewOnInit: true,
+        simulationRepulsion: 0.4,
+        simulationGravity: 0.25,
+      });
+      window.cosmograph = grafo;
+      const segundos = ((performance.now() - inicio) / 1000).toFixed(1);
+      estado.textContent = `${liviano ? "40 mil" : "200 mil"} registros cargados desde Parquet en ${segundos} s.`;
+    } catch (error) {
+      estado.textContent = "No se pudo cargar la visualización: " + error;
+      console.error(error);
+    }
+  }
+  document.getElementById("b-liviano").addEventListener("click", () => cargar(true));
+  document.getElementById("b-completo").addEventListener("click", () => cargar(false));
+  cargar(esLiviano);
+</script>
+</body>
+</html>
