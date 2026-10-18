@@ -50,3 +50,32 @@ def test_columnas_faltantes_lanzan_error(tmp_path, monkeypatch):
     with pytest.raises(ValueError, match="Faltan columnas"):
         datos.cargar_fake_1000(tmp_path)
     assert not (tmp_path / "fake_1000.parquet").exists()
+
+
+def test_dividir_por_persona_no_parte_personas(registros_pequenos):
+    grande = pd.concat(
+        [
+            registros_pequenos.assign(cluster=registros_pequenos["cluster"] + 3 * i)
+            for i in range(10)
+        ],
+        ignore_index=True,
+    )
+
+    desarrollo, prueba = datos.dividir_por_persona(grande, frac_desarrollo=0.6, semilla=1)
+
+    assert len(desarrollo) + len(prueba) == len(grande)
+    assert set(desarrollo["cluster"]).isdisjoint(prueba["cluster"])
+    assert desarrollo["cluster"].nunique() == 18  # 60 % de 30 personas
+    assert prueba["cluster"].nunique() == 12
+
+
+def test_dividir_por_persona_es_reproducible(registros_pequenos):
+    a, _ = datos.dividir_por_persona(registros_pequenos, semilla=7)
+    b, _ = datos.dividir_por_persona(registros_pequenos, semilla=7)
+
+    pd.testing.assert_frame_equal(a, b)
+
+
+def test_dividir_por_persona_valida_fraccion(registros_pequenos):
+    with pytest.raises(ValueError, match="frac_desarrollo"):
+        datos.dividir_por_persona(registros_pequenos, frac_desarrollo=1.0)

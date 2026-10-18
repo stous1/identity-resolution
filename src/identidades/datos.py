@@ -6,6 +6,7 @@ import io
 from pathlib import Path
 from urllib.request import urlopen
 
+import numpy as np
 import pandas as pd
 
 from identidades import rutas
@@ -56,3 +57,24 @@ def cargar_fake_1000(directorio: Path | None = None) -> pd.DataFrame:
     directorio.mkdir(parents=True, exist_ok=True)
     df.to_parquet(ruta, index=False)
     return df
+
+
+def dividir_por_persona(
+    df: pd.DataFrame,
+    frac_desarrollo: float = 0.6,
+    semilla: int = 42,
+    col_grupo: str = "cluster",
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Divide los registros en desarrollo y prueba por persona (``col_grupo``).
+
+    Todos los registros de una persona quedan del mismo lado, para que el modelo nunca
+    vea en desarrollo a alguien que luego se evalúa en prueba. La partición es
+    reproducible con ``semilla``.
+    """
+    if not 0 < frac_desarrollo < 1:
+        raise ValueError("frac_desarrollo debe estar entre 0 y 1")
+    personas = np.sort(df[col_grupo].unique())
+    np.random.default_rng(semilla).shuffle(personas)
+    desarrollo = set(personas[: round(frac_desarrollo * len(personas))].tolist())
+    en_desarrollo = df[col_grupo].isin(desarrollo)
+    return df[en_desarrollo].reset_index(drop=True), df[~en_desarrollo].reset_index(drop=True)
