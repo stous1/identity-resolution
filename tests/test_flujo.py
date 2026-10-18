@@ -7,7 +7,12 @@ import pytest
 from faker import Faker
 
 from identidades import modelo
-from identidades.flujo import candidatos_bloqueo, comparar_bloqueos, ejecutar_hito1
+from identidades.flujo import (
+    aplicar_modelo,
+    candidatos_bloqueo,
+    comparar_bloqueos,
+    ejecutar_hito1,
+)
 
 
 def _muestra_sintetica(n_personas: int = 60, semilla: int = 7) -> pd.DataFrame:
@@ -40,14 +45,18 @@ def _muestra_sintetica(n_personas: int = 60, semilla: int = 7) -> pd.DataFrame:
 
 @pytest.mark.integracion
 def test_flujo_completo_genera_salidas(tmp_path):
-    df = _muestra_sintetica()
+    df = _muestra_sintetica(n_personas=80)
 
-    metricas = ejecutar_hito1(df, tmp_path, capturas=False, comparar=False)
+    metricas = ejecutar_hito1(
+        df, tmp_path, n_bootstrap=50, capturas=False, comparar=False, referencia=False
+    )
 
     for nombre in [
         "modelo.json",
         "metricas.json",
+        "seleccion_bloqueos.csv",
         "curva_umbral.csv",
+        "curva_umbral_clusters.csv",
         "cascada.html",
         "cascada.png",
         "pesos.html",
@@ -55,7 +64,6 @@ def test_flujo_completo_genera_salidas(tmp_path):
         "parametros_mu.png",
         "curva_umbral.html",
         "curva_umbral.png",
-        "curva_umbral_clusters.csv",
         "curva_umbral_clusters.png",
         "costo_umbral.html",
         "costo_umbral.png",
@@ -63,22 +71,29 @@ def test_flujo_completo_genera_salidas(tmp_path):
         "cluster_studio.html",
     ]:
         assert (tmp_path / nombre).stat().st_size > 0, nombre
-
     assert json.loads((tmp_path / "metricas.json").read_text(encoding="utf-8")) == metricas
-    for seccion in ("pares", "clusters"):
-        for clave in ("precision", "recall", "f1"):
-            assert 0 <= metricas[seccion][clave] <= 1
 
-    # Sin umbral explícito se usa el de menor costo por clúster.
-    umbrales = {u["criterio"]: u for u in metricas["umbrales"]}
+    # Partición por persona: desarrollo y prueba suman el total.
+    particion = metricas["particion"]
+    assert particion["desarrollo"]["registros"] + particion["prueba"]["registros"] == len(df)
+    assert particion["desarrollo"]["personas"] == 48  # 60 % de 80
+
+    # El umbral se elige en desarrollo: el de menor costo por clúster.
+    umbrales = {u["criterio"]: u for u in metricas["desarrollo"]["umbrales"]}
     assert set(umbrales) == {"fijo", "max_f1_par", "min_costo_par", "min_costo_cluster"}
     assert metricas["umbral"]["criterio"] == "min_costo_cluster"
     assert metricas["umbral"]["valor"] == umbrales["min_costo_cluster"]["umbral"]
-    assert metricas["clusters"]["umbral"] == metricas["umbral"]["valor"]
     costo_elegido = umbrales["min_costo_cluster"]["costo_clusters"]
     assert all(costo_elegido <= u["costo_clusters"] for u in umbrales.values())
-    assert 0 <= metricas["bloqueo"]["recall_bloqueo"] <= 1
-    assert metricas["dataset"]["registros"] == len(df)
+
+    # Prueba se mide con ese umbral, con intervalos que contienen el valor observado.
+    prueba = metricas["prueba"]
+    assert prueba["clusters"]["umbral"] == metricas["umbral"]["valor"]
+    for nivel in ("pares", "clusters"):
+        for metrica, ic in prueba["intervalos"][nivel].items():
+            assert ic["valor"] == pytest.approx(prueba[nivel][metrica]), (nivel, metrica)
+            assert 0 <= ic["ic_inf"] <= ic["ic_sup"] <= 1
+    assert "referencia_todo_el_dataset" not in metricas
 
 
 @pytest.mark.integracion
@@ -101,16 +116,34 @@ def test_comparar_bloqueos_mide_cada_candidato():
 
 
 def test_candidatos_incluyen_seleccion_y_referencia():
-    candidatos = candidatos_bloqueo()
+    seleccion = modelo.BLOQUEOS_EXACTOS + [("surname_soundex",)]
+    candidatos = candidatos_bloqueo(seleccion)
 
     assert candidatos["exactas"] == modelo.BLOQUEOS_EXACTOS
-    assert candidatos["selección"] == modelo.BLOQUEOS_PREDICCION
-    assert len(candidatos["todas"]) > len(candidatos["selección"])
+    assert candidatos["selección"] == seleccion
+    assert candidatos["todas"] == modelo.BLOQUEOS_EXACTOS + modelo.BLOQUEOS_CANDIDATOS
+    assert len(candidatos) == len(modelo.BLOQUEOS_CANDIDATOS) + 3
+
+
+def test_aplicar_modelo_reestima_lambda_sin_etiquetas():
+    desarrollo, prueba = _muestra_sintetica(n_personas=40), _muestra_sintetica(20, semilla=3)
+    linker = modelo.crear_linker(desarrollo)
+    modelo.entrenar(linker)
+
+    aplicado = aplicar_modelo(linker, prueba.drop(columns="cluster"))
+
+    original = linker.misc.save_model_to_json()
+    nuevo = aplicado.misc.save_model_to_json()
+    # Mismos niveles con los mismos m y u de desarrollo (solo cambia la descripción).
+    niveles = [[c["comparison_levels"] for c in m["comparisons"]] for m in (original, nuevo)]
+    assert niveles[0] == niveles[1]
+    lam = "probability_two_random_records_match"
+    assert nuevo[lam] != original[lam]
 
 
 def test_reglas_candidatas_son_sql_valido():
     # Todas las reglas que compara comparar_bloqueos deben poder ejecutarse.
     df = _muestra_sintetica(n_personas=5)
-    for regla in candidatos_bloqueo()["todas"]:
+    for regla in candidatos_bloqueo(modelo.BLOQUEOS_EXACTOS)["todas"]:
         linker = modelo.crear_linker(df, modelo.crear_settings([regla]))
         assert linker.inference.predict().as_pandas_dataframe() is not None, regla

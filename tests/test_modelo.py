@@ -19,14 +19,14 @@ def test_columnas_del_modelo_existen_en_los_datos():
     columnas = set(datos.COLUMNAS_FAKE_1000) | set(modelo.COLUMNAS_DERIVADAS)
 
     assert set(modelo.COLUMNAS_COMPARACION) <= columnas
-    for bloqueo in modelo.BLOQUEOS_PREDICCION + modelo.BLOQUEOS_EM:
+    for bloqueo in modelo.BLOQUEOS_EXACTOS + modelo.BLOQUEOS_CANDIDATOS + modelo.BLOQUEOS_EM:
         for expresion in bloqueo:
             assert _columnas_de(expresion) <= columnas, expresion
 
 
-def test_bloqueo_incluye_reglas_exactas_y_aproximadas():
-    assert modelo.BLOQUEOS_PREDICCION == modelo.BLOQUEOS_EXACTOS + modelo.BLOQUEOS_APROXIMADOS
-    assert len(set(modelo.BLOQUEOS_PREDICCION)) == len(modelo.BLOQUEOS_PREDICCION)
+def test_reglas_de_bloqueo_sin_repetir():
+    todas = modelo.BLOQUEOS_EXACTOS + modelo.BLOQUEOS_CANDIDATOS
+    assert len(set(todas)) == len(todas)
 
 
 def test_preparar_agrega_codigos_foneticos(registros_pequenos):
@@ -41,7 +41,7 @@ def test_preparar_agrega_codigos_foneticos(registros_pequenos):
 
 def test_todas_las_reglas_de_bloqueo_son_sql_valido(registros_pequenos):
     # Una regla por linker: si alguna expresión no es SQL válido, predict falla.
-    for regla in modelo.BLOQUEOS_PREDICCION:
+    for regla in modelo.BLOQUEOS_EXACTOS + modelo.BLOQUEOS_CANDIDATOS:
         linker = modelo.crear_linker(registros_pequenos, modelo.crear_settings([regla]))
         pred = linker.inference.predict().as_pandas_dataframe()
         assert isinstance(pred, pd.DataFrame), regla
@@ -66,7 +66,7 @@ def test_splink_acepta_la_configuracion(registros_pequenos):
     nombres = [c["output_column_name"] for c in configuracion["comparisons"]]
     assert nombres == modelo.COLUMNAS_COMPARACION
     assert len(configuracion["blocking_rules_to_generate_predictions"]) == len(
-        modelo.BLOQUEOS_PREDICCION
+        modelo.BLOQUEOS_EXACTOS
     )
 
 

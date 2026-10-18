@@ -18,10 +18,10 @@ COLUMNAS_COMPARACION: list[str] = ["first_name", "surname", "dob", "city", "emai
 # Columnas derivadas que agrega ``preparar`` para el bloqueo aproximado.
 COLUMNAS_DERIVADAS: list[str] = ["surname_soundex", "surname_metaphone", "first_name_metaphone"]
 
-# Bloqueo para predecir: solo se comparan pares que coinciden en alguna de estas reglas.
-# Cada regla es una tupla de columnas o expresiones SQL que deben coincidir a la vez.
-# En fake_1000 los bloqueos de dos columnas cubrían ~55 % de los pares verdaderos; con
-# una columna por regla se cubre ~81 % con ~4.000 comparaciones (de ~500.000).
+# Bloqueo para predecir: solo se comparan pares que coinciden en alguna regla. Cada regla
+# es una tupla de columnas o expresiones SQL que deben coincidir a la vez. En fake_1000 los
+# bloqueos de dos columnas cubrían ~55 % de los pares verdaderos; con una columna por regla
+# se cubre ~81 % con ~4.000 comparaciones (de ~500.000). Las exactas siempre se usan.
 BLOQUEOS_EXACTOS: list[tuple[str, ...]] = [
     ("first_name",),
     ("surname",),
@@ -29,21 +29,18 @@ BLOQUEOS_EXACTOS: list[tuple[str, ...]] = [
     ("email",),
 ]
 
-# Reglas aproximadas para pares que no comparten ningún campo exacto. Con ellas el recall
-# del bloqueo sube a ~92 % con ~7.100 comparaciones, sin bajar la precisión. Se
-# descartaron Metaphone del apellido (no aportaba sobre Soundex) y las tres primeras
-# letras del nombre (+0,1 puntos de recall a cambio de ~1.400 comparaciones). La
-# comparación completa se genera con ``identidades.flujo.comparar_bloqueos``.
-BLOQUEOS_APROXIMADOS: list[tuple[str, ...]] = [
+# Reglas aproximadas candidatas, para pares que no comparten ningún campo exacto. Cuáles se
+# usan lo decide ``identidades.bloqueo.seleccionar_reglas`` sobre el conjunto de desarrollo.
+BLOQUEOS_CANDIDATOS: list[tuple[str, ...]] = [
     ("surname_soundex",),
+    ("surname_metaphone",),
     ("first_name_metaphone",),
+    ("substr(first_name, 1, 3)",),
     ("substr(dob, 1, 4)", "substr(surname, 1, 1)"),
     ("substr(dob, 1, 4)", "substr(first_name, 1, 1)"),
     ("substr(email, 1, 4)",),
     ("city", "substr(dob, 1, 4)"),
 ]
-
-BLOQUEOS_PREDICCION: list[tuple[str, ...]] = BLOQUEOS_EXACTOS + BLOQUEOS_APROXIMADOS
 
 # Bloqueos de las pasadas de EM. Cada pasada no puede estimar los parámetros m de las
 # columnas de su propio bloqueo, por eso se usan dos bloqueos que se complementan.
@@ -75,8 +72,8 @@ def preparar(df: pd.DataFrame) -> pd.DataFrame:
     """Agrega las columnas fonéticas que usa el bloqueo aproximado.
 
     - ``surname_soundex``: Soundex del apellido ("Allen" y "Alan" -> "A450").
-    - ``surname_metaphone``: Metaphone del apellido (probada y descartada en el bloqueo).
-    - ``first_name_metaphone``: Metaphone del nombre ("Smith" y "Smyth" -> "SM0").
+    - ``surname_metaphone``: Metaphone del apellido ("Smith" y "Smyth" -> "SM0").
+    - ``first_name_metaphone``: Metaphone del nombre.
     """
     return df.assign(
         surname_soundex=df["surname"].map(_codigo_fonetico(jellyfish.soundex)),
@@ -88,9 +85,9 @@ def preparar(df: pd.DataFrame) -> pd.DataFrame:
 def crear_settings(bloqueos: list[tuple[str, ...]] | None = None) -> SettingsCreator:
     """Construye la configuración del modelo de deduplicación.
 
-    ``bloqueos`` reemplaza las reglas de predicción (por defecto ``BLOQUEOS_PREDICCION``).
+    ``bloqueos`` son las reglas de predicción (por defecto, solo ``BLOQUEOS_EXACTOS``).
     """
-    bloqueos = BLOQUEOS_PREDICCION if bloqueos is None else bloqueos
+    bloqueos = BLOQUEOS_EXACTOS if bloqueos is None else bloqueos
     return SettingsCreator(
         link_type="dedupe_only",
         unique_id_column_name="unique_id",

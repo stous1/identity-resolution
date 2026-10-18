@@ -1,23 +1,36 @@
-"""Flujo completo del hito 1: entrenar, evaluar y generar tableros."""
+"""Flujo completo del hito 1: desarrollar en un conjunto, medir en otro y publicar.
+
+1. Se dividen las personas en desarrollo y prueba (``datos.dividir_por_persona``).
+2. En desarrollo, mirando la verdad conocida, se eligen las reglas de bloqueo, se entrena
+   el modelo y se elige el umbral por costo.
+3. El modelo se aplica a prueba, deduplicando dentro de prueba, y se mide una sola vez,
+   con intervalos de confianza por bootstrap de personas.
+4. Como referencia (optimista), el mismo procedimiento se repite sobre todo el dataset y
+   se mide sobre los mismos datos con que se eligió todo.
+"""
 
 from __future__ import annotations
 
 import json
 import shutil
 from collections.abc import Sequence
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 import numpy as np
 import pandas as pd
-from splink import Linker
+from splink import DuckDBAPI, Linker
 from splink.internals.splink_dataframe import SplinkDataFrame
 
-from identidades import evaluacion, modelo, tableros
+from identidades import bloqueo, datos, evaluacion, modelo, tableros
+
+Regla = tuple[str, ...]
 
 # Salidas del hito 1 que se versionan en docs/resultados/ para GitHub Pages.
 ARCHIVOS_PUBLICABLES: list[str] = [
     "metricas.json",
+    "seleccion_bloqueos.csv",
     "comparacion_bloqueos.csv",
     "cascada.html",
     "cascada.png",
@@ -37,32 +50,40 @@ ARCHIVOS_PUBLICABLES: list[str] = [
     "pesos.png",
 ]
 
-# Reglas aproximadas probadas y descartadas por redundantes (ver ``comparar_bloqueos``).
-BLOQUEOS_DESCARTADOS: list[tuple[str, ...]] = [
-    ("surname_metaphone",),
-    ("substr(first_name, 1, 3)",),
-]
+UMBRAL_FIJO: float = 0.9
+
+# Etiquetas legibles de cada criterio de umbral (para métricas y gráficos).
+CRITERIOS_UMBRAL: dict[str, str] = {
+    "fijo": "fijo 0,9",
+    "max_f1_par": "mejor F1 por par",
+    "min_costo_par": "mín. costo por par",
+    "min_costo_cluster": "mín. costo por clúster",
+}
+
+ADVERTENCIA_REFERENCIA: str = (
+    "Optimista: las reglas de bloqueo, el modelo y el umbral se eligieron con la verdad "
+    "conocida de los mismos datos con que se mide."
+)
 
 
-def candidatos_bloqueo() -> dict[str, list[tuple[str, ...]]]:
+def candidatos_bloqueo(seleccion: list[Regla]) -> dict[str, list[Regla]]:
     """Conjuntos de reglas de bloqueo a comparar.
 
-    Las exactas solas, las exactas más cada regla aproximada por separado, la selección
-    final (``modelo.BLOQUEOS_PREDICCION``) y todas las reglas probadas.
+    Las exactas solas, las exactas más cada candidata por separado, la ``seleccion``
+    hecha en desarrollo y todas las reglas.
     """
-    exactos = modelo.BLOQUEOS_EXACTOS
-    aproximados = modelo.BLOQUEOS_APROXIMADOS + BLOQUEOS_DESCARTADOS
-    candidatos = {"exactas": exactos}
-    for regla in aproximados:
-        candidatos["exactas + " + " & ".join(regla)] = exactos + [regla]
-    candidatos["selección"] = modelo.BLOQUEOS_PREDICCION
-    candidatos["todas"] = exactos + aproximados
+    exactas = modelo.BLOQUEOS_EXACTOS
+    candidatos = {"exactas": exactas}
+    for regla in modelo.BLOQUEOS_CANDIDATOS:
+        candidatos["exactas + " + " & ".join(regla)] = exactas + [regla]
+    candidatos["selección"] = seleccion
+    candidatos["todas"] = exactas + modelo.BLOQUEOS_CANDIDATOS
     return candidatos
 
 
 def comparar_bloqueos(
     df: pd.DataFrame,
-    candidatos: dict[str, list[tuple[str, ...]]],
+    candidatos: dict[str, list[Regla]],
     umbral: float,
 ) -> pd.DataFrame:
     """Entrena y evalúa el modelo con cada conjunto de reglas de bloqueo.
@@ -78,7 +99,7 @@ def comparar_bloqueos(
         modelo.entrenar(linker)
         df_pred = modelo.predecir(linker)
         pred = df_pred.as_pandas_dataframe()
-        bloqueo = evaluacion.recall_bloqueo(pred, verdaderos)
+        recall_bloqueo = evaluacion.recall_bloqueo(pred, verdaderos)
         pares = evaluacion.metricas_pares(pred, verdaderos, umbral)
         clusters = evaluacion.metricas_cluster(
             modelo.agrupar(linker, df_pred, umbral).as_pandas_dataframe(), df
@@ -87,8 +108,8 @@ def comparar_bloqueos(
             {
                 "candidato": nombre,
                 "reglas": len(bloqueos),
-                "pares_comparados": bloqueo["pares_comparados"],
-                "recall_bloqueo": bloqueo["recall_bloqueo"],
+                "pares_comparados": recall_bloqueo["pares_comparados"],
+                "recall_bloqueo": recall_bloqueo["recall_bloqueo"],
                 "precision_par": pares["precision"],
                 "recall_par": pares["recall"],
                 "precision_cluster": clusters["precision"],
@@ -97,17 +118,6 @@ def comparar_bloqueos(
             }
         )
     return pd.DataFrame(filas)
-
-
-UMBRAL_FIJO: float = 0.9
-
-# Etiquetas legibles de cada criterio de umbral (para métricas y gráficos).
-CRITERIOS_UMBRAL: dict[str, str] = {
-    "fijo": "fijo 0,9",
-    "max_f1_par": "mejor F1 por par",
-    "min_costo_par": "mín. costo por par",
-    "min_costo_cluster": "mín. costo por clúster",
-}
 
 
 def curva_umbral_clusters(
@@ -130,63 +140,66 @@ def _resumen(metricas: dict[str, Any], claves: Sequence[str]) -> dict[str, Any]:
     return {k: metricas[k] for k in claves}
 
 
-def ejecutar_hito1(
+@dataclass
+class Desarrollo:
+    """Todo lo que se decide mirando la verdad conocida de un conjunto."""
+
+    bloqueos: list[Regla]
+    historial_bloqueos: pd.DataFrame
+    linker: Linker
+    curva: pd.DataFrame
+    curva_clusters: pd.DataFrame
+    umbrales: dict[str, float]
+    criterio: str
+    umbral: float
+    comparacion_umbrales: list[dict[str, Any]] = field(default_factory=list)
+
+
+def desarrollar(
     df: pd.DataFrame,
-    directorio: Path,
-    umbral: float | None = None,
     costo_fp: float = 10.0,
     costo_fn: float = 1.0,
-    capturas: bool = True,
-    comparar: bool = True,
-) -> dict[str, Any]:
-    """Entrena el modelo sobre ``df``, lo evalúa contra ``cluster`` y genera los tableros.
+    min_ganancia: float = 0.005,
+    umbral: float | None = None,
+) -> Desarrollo:
+    """Elige bloqueo, entrena y elige umbral usando la verdad conocida de ``df``.
 
-    El umbral de operación es ``umbral`` si se da; si no, el que minimiza el costo de
-    errores por clúster (``costo_fp`` por cada par unido por error y ``costo_fn`` por
-    cada par verdadero sin unir). También se reportan el umbral fijo de 0,9, el de mejor
-    F1 por par y el de menor costo por par.
-
-    Escribe en ``directorio``: ``modelo.json``, ``metricas.json``, las curvas por umbral
-    (CSV), los tableros HTML y sus PNG. Si ``capturas`` es falso, omite las capturas con
-    Playwright de los tableros interactivos (los PNG de Altair se generan siempre).
-    Si ``comparar`` es verdadero, escribe también ``comparacion_bloqueos.csv``.
-    Devuelve el diccionario de métricas.
+    El umbral es ``umbral`` si se da; si no, el que minimiza el costo de errores por
+    clúster. También se calculan el fijo de 0,9, el de mejor F1 por par y el de menor
+    costo por par, para compararlos.
     """
-    directorio.mkdir(parents=True, exist_ok=True)
-
-    linker = modelo.crear_linker(df)
+    bloqueos, historial = bloqueo.seleccionar_reglas(
+        df, modelo.BLOQUEOS_EXACTOS, modelo.BLOQUEOS_CANDIDATOS, min_ganancia
+    )
+    linker = modelo.crear_linker(df, modelo.crear_settings(bloqueos))
     modelo.entrenar(linker)
-    modelo.guardar_modelo(linker, directorio / "modelo.json")
 
     df_pred = modelo.predecir(linker)
     pred = df_pred.as_pandas_dataframe()
     verdaderos = evaluacion.pares_verdaderos(df)
-
     curva = evaluacion.agregar_costo(evaluacion.curva_umbral(pred, verdaderos), costo_fp, costo_fn)
     curva_cl = evaluacion.agregar_costo(
         curva_umbral_clusters(linker, df_pred, df), costo_fp, costo_fn
     )
-    curva.to_csv(directorio / "curva_umbral.csv", index=False, lineterminator="\n")
-    curva_cl.to_csv(directorio / "curva_umbral_clusters.csv", index=False, lineterminator="\n")
 
-    candidatos = {
+    umbrales = {
         "fijo": UMBRAL_FIJO,
         "max_f1_par": evaluacion.umbral_max_f1(curva),
         "min_costo_par": evaluacion.umbral_min_costo(curva, costo_fp, costo_fn),
         "min_costo_cluster": evaluacion.umbral_min_costo(curva_cl, costo_fp, costo_fn),
     }
     if umbral is None:
-        criterio, umbral = "min_costo_cluster", candidatos["min_costo_cluster"]
+        criterio, umbral = "min_costo_cluster", umbrales["min_costo_cluster"]
     else:
-        criterio = next((c for c, u in candidatos.items() if u == umbral), "manual")
+        criterio = next((c for c, u in umbrales.items() if u == umbral), "manual")
 
-    comparacion_umbrales = []
-    for nombre, valor in candidatos.items():
+    comparacion = []
+    for nombre, valor in umbrales.items():
         pares = evaluacion.metricas_pares(pred, verdaderos, valor)
         cl = evaluacion.metricas_cluster(
             modelo.agrupar(linker, df_pred, valor).as_pandas_dataframe(), df
         )
-        comparacion_umbrales.append(
+        comparacion.append(
             {
                 "criterio": nombre,
                 "umbral": valor,
@@ -199,67 +212,234 @@ def ejecutar_hito1(
             }
         )
 
+    return Desarrollo(
+        bloqueos=bloqueos,
+        historial_bloqueos=historial,
+        linker=linker,
+        curva=curva,
+        curva_clusters=curva_cl,
+        umbrales=umbrales,
+        criterio=criterio,
+        umbral=umbral,
+        comparacion_umbrales=comparacion,
+    )
+
+
+def aplicar_modelo(linker_entrenado: Linker, df: pd.DataFrame) -> Linker:
+    """Aplica un modelo entrenado a otro conjunto, deduplicando dentro de ``df``.
+
+    Conserva las comparaciones, el bloqueo y los parámetros m y u. La probabilidad a
+    priori (lambda) depende del tamaño del conjunto, así que se vuelve a estimar en
+    ``df`` con las mismas reglas determinísticas, que no usan etiquetas.
+    """
+    configuracion = linker_entrenado.misc.save_model_to_json()
+    linker = Linker(modelo.preparar(df), configuracion, db_api=DuckDBAPI())
+    linker.training.estimate_probability_two_random_records_match(
+        modelo.REGLAS_DETERMINISTICAS, recall=0.7
+    )
+    return linker
+
+
+@dataclass
+class Evaluacion:
+    """Predicciones, clústeres y métricas de un modelo sobre un conjunto."""
+
+    df_pred: SplinkDataFrame
+    pred: pd.DataFrame
+    verdaderos: pd.DataFrame
+    df_clusters: SplinkDataFrame
+    clusters: pd.DataFrame
+    metricas: dict[str, Any]
+
+
+def evaluar(
+    linker: Linker,
+    df: pd.DataFrame,
+    umbral: float,
+    n_bootstrap: int = 0,
+    semilla: int = 0,
+) -> Evaluacion:
+    """Predice, agrupa a ``umbral`` y mide contra la verdad conocida de ``df``.
+
+    Con ``n_bootstrap`` > 0 agrega intervalos de confianza del 95 % remuestreando
+    personas, por par y por clúster.
+    """
+    df_pred = modelo.predecir(linker)
+    pred = df_pred.as_pandas_dataframe()
+    verdaderos = evaluacion.pares_verdaderos(df)
     df_clusters = modelo.agrupar(linker, df_pred, umbral)
     clusters = df_clusters.as_pandas_dataframe()
 
-    metricas = {
-        "dataset": {
-            "registros": len(df),
-            "personas": int(df["cluster"].nunique()),
-        },
-        "modelo": {
-            "probability_two_random_records_match": linker.misc.save_model_to_json()[
-                "probability_two_random_records_match"
-            ],
-            "bloqueos_prediccion": [list(b) for b in modelo.BLOQUEOS_PREDICCION],
-            "bloqueos_em": [list(b) for b in modelo.BLOQUEOS_EM],
-        },
-        "umbral": {
-            "criterio": criterio,
-            "valor": umbral,
-            "costo_fp": costo_fp,
-            "costo_fn": costo_fn,
-        },
-        "umbrales": comparacion_umbrales,
+    metricas: dict[str, Any] = {
         "bloqueo": evaluacion.recall_bloqueo(pred, verdaderos),
         "pares": evaluacion.metricas_pares(pred, verdaderos, umbral),
         "clusters": {"umbral": umbral, **evaluacion.metricas_cluster(clusters, df)},
     }
+    if n_bootstrap:
+        marcadas = evaluacion.marcar_verdaderos(pred, verdaderos)
+        positivos_par = marcadas[marcadas["match_probability"] >= umbral]
+        positivos_cl = evaluacion.pares_inducidos(clusters)
+        metricas["intervalos"] = {
+            "metodo": "bootstrap percentil remuestreando personas",
+            "nivel": 0.95,
+            "replicas": n_bootstrap,
+            "personas": int(df["cluster"].nunique()),
+            "pares": evaluacion.bootstrap_por_persona(
+                *evaluacion.contribuciones_por_persona(positivos_par, df),
+                n=n_bootstrap,
+                semilla=semilla,
+            ),
+            "clusters": evaluacion.bootstrap_por_persona(
+                *evaluacion.contribuciones_por_persona(positivos_cl, df, clusters),
+                n=n_bootstrap,
+                semilla=semilla,
+            ),
+        }
+    return Evaluacion(df_pred, pred, verdaderos, df_clusters, clusters, metricas)
+
+
+def _describir(df: pd.DataFrame) -> dict[str, int]:
+    return {"registros": len(df), "personas": int(df["cluster"].nunique())}
+
+
+def _lambda(linker: Linker) -> float:
+    return linker.misc.save_model_to_json()["probability_two_random_records_match"]
+
+
+def _escribir_csv(tabla: pd.DataFrame, ruta: Path) -> None:
+    tabla.to_csv(ruta, index=False, lineterminator="\n")
+
+
+def ejecutar_hito1(
+    df: pd.DataFrame,
+    directorio: Path,
+    frac_desarrollo: float = 0.6,
+    semilla: int = 42,
+    umbral: float | None = None,
+    costo_fp: float = 10.0,
+    costo_fn: float = 1.0,
+    min_ganancia: float = 0.005,
+    n_bootstrap: int = 1000,
+    capturas: bool = True,
+    comparar: bool = True,
+    referencia: bool = True,
+) -> dict[str, Any]:
+    """Desarrolla en una parte de las personas, mide en el resto y genera los tableros.
+
+    Escribe en ``directorio``: ``modelo.json`` (entrenado en desarrollo),
+    ``metricas.json``, la selección de bloqueo y las curvas de desarrollo (CSV), los
+    tableros HTML y sus PNG. Las curvas y el gráfico de costo son de desarrollo; la
+    cascada, Cluster Studio y el comparison viewer son de prueba.
+
+    Si ``capturas`` es falso, omite las capturas con Playwright de los tableros
+    interactivos. Si ``comparar`` es verdadero, escribe ``comparacion_bloqueos.csv``
+    (en desarrollo). Si ``referencia`` es verdadero, repite el procedimiento sobre todo
+    el dataset como referencia optimista. Devuelve el diccionario de métricas.
+    """
+    directorio.mkdir(parents=True, exist_ok=True)
+    df_dev, df_prueba = datos.dividir_por_persona(df, frac_desarrollo, semilla)
+
+    # Desarrollo: todo lo que mira etiquetas.
+    dev = desarrollar(df_dev, costo_fp, costo_fn, min_ganancia, umbral)
+    modelo.guardar_modelo(dev.linker, directorio / "modelo.json")
+    _escribir_csv(dev.historial_bloqueos, directorio / "seleccion_bloqueos.csv")
+    _escribir_csv(dev.curva, directorio / "curva_umbral.csv")
+    _escribir_csv(dev.curva_clusters, directorio / "curva_umbral_clusters.csv")
+    ev_dev = evaluar(dev.linker, df_dev, dev.umbral)
+
+    # Prueba: se mide una sola vez, con el modelo y el umbral de desarrollo.
+    linker_prueba = aplicar_modelo(dev.linker, df_prueba)
+    ev_prueba = evaluar(linker_prueba, df_prueba, dev.umbral, n_bootstrap, semilla)
+
+    metricas: dict[str, Any] = {
+        "dataset": _describir(df),
+        "particion": {
+            "frac_desarrollo": frac_desarrollo,
+            "semilla": semilla,
+            "desarrollo": _describir(df_dev),
+            "prueba": _describir(df_prueba),
+        },
+        "modelo": {
+            "entrenado_en": "desarrollo",
+            "lambda_desarrollo": _lambda(dev.linker),
+            "lambda_prueba": _lambda(linker_prueba),
+            "bloqueos_prediccion": [list(b) for b in dev.bloqueos],
+            "bloqueos_em": [list(b) for b in modelo.BLOQUEOS_EM],
+        },
+        "umbral": {
+            "criterio": dev.criterio,
+            "valor": dev.umbral,
+            "elegido_en": "desarrollo",
+            "costo_fp": costo_fp,
+            "costo_fn": costo_fn,
+        },
+        "prueba": ev_prueba.metricas,
+        "desarrollo": {
+            **ev_dev.metricas,
+            "seleccion_bloqueos": dev.historial_bloqueos.to_dict("records"),
+            "umbrales": dev.comparacion_umbrales,
+        },
+    }
+
+    if referencia:
+        ref = desarrollar(df, costo_fp, costo_fn, min_ganancia, umbral)
+        ev_ref = evaluar(ref.linker, df, ref.umbral)
+        metricas["referencia_todo_el_dataset"] = {
+            "advertencia": ADVERTENCIA_REFERENCIA,
+            "bloqueos_prediccion": [list(b) for b in ref.bloqueos],
+            "umbral": {"criterio": ref.criterio, "valor": ref.umbral},
+            **ev_ref.metricas,
+        }
+
     (directorio / "metricas.json").write_text(
         json.dumps(metricas, indent=2, ensure_ascii=False), encoding="utf-8", newline="\n"
     )
 
     if comparar:
-        comparar_bloqueos(df, candidatos_bloqueo(), umbral).to_csv(
-            directorio / "comparacion_bloqueos.csv", index=False, lineterminator="\n"
+        _escribir_csv(
+            comparar_bloqueos(df_dev, candidatos_bloqueo(dev.bloqueos), dev.umbral),
+            directorio / "comparacion_bloqueos.csv",
         )
 
-    marcas = {CRITERIOS_UMBRAL[c]: u for c, u in candidatos.items()}
+    # Gráficos de desarrollo (elección del umbral) y del modelo entrenado.
+    marcas = {CRITERIOS_UMBRAL[c]: u for c, u in dev.umbrales.items()}
     tableros.guardar_curva_umbral(
-        curva, marcas, "Precisión, recall y F1 por par", directorio / "curva_umbral.html"
+        dev.curva,
+        marcas,
+        "Precisión, recall y F1 por par (desarrollo)",
+        directorio / "curva_umbral.html",
     )
     tableros.guardar_curva_umbral(
-        curva_cl,
+        dev.curva_clusters,
         marcas,
-        "Precisión, recall y F1 por clúster",
+        "Precisión, recall y F1 por clúster (desarrollo)",
         directorio / "curva_umbral_clusters.html",
     )
     tableros.guardar_costo(
-        {"par": curva, "clúster": curva_cl},
+        {"par": dev.curva, "clúster": dev.curva_clusters},
         marcas,
         costo_fp,
         costo_fn,
         directorio / "costo_umbral.html",
     )
+    tableros.guardar_parametros(dev.linker, directorio)
 
-    ejemplos = tableros.seleccionar_ejemplos_cascada(pred, verdaderos, umbral)
-    tableros.guardar_cascada(linker, ejemplos, directorio / "cascada.html")
-    tableros.guardar_parametros(linker, directorio)
-    tableros.guardar_comparison_viewer(linker, df_pred, directorio / "comparison_viewer.html")
-
-    ids, nombres = tableros.seleccionar_clusters(clusters, df)
+    # Tableros de prueba.
+    ejemplos = tableros.seleccionar_ejemplos_cascada(
+        ev_prueba.pred, ev_prueba.verdaderos, dev.umbral
+    )
+    tableros.guardar_cascada(linker_prueba, ejemplos, directorio / "cascada.html")
+    tableros.guardar_comparison_viewer(
+        linker_prueba, ev_prueba.df_pred, directorio / "comparison_viewer.html"
+    )
+    ids, nombres = tableros.seleccionar_clusters(ev_prueba.clusters, df_prueba)
     tableros.guardar_cluster_studio(
-        linker, df_pred, df_clusters, ids, nombres, directorio / "cluster_studio.html"
+        linker_prueba,
+        ev_prueba.df_pred,
+        ev_prueba.df_clusters,
+        ids,
+        nombres,
+        directorio / "cluster_studio.html",
     )
 
     if capturas:
