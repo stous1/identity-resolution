@@ -1,5 +1,7 @@
 # Resolución de identidades con Splink
 
+[![CI](https://github.com/stous1/identity-resolution/actions/workflows/ci.yml/badge.svg)](https://github.com/stous1/identity-resolution/actions/workflows/ci.yml)
+
 Caso de uso 1 de un portafolio de ciencia de datos y agentes aplicado a banca: **calidad del
 dato y resolución de identidades**.
 
