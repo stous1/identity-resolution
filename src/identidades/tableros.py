@@ -40,8 +40,8 @@ def seleccionar_ejemplos_cascada(
     """Elige pares de ejemplo para la cascada: aciertos, falsos positivos y falsos negativos.
 
     - Acierto: par verdadero con la mayor probabilidad.
-    - Falso positivo: par no verdadero con la mayor probabilidad. Si ninguno supera el
-      umbral, se muestra el "casi falso positivo" (el no verdadero mejor puntuado).
+    - Falso positivo: par no verdadero con la mayor probabilidad. Si no supera el
+      umbral, se etiqueta ``casi_falso_positivo`` (el modelo no lo habría unido).
     - Falso negativo: par verdadero, comparado, con la menor probabilidad bajo el umbral.
 
     Cada registro conserva todas las columnas de ``pred`` y agrega ``tipo_ejemplo``.
@@ -65,7 +65,12 @@ def seleccionar_ejemplos_cascada(
         ("falso_negativo", falsos_neg),
     ]:
         for registro in filas.drop(columns=["id_l", "id_r", "es_match"]).to_dict("records"):
-            ejemplos.append(_limpiar_nulos({**registro, "tipo_ejemplo": tipo}))
+            # Un no verdadero bajo el umbral no es un error: es un "casi falso positivo".
+            if tipo == "falso_positivo" and registro["match_probability"] < umbral:
+                tipo_registro = "casi_falso_positivo"
+            else:
+                tipo_registro = tipo
+            ejemplos.append(_limpiar_nulos({**registro, "tipo_ejemplo": tipo_registro}))
     return ejemplos
 
 
