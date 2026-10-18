@@ -80,7 +80,11 @@ de casos dudosos con un agente.
    **2b. Corrección** (completado): la prueba ciega 1 pasa a desarrollo, se corrigen el
    apellido de casada, los apodos, los nombres cruzados, el documento y los teléfonos, y se
    mide con una segunda prueba ciega. Resultados en [hito2b.md](hito2b.md).
-3. Registro de oro y grafo de identidad compartida.
+3. **Registro de oro y grafo de identidad compartida** (completado): escenario con historia,
+   metadatos y patrones sospechosos; reglas de supervivencia por campo; grafo de datos
+   compartidos (relleno, hogar, sospechoso); puentes con las métricas de grafo de Splink;
+   universo de registros en Cosmograph; cola de revisión para el agente. Resultados en
+   [hito3.md](hito3.md).
 4. Agente para la zona gris.
 
 ## Notas

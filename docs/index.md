@@ -18,6 +18,10 @@ medir su precisión contra la verdad conocida.
   de casada, apodos, nombres cruzados, documento, teléfonos y fechas), en una **segunda
   prueba ciega**, precisión 0,998 y recall 1,000 por clúster; el modelo anterior, en esos
   mismos datos, 0,995 y 0,920.
+- [Hito 3: registro de oro, grafo de identidad compartida y puentes](hito3.md): registro de
+  oro a menos de 5 puntos del techo alcanzable, grupos de datos compartidos clasificados
+  en relleno, hogar o sospechoso, puentes que evitan 4 de cada 10 mezclas sin perder
+  recall, y el [universo de registros en Cosmograph](hito3_universo.html).
 
 ## Hito 1: fake_1000
 

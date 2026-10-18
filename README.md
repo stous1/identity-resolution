@@ -10,6 +10,7 @@ dato y resolución de identidades**.
 | [1. fake_1000](#hito-1-fake_1000-de-punta-a-punta) | Demo de Splink, 251 personas | Precisión 0,970 y recall 0,851 por clúster |
 | [2. Colombia](#hito-2-clientes-sintéticos-colombianos-y-estandarización) | Sintéticos es_CO, 2.000 personas | Prueba normal: precisión 1,000 y recall 0,998 por clúster. **[Prueba ciega](#validación-prueba-ciega-y-febrl3): precisión 0,997 y recall 0,636** |
 | [2b. Corrección](#hito-2b-corregir-y-volver-a-medir-a-ciegas) | Ciega 1 como desarrollo; ciega 2 nueva | **Ciega 2: precisión 0,998 y recall 1,000 por clúster** (v1 en la misma ciega 2: 0,995 y 0,920) |
+| [3. Registro de oro y grafo](#hito-3-registro-de-oro-grafo-de-identidad-compartida-y-puentes) | Escenario con historia, metadatos y patrones sospechosos | Registro de oro a menos de 5 puntos del techo alcanzable; 432 grupos compartidos bien clasificados; puentes que evitan 4 de cada 10 mezclas sin perder recall |
 
 ## Qué problema resuelve
 
@@ -495,6 +496,136 @@ en personas de los otros grupos). Pero hay que ser honesto con lo que esto demue
 Métricas completas en [docs/resultados/hito2b/metricas.json](docs/resultados/hito2b/metricas.json)
 y [muestra de registros de la ciega 2](docs/resultados/hito2b/ciega2_muestra_registros.csv).
 
+## Hito 3: registro de oro, grafo de identidad compartida y puentes
+
+**Visualización:** [universo de registros en Cosmograph](https://stous1.github.io/identity-resolution/hito3_universo.html)
+
+![Universo de registros en Cosmograph](docs/resultados/hito3/universo.png)
+
+### Escenario
+
+El generador del hito 2 no tiene historia en el tiempo ni datos sospechosos, y cambiarlo
+alteraría los hitos anteriores. Por eso se creó un escenario aparte
+([`escenario_hito3.py`](src/identidades/escenario_hito3.py)) sobre las mismas personas
+sintéticas:
+
+- **Historia:** el celular, el correo y el domicilio pueden cambiar en una fecha. El valor
+  vigente (el último) es la verdad del registro de oro.
+- **Metadatos por registro:** fecha de actualización, canal de origen (sucursal, app, web,
+  call center, corresponsal) y si el dato fue validado. Los canales menos confiables y los
+  datos sin validar tienen más errores.
+- **Datos compartidos con verdad conocida:** relleno (3000000000, notiene@gmail.com,
+  "CENTRO"), hogares (familiares con la misma dirección y a veces el mismo teléfono) y
+  patrones sospechosos: anillos de 3 a 6 personas no relacionadas que en registros
+  recientes, por canales digitales y sin validar, comparten un celular, un correo o una
+  dirección; y suplantaciones (un registro con el documento de otra persona).
+
+**Regla de evaluación:** todo lo que se elige (regla de supervivencia, umbrales del
+clasificador, política de puentes) se elige en un escenario de **desarrollo** (semilla 3030)
+y se mide una sola vez en otro de **prueba** (semilla 3131, 2.000 personas, 4.839
+registros). Los clientes salen del modelo v2 congelado, sin ajustes (en prueba: precisión
+1,000 y recall 0,998 por clúster).
+
+### Registro de oro
+
+Para cada cliente y cada campo sobrevive un valor según una regla: el **más reciente**, el
+**validado** más reciente, el de la **fuente más confiable** o el **más frecuente**. Los
+valores que el grafo clasifica como relleno no pueden sobrevivir. La regla de cada campo se
+eligió en desarrollo:
+
+| Campo | Regla (elegida en desarrollo) | Acierto en prueba (IC 95 %) | Techo alcanzable |
+|---|---|---|---|
+| Documento | Fuente más confiable | 95,6 % [94,7 – 96,5] | 97,2 % |
+| Nombres | Fuente más confiable | 92,8 % [91,6 – 94,0] | 96,1 % |
+| Apellidos | Fuente más confiable | 93,6 % [92,5 – 94,6] | 96,6 % |
+| Fecha de nacimiento | Más reciente | 100 % | 100 % |
+| Celular | Validado más reciente | 80,4 % [78,8 – 82,2] | 83,7 % |
+| Correo | Validado más reciente | 82,9 % [81,3 – 84,6] | 86,1 % |
+| Dirección | Más frecuente | 83,9 % [82,3 – 85,5] | 88,6 % |
+
+El **techo alcanzable** es la fracción de clientes con el valor correcto en al menos uno de
+sus registros: si alguien cambió de celular después de su última actualización, ningún
+registro trae el número vigente y ninguna regla puede acertar. Las reglas elegidas quedan a
+menos de 5 puntos de ese techo. En la identidad (documento, nombres) gana la fuente más
+confiable; en el contacto, el dato validado más reciente. Usar siempre "el más reciente"
+sería igual o peor en todos los campos: por ejemplo, documento 92,1 % y nombres 89,4 %.
+
+![Registro de oro por regla](docs/resultados/hito3/registro_oro.png)
+
+### Grafo de identidad compartida
+
+Cada teléfono, correo, dirección o documento que comparten dos o más clientes distintos
+forma una estrella. Se clasifica con reglas explicables, con umbrales elegidos en
+desarrollo:
+
+1. **Documento** compartido por clientes distintos → sospechoso (suplantación).
+2. **Relleno** si el valor tiene forma genérica (dígitos repetidos o secuencias, correos
+   como notiene@ o na@na.com, direcciones sin nomenclatura) o lo comparten más de 15
+   clientes.
+3. **Hogar** si al menos la mitad de los pares de clientes comparte apellido (tolerando
+   errores de digitación).
+4. **Sospechoso** en otro caso: personas sin relación que comparten un dato de contacto.
+
+En prueba, los 432 grupos quedan bien clasificados (386 de hogar, 36 sospechosos y 10 de
+relleno); en desarrollo, la exactitud fue 98,4 %. Este resultado es optimista, por la misma
+razón que en el hito 2: el escenario y el clasificador los escribió la misma persona, y en
+este escenario los anillos no tienen apellidos en común con nadie. Con datos reales, un
+anillo puede usar familiares o testaferros con apellidos parecidos.
+
+### Puentes
+
+Una arista es puente si al quitarla el clúster se parte en dos (métricas de grafo de
+Splink). En un clúster de dos registros la única arista siempre es puente, así que no basta
+con eso: la política mira además el peso del puente y el tamaño del lado más chico.
+
+| Umbral de operación | Política (elegida en desarrollo) | Clientes mezclados (prueba) | Pares unidos por error | Recall perdido |
+|---|---|---|---|---|
+| 0,9999 (congelado) | No cortar | 0 → 0 | 0 → 0 | 0 |
+| 0,99 | Cortar puentes con peso < 15 | 8 → 5 | 46 → 35 | 0 |
+| 0,9 | Cortar puentes con peso < 15 | 18 → 11 | 88 → 63 | 0 |
+
+- **Con el umbral congelado, el modelo v2 no deja uniones erróneas en este escenario**, así
+  que la mejor política es no tocar nada. Los puentes sirven cuando se opera con un umbral
+  más bajo: cortarlos evita cerca de 4 de cada 10 mezclas **sin perder recall**. Las demás
+  mezclas son clústeres densos, que no cuelgan de un solo enlace.
+- **Las uniones erróneas conocidas cuelgan de puentes:** el caso 109-844 del hito 1 es el
+  segundo puente más débil de 35 (peso 2,5, une 3 registros), y las 3 uniones erróneas del
+  modelo v2 en la prueba ciega 2 cuelgan cada una de un puente (pesos 13,8, 16,9 y 20,9).
+  Como en desarrollo no había mezclas al umbral congelado, desarrollo no puede calibrar ahí
+  una política. *Como diagnóstico* (sin usarlo para elegir nada), mandar a revisión los
+  puentes de peso menor a 25 marcaría 6 clientes en la ciega 2 y atraparía las 3 uniones,
+  y en los escenarios del hito 3 marcaría 1 o 2 casos.
+
+### Cola de revisión para el hito 4
+
+[`cola_revision.csv`](docs/resultados/hito3/cola_revision.csv) reúne los casos de prueba
+para el agente: 7 uniones sostenidas por un puente débil (al umbral 0,9) y 36 grupos
+sospechosos (12 documentos, 11 correos, 7 direcciones y 6 celulares compartidos), cada uno
+con su evidencia.
+
+Métricas completas en [docs/resultados/hito3/metricas.json](docs/resultados/hito3/metricas.json)
+y comparación de políticas en
+[politicas_puentes_desarrollo.csv](docs/resultados/hito3/politicas_puentes_desarrollo.csv).
+
+### Visualización
+
+La [página de Cosmograph](https://stous1.github.io/identity-resolution/hito3_universo.html)
+muestra el escenario de prueba: 4.839 registros, los enlaces del modelo (fuertes sobre el
+umbral congelado y débiles entre 0,9 y ese umbral), los puentes débiles en naranja y las
+estrellas de datos compartidos (relleno en morado, hogares en verde, sospechosos en rojo).
+Cosmograph tiene licencia CC-BY-NC-4.0: libre para uso no comercial, como este portafolio.
+
+## Trabajo futuro
+
+- **Tercera prueba ciega:** con un generador nuevo que incluya a propósito el apellido de
+  casada en la posición del segundo apellido y apodos fuera del diccionario, para confirmar
+  a ciegas la corrección del hito 2b.
+- **Escenario ciego para el hito 3:** un generador de patrones sospechosos escrito sin
+  conocer el clasificador (anillos con familiares o testaferros, contactos reutilizados en
+  el tiempo).
+- **Calibrar la revisión de puentes al umbral congelado** con un desarrollo que tenga
+  uniones erróneas, en lugar del diagnóstico sobre la ciega 2.
+
 ## Cómo correrlo
 
 Requiere [uv](https://docs.astral.sh/uv/). uv instala Python 3.11 si hace falta.
@@ -508,7 +639,9 @@ uv run python scripts/hito2_colombia.py       # hito 2 completo -> reports/hito2
 uv run python scripts/validacion.py           # prueba ciega + FEBRL3 -> reports/validacion/
 uv run python scripts/hito2b.py desarrollar   # hito 2b: modelo v2 -> reports/hito2b/
 uv run python scripts/hito2b.py evaluar       # v2 congelado en prueba normal y ciegas
-uv run python scripts/publicar_resultados.py --hito 1   # o 2, validacion, 2b: a docs/resultados/
+uv run python scripts/hito3.py                # hito 3 -> reports/hito3/
+uv run python scripts/hito3.py --captura-universo  # PNG de Cosmograph (tras publicar)
+uv run python scripts/publicar_resultados.py --hito 1   # o 2, validacion, 2b, 3: a docs/resultados/
 ```
 
 La primera ejecución del hito descarga fake_1000 y lo guarda en `data/raw/`.
@@ -519,7 +652,8 @@ La primera ejecución del hito descarga fake_1000 y lo guarda en `data/raw/`.
 src/identidades/   datos, modelo, bloqueo, evaluación, tableros y flujo del hito 1;
                    sinteticos, estandarizacion, modelo_co y flujo_hito2 (hito 2);
                    errores_ciegos, modelo_febrl y flujo_validacion (validación);
-                   estandarizacion_v2, modelo_co_v2, errores_ciegos_2 y flujo_hito2b (2b)
+                   estandarizacion_v2, modelo_co_v2, errores_ciegos_2 y flujo_hito2b (2b);
+                   escenario_hito3, registro_oro, grafo_compartido, puentes y flujo_hito3 (3)
 scripts/           puntos de entrada
 tests/             pruebas con pytest
 notebooks/         solo exploración

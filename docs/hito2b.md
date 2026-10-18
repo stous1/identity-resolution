@@ -1,6 +1,6 @@
 # Hito 2b: corregir y volver a medir a ciegas
 
-[← Volver a la portada](index.md) · [Hito 2](hito2.md) ·
+[← Volver a la portada](index.md) · [Hito 2](hito2.md) · [Hito 3](hito3.md) ·
 [Detalle en el README](https://github.com/stous1/identity-resolution#hito-2b-corregir-y-volver-a-medir-a-ciegas)
 
 La prueba ciega 1 pasó a ser desarrollo. Con ella se corrigieron el apellido de casada, los

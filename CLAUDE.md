@@ -34,6 +34,8 @@ uv run python scripts/hito2_colombia.py      # hito 2 (sintéticos colombianos) 
 uv run python scripts/validacion.py          # prueba ciega + FEBRL3 -> reports/validacion/
 uv run python scripts/hito2b.py desarrollar   # hito 2b: modelo v2 -> reports/hito2b/
 uv run python scripts/hito2b.py evaluar       # v2 congelado en prueba normal y ciegas
+uv run python scripts/hito3.py                # hito 3 -> reports/hito3/
+uv run python scripts/hito3.py --captura-universo  # PNG de Cosmograph (tras publicar --hito 3)
 uv run python scripts/publicar_resultados.py --hito 1  # o 2, o validacion -> docs/resultados/
 ```
 
@@ -56,6 +58,11 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, o validacion -> do
     `desarrollo.json` (lo verifica `tests/test_flujo_hito2b.py`). `errores_ciegos_2.py` es
     la segunda prueba ciega: no se usa para desarrollar. Una prueba ciega deja de serlo en
     cuanto se miran sus errores; desde ahí solo sirve como desarrollo.
+  - Hito 3: `escenario_hito3.py` (historia, metadatos y patrones sospechosos sobre las
+    personas de `sinteticos`, sin modificarlo), `registro_oro.py`, `grafo_compartido.py`,
+    `puentes.py` y `flujo_hito3.py`. Desarrollo = escenario semilla 3030; prueba = 3131.
+    `docs/hito3_universo.html` (Cosmograph desde esm.sh; jsdelivr carga dos versiones de
+    luma.gl y falla) lee `docs/resultados/hito3/universo_*.json`.
 - `scripts/`: puntos de entrada delgados que orquestan funciones de `src/`.
 - `notebooks/`: solo exploración. Nada en `src/` ni `scripts/` importa de notebooks.
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.
