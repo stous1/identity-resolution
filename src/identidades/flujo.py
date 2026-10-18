@@ -443,10 +443,12 @@ def ejecutar_hito1(
     )
 
     if capturas:
+        # La captura muestra el error más grave disponible: una mezcla de personas.
+        error = "mezcla personas" if any("mezcla" in n for n in nombres) else "dividida"
         tableros.capturar_png(
             directorio / "cluster_studio.html",
             directorio / "cluster_studio.png",
-            seleccionar="dividida",
+            seleccionar=error,
         )
         tableros.capturar_png(
             directorio / "comparison_viewer.html", directorio / "comparison_viewer.png"
