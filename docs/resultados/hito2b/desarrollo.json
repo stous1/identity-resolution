@@ -1,0 +1,131 @@
+{
+  "desarrollo": {
+    "descripcion": "Desarrollo del hito 2 (semilla 42) + prueba ciega 1 completa",
+    "registros": 8952,
+    "personas": 3200
+  },
+  "bloqueos_prediccion": [
+    [
+      "documento"
+    ],
+    [
+      "telefono"
+    ],
+    [
+      "email"
+    ],
+    [
+      "primer_apellido",
+      "fecha_nacimiento"
+    ]
+  ],
+  "seleccion_bloqueos": [
+    {
+      "regla_agregada": "exactas",
+      "reglas": 4,
+      "pares_comparados": 14685,
+      "recall_bloqueo": 0.9965411524251239,
+      "ganancia_recall": 0.0
+    }
+  ],
+  "umbral": {
+    "criterio": "min_costo_cluster",
+    "valor": 0.9999,
+    "costo_fp": 10.0,
+    "costo_fn": 1.0
+  },
+  "umbrales": [
+    {
+      "criterio": "fijo",
+      "umbral": 0.9,
+      "pares": {
+        "tp": 12676,
+        "fp": 35,
+        "fn": 45,
+        "precision": 0.9972464794272677,
+        "recall": 0.9964625422529675,
+        "f1": 0.9968543567159484
+      },
+      "costo_pares": 395.0,
+      "clusters": {
+        "tp": 12713,
+        "fp": 99,
+        "fn": 8,
+        "precision": 0.9922728691851389,
+        "recall": 0.9993711186227497,
+        "f1": 0.9958093447695139,
+        "clusters_exactos": 3160
+      },
+      "costo_clusters": 998.0
+    },
+    {
+      "criterio": "max_f1_par",
+      "umbral": 0.995,
+      "pares": {
+        "tp": 12671,
+        "fp": 6,
+        "fn": 50,
+        "precision": 0.9995267019010807,
+        "recall": 0.9960694913921861,
+        "f1": 0.9977951019765336
+      },
+      "costo_pares": 110.0,
+      "clusters": {
+        "tp": 12713,
+        "fp": 23,
+        "fn": 8,
+        "precision": 0.9981940954773869,
+        "recall": 0.9993711186227497,
+        "f1": 0.9987822602820443,
+        "clusters_exactos": 3189
+      },
+      "costo_clusters": 238.0
+    },
+    {
+      "criterio": "min_costo_par",
+      "umbral": 0.9999,
+      "pares": {
+        "tp": 12653,
+        "fp": 2,
+        "fn": 68,
+        "precision": 0.9998419596997234,
+        "recall": 0.9946545082933732,
+        "f1": 0.9972414880201766
+      },
+      "costo_pares": 88.0,
+      "clusters": {
+        "tp": 12709,
+        "fp": 4,
+        "fn": 12,
+        "precision": 0.9996853614410446,
+        "recall": 0.9990566779341247,
+        "f1": 0.9993709208146574,
+        "clusters_exactos": 3194
+      },
+      "costo_clusters": 52.0
+    },
+    {
+      "criterio": "min_costo_cluster",
+      "umbral": 0.9999,
+      "pares": {
+        "tp": 12653,
+        "fp": 2,
+        "fn": 68,
+        "precision": 0.9998419596997234,
+        "recall": 0.9946545082933732,
+        "f1": 0.9972414880201766
+      },
+      "costo_pares": 88.0,
+      "clusters": {
+        "tp": 12709,
+        "fp": 4,
+        "fn": 12,
+        "precision": 0.9996853614410446,
+        "recall": 0.9990566779341247,
+        "f1": 0.9993709208146574,
+        "clusters_exactos": 3194
+      },
+      "costo_clusters": 52.0
+    }
+  ]
+}
