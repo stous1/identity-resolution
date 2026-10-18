@@ -1,0 +1,358 @@
+{
+  "desarrollo": {
+    "descripcion": "Hito 2 con mudanzas y apellidos de casada (60 % de las personas de la semilla 42) + prueba ciega 1 + prueba ciega 2",
+    "registros": 13919,
+    "personas": 5200,
+    "historia": {
+      "mudanza": 0.2,
+      "mudanza_otra_ciudad": 0.5,
+      "casada": 0.3,
+      "nuevo_matrimonio": 0.2
+    }
+  },
+  "bloqueos_prediccion": [
+    [
+      "documento"
+    ],
+    [
+      "telefono"
+    ],
+    [
+      "email"
+    ],
+    [
+      "primer_apellido",
+      "fecha_nacimiento"
+    ]
+  ],
+  "seleccion_bloqueos": [
+    {
+      "regla_agregada": "exactas",
+      "reglas": 4,
+      "pares_comparados": 21027,
+      "recall_bloqueo": 0.9975311292400172,
+      "ganancia_recall": 0.0
+    }
+  ],
+  "piso_m": {
+    "max_bits_en_contra": 10.0,
+    "criterio": "menor costo por clúster en desarrollo (10·FP + FN); empate: más estricto",
+    "candidatos": {
+      "sin piso": {
+        "umbral": 0.999999,
+        "costo": 74.0,
+        "clusters": {
+          "precision": 0.9997313705474669,
+          "recall": 0.9987118935165307,
+          "f1": 0.9992213719962411,
+          "fp": 5.0,
+          "fn": 24.0
+        },
+        "vetos": {
+          "pares_verdaderos": 18632,
+          "vetados": 43,
+          "por_campo": {
+            "email": 13,
+            "municipio": 7,
+            "documento": 6,
+            "nombres": 5,
+            "primer_apellido": 5,
+            "telefonos": 2,
+            "domicilio": 2,
+            "segundo_apellido": 2,
+            "fecha_nacimiento": 1
+          },
+          "peor_aporte_en_verdaderos": -10.313582163344934
+        }
+      },
+      "5.0": {
+        "umbral": 0.99999999,
+        "costo": 111.0,
+        "clusters": {
+          "precision": 0.9997845408025855,
+          "recall": 0.99618935165307,
+          "f1": 0.9979837083635777,
+          "fp": 4.0,
+          "fn": 71.0
+        },
+        "vetos": {
+          "pares_verdaderos": 18632,
+          "vetados": 127,
+          "por_campo": {
+            "municipio": 32,
+            "email": 20,
+            "nombres": 20,
+            "documento": 18,
+            "telefonos": 12,
+            "segundo_apellido": 12,
+            "domicilio": 6,
+            "primer_apellido": 6,
+            "fecha_nacimiento": 1
+          },
+          "peor_aporte_en_verdaderos": -5.0
+        }
+      },
+      "7.5": {
+        "umbral": 0.9999999,
+        "costo": 86.0,
+        "clusters": {
+          "precision": 0.9997311972474598,
+          "recall": 0.998067840274796,
+          "f1": 0.9988988263099938,
+          "fp": 5.0,
+          "fn": 36.0
+        },
+        "vetos": {
+          "pares_verdaderos": 18632,
+          "vetados": 65,
+          "por_campo": {
+            "email": 19,
+            "nombres": 12,
+            "municipio": 8,
+            "documento": 7,
+            "primer_apellido": 6,
+            "segundo_apellido": 5,
+            "telefonos": 4,
+            "domicilio": 3,
+            "fecha_nacimiento": 1
+          },
+          "peor_aporte_en_verdaderos": -7.5
+        }
+      },
+      "10.0": {
+        "umbral": 0.999999,
+        "costo": 74.0,
+        "clusters": {
+          "precision": 0.9997313705474669,
+          "recall": 0.9987118935165307,
+          "f1": 0.9992213719962411,
+          "fp": 5.0,
+          "fn": 24.0
+        },
+        "vetos": {
+          "pares_verdaderos": 18632,
+          "vetados": 43,
+          "por_campo": {
+            "email": 13,
+            "municipio": 7,
+            "documento": 6,
+            "primer_apellido": 5,
+            "nombres": 5,
+            "telefonos": 2,
+            "segundo_apellido": 2,
+            "domicilio": 2,
+            "fecha_nacimiento": 1
+          },
+          "peor_aporte_en_verdaderos": -10.0
+        }
+      },
+      "12.5": {
+        "umbral": 0.999999,
+        "costo": 74.0,
+        "clusters": {
+          "precision": 0.9997313705474669,
+          "recall": 0.9987118935165307,
+          "f1": 0.9992213719962411,
+          "fp": 5.0,
+          "fn": 24.0
+        },
+        "vetos": {
+          "pares_verdaderos": 18632,
+          "vetados": 43,
+          "por_campo": {
+            "email": 13,
+            "municipio": 7,
+            "documento": 6,
+            "primer_apellido": 5,
+            "nombres": 5,
+            "telefonos": 2,
+            "segundo_apellido": 2,
+            "domicilio": 2,
+            "fecha_nacimiento": 1
+          },
+          "peor_aporte_en_verdaderos": -10.313582163344934
+        }
+      },
+      "15.0": {
+        "umbral": 0.999999,
+        "costo": 74.0,
+        "clusters": {
+          "precision": 0.9997313705474669,
+          "recall": 0.9987118935165307,
+          "f1": 0.9992213719962411,
+          "fp": 5.0,
+          "fn": 24.0
+        },
+        "vetos": {
+          "pares_verdaderos": 18632,
+          "vetados": 43,
+          "por_campo": {
+            "email": 13,
+            "municipio": 7,
+            "documento": 6,
+            "primer_apellido": 5,
+            "nombres": 5,
+            "telefonos": 2,
+            "segundo_apellido": 2,
+            "domicilio": 2,
+            "fecha_nacimiento": 1
+          },
+          "peor_aporte_en_verdaderos": -10.313582163344934
+        }
+      },
+      "20.0": {
+        "umbral": 0.999999,
+        "costo": 74.0,
+        "clusters": {
+          "precision": 0.9997313705474669,
+          "recall": 0.9987118935165307,
+          "f1": 0.9992213719962411,
+          "fp": 5.0,
+          "fn": 24.0
+        },
+        "vetos": {
+          "pares_verdaderos": 18632,
+          "vetados": 43,
+          "por_campo": {
+            "email": 13,
+            "municipio": 7,
+            "documento": 6,
+            "primer_apellido": 5,
+            "nombres": 5,
+            "telefonos": 2,
+            "segundo_apellido": 2,
+            "domicilio": 2,
+            "fecha_nacimiento": 1
+          },
+          "peor_aporte_en_verdaderos": -10.313582163344934
+        }
+      }
+    }
+  },
+  "pesos_extremos": {
+    "sin_piso": [
+      {
+        "comparacion": "fecha_nacimiento",
+        "nivel": "Abs date difference <= 10 year",
+        "peso": -10.313582163344934
+      },
+      {
+        "comparacion": "primer_apellido",
+        "nivel": "All other comparisons",
+        "peso": -7.459475917029225
+      },
+      {
+        "comparacion": "documento",
+        "nivel": "All other comparisons",
+        "peso": -6.0535270470522695
+      },
+      {
+        "comparacion": "segundo_apellido",
+        "nivel": "All other comparisons",
+        "peso": -5.0133676229125825
+      },
+      {
+        "comparacion": "nombres",
+        "nivel": "All other comparisons",
+        "peso": -4.928606273871038
+      },
+      {
+        "comparacion": "email",
+        "nivel": "All other comparisons",
+        "peso": -4.784863675781393
+      },
+      {
+        "comparacion": "telefonos",
+        "nivel": "All other comparisons",
+        "peso": -3.727114956018499
+      },
+      {
+        "comparacion": "apellido_casada",
+        "nivel": "All other comparisons",
+        "peso": -3.526994696349772
+      },
+      {
+        "comparacion": "municipio",
+        "nivel": "All other comparisons",
+        "peso": -2.3356741526091813
+      },
+      {
+        "comparacion": "domicilio",
+        "nivel": "All other comparisons",
+        "peso": -1.69701901584268
+      }
+    ],
+    "con_piso": [
+      {
+        "comparacion": "fecha_nacimiento",
+        "nivel": "Abs date difference <= 10 year",
+        "peso": -10.0
+      },
+      {
+        "comparacion": "primer_apellido",
+        "nivel": "All other comparisons",
+        "peso": -7.459475917029225
+      },
+      {
+        "comparacion": "documento",
+        "nivel": "All other comparisons",
+        "peso": -6.0535270470522695
+      },
+      {
+        "comparacion": "segundo_apellido",
+        "nivel": "All other comparisons",
+        "peso": -5.0133676229125825
+      },
+      {
+        "comparacion": "nombres",
+        "nivel": "All other comparisons",
+        "peso": -4.928606273871038
+      },
+      {
+        "comparacion": "email",
+        "nivel": "All other comparisons",
+        "peso": -4.784863675781393
+      },
+      {
+        "comparacion": "telefonos",
+        "nivel": "All other comparisons",
+        "peso": -3.727114956018499
+      },
+      {
+        "comparacion": "apellido_casada",
+        "nivel": "All other comparisons",
+        "peso": -3.526994696349772
+      },
+      {
+        "comparacion": "municipio",
+        "nivel": "All other comparisons",
+        "peso": -2.3356741526091813
+      },
+      {
+        "comparacion": "domicilio",
+        "nivel": "All other comparisons",
+        "peso": -1.69701901584268
+      }
+    ]
+  },
+  "umbral": {
+    "criterio": "min_costo_cluster",
+    "valor": 0.999999,
+    "peso": 19.931567126586927,
+    "costo_fp": 10.0,
+    "costo_fn": 1.0
+  },
+  "calibracion": {
+    "metodo": "isotónica de la verdad sobre match_weight, pares del bloqueo en desarrollo",
+    "pares": 21027,
+    "bandas": {
+      "probabilidad_calibrada": [
+        0.1,
+        0.9
+      ],
+      "peso_desde_revisar": 5.226974362503657,
+      "peso_calibrado_0_9": 15.957142256610608,
+      "peso_desde_aceptar": 19.931567126586927
+    }
+  }
+}
