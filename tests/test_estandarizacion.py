@@ -8,7 +8,13 @@ from identidades import estandarizacion as e
 
 @pytest.mark.parametrize(
     ("entrada", "esperado"),
-    [("  maría   josé ", "MARÍA JOSÉ"), ("", None), (None, None), (float("nan"), None)],
+    [
+        ("  maría   josé ", "MARÍA JOSÉ"),
+        ("", None),
+        (None, None),
+        (float("nan"), None),
+        (pd.NA, None),
+    ],
 )
 def test_normalizar_texto(entrada, esperado):
     assert e.normalizar_texto(entrada) == esperado
@@ -152,3 +158,24 @@ def test_estandarizar_agrega_columnas_sin_tocar_las_originales():
     assert fila["correo_std"] == "jm@gmail.com"
     assert fila["direccion_std"] == "KR 45 # 10-20"
     assert fila["ciudad_std"] == "BOGOTA, D.C."
+
+
+def test_estandarizar_con_apellidos_vacios_no_falla():
+    # Hallazgo de la prueba ciega: un registro sin apellidos hacía fallar quitar_tildes,
+    # porque pandas convierte el None en NaN al mapear una columna de texto.
+    df = pd.DataFrame(
+        {
+            "nombres": ["Ana María Ruiz", "Luis"],
+            "apellidos": pd.Series([None, "Gómez"], dtype="string"),
+            "numero_documento": ["1", "2"],
+            "celular": [None, None],
+            "correo": [None, None],
+            "direccion": [None, None],
+            "ciudad": ["Cali", "Cali"],
+        }
+    )
+
+    s = e.estandarizar(df)
+
+    assert pd.isna(s.loc[0, "primer_apellido"]) and s.loc[1, "primer_apellido"] == "GOMEZ"
+    assert e.quitar_tildes(float("nan")) is None and e.ordenar_tokens(float("nan")) is None

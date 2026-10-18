@@ -65,7 +65,10 @@ _PATRON_DIRECCION = re.compile(
 
 
 def _vacio(valor: object) -> bool:
-    return valor is None or (isinstance(valor, float) and pd.isna(valor)) or str(valor) == ""
+    """True para None, NaN, pd.NA y textos vacíos."""
+    if valor is None or str(valor) == "":
+        return True
+    return isinstance(valor, float | type(pd.NA)) and bool(pd.isna(valor))
 
 
 def normalizar_texto(valor: object) -> str | None:
@@ -78,7 +81,7 @@ def normalizar_texto(valor: object) -> str | None:
 
 def quitar_tildes(valor: str | None) -> str | None:
     """Quita tildes y diéresis; la Ñ pasa a N (variante frecuente al digitar)."""
-    if valor is None:
+    if _vacio(valor):
         return None
     descompuesto = unicodedata.normalize("NFD", valor)
     return "".join(c for c in descompuesto if unicodedata.category(c) != "Mn")
@@ -125,7 +128,7 @@ def separar_compuesto(valor: object) -> tuple[str | None, str | None]:
 
 def ordenar_tokens(valor: str | None) -> str | None:
     """Palabras en orden alfabético: "JOSE MARIA" y "MARIA JOSE" quedan iguales."""
-    if valor is None:
+    if _vacio(valor):
         return None
     return " ".join(sorted(valor.split()))
 
