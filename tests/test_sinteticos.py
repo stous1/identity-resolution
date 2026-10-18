@@ -106,3 +106,22 @@ def test_digitacion_cambia_una_sola_posicion_aproximadamente():
     for _ in range(30):
         resultado = gen._digitacion("Rodriguez")
         assert resultado != "" and abs(len(resultado) - len("Rodriguez")) <= 1
+
+
+def test_familiares_comparten_apellido_y_direccion():
+    _, personas = sinteticos.generar(n_personas=400, semilla=6)
+    familiares = personas[personas["familiar_de"].notna()]
+    base = personas.set_index("cluster").loc[familiares["familiar_de"].astype(int)]
+
+    assert 0.15 < len(familiares) / len(personas) < 0.35
+    assert (familiares["primer_apellido"].to_numpy() == base["primer_apellido"].to_numpy()).all()
+    assert (familiares["direccion_placa"].to_numpy() == base["direccion_placa"].to_numpy()).all()
+    # Pero son otras personas: otro documento.
+    assert (familiares["numero_documento"].to_numpy() != base["numero_documento"].to_numpy()).all()
+
+
+def test_fecha_errada_sigue_siendo_una_fecha_valida():
+    gen = sinteticos.Generador(semilla=8, tasas=sinteticos.TasasError(fecha_errada=1.0))
+    for _ in range(50):
+        fecha = gen._fecha_capturada("1985-03-07")
+        assert sinteticos._fecha_valida(fecha)
