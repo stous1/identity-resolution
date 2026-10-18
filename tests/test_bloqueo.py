@@ -1,6 +1,7 @@
 """Pruebas de la selección voraz de reglas de bloqueo."""
 
 import pandas as pd
+import pytest
 
 from identidades import bloqueo, modelo
 
@@ -50,3 +51,10 @@ def test_seleccionar_reglas_desempata_por_menos_comparaciones():
     )
 
     assert elegidas == [("email",), ("surname",)]
+
+
+def test_seleccionar_reglas_sin_pares_verdaderos_falla(registros_pequenos):
+    todos_distintos = registros_pequenos.assign(cluster=range(len(registros_pequenos)))
+
+    with pytest.raises(ValueError, match="No hay pares verdaderos"):
+        bloqueo.seleccionar_reglas(todos_distintos, [("email",)], [("city",)])

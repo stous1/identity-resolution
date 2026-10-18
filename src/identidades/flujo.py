@@ -235,7 +235,7 @@ def aplicar_modelo(linker_entrenado: Linker, df: pd.DataFrame) -> Linker:
     configuracion = linker_entrenado.misc.save_model_to_json()
     linker = Linker(modelo.preparar(df), configuracion, db_api=DuckDBAPI())
     linker.training.estimate_probability_two_random_records_match(
-        modelo.REGLAS_DETERMINISTICAS, recall=0.7
+        modelo.REGLAS_DETERMINISTICAS, recall=modelo.RECALL_DETERMINISTICO
     )
     return linker
 

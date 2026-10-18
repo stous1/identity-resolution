@@ -49,6 +49,9 @@ BLOQUEOS_EM: list[tuple[str, ...]] = [
     ("dob",),
 ]
 
+# Recall que se supone para las reglas determinísticas al estimar lambda.
+RECALL_DETERMINISTICO: float = 0.7
+
 # Reglas determinísticas (alta precisión) para estimar lambda: la probabilidad a priori
 # de que dos registros al azar sean la misma persona.
 REGLAS_DETERMINISTICAS: list[str] = [
@@ -111,7 +114,7 @@ def crear_linker(df: pd.DataFrame, settings: SettingsCreator | None = None) -> L
 
 def entrenar(
     linker: Linker,
-    recall_deterministico: float = 0.7,
+    recall_deterministico: float = RECALL_DETERMINISTICO,
     max_pares_u: float = 1e6,
     semilla: int = 42,
 ) -> None:

@@ -55,6 +55,8 @@ def seleccionar_reglas(
     verdaderos = {
         tuple(p) for p in evaluacion.pares_verdaderos(df)[["id_l", "id_r"]].to_numpy().tolist()
     }
+    if not verdaderos:
+        raise ValueError("No hay pares verdaderos: no se puede medir el recall del bloqueo")
     pares = {regla: pares_de_regla(preparado, regla) for regla in exactas + candidatas}
 
     def _paso(nombre: str, reglas: list[Regla], ganancia: float) -> dict:
