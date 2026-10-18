@@ -59,6 +59,70 @@ def cargar_fake_1000(directorio: Path | None = None) -> pd.DataFrame:
     return df
 
 
+URL_FEBRL3: str = (
+    "https://raw.githubusercontent.com/moj-analytical-services/"
+    "splink_datasets/master/data/febrl/dataset3.csv"
+)
+
+COLUMNAS_FEBRL: list[str] = [
+    "given_name",
+    "surname",
+    "street_number",
+    "address_1",
+    "address_2",
+    "suburb",
+    "postcode",
+    "state",
+    "date_of_birth",
+    "soc_sec_id",
+]
+
+
+def limpiar_febrl(crudo: pd.DataFrame) -> pd.DataFrame:
+    """Deja FEBRL en el formato del proyecto, sin normalizar los valores.
+
+    Quita los espacios sobrantes de nombres de columna y valores, convierte los vacíos
+    en nulos, lee todo como texto y agrega ``unique_id`` (entero) y ``cluster`` (la
+    persona, tomada de ``rec_id``: "rec-1496-dup-3" es la persona 1496).
+    """
+    df = crudo.rename(columns=lambda c: c.strip())
+    faltantes = {"rec_id", *COLUMNAS_FEBRL} - set(df.columns)
+    if faltantes:
+        raise ValueError(f"Faltan columnas en FEBRL: {sorted(faltantes)}")
+    texto = df[COLUMNAS_FEBRL].astype("string").apply(lambda s: s.str.strip())
+    texto = texto.mask(texto == "")
+    return pd.concat(
+        [
+            pd.DataFrame(
+                {
+                    "unique_id": range(len(df)),
+                    "rec_id": df["rec_id"].str.strip(),
+                    "cluster": df["rec_id"].str.extract(r"rec-(\d+)-")[0].astype(int),
+                }
+            ),
+            texto,
+        ],
+        axis=1,
+    )
+
+
+def cargar_febrl3(directorio: Path | None = None) -> pd.DataFrame:
+    """Carga FEBRL3 (5.000 registros sintéticos de 2.000 personas), con caché local.
+
+    FEBRL es un generador de registros de personas con errores, independiente de este
+    proyecto; aquí sirve como validación externa.
+    """
+    directorio = directorio or rutas.DATA_RAW
+    ruta = directorio / "febrl3.parquet"
+    if ruta.exists():
+        return pd.read_parquet(ruta)
+
+    df = limpiar_febrl(pd.read_csv(io.BytesIO(descargar(URL_FEBRL3)), dtype=str))
+    directorio.mkdir(parents=True, exist_ok=True)
+    df.to_parquet(ruta, index=False)
+    return df
+
+
 def dividir_por_persona(
     df: pd.DataFrame,
     frac_desarrollo: float = 0.6,

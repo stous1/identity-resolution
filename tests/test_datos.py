@@ -79,3 +79,30 @@ def test_dividir_por_persona_es_reproducible(registros_pequenos):
 def test_dividir_por_persona_valida_fraccion(registros_pequenos):
     with pytest.raises(ValueError, match="frac_desarrollo"):
         datos.dividir_por_persona(registros_pequenos, frac_desarrollo=1.0)
+
+
+CSV_FEBRL_FALSO = (
+    b"rec_id, given_name, surname, street_number, address_1, address_2, suburb, postcode,"
+    b" state, date_of_birth, soc_sec_id\n"
+    b"rec-7-org, mitchell, green, 7, wallaby place, , cleveland, 2119, sa, 19560409, 1804974\n"
+    b"rec-7-dup-0, mitchel, green,  , wallaby pl, , cleveland, 2119, sa, 19560409, 1804947\n"
+    b"rec-12-org, harley, mccarthy, 177, pridham street, milton, marsden, 3165, nsw,"
+    b" 19080419, 6089216\n"
+)
+
+
+def test_cargar_febrl3_limpia_y_extrae_la_persona(tmp_path, monkeypatch):
+    llamadas = []
+    monkeypatch.setattr(
+        datos, "descargar", lambda url, timeout=60: llamadas.append(url) or CSV_FEBRL_FALSO
+    )
+
+    df = datos.cargar_febrl3(tmp_path)
+    otra = datos.cargar_febrl3(tmp_path)
+
+    assert llamadas == [datos.URL_FEBRL3]  # la segunda vez usa la caché
+    pd.testing.assert_frame_equal(df, otra)
+    assert df["cluster"].tolist() == [7, 7, 12]
+    assert df["unique_id"].tolist() == [0, 1, 2]
+    assert df.loc[0, "given_name"] == "mitchell" and df.loc[0, "postcode"] == "2119"
+    assert pd.isna(df.loc[1, "street_number"]) and pd.isna(df.loc[0, "address_2"])
