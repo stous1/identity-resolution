@@ -1,7 +1,7 @@
 """Copia los resultados finales de reports/ a docs/resultados/ (GitHub Pages).
 
 Uso:
-    uv run python scripts/publicar_resultados.py [--hito 1|2|validacion|2b]
+    uv run python scripts/publicar_resultados.py [--hito 1|2|validacion|2b|3]
 
 Correr después del script del hito, solo cuando se quiera actualizar lo publicado.
 """
@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import argparse
 
-from identidades import flujo, flujo_hito2, flujo_hito2b, flujo_validacion, rutas
+from identidades import flujo, flujo_hito2, flujo_hito2b, flujo_hito3, flujo_validacion, rutas
 
 HITOS = {
     1: (rutas.REPORTS, rutas.DOCS_RESULTADOS, flujo.ARCHIVOS_PUBLICABLES),
@@ -21,6 +21,7 @@ HITOS = {
         flujo_validacion.ARCHIVOS_PUBLICABLES,
     ),
     "2b": (rutas.REPORTS_HITO2B, rutas.DOCS_RESULTADOS_HITO2B, flujo_hito2b.ARCHIVOS_PUBLICABLES),
+    3: (rutas.REPORTS_HITO3, rutas.DOCS_RESULTADOS_HITO3, flujo_hito3.ARCHIVOS_PUBLICABLES),
 }
 
 

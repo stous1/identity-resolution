@@ -1,0 +1,683 @@
+{
+  "escenarios": {
+    "desarrollo": {
+      "semilla": 3030,
+      "registros": 4918,
+      "personas": 2000,
+      "grupos_compartidos_verdaderos": {
+        "hogar": 390,
+        "sospechoso": 36,
+        "relleno": 10,
+        "coincidencia": 1
+      },
+      "origen_registros": {
+        "normal": 4798,
+        "anillo_correo": 43,
+        "anillo_celular": 37,
+        "anillo_direccion": 28,
+        "suplantacion": 12
+      }
+    },
+    "prueba": {
+      "semilla": 3131,
+      "registros": 4839,
+      "personas": 2000,
+      "grupos_compartidos_verdaderos": {
+        "hogar": 386,
+        "sospechoso": 36,
+        "relleno": 10
+      },
+      "origen_registros": {
+        "normal": 4715,
+        "anillo_correo": 47,
+        "anillo_direccion": 36,
+        "anillo_celular": 29,
+        "suplantacion": 12
+      }
+    }
+  },
+  "modelo": {
+    "tag": "hito2b-congelado",
+    "umbral": 0.9999
+  },
+  "calidad_union": {
+    "desarrollo": {
+      "umbral": 0.9999,
+      "tp": 5713,
+      "fp": 0,
+      "fn": 14,
+      "precision": 1.0,
+      "recall": 0.9975554391478959,
+      "f1": 0.9987762237762237,
+      "clusters_predichos": 2008,
+      "clusters_reales": 2000,
+      "clusters_exactos": 1992,
+      "pct_clusters_exactos": 0.996
+    },
+    "prueba": {
+      "umbral": 0.9999,
+      "tp": 5441,
+      "fp": 0,
+      "fn": 12,
+      "precision": 1.0,
+      "recall": 0.9977993764900055,
+      "f1": 0.9988984762254451,
+      "clusters_predichos": 2007,
+      "clusters_reales": 2000,
+      "clusters_exactos": 1993,
+      "pct_clusters_exactos": 0.9965
+    }
+  },
+  "registro_oro": {
+    "reglas_elegidas_en_desarrollo": {
+      "documento": "fuente_confiable",
+      "nombres": "fuente_confiable",
+      "apellidos": "fuente_confiable",
+      "fecha_nacimiento": "mas_reciente",
+      "celular": "validado",
+      "correo": "validado",
+      "direccion": "frecuente"
+    },
+    "prueba_con_reglas_elegidas": {
+      "documento": {
+        "valor": 0.9561534628799203,
+        "ic_inf": 0.9471848530144494,
+        "ic_sup": 0.9651220727453911
+      },
+      "nombres": {
+        "valor": 0.9282511210762332,
+        "ic_inf": 0.9162929745889388,
+        "ic_sup": 0.9397110114598903
+      },
+      "apellidos": {
+        "valor": 0.9357249626307922,
+        "ic_inf": 0.9247508719481814,
+        "ic_sup": 0.9456900847035377
+      },
+      "fecha_nacimiento": {
+        "valor": 1.0,
+        "ic_inf": 1.0,
+        "ic_sup": 1.0
+      },
+      "celular": {
+        "valor": 0.804185351270553,
+        "ic_inf": 0.7877304434479322,
+        "ic_sup": 0.8216243148978575
+      },
+      "correo": {
+        "valor": 0.8285999003487793,
+        "ic_inf": 0.8131539611360239,
+        "ic_sup": 0.8455530642750374
+      },
+      "direccion": {
+        "valor": 0.8390632785251619,
+        "ic_inf": 0.8226208271051321,
+        "ic_sup": 0.8550074738415545
+      }
+    },
+    "prueba_techo_alcanzable": {
+      "apellidos": 0.9661185849526657,
+      "celular": 0.8370702541106129,
+      "correo": 0.8609865470852018,
+      "direccion": 0.8863976083707026,
+      "documento": 0.9720976581963129,
+      "fecha_nacimiento": 1.0,
+      "nombres": 0.9606377678126558
+    },
+    "prueba_por_regla": {
+      "mas_reciente": {
+        "documento": {
+          "valor": 0.9207772795216741,
+          "ic_inf": 0.9088191330343797,
+          "ic_sup": 0.9322371699053313
+        },
+        "nombres": {
+          "valor": 0.8943697060288989,
+          "ic_inf": 0.8799202790234181,
+          "ic_sup": 0.9078226208271052
+        },
+        "apellidos": {
+          "valor": 0.890881913303438,
+          "ic_inf": 0.8774289985052317,
+          "ic_sup": 0.9043472845042352
+        },
+        "fecha_nacimiento": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "celular": {
+          "valor": 0.8036870951669158,
+          "ic_inf": 0.7867463876432487,
+          "ic_sup": 0.8211260587942202
+        },
+        "correo": {
+          "valor": 0.8031888390632785,
+          "ic_inf": 0.7857498754359741,
+          "ic_sup": 0.8221225710014948
+        },
+        "direccion": {
+          "valor": 0.8166417538614849,
+          "ic_inf": 0.7987045341305431,
+          "ic_sup": 0.8325984055804684
+        }
+      },
+      "validado": {
+        "documento": {
+          "valor": 0.9591429995017439,
+          "ic_inf": 0.9511584454409566,
+          "ic_sup": 0.9671275535625312
+        },
+        "nombres": {
+          "valor": 0.9078226208271052,
+          "ic_inf": 0.8948679621325362,
+          "ic_sup": 0.9207772795216741
+        },
+        "apellidos": {
+          "valor": 0.9118086696562033,
+          "ic_inf": 0.8988540109616343,
+          "ic_sup": 0.9232810164424514
+        },
+        "fecha_nacimiento": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "celular": {
+          "valor": 0.804185351270553,
+          "ic_inf": 0.7877304434479322,
+          "ic_sup": 0.8216243148978575
+        },
+        "correo": {
+          "valor": 0.8285999003487793,
+          "ic_inf": 0.8131539611360239,
+          "ic_sup": 0.8455530642750374
+        },
+        "direccion": {
+          "valor": 0.8365719980069756,
+          "ic_inf": 0.8201170901843547,
+          "ic_sup": 0.8525161933233683
+        }
+      },
+      "fuente_confiable": {
+        "documento": {
+          "valor": 0.9561534628799203,
+          "ic_inf": 0.9471848530144494,
+          "ic_sup": 0.9651220727453911
+        },
+        "nombres": {
+          "valor": 0.9282511210762332,
+          "ic_inf": 0.9162929745889388,
+          "ic_sup": 0.9397110114598903
+        },
+        "apellidos": {
+          "valor": 0.9357249626307922,
+          "ic_inf": 0.9247508719481814,
+          "ic_sup": 0.9456900847035377
+        },
+        "fecha_nacimiento": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "celular": {
+          "valor": 0.7957149975087194,
+          "ic_inf": 0.7787742899850523,
+          "ic_sup": 0.8121699053313404
+        },
+        "correo": {
+          "valor": 0.8166417538614849,
+          "ic_inf": 0.8006851021425012,
+          "ic_sup": 0.8350772296960638
+        },
+        "direccion": {
+          "valor": 0.8390632785251619,
+          "ic_inf": 0.8221101145989038,
+          "ic_sup": 0.8550074738415545
+        }
+      },
+      "frecuente": {
+        "documento": {
+          "valor": 0.9511709018435476,
+          "ic_inf": 0.9422022919780767,
+          "ic_sup": 0.9606377678126558
+        },
+        "nombres": {
+          "valor": 0.931738913801694,
+          "ic_inf": 0.9202790234180369,
+          "ic_sup": 0.9431988041853513
+        },
+        "apellidos": {
+          "valor": 0.9377179870453413,
+          "ic_inf": 0.9272546088689586,
+          "ic_sup": 0.9476831091180867
+        },
+        "fecha_nacimiento": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "celular": {
+          "valor": 0.7987045341305431,
+          "ic_inf": 0.781751370204285,
+          "ic_sup": 0.8166417538614849
+        },
+        "correo": {
+          "valor": 0.809666168410563,
+          "ic_inf": 0.7927254608868959,
+          "ic_sup": 0.8276158445440956
+        },
+        "direccion": {
+          "valor": 0.8390632785251619,
+          "ic_inf": 0.8226208271051321,
+          "ic_sup": 0.8550074738415545
+        }
+      }
+    },
+    "desarrollo_por_regla": {
+      "mas_reciente": {
+        "documento": {
+          "valor": 0.9282868525896414,
+          "ic_inf": 0.9159487051792828,
+          "ic_sup": 0.9405129482071714
+        },
+        "nombres": {
+          "valor": 0.8874501992031872,
+          "ic_inf": 0.8754980079681275,
+          "ic_sup": 0.896414342629482
+        },
+        "apellidos": {
+          "valor": 0.8884462151394422,
+          "ic_inf": 0.8748381474103586,
+          "ic_sup": 0.898406374501992
+        },
+        "fecha_nacimiento": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "celular": {
+          "valor": 0.7773904382470119,
+          "ic_inf": 0.7637823705179283,
+          "ic_sup": 0.7965886454183266
+        },
+        "correo": {
+          "valor": 0.8082669322709163,
+          "ic_inf": 0.7918326693227091,
+          "ic_sup": 0.826195219123506
+        },
+        "direccion": {
+          "valor": 0.8361553784860558,
+          "ic_inf": 0.8230453187250997,
+          "ic_sup": 0.8511454183266932
+        }
+      },
+      "validado": {
+        "documento": {
+          "valor": 0.9631474103585658,
+          "ic_inf": 0.9577813745019921,
+          "ic_sup": 0.9706673306772908
+        },
+        "nombres": {
+          "valor": 0.9098605577689243,
+          "ic_inf": 0.8997385458167331,
+          "ic_sup": 0.9187126494023904
+        },
+        "apellidos": {
+          "valor": 0.9073705179282868,
+          "ic_inf": 0.8945343625498008,
+          "ic_sup": 0.9190986055776892
+        },
+        "fecha_nacimiento": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "celular": {
+          "valor": 0.7863545816733067,
+          "ic_inf": 0.7690986055776893,
+          "ic_sup": 0.8021165338645417
+        },
+        "correo": {
+          "valor": 0.8296812749003984,
+          "ic_inf": 0.8136952191235061,
+          "ic_sup": 0.8491533864541833
+        },
+        "direccion": {
+          "valor": 0.8451195219123506,
+          "ic_inf": 0.8338894422310758,
+          "ic_sup": 0.8624377490039841
+        }
+      },
+      "fuente_confiable": {
+        "documento": {
+          "valor": 0.9646414342629482,
+          "ic_inf": 0.9602714143426295,
+          "ic_sup": 0.9721613545816733
+        },
+        "nombres": {
+          "valor": 0.9307768924302788,
+          "ic_inf": 0.9214267928286852,
+          "ic_sup": 0.940288844621514
+        },
+        "apellidos": {
+          "valor": 0.9337649402390438,
+          "ic_inf": 0.9207669322709163,
+          "ic_sup": 0.9435009960159363
+        },
+        "fecha_nacimiento": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "celular": {
+          "valor": 0.7773904382470119,
+          "ic_inf": 0.7627863545816733,
+          "ic_sup": 0.7926045816733067
+        },
+        "correo": {
+          "valor": 0.8242031872509961,
+          "ic_inf": 0.807445219123506,
+          "ic_sup": 0.8425174302788845
+        },
+        "direccion": {
+          "valor": 0.8540836653386454,
+          "ic_inf": 0.8388695219123506,
+          "ic_sup": 0.8720119521912351
+        }
+      },
+      "frecuente": {
+        "documento": {
+          "valor": 0.9576693227091634,
+          "ic_inf": 0.9514193227091634,
+          "ic_sup": 0.9666832669322709
+        },
+        "nombres": {
+          "valor": 0.9307768924302788,
+          "ic_inf": 0.91988296812749,
+          "ic_sup": 0.9381349601593626
+        },
+        "apellidos": {
+          "valor": 0.9337649402390438,
+          "ic_inf": 0.9232569721115538,
+          "ic_sup": 0.94460906374502
+        },
+        "fecha_nacimiento": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "celular": {
+          "valor": 0.772410358565737,
+          "ic_inf": 0.7562001992031873,
+          "ic_sup": 0.791496513944223
+        },
+        "correo": {
+          "valor": 0.8177290836653387,
+          "ic_inf": 0.7986429282868526,
+          "ic_sup": 0.8360931274900398
+        },
+        "direccion": {
+          "valor": 0.8560756972111554,
+          "ic_inf": 0.843413844621514,
+          "ic_sup": 0.8733939243027888
+        }
+      }
+    }
+  },
+  "grafo_compartido": {
+    "parametros_elegidos_en_desarrollo": {
+      "max_clientes": 15,
+      "min_apellido": 0.5
+    },
+    "desarrollo": {
+      "grupos": 440,
+      "exactitud": 0.9840909090909091,
+      "por_clase": {
+        "relleno": {
+          "reales": 10,
+          "predichos": 12,
+          "precision": 0.8333333333333334,
+          "recall": 1.0
+        },
+        "hogar": {
+          "reales": 390,
+          "predichos": 390,
+          "precision": 0.9923076923076923,
+          "recall": 0.9923076923076923
+        },
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 38,
+          "precision": 0.9473684210526315,
+          "recall": 1.0
+        }
+      },
+      "confusion": {
+        "coincidencia": {
+          "hogar": 0,
+          "relleno": 1,
+          "sospechoso": 0
+        },
+        "hogar": {
+          "hogar": 387,
+          "relleno": 1,
+          "sospechoso": 2
+        },
+        "misma_persona": {
+          "hogar": 3,
+          "relleno": 0,
+          "sospechoso": 0
+        },
+        "relleno": {
+          "hogar": 0,
+          "relleno": 10,
+          "sospechoso": 0
+        },
+        "sospechoso": {
+          "hogar": 0,
+          "relleno": 0,
+          "sospechoso": 36
+        }
+      }
+    },
+    "prueba": {
+      "grupos": 432,
+      "exactitud": 1.0,
+      "por_clase": {
+        "relleno": {
+          "reales": 10,
+          "predichos": 10,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "hogar": {
+          "reales": 386,
+          "predichos": 386,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 36,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "confusion": {
+        "hogar": {
+          "hogar": 386,
+          "relleno": 0,
+          "sospechoso": 0
+        },
+        "relleno": {
+          "hogar": 0,
+          "relleno": 10,
+          "sospechoso": 0
+        },
+        "sospechoso": {
+          "hogar": 0,
+          "relleno": 0,
+          "sospechoso": 36
+        }
+      },
+      "intervalos": {
+        "exactitud": {
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "recall_relleno": {
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "recall_hogar": {
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "recall_sospechoso": {
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        }
+      }
+    }
+  },
+  "puentes": {
+    "0.9999": {
+      "politica_elegida_en_desarrollo": {
+        "max_peso": 0.0,
+        "min_lado": 1
+      },
+      "prueba": {
+        "max_peso": 0.0,
+        "min_lado": 1,
+        "puentes_cortados": 0,
+        "mezclados_antes": 0,
+        "mezclados_despues": 0,
+        "fp_antes": 0,
+        "fp_despues": 0,
+        "fn_antes": 12,
+        "fn_despues": 12,
+        "precision_despues": 1.0,
+        "recall_despues": 0.9977993764900055,
+        "recall_perdido": 0.0,
+        "costo_antes": 12.0,
+        "costo_despues": 12.0,
+        "revision_marcados": 0,
+        "revision_mezclas_atrapadas": 0,
+        "revision_precision": 0.0,
+        "revision_recall": 0.0
+      },
+      "prueba_sostenidas_por_puente": {
+        "mezclados": 0,
+        "sostenidos_por_puente": 0,
+        "pesos_de_esos_puentes": []
+      }
+    },
+    "0.9": {
+      "politica_elegida_en_desarrollo": {
+        "max_peso": 15.0,
+        "min_lado": 1
+      },
+      "prueba": {
+        "max_peso": 15.0,
+        "min_lado": 1,
+        "puentes_cortados": 7,
+        "mezclados_antes": 18,
+        "mezclados_despues": 11,
+        "fp_antes": 88,
+        "fp_despues": 63,
+        "fn_antes": 10,
+        "fn_despues": 10,
+        "precision_despues": 0.9885579367962223,
+        "recall_despues": 0.9981661470750046,
+        "recall_perdido": 0.0,
+        "costo_antes": 890.0,
+        "costo_despues": 640.0,
+        "revision_marcados": 7,
+        "revision_mezclas_atrapadas": 7,
+        "revision_precision": 1.0,
+        "revision_recall": 0.3888888888888889
+      },
+      "prueba_sostenidas_por_puente": {
+        "mezclados": 18,
+        "sostenidos_por_puente": 7,
+        "pesos_de_esos_puentes": [
+          3.86,
+          3.97,
+          5.0,
+          5.76,
+          5.95,
+          7.58,
+          10.69
+        ]
+      }
+    },
+    "0.99": {
+      "politica_elegida_en_desarrollo": {
+        "max_peso": 15.0,
+        "min_lado": 1
+      },
+      "prueba": {
+        "max_peso": 15.0,
+        "min_lado": 1,
+        "puentes_cortados": 3,
+        "mezclados_antes": 8,
+        "mezclados_despues": 5,
+        "fp_antes": 46,
+        "fp_despues": 35,
+        "fn_antes": 10,
+        "fn_despues": 10,
+        "precision_despues": 0.9936108068638189,
+        "recall_despues": 0.9981661470750046,
+        "recall_perdido": 0.0,
+        "costo_antes": 470.0,
+        "costo_despues": 360.0,
+        "revision_marcados": 3,
+        "revision_mezclas_atrapadas": 3,
+        "revision_precision": 1.0,
+        "revision_recall": 0.375
+      },
+      "prueba_sostenidas_por_puente": {
+        "mezclados": 8,
+        "sostenidos_por_puente": 3,
+        "pesos_de_esos_puentes": [
+          7.28,
+          7.58,
+          10.69
+        ]
+      }
+    },
+    "casos_externos": {
+      "hito1_109_844": {
+        "es_puente": true,
+        "match_weight": 2.5162118677351817,
+        "lado_menor": 3,
+        "rango_entre_puentes_por_peso": 2,
+        "puentes_totales": 35
+      },
+      "hito1_sostenidas_por_puente": {
+        "mezclados": 1,
+        "sostenidos_por_puente": 1,
+        "pesos_de_esos_puentes": [
+          2.52
+        ]
+      },
+      "ciega2_modelo_v2_sostenidas_por_puente": {
+        "mezclados": 3,
+        "sostenidos_por_puente": 3,
+        "pesos_de_esos_puentes": [
+          13.77,
+          16.94,
+          20.92
+        ]
+      }
+    }
+  },
+  "cola_revision": {
+    "grupo_sospechoso_documento": 12,
+    "grupo_sospechoso_correo": 11,
+    "puente_debil": 7,
+    "grupo_sospechoso_direccion": 7,
+    "grupo_sospechoso_celular": 6
+  }
+}

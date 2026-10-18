@@ -312,3 +312,50 @@ def grafico_intervalos(tabla: pd.DataFrame, titulo: str) -> alt.FacetChart:
 
 def guardar_intervalos(tabla: pd.DataFrame, titulo: str, ruta_html: Path) -> None:
     _guardar_grafico(grafico_intervalos(tabla, titulo), ruta_html)
+
+
+def capturar_pagina_servida(
+    raiz: Path,
+    pagina: str,
+    ruta_png: Path,
+    ancho: int = 1400,
+    alto: int = 900,
+    espera_ms: int = 25000,
+    puerto: int = 8765,
+) -> str:
+    """Captura una página que necesita servidor (carga datos con ``fetch`` y usa WebGL).
+
+    Sirve ``raiz`` en ``127.0.0.1:puerto`` solo mientras dura la captura. Devuelve el
+    texto del elemento ``#estado`` si existe, para comprobar que la página cargó.
+    """
+    import functools
+    import http.server
+    import threading
+
+    from playwright.sync_api import sync_playwright
+
+    class Silencioso(http.server.SimpleHTTPRequestHandler):
+        def log_message(self, *args: object) -> None:  # sin ruido en consola
+            pass
+
+    manejador = functools.partial(Silencioso, directory=str(raiz))
+    servidor = http.server.ThreadingHTTPServer(("127.0.0.1", puerto), manejador)
+    hilo = threading.Thread(target=servidor.serve_forever, daemon=True)
+    hilo.start()
+    try:
+        with sync_playwright() as p:
+            navegador = p.chromium.launch(
+                args=["--use-angle=swiftshader", "--enable-unsafe-swiftshader"]
+            )
+            pagina_web = navegador.new_page(viewport={"width": ancho, "height": alto})
+            pagina_web.goto(f"http://127.0.0.1:{puerto}/{pagina}")
+            pagina_web.wait_for_timeout(espera_ms)
+            ruta_png.parent.mkdir(parents=True, exist_ok=True)
+            pagina_web.screenshot(path=str(ruta_png))
+            estado = (
+                pagina_web.inner_text("#estado") if pagina_web.query_selector("#estado") else ""
+            )
+            navegador.close()
+    finally:
+        servidor.shutdown()
+    return estado

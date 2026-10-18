@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-4671cde22c3f7d2a9a56e19679678f23"}, "facet": {"column": {"field": "metrica", "title": null, "type": "nominal"}}, "spec": {"layer": [{"mark": {"type": "rule", "color": "#6b7280", "strokeWidth": 2}, "encoding": {"tooltip": [{"field": "grupo", "type": "nominal"}, {"field": "metrica", "type": "nominal"}, {"field": "valor", "format": ".3f", "type": "quantitative"}, {"field": "ic_inf", "format": ".3f", "title": "IC 95 % inferior", "type": "quantitative"}, {"field": "ic_sup", "format": ".3f", "title": "IC 95 % superior", "type": "quantitative"}], "x": {"field": "ic_inf", "scale": {"zero": false}, "title": "Valor (IC 95 %)", "type": "quantitative"}, "x2": {"field": "ic_sup"}, "y": {"field": "grupo", "sort": null, "title": null, "type": "nominal"}}}, {"mark": {"type": "point", "color": "#2563eb", "filled": true, "size": 70}, "encoding": {"tooltip": [{"field": "grupo", "type": "nominal"}, {"field": "metrica", "type": "nominal"}, {"field": "valor", "format": ".3f", "type": "quantitative"}, {"field": "ic_inf", "format": ".3f", "title": "IC 95 % inferior", "type": "quantitative"}, {"field": "ic_sup", "format": ".3f", "title": "IC 95 % superior", "type": "quantitative"}], "x": {"field": "valor", "type": "quantitative"}, "y": {"field": "grupo", "sort": null, "title": null, "type": "nominal"}}}], "height": {"step": 26}, "width": 260}, "resolve": {"scale": {"x": "independent"}}, "title": "Registro de oro en prueba: acierto por campo y regla de supervivencia", "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json", "datasets": {"data-4671cde22c3f7d2a9a56e19679678f23": [{"grupo": "documento", "metrica": "M\u00e1s reciente", "valor": 0.9207772795216741, "ic_inf": 0.9088191330343797, "ic_sup": 0.9322371699053313}, {"grupo": "documento", "metrica": "Validado m\u00e1s reciente", "valor": 0.9591429995017439, "ic_inf": 0.9511584454409566, "ic_sup": 0.9671275535625312}, {"grupo": "documento", "metrica": "Fuente m\u00e1s confiable", "valor": 0.9561534628799203, "ic_inf": 0.9471848530144494, "ic_sup": 0.9651220727453911}, {"grupo": "documento", "metrica": "M\u00e1s frecuente", "valor": 0.9511709018435476, "ic_inf": 0.9422022919780767, "ic_sup": 0.9606377678126558}, {"grupo": "nombres", "metrica": "M\u00e1s reciente", "valor": 0.8943697060288989, "ic_inf": 0.8799202790234181, "ic_sup": 0.9078226208271052}, {"grupo": "nombres", "metrica": "Validado m\u00e1s reciente", "valor": 0.9078226208271052, "ic_inf": 0.8948679621325362, "ic_sup": 0.9207772795216741}, {"grupo": "nombres", "metrica": "Fuente m\u00e1s confiable", "valor": 0.9282511210762332, "ic_inf": 0.9162929745889388, "ic_sup": 0.9397110114598903}, {"grupo": "nombres", "metrica": "M\u00e1s frecuente", "valor": 0.931738913801694, "ic_inf": 0.9202790234180369, "ic_sup": 0.9431988041853513}, {"grupo": "apellidos", "metrica": "M\u00e1s reciente", "valor": 0.890881913303438, "ic_inf": 0.8774289985052317, "ic_sup": 0.9043472845042352}, {"grupo": "apellidos", "metrica": "Validado m\u00e1s reciente", "valor": 0.9118086696562033, "ic_inf": 0.8988540109616343, "ic_sup": 0.9232810164424514}, {"grupo": "apellidos", "metrica": "Fuente m\u00e1s confiable", "valor": 0.9357249626307922, "ic_inf": 0.9247508719481814, "ic_sup": 0.9456900847035377}, {"grupo": "apellidos", "metrica": "M\u00e1s frecuente", "valor": 0.9377179870453413, "ic_inf": 0.9272546088689586, "ic_sup": 0.9476831091180867}, {"grupo": "fecha_nacimiento", "metrica": "M\u00e1s reciente", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "fecha_nacimiento", "metrica": "Validado m\u00e1s reciente", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "fecha_nacimiento", "metrica": "Fuente m\u00e1s confiable", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "fecha_nacimiento", "metrica": "M\u00e1s frecuente", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "celular", "metrica": "M\u00e1s reciente", "valor": 0.8036870951669158, "ic_inf": 0.7867463876432487, "ic_sup": 0.8211260587942202}, {"grupo": "celular", "metrica": "Validado m\u00e1s reciente", "valor": 0.804185351270553, "ic_inf": 0.7877304434479322, "ic_sup": 0.8216243148978575}, {"grupo": "celular", "metrica": "Fuente m\u00e1s confiable", "valor": 0.7957149975087194, "ic_inf": 0.7787742899850523, "ic_sup": 0.8121699053313404}, {"grupo": "celular", "metrica": "M\u00e1s frecuente", "valor": 0.7987045341305431, "ic_inf": 0.781751370204285, "ic_sup": 0.8166417538614849}, {"grupo": "correo", "metrica": "M\u00e1s reciente", "valor": 0.8031888390632785, "ic_inf": 0.7857498754359741, "ic_sup": 0.8221225710014948}, {"grupo": "correo", "metrica": "Validado m\u00e1s reciente", "valor": 0.8285999003487793, "ic_inf": 0.8131539611360239, "ic_sup": 0.8455530642750374}, {"grupo": "correo", "metrica": "Fuente m\u00e1s confiable", "valor": 0.8166417538614849, "ic_inf": 0.8006851021425012, "ic_sup": 0.8350772296960638}, {"grupo": "correo", "metrica": "M\u00e1s frecuente", "valor": 0.809666168410563, "ic_inf": 0.7927254608868959, "ic_sup": 0.8276158445440956}, {"grupo": "direccion", "metrica": "M\u00e1s reciente", "valor": 0.8166417538614849, "ic_inf": 0.7987045341305431, "ic_sup": 0.8325984055804684}, {"grupo": "direccion", "metrica": "Validado m\u00e1s reciente", "valor": 0.8365719980069756, "ic_inf": 0.8201170901843547, "ic_sup": 0.8525161933233683}, {"grupo": "direccion", "metrica": "Fuente m\u00e1s confiable", "valor": 0.8390632785251619, "ic_inf": 0.8221101145989038, "ic_sup": 0.8550074738415545}, {"grupo": "direccion", "metrica": "M\u00e1s frecuente", "valor": 0.8390632785251619, "ic_inf": 0.8226208271051321, "ic_sup": 0.8550074738415545}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
