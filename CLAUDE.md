@@ -83,6 +83,15 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, o validacion -> do
 - Métricas medidas sobre los mismos datos con que se eligió algo se presentan solo como
   referencia y marcadas como optimistas.
 
+## Regla de procesos (para Claude y cualquier subagente)
+
+- **Nunca terminar procesos que no hayas iniciado tú.** Nada de `taskkill /IM`, `pkill`,
+  `killall` ni `kill` generales por nombre: pueden cerrar procesos del usuario o de otras
+  sesiones.
+- Si un comando se traba, termina solo ese proceso por su identificador (el que lanzaste
+  tú) o pregúntale al usuario.
+- Al delegar en un subagente, incluye esta regla en sus instrucciones.
+
 ## Regla dura de datos
 
 - **Nunca usar datos reales de clientes.** Solo datasets públicos de demostración (Splink,
