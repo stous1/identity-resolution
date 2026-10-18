@@ -82,26 +82,28 @@ def guardar_parametros(linker: Linker, directorio: Path) -> None:
     )
 
 
-def _marcas_umbral(marcas: dict[str, float], tope: float = 1.0) -> alt.LayerChart:
-    """Líneas verticales punteadas con etiqueta para cada umbral de ``marcas``.
+ALTO_GRAFICO: int = 320
 
-    Las etiquetas se ubican en la parte baja del eje Y, cuyo máximo es ``tope``.
+
+def _marcas_umbral(marcas: dict[str, float], abajo: bool = False) -> alt.LayerChart:
+    """Líneas verticales punteadas, con su etiqueta escrita a lo largo de cada línea.
+
+    Las etiquetas van arriba o, con ``abajo``, en la parte baja del gráfico.
     """
-    datos = pd.DataFrame(
-        {
-            "criterio": list(marcas),
-            "umbral": list(marcas.values()),
-            # Etiquetas escalonadas para que no se encimen si dos umbrales coinciden.
-            "y": [tope * (0.04 + 0.07 * i) for i in range(len(marcas))],
-        }
-    )
+    datos = pd.DataFrame({"criterio": list(marcas), "umbral": list(marcas.values())})
     base = alt.Chart(datos)
     reglas = base.mark_rule(strokeDash=[4, 4], color="#6b7280").encode(
         x="umbral:Q", tooltip=["criterio:N", "umbral:Q"]
     )
-    textos = base.mark_text(align="right", dx=-4, fontSize=11, color="#374151").encode(
-        x="umbral:Q", y="y:Q", text="criterio:N"
-    )
+    textos = base.mark_text(
+        angle=270,
+        align="left" if abajo else "right",
+        baseline="bottom",
+        dx=6 if abajo else -6,
+        dy=-3,
+        fontSize=11,
+        color="#374151",
+    ).encode(x="umbral:Q", y=alt.value(ALTO_GRAFICO if abajo else 0), text="criterio:N")
     return reglas + textos
 
 
@@ -126,7 +128,9 @@ def grafico_curva_umbral(
             tooltip=["umbral:Q", "metrica:N", alt.Tooltip("valor:Q", format=".3f")],
         )
     )
-    return (lineas + _marcas_umbral(marcas)).properties(title=titulo, width=560, height=320)
+    return (lineas + _marcas_umbral(marcas, abajo=True)).properties(
+        title=titulo, width=560, height=ALTO_GRAFICO
+    )
 
 
 def grafico_costo(
@@ -134,23 +138,26 @@ def grafico_costo(
 ) -> alt.LayerChart:
     """Costo total de errores según el umbral, una línea por nivel (par, clúster)."""
     largo = pd.concat([c[["umbral", "costo"]].assign(nivel=nivel) for nivel, c in curvas.items()])
-    tope = float(largo["costo"].max())
     lineas = (
         alt.Chart(largo)
         .mark_line(strokeWidth=2)
         .encode(
             x=alt.X("umbral:Q", title="Umbral de match_probability"),
-            y=alt.Y("costo:Q", title="Costo total", scale=alt.Scale(domain=[0, tope])),
+            y=alt.Y(
+                "costo:Q", title="Costo total (escala logarítmica)", scale=alt.Scale(type="log")
+            ),
             color=alt.Color(
                 "nivel:N",
                 title="Nivel",
                 scale=alt.Scale(range=[COLORES_METRICAS["precision"], COLORES_METRICAS["f1"]]),
             ),
-            tooltip=["umbral:Q", "nivel:N", "costo:Q"],
+            tooltip=["umbral:Q", "nivel:N", alt.Tooltip("costo:Q", format=",.0f")],
         )
     )
     titulo = f"Costo de errores según el umbral (FP = {costo_fp:g}, FN = {costo_fn:g})"
-    return (lineas + _marcas_umbral(marcas, tope)).properties(title=titulo, width=560, height=320)
+    return (lineas + _marcas_umbral(marcas)).properties(
+        title=titulo, width=560, height=ALTO_GRAFICO
+    )
 
 
 def guardar_curva_umbral(
