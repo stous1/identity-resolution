@@ -1,0 +1,41 @@
+unique_id,tipo_documento,numero_documento,nombres,apellidos,fecha_nacimiento,celular,correo,direccion,ciudad,departamento,cluster
+2136,CC,1115349974,ALEXIS,CÁRDENAS MORENO,1988-10-26,3019167478,alexiscardenas68@hotmail.com,CL 64 SUR # 94-94,BELALCÁZAR,CALDAS,205
+1884,CC,56806603,ELIECER,GAMBOA PEREZ,1941-06-01,3503403855,eliecergamboa88@gmail.com,CL 58 # 36-8,CAMPAMENTO,ANTIOQUIA,224
+1527,CE,6066348,Eduard Enrique,Torres Cabrera,1942-10-31,3016005239,eduard.torres@logisticadelvalle.com.co,KR 122C # 46A-10,Bucaramanga,Santander,248
+85,PPT,5983869,Ernesto Javier,Rojas Carvajal,1995-11-09,3009366769,ernesto.rojas48@yahoo.com,KR 147A # 107B-3,El Cerrito,Valle del Cauca,250
+4214,CC,1036731216,Marcela,Gómez Flórez,1956-11-06,3208147234,marcela.gomez6@gmail.com,KR 39C # 100-13,Sonsón,Antioquia,458
+3658,CC,95881168,LUIS ROGER,JAIMES - CARO,1964-08-15,3104489175,luisjaimes74@yahoo.com,CL 5A # 140-93,MIRITI - PARANA,AMAZONAS,498
+2039,CC,1120548688,LIGIA,GOMEZRODRIGUEZ,1945-12-27,3120398545,ligiagomez35@gmail.com,CL86#107-5ESTE,VEGACHI,ANTIOQUIA,641
+3418,CC,85922840,Jorge,Ospino,1941-08-28,3155089401,jorge.ospino22@yahoo.com,TV 147B # 26-25,Santa Marta,Magdalena,672
+3942,CC,1125737378,José W,Chaparro Pérez,1995-08-21,3509963271,jose.chaparro63@yahoo.com,CL 130C # 105A-82,Filadelfia,Caldas,692
+4468,CC,1125051598,Milena,Bautista,1971-07-25,3126804331,mbautista60@gmail.com,KR 119 # 37A-84,Palocabildo,Tolima,759
+3948,CC,1140885886,ISABEL MARIA,RODRIGUEZ,1964-12-06,3156638058,irodriguez36@outlook.com,CL 62C # 98B-3,MANAURE,LA GUAJIRA,780
+2388,CC,1031647727,FIDEL,GUERRERO ROMERO,1967-10-24,3005216313,fguerrero69@outlook.com,CL 87 # 114-9,"BOGOTÁ, D.C.","BOGOTÁ, D.C.",797
+373,CC,1137079605,FLOR,GAVIRIA LONDOÑO,1988-08-13,3500044392,fgaviria85@yahoo.com,KR 92C # 63B-36,QUIBDÓ,CHOCÓ,843
+4252,CC,1128912430,Rosario,Rodríguez Díaz,1977-09-29,3048987062,rosariorodriguez15@gmail.com,Conjunto Puerta del Sol Torre 6 Apto 502,Bucaramanga,Santander,906
+4132,CC,802797780,Daniel Mario,Arias Rivera,1985-06-11,3018734807,danielarias7@gmail.com,CL 24 # 111-72,Cali,Valle del Cauca,916
+4394,CC,50590868,Blanca,Rodríguez Ortiz,1991-11-16,3500272774,brodriguez66@hotmail.com,Urb. Puerta del Sol casa 73,Cartagena de Indias,Bolívar,951
+1859,CC,1092229450,Gloria,Zapata Díaz,1958-04-29,3503436598,gloriazapata68@gmail.com,CL 148 # 36A-69,Guadalupe,Santander,1053
+2454,CC,89861131,Sebastián,Arango Jiménez,1962-02-18,3044101018,sarango58@hotmail.com,CL 20 BIS # 25-58,Sopó,Cundinamarca,1080
+2184,CC,1026051647,ALEXANDER,CONTRERASVEGA,1983-07-15,3018899846,acontreras22@gmail.com,AV60BIS#25-39,PITALITO,HUILA,1155
+3695,CC,50137578,Paola,Zapata,1948-08-19,3107419456,paola.zapata96@yahoo.com,"Km 38 vía Guadalupe - Duitama, Finca La Primavera",Guadalupe,Santander,1239
+3693,CC,1040387180,CHÍO,HERNÁNDEZ LÓPEZ,,3128624707,rocio.hernandez22@hotmail.com,CL 47B # 116-62,"BOGOTÁ, D.C.","BOGOTÁ, D.C.",1328
+1917,CC,1140297379,Patricia Alicia,Hoyos Sánchez,1976-05-03,3017090437,patricia.hoyos60@hotmail.com,CL 81B # 35B-63,Cali,Valle del Cauca,1337
+81,CC,1056069212,Kathering,Rodríguez Romero de Beltrán,1996-07-18,3156541429,katherinerodriguez90@gmail.com,AV 132C # 19-75,Bucaramanga,Santander,1342
+564,CC,31490702,IVÁN JOSÉ,LUNA DÍAZ,1969-10-23,3209257408,iluna55@gmail.com,CL 65B # 64B-35,BARRANQUILLA,ATLÁNTICO,1393
+4440,CC,1039637861,Janethito,Salgado Salcedo,1957-01-14,3002158930,janethsalgado52@gmail.com,KR 49C BIS # 65A-87,Quebradanegra,Cundinamarca,1449
+4092,CE,7205325,MERCEDES,LÓPEZ CASTRO,1993-07-14,3009534341,mercedes.lopez10@outlook.com,CL 18B # 134-42,MEDELLÍN,ANTIOQUIA,1454
+3234,PA,138026540,Estela Angela,Cardozo Fernnandez,1947-10-13,3151946471,estela.cardozo26@gmail.com,KR 49 # 62-95,Guamo,Tolima,1512
+4601,CC,1105035080,EVER,SANABRIA LÓPEZ,1989-05-04,3154981500,ever.sanabria24@hotmail.com,KR 2B # 117-51,BUCARAMANGA,SANTANDER,1585
+1808,CC,68921621,Elena Andrea,Orozco de Rojas,,3209967232,eorozco77@yahoo.com,KR 136 # 109-23,Cali,Valle del Cauca,1592
+3985,CC,1058945876,EDITHMARIA,LUNAARENASDERESTREPO,1956-09-11,3107029628,eluna47@outlook.com,CL39#57B-48,CALI,VALLEDELCAUCA,1593
+2350,CC,1058154718,María,Suárez Rincón,2006-08-31,3112838571,mariasuarez43@yahoo.com,CL 74 # 91-11,Bucaramanga,Santander,1602
+4236,CC,1111386793,Nancy,Vargas Valencia,1998-10-30,3501378364,nvargas29@hotmail.com,CL 35A # 59B-72 ESTE,Montería,Córdoba,1676
+1074,CC,1021111637,Dina,Leon,2008-10-09,3155441357,dina.leon6@yahoo.com,AV 120 # 108A-79 ESTE,Almeida,Boyaca,1692
+3247,CC,1068003554,Ing. Luis,Rivera Castellanos,1953-01-28,3111111471,lrivera37@outlook.com,Vereda La Mesa Finca La Primavera,Tesalia,Huila,1745
+3739,CC,1015694643,YAZMIN,BARRERA,1962-10-08,3208259380,yazmin.barrera54@gmail.com,"FINCAELEDEN,VEREDAELVOLCAN",LABRANZAGRANDE,BOYACA,1813
+2553,CC,77730652,Augusto,Rodríguez,1964-11-11,3000884846,augustor@laboratoriosnova.com.co,KR 36C # 102-75,Sincelejo,Sucre,1816
+4896,CC,1100284060,Robert,Serrano,1942-11-26,3006942766,robert.serrano98@hotmail.com,KR 80B # 89-44,Medellín,Antioquia,1886
+4543,CC,1125543121,Luz Ofelia,Sánchez Ibarra,1947-07-24,3158346654,luz.sanchez98@gmail.com,Barrio Simón Bolívar Mz 3 Casa 11,Cali,Valle del Cauca,1977
+539,CC,1145287440,Alexis,Chavez Orjuela,2003-05-27,3150706893,alexis.chavez9@gmail.com,CL 122 # 59-84,Itagui,Antioquia,1989
+2401,CC,03030125,Andrés,Martínez Benítez,1958-01-24,3014004202,andres.martinez25@outlook.com,CL 75A SUR # 40-60,Cali,Valle del Cauca,1990

@@ -1,0 +1,4076 @@
+{
+  "modelo_congelado": {
+    "tag": "hito2b-congelado",
+    "umbral": 0.9999
+  },
+  "evolucion_clusters": {
+    "prueba normal · modelo v1": {
+      "precision": {
+        "valor": 1.0,
+        "ic_inf": 1.0,
+        "ic_sup": 1.0
+      },
+      "recall": {
+        "valor": 0.9977313974591652,
+        "ic_inf": 0.9933848924891912,
+        "ic_sup": 1.0
+      },
+      "f1": {
+        "valor": 0.9988644106291166,
+        "ic_inf": 0.9966814699898848,
+        "ic_sup": 1.0
+      },
+      "pct_clusters_exactos": {
+        "valor": 0.9975,
+        "ic_inf": 0.99375,
+        "ic_sup": 1.0
+      }
+    },
+    "prueba normal · modelo v2": {
+      "precision": {
+        "valor": 1.0,
+        "ic_inf": 1.0,
+        "ic_sup": 1.0
+      },
+      "recall": {
+        "valor": 0.9931941923774955,
+        "ic_inf": 0.9857205467799783,
+        "ic_sup": 0.999140219269747
+      },
+      "f1": {
+        "valor": 0.9965854768950603,
+        "ic_inf": 0.9928089311231671,
+        "ic_sup": 0.9995699247496266
+      },
+      "pct_clusters_exactos": {
+        "valor": 0.995,
+        "ic_inf": 0.99,
+        "ic_sup": 0.99875
+      }
+    },
+    "ciega 1 · modelo v1": {
+      "precision": {
+        "valor": 0.9966865473823724,
+        "ic_inf": 0.9872542495744029,
+        "ic_sup": 1.0
+      },
+      "recall": {
+        "valor": 0.6364790520524757,
+        "ic_inf": 0.6164559590222353,
+        "ic_sup": 0.6565992885871069
+      },
+      "f1": {
+        "valor": 0.7768595041322314,
+        "ic_inf": 0.7615172227883784,
+        "ic_sup": 0.7915605734284561
+      },
+      "pct_clusters_exactos": {
+        "valor": 0.6015,
+        "ic_inf": 0.5809875,
+        "ic_sup": 0.6225
+      }
+    },
+    "ciega 1 · modelo v2 (desarrollo)": {
+      "precision": {
+        "valor": 1.0,
+        "ic_inf": 1.0,
+        "ic_sup": 1.0
+      },
+      "recall": {
+        "valor": 0.9995768091409225,
+        "ic_inf": 0.9986992502623531,
+        "ic_sup": 1.0
+      },
+      "f1": {
+        "valor": 0.9997883597883598,
+        "ic_inf": 0.9993492018683682,
+        "ic_sup": 1.0
+      },
+      "pct_clusters_exactos": {
+        "valor": 0.9995,
+        "ic_inf": 0.9985,
+        "ic_sup": 1.0
+      }
+    },
+    "ciega 2 · modelo v1 (control)": {
+      "precision": {
+        "valor": 0.9946944749359679,
+        "ic_inf": 0.9772722274837464,
+        "ic_sup": 1.0
+      },
+      "recall": {
+        "valor": 0.9198105227541871,
+        "ic_inf": 0.9071933782296362,
+        "ic_sup": 0.9323208673053509
+      },
+      "f1": {
+        "valor": 0.9557879933198559,
+        "ic_inf": 0.9464407984264136,
+        "ic_sup": 0.9637154314057581
+      },
+      "pct_clusters_exactos": {
+        "valor": 0.911,
+        "ic_inf": 0.8985,
+        "ic_sup": 0.923
+      }
+    },
+    "ciega 2 · modelo v2": {
+      "precision": {
+        "valor": 0.9984797297297298,
+        "ic_inf": 0.9944023681197188,
+        "ic_sup": 1.0
+      },
+      "recall": {
+        "valor": 1.0,
+        "ic_inf": 1.0,
+        "ic_sup": 1.0
+      },
+      "f1": {
+        "valor": 0.9992392866198969,
+        "ic_inf": 0.9971933286997535,
+        "ic_sup": 1.0
+      },
+      "pct_clusters_exactos": {
+        "valor": 0.997,
+        "ic_inf": 0.9945,
+        "ic_sup": 0.999
+      }
+    }
+  },
+  "brechas": {
+    "apellido_casada": {
+      "antes (ciega 1, modelo v1)": {
+        "grupos": {
+          "sin apellido de casada": {
+            "personas": 1864,
+            "recall": {
+              "valor": 0.6384268060836502,
+              "ic_inf": 0.616789839220107,
+              "ic_sup": 0.659088391947706
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.615343347639485,
+              "ic_inf": 0.5937996915749669,
+              "ic_sup": 0.6362183270643024
+            },
+            "precision": {
+              "valor": 0.9962914889671797,
+              "ic_inf": 0.9857211271662307,
+              "ic_sup": 1.0
+            }
+          },
+          "apellido de casada": {
+            "personas": 136,
+            "recall": {
+              "valor": 0.6206563706563707,
+              "ic_inf": 0.5514850776280191,
+              "ic_sup": 0.6860882800198442
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.4117647058823529,
+              "ic_inf": 0.3281978901611535,
+              "ic_sup": 0.49612833763996556
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "sin apellido de casada - apellido de casada",
+        "pct_clusters_exactos": {
+          "valor": 0.20357864175713203,
+          "ic_inf": 0.1143978790199856,
+          "ic_sup": 0.2906587802830111,
+          "significativa": true
+        },
+        "recall": {
+          "valor": 0.01777043542727952,
+          "ic_inf": -0.051670484963386325,
+          "ic_sup": 0.08871164179239038,
+          "significativa": false
+        }
+      },
+      "control (ciega 2, modelo v1)": {
+        "grupos": {
+          "sin apellido de casada": {
+            "personas": 1751,
+            "recall": {
+              "valor": 0.9189292543021033,
+              "ic_inf": 0.9052524628570514,
+              "ic_sup": 0.9327786933957533
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9097658480868075,
+              "ic_inf": 0.8972101735398323,
+              "ic_sup": 0.9237003997189372
+            },
+            "precision": {
+              "valor": 0.9940020682523267,
+              "ic_inf": 0.9742882289275562,
+              "ic_sup": 1.0
+            }
+          },
+          "apellido de casada": {
+            "personas": 249,
+            "recall": {
+              "valor": 0.9265785609397944,
+              "ic_inf": 0.8894391004701729,
+              "ic_sup": 0.9593183855066898
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9196787148594378,
+              "ic_inf": 0.8861726792172865,
+              "ic_sup": 0.9527696926989184
+            },
+            "precision": {
+              "valor": 0.9937007874015747,
+              "ic_inf": 0.9640678042411418,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "sin apellido de casada - apellido de casada",
+        "pct_clusters_exactos": {
+          "valor": -0.009912866772630258,
+          "ic_inf": -0.04423646611733658,
+          "ic_sup": 0.025413086635880055,
+          "significativa": false
+        },
+        "recall": {
+          "valor": -0.0076493066376911445,
+          "ic_inf": -0.0419349082725877,
+          "ic_sup": 0.03348479967756305,
+          "significativa": false
+        }
+      },
+      "después (ciega 2, modelo v2)": {
+        "grupos": {
+          "sin apellido de casada": {
+            "personas": 1751,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9965733866362079,
+              "ic_inf": 0.993707003768474,
+              "ic_sup": 0.9988649262202043
+            },
+            "precision": {
+              "valor": 0.9982821149074251,
+              "ic_inf": 0.9937153378765774,
+              "ic_sup": 1.0
+            }
+          },
+          "apellido de casada": {
+            "personas": 249,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "sin apellido de casada - apellido de casada",
+        "pct_clusters_exactos": {
+          "valor": -0.0034266133637921303,
+          "ic_inf": -0.006292996231525983,
+          "ic_sup": -0.0011350737797957144,
+          "significativa": true
+        },
+        "recall": {
+          "valor": 0.0,
+          "ic_inf": 0.0,
+          "ic_sup": 0.0,
+          "significativa": false
+        }
+      }
+    },
+    "con_apodo": {
+      "antes (ciega 1, modelo v1)": {
+        "grupos": {
+          "sin apodo": {
+            "personas": 1663,
+            "recall": {
+              "valor": 0.6387412587412588,
+              "ic_inf": 0.6137318837891144,
+              "ic_sup": 0.6603138486392139
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.6235718580877931,
+              "ic_inf": 0.6017934886076677,
+              "ic_sup": 0.6464819706021713
+            },
+            "precision": {
+              "valor": 0.9956398517549596,
+              "ic_inf": 0.9835531320681986,
+              "ic_sup": 1.0
+            }
+          },
+          "con apodo": {
+            "personas": 337,
+            "recall": {
+              "valor": 0.6294526498696785,
+              "ic_inf": 0.5870247976563822,
+              "ic_sup": 0.66879304902494
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.49258160237388726,
+              "ic_inf": 0.43859253990832936,
+              "ic_sup": 0.5457472170854636
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "sin apodo - con apodo",
+        "pct_clusters_exactos": {
+          "valor": 0.13099025571390588,
+          "ic_inf": 0.07361012713385813,
+          "ic_sup": 0.19030834944865996,
+          "significativa": true
+        },
+        "recall": {
+          "valor": 0.009288608871580228,
+          "ic_inf": -0.03749936677664164,
+          "ic_sup": 0.056965685406662844,
+          "significativa": false
+        }
+      },
+      "control (ciega 2, modelo v1)": {
+        "grupos": {
+          "sin apodo": {
+            "personas": 1771,
+            "recall": {
+              "valor": 0.9180704441041347,
+              "ic_inf": 0.904175091581607,
+              "ic_sup": 0.931904695233424
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9113495200451722,
+              "ic_inf": 0.8982838286992649,
+              "ic_sup": 0.9247316323227964
+            },
+            "precision": {
+              "valor": 0.9981269510926118,
+              "ic_inf": 0.9927229919483038,
+              "ic_sup": 1.0
+            }
+          },
+          "con apodo": {
+            "personas": 229,
+            "recall": {
+              "valor": 0.9330422125181951,
+              "ic_inf": 0.8993242700625251,
+              "ic_sup": 0.9645175077368473
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9082969432314411,
+              "ic_inf": 0.8678365509199274,
+              "ic_sup": 0.9453222214366516
+            },
+            "precision": {
+              "valor": 0.9697428139183056,
+              "ic_inf": 0.8473136205434179,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "sin apodo - con apodo",
+        "pct_clusters_exactos": {
+          "valor": 0.003052576813731167,
+          "ic_inf": -0.03791414240114656,
+          "ic_sup": 0.045086882217588706,
+          "significativa": false
+        },
+        "recall": {
+          "valor": -0.014971768414060338,
+          "ic_inf": -0.049015275940203766,
+          "ic_sup": 0.021714263142379012,
+          "significativa": false
+        }
+      },
+      "después (ciega 2, modelo v2)": {
+        "grupos": {
+          "sin apodo": {
+            "personas": 1771,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9966120835686053,
+              "ic_inf": 0.993774317847638,
+              "ic_sup": 0.9988757886958334
+            },
+            "precision": {
+              "valor": 0.9982801452321803,
+              "ic_inf": 0.9936774107430068,
+              "ic_sup": 1.0
+            }
+          },
+          "con apodo": {
+            "personas": 229,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "sin apodo - con apodo",
+        "pct_clusters_exactos": {
+          "valor": -0.0033879164313946886,
+          "ic_inf": -0.006225682152361925,
+          "ic_sup": -0.0011242113041665697,
+          "significativa": true
+        },
+        "recall": {
+          "valor": 0.0,
+          "ic_inf": 0.0,
+          "ic_sup": 0.0,
+          "significativa": false
+        }
+      }
+    },
+    "nombre_compuesto": {
+      "antes (ciega 1, modelo v1)": {
+        "grupos": {
+          "nombre simple": {
+            "personas": 1212,
+            "recall": {
+              "valor": 0.6344530577088716,
+              "ic_inf": 0.6084163110853016,
+              "ic_sup": 0.6587361175305301
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.5907590759075908,
+              "ic_inf": 0.5639719592196307,
+              "ic_sup": 0.6192129367615432
+            },
+            "precision": {
+              "valor": 0.9945989738050229,
+              "ic_inf": 0.9797278490362604,
+              "ic_sup": 1.0
+            }
+          },
+          "nombre compuesto": {
+            "personas": 788,
+            "recall": {
+              "valor": 0.6397038661913902,
+              "ic_inf": 0.6062450972692899,
+              "ic_sup": 0.674487893651719
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.618020304568528,
+              "ic_inf": 0.5856035035248878,
+              "ic_sup": 0.6524468776646274
+            },
+            "precision": {
+              "valor": 0.9965826569841948,
+              "ic_inf": 0.9878376066884723,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "nombre simple - nombre compuesto",
+        "pct_clusters_exactos": {
+          "valor": -0.027261228660937165,
+          "ic_inf": -0.0711296820169024,
+          "ic_sup": 0.012590266545409581,
+          "significativa": false
+        },
+        "recall": {
+          "valor": -0.005250808482518576,
+          "ic_inf": -0.04658192828680401,
+          "ic_sup": 0.03502682381843642,
+          "significativa": false
+        }
+      },
+      "control (ciega 2, modelo v1)": {
+        "grupos": {
+          "nombre simple": {
+            "personas": 1218,
+            "recall": {
+              "valor": 0.9104602510460251,
+              "ic_inf": 0.8926476239190549,
+              "ic_sup": 0.9269048188572216
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.90311986863711,
+              "ic_inf": 0.8878245573818375,
+              "ic_sup": 0.9184193442230599
+            },
+            "precision": {
+              "valor": 0.9911934406316428,
+              "ic_inf": 0.9624762300104766,
+              "ic_sup": 1.0
+            }
+          },
+          "nombre compuesto": {
+            "personas": 782,
+            "recall": {
+              "valor": 0.9342218400687876,
+              "ic_inf": 0.9158325750682439,
+              "ic_sup": 0.9522368797378009
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9232736572890026,
+              "ic_inf": 0.9057301033470714,
+              "ic_sup": 0.9418692298702817
+            },
+            "precision": {
+              "valor": 0.999540018399264,
+              "ic_inf": 0.9971575426085059,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "nombre simple - nombre compuesto",
+        "pct_clusters_exactos": {
+          "valor": -0.020153788651892546,
+          "ic_inf": -0.04554388053258183,
+          "ic_sup": 0.0025043573748907253,
+          "significativa": false
+        },
+        "recall": {
+          "valor": -0.023761589022762486,
+          "ic_inf": -0.049516394902726524,
+          "ic_sup": 0.0004118252176847632,
+          "significativa": false
+        }
+      },
+      "después (ciega 2, modelo v2)": {
+        "grupos": {
+          "nombre simple": {
+            "personas": 1218,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9958949096880131,
+              "ic_inf": 0.9918498745597626,
+              "ic_sup": 0.9991776821758559
+            },
+            "precision": {
+              "valor": 0.9974958263772955,
+              "ic_inf": 0.9905277212266888,
+              "ic_sup": 1.0
+            }
+          },
+          "nombre compuesto": {
+            "personas": 782,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9987212276214834,
+              "ic_inf": 0.9961340206185567,
+              "ic_sup": 1.0
+            },
+            "precision": {
+              "valor": 0.9995702621400946,
+              "ic_inf": 0.997332147621165,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "nombre simple - nombre compuesto",
+        "pct_clusters_exactos": {
+          "valor": -0.0028263179334703237,
+          "ic_inf": -0.007413509060955503,
+          "ic_sup": 0.0012306296212271856,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.0,
+          "ic_inf": 0.0,
+          "ic_sup": 0.0,
+          "significativa": false
+        }
+      }
+    },
+    "dos_apellidos": {
+      "antes (ciega 1, modelo v1)": {
+        "grupos": {
+          "dos apellidos": {
+            "personas": 1699,
+            "recall": {
+              "valor": 0.6430527888446215,
+              "ic_inf": 0.6201907614094653,
+              "ic_sup": 0.6649711681380175
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.6032960565038258,
+              "ic_inf": 0.580739410710497,
+              "ic_sup": 0.6260572090175671
+            },
+            "precision": {
+              "valor": 0.996142719382835,
+              "ic_inf": 0.9852422073395657,
+              "ic_sup": 1.0
+            }
+          },
+          "un apellido": {
+            "personas": 301,
+            "recall": {
+              "valor": 0.5992957746478873,
+              "ic_inf": 0.5488316385039446,
+              "ic_sup": 0.6531094231251222
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.5913621262458472,
+              "ic_inf": 0.5380107705973795,
+              "ic_sup": 0.6444675186368477
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "dos apellidos - un apellido",
+        "pct_clusters_exactos": {
+          "valor": 0.01193393025797862,
+          "ic_inf": -0.04544171220839324,
+          "ic_sup": 0.07048766325154561,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.04375701419673417,
+          "ic_inf": -0.018354486013341987,
+          "ic_sup": 0.09998964445433922,
+          "significativa": false
+        }
+      },
+      "control (ciega 2, modelo v1)": {
+        "grupos": {
+          "dos apellidos": {
+            "personas": 1719,
+            "recall": {
+              "valor": 0.9227119984186598,
+              "ic_inf": 0.9095978440699131,
+              "ic_sup": 0.9354537652890428
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9139034322280396,
+              "ic_inf": 0.9013336351641617,
+              "ic_sup": 0.9275333748438329
+            },
+            "precision": {
+              "valor": 0.9946729171105902,
+              "ic_inf": 0.9740875610586901,
+              "ic_sup": 1.0
+            }
+          },
+          "un apellido": {
+            "personas": 281,
+            "recall": {
+              "valor": 0.9025821596244131,
+              "ic_inf": 0.8612784204228161,
+              "ic_sup": 0.9394651424037728
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.8932384341637011,
+              "ic_inf": 0.8571303696303696,
+              "ic_sup": 0.9264252052295531
+            },
+            "precision": {
+              "valor": 0.9948253557567918,
+              "ic_inf": 0.9719811635272546,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "dos apellidos - un apellido",
+        "pct_clusters_exactos": {
+          "valor": 0.020664998064338524,
+          "ic_inf": -0.016490900570308043,
+          "ic_sup": 0.05967655041836907,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.02012983879424668,
+          "ic_inf": -0.019396719871599497,
+          "ic_sup": 0.0646089935294135,
+          "significativa": false
+        }
+      },
+      "después (ciega 2, modelo v2)": {
+        "grupos": {
+          "dos apellidos": {
+            "personas": 1719,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9965095986038395,
+              "ic_inf": 0.9935481028012585,
+              "ic_sup": 0.9988412849770396
+            },
+            "precision": {
+              "valor": 0.9982241515390686,
+              "ic_inf": 0.9934770639397509,
+              "ic_sup": 1.0
+            }
+          },
+          "un apellido": {
+            "personas": 281,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "dos apellidos - un apellido",
+        "pct_clusters_exactos": {
+          "valor": -0.003490401396160525,
+          "ic_inf": -0.006451897198741535,
+          "ic_sup": -0.0011587150229603604,
+          "significativa": true
+        },
+        "recall": {
+          "valor": 0.0,
+          "ic_inf": 0.0,
+          "ic_sup": 0.0,
+          "significativa": false
+        }
+      }
+    },
+    "con_tilde": {
+      "antes (ciega 1, modelo v1)": {
+        "grupos": {
+          "con tilde o ñ": {
+            "personas": 1366,
+            "recall": {
+              "valor": 0.6406995230524642,
+              "ic_inf": 0.6138170879650134,
+              "ic_sup": 0.6646768565884724
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.6039531478770132,
+              "ic_inf": 0.5779734749499923,
+              "ic_sup": 0.6292425617075847
+            },
+            "precision": {
+              "valor": 0.9950617283950617,
+              "ic_inf": 0.9811211481022802,
+              "ic_sup": 1.0
+            }
+          },
+          "sin tilde": {
+            "personas": 634,
+            "recall": {
+              "valor": 0.6280834914611005,
+              "ic_inf": 0.5894211275734796,
+              "ic_sup": 0.6655778353571552
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.5962145110410094,
+              "ic_inf": 0.5573191888810254,
+              "ic_sup": 0.6338270697600509
+            },
+            "precision": {
+              "valor": 0.992503748125937,
+              "ic_inf": 0.9661605522426756,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "con tilde o ñ - sin tilde",
+        "pct_clusters_exactos": {
+          "valor": 0.007738636836003732,
+          "ic_inf": -0.03947840950707942,
+          "ic_sup": 0.05570069695347311,
+          "significativa": false
+        },
+        "recall": {
+          "valor": 0.012616031591363708,
+          "ic_inf": -0.032861540586266204,
+          "ic_sup": 0.05591310367571909,
+          "significativa": false
+        }
+      },
+      "control (ciega 2, modelo v1)": {
+        "grupos": {
+          "sin tilde": {
+            "personas": 596,
+            "recall": {
+              "valor": 0.9060838747784997,
+              "ic_inf": 0.8817327063030395,
+              "ic_sup": 0.9292933909478699
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9060402684563759,
+              "ic_inf": 0.8826530612244898,
+              "ic_sup": 0.9283333333333333
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          },
+          "con tilde o ñ": {
+            "personas": 1404,
+            "recall": {
+              "valor": 0.9253200568990043,
+              "ic_inf": 0.910453617645638,
+              "ic_sup": 0.9390426149442841
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9131054131054132,
+              "ic_inf": 0.8992012541057032,
+              "ic_sup": 0.9273793836531028
+            },
+            "precision": {
+              "valor": 0.9926246185147508,
+              "ic_inf": 0.9686368231796191,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "sin tilde - con tilde o ñ",
+        "pct_clusters_exactos": {
+          "valor": -0.0070651446490372916,
+          "ic_inf": -0.03528995615974354,
+          "ic_sup": 0.019191050117796333,
+          "significativa": false
+        },
+        "recall": {
+          "valor": -0.019236182120504597,
+          "ic_inf": -0.04897161586235594,
+          "ic_sup": 0.008864346330140445,
+          "significativa": false
+        }
+      },
+      "después (ciega 2, modelo v2)": {
+        "grupos": {
+          "sin tilde": {
+            "personas": 596,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          },
+          "con tilde o ñ": {
+            "personas": 1404,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9957264957264957,
+              "ic_inf": 0.9920804909094304,
+              "ic_sup": 0.9985846468026917
+            },
+            "precision": {
+              "valor": 0.9978708303761533,
+              "ic_inf": 0.9920835379895397,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "sin tilde - con tilde o ñ",
+        "pct_clusters_exactos": {
+          "valor": 0.004273504273504258,
+          "ic_inf": 0.0014153531973083223,
+          "ic_sup": 0.007919509090569557,
+          "significativa": true
+        },
+        "recall": {
+          "valor": 0.0,
+          "ic_inf": 0.0,
+          "ic_sup": 0.0,
+          "significativa": false
+        }
+      }
+    },
+    "rural": {
+      "antes (ciega 1, modelo v1)": {
+        "grupos": {
+          "dirección urbana": {
+            "personas": 1865,
+            "recall": {
+              "valor": 0.6337163007621431,
+              "ic_inf": 0.6125683707278718,
+              "ic_sup": 0.6546739793944576
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.6021447721179625,
+              "ic_inf": 0.580074986609534,
+              "ic_sup": 0.6235278693872899
+            },
+            "precision": {
+              "valor": 0.9964228223931318,
+              "ic_inf": 0.9861839627831601,
+              "ic_sup": 1.0
+            }
+          },
+          "dirección rural": {
+            "personas": 135,
+            "recall": {
+              "valor": 0.6732223903177005,
+              "ic_inf": 0.597056354138415,
+              "ic_sup": 0.7430064812598898
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.5925925925925926,
+              "ic_inf": 0.511078431372549,
+              "ic_sup": 0.6742424242424242
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "dirección urbana - dirección rural",
+        "pct_clusters_exactos": {
+          "valor": 0.009552179525369908,
+          "ic_inf": -0.07464737843353549,
+          "ic_sup": 0.0990471830537134,
+          "significativa": false
+        },
+        "recall": {
+          "valor": -0.039506089555557344,
+          "ic_inf": -0.11655102616474751,
+          "ic_sup": 0.04342581276580447,
+          "significativa": false
+        }
+      },
+      "control (ciega 2, modelo v1)": {
+        "grupos": {
+          "dirección urbana": {
+            "personas": 1877,
+            "recall": {
+              "valor": 0.9187051682913371,
+              "ic_inf": 0.9052460809036348,
+              "ic_sup": 0.9321709017449809
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.9099627064464572,
+              "ic_inf": 0.8972698932085886,
+              "ic_sup": 0.9229553268435123
+            },
+            "precision": {
+              "valor": 0.9942277070063694,
+              "ic_inf": 0.9755264673887664,
+              "ic_sup": 1.0
+            }
+          },
+          "dirección rural": {
+            "personas": 123,
+            "recall": {
+              "valor": 0.9324894514767933,
+              "ic_inf": 0.8849031084005509,
+              "ic_sup": 0.9723951992961057
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.926829268292683,
+              "ic_inf": 0.8780273855370133,
+              "ic_sup": 0.968503937007874
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "dirección urbana - dirección rural",
+        "pct_clusters_exactos": {
+          "valor": -0.016866561846225814,
+          "ic_inf": -0.06047593415143633,
+          "ic_sup": 0.03309607450303832,
+          "significativa": false
+        },
+        "recall": {
+          "valor": -0.013784283185456214,
+          "ic_inf": -0.056015182217112276,
+          "ic_sup": 0.03395816139753117,
+          "significativa": false
+        }
+      },
+      "después (ciega 2, modelo v2)": {
+        "grupos": {
+          "dirección urbana": {
+            "personas": 1877,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 0.996803409696324,
+              "ic_inf": 0.9941174107564826,
+              "ic_sup": 0.9989401306216485
+            },
+            "precision": {
+              "valor": 0.998347410943812,
+              "ic_inf": 0.9938759426909372,
+              "ic_sup": 1.0
+            }
+          },
+          "dirección rural": {
+            "personas": 123,
+            "recall": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "pct_clusters_exactos": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            },
+            "precision": {
+              "valor": 1.0,
+              "ic_inf": 1.0,
+              "ic_sup": 1.0
+            }
+          }
+        },
+        "diferencia": "dirección urbana - dirección rural",
+        "pct_clusters_exactos": {
+          "valor": -0.003196590303676028,
+          "ic_inf": -0.0058825892435174195,
+          "ic_sup": -0.0010598693783514356,
+          "significativa": true
+        },
+        "recall": {
+          "valor": 0.0,
+          "ic_inf": 0.0,
+          "ic_sup": 0.0,
+          "significativa": false
+        }
+      }
+    }
+  },
+  "prueba_normal_hito2": {
+    "bloqueo": {
+      "pares_comparados": 3390,
+      "pares_verdaderos": 2204,
+      "pares_verdaderos_comparados": 2178,
+      "recall_bloqueo": 0.9882032667876588,
+      "recall_perdido_por_bloqueo": 0.011796733212341204
+    },
+    "pares": {
+      "umbral": 0.9999,
+      "tp": 2178,
+      "fp": 0,
+      "fn": 26,
+      "precision": 1.0,
+      "recall": 0.9882032667876588,
+      "f1": 0.9940666362391603
+    },
+    "clusters": {
+      "umbral": 0.9999,
+      "tp": 2189,
+      "fp": 0,
+      "fn": 15,
+      "precision": 1.0,
+      "recall": 0.9931941923774955,
+      "f1": 0.9965854768950603,
+      "clusters_predichos": 804,
+      "clusters_reales": 800,
+      "clusters_exactos": 796,
+      "pct_clusters_exactos": 0.995
+    },
+    "intervalos": {
+      "metodo": "bootstrap percentil remuestreando personas",
+      "nivel": 0.95,
+      "replicas": 1000,
+      "personas": 800,
+      "pares": {
+        "precision": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.9882032667876588,
+          "ic_inf": 0.9800124569763744,
+          "ic_sup": 0.9950373438674492
+        },
+        "f1": {
+          "valor": 0.9940666362391603,
+          "ic_inf": 0.9899053446027087,
+          "ic_sup": 0.997512499629091
+        }
+      },
+      "clusters": {
+        "precision": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.9931941923774955,
+          "ic_inf": 0.9857205467799783,
+          "ic_sup": 0.999140219269747
+        },
+        "f1": {
+          "valor": 0.9965854768950603,
+          "ic_inf": 0.9928089311231671,
+          "ic_sup": 0.9995699247496266
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.995,
+          "ic_inf": 0.99,
+          "ic_sup": 0.99875
+        }
+      }
+    }
+  },
+  "ciega_1_desarrollo": {
+    "nota": "Desarrollo del modelo v2: optimista, solo referencia.",
+    "bloqueo": {
+      "pares_comparados": 9699,
+      "pares_verdaderos": 9452,
+      "pares_verdaderos_comparados": 9444,
+      "recall_bloqueo": 0.9991536182818451,
+      "recall_perdido_por_bloqueo": 0.0008463817181548761
+    },
+    "pares": {
+      "umbral": 0.9999,
+      "tp": 9420,
+      "fp": 0,
+      "fn": 32,
+      "precision": 1.0,
+      "recall": 0.9966144731273805,
+      "f1": 0.9983043662568886
+    },
+    "clusters": {
+      "umbral": 0.9999,
+      "tp": 9448,
+      "fp": 0,
+      "fn": 4,
+      "precision": 1.0,
+      "recall": 0.9995768091409225,
+      "f1": 0.9997883597883598,
+      "clusters_predichos": 2001,
+      "clusters_reales": 2000,
+      "clusters_exactos": 1999,
+      "pct_clusters_exactos": 0.9995
+    },
+    "intervalos": {
+      "metodo": "bootstrap percentil remuestreando personas",
+      "nivel": 0.95,
+      "replicas": 1000,
+      "personas": 2000,
+      "pares": {
+        "precision": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.9966144731273805,
+          "ic_inf": 0.9948562760625179,
+          "ic_sup": 0.9980867683851519
+        },
+        "f1": {
+          "valor": 0.9983043662568886,
+          "ic_inf": 0.9974215064999318,
+          "ic_sup": 0.9990424682006249
+        }
+      },
+      "clusters": {
+        "precision": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.9995768091409225,
+          "ic_inf": 0.9986992502623531,
+          "ic_sup": 1.0
+        },
+        "f1": {
+          "valor": 0.9997883597883598,
+          "ic_inf": 0.9993492018683682,
+          "ic_sup": 1.0
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.9995,
+          "ic_inf": 0.9985,
+          "ic_sup": 1.0
+        }
+      }
+    },
+    "equidad": {
+      "nombre_compuesto": {
+        "clusters": {
+          "grupos": {
+            "nombre simple": {
+              "personas": 1212,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9993109388458226,
+                "ic_inf": 0.9978611333289902,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9996553506806825,
+                "ic_inf": 0.9989294217519956,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9991749174917491,
+                "ic_inf": 0.9974724064089627,
+                "ic_sup": 1.0
+              }
+            },
+            "nombre compuesto": {
+              "personas": 788,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "nombre simple - nombre compuesto": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.0006890611541774394,
+                "ic_inf": -0.002138866671009773,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.00034464931931754705,
+                "ic_inf": -0.0010705782480043917,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.0008250825082508628,
+                "ic_inf": -0.002527593591037308,
+                "ic_sup": 0.0,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "nombre simple": {
+              "personas": 1212,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9977605512489234,
+                "ic_inf": 0.9959388096773881,
+                "ic_sup": 0.9991472522930087
+              },
+              "f1": {
+                "valor": 0.9988790204363197,
+                "ic_inf": 0.9979652731301231,
+                "ic_sup": 0.999573444274263
+              }
+            },
+            "nombre compuesto": {
+              "personas": 788,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9947902385522347,
+                "ic_inf": 0.991282973863666,
+                "ic_sup": 0.997758422843211
+              },
+              "f1": {
+                "valor": 0.9973883161512027,
+                "ic_inf": 0.9956224071360985,
+                "ic_sup": 0.9988779538418527
+              }
+            }
+          },
+          "diferencias": {
+            "nombre simple - nombre compuesto": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.0029703126966886817,
+                "ic_inf": -0.00037788280582661503,
+                "ic_sup": 0.0069140461658770405,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.001490704285116995,
+                "ic_inf": -0.00018935467248553644,
+                "ic_sup": 0.0034745782624098272,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "dos_apellidos": {
+        "clusters": {
+          "grupos": {
+            "dos apellidos": {
+              "personas": 1699,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9995019920318725,
+                "ic_inf": 0.9984650511109303,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9997509339975093,
+                "ic_inf": 0.9992319360860309,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9994114184814596,
+                "ic_inf": 0.9982132221560452,
+                "ic_sup": 1.0
+              }
+            },
+            "un apellido": {
+              "personas": 301,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "dos apellidos - un apellido": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.0004980079681274896,
+                "ic_inf": -0.0015349488890697039,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.00024906600249074984,
+                "ic_inf": -0.0007680639139690637,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.0005885815185403542,
+                "ic_inf": -0.0017867778439547566,
+                "ic_sup": 0.0,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "dos apellidos": {
+              "personas": 1699,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9966384462151394,
+                "ic_inf": 0.9946961513740773,
+                "ic_sup": 0.9982451350065896
+              },
+              "f1": {
+                "valor": 0.9983163933404003,
+                "ic_inf": 0.9973410242819895,
+                "ic_sup": 0.9991217969390713
+              }
+            },
+            "un apellido": {
+              "personas": 301,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9964788732394366,
+                "ic_inf": 0.9916488325573676,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.998236331569665,
+                "ic_inf": 0.9958069076687278,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "dos apellidos - un apellido": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.00015957297570279305,
+                "ic_inf": -0.003944818655770299,
+                "ic_sup": 0.005563792023801849,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 8.006177073538456e-05,
+                "ic_inf": -0.001977752062464985,
+                "ic_sup": 0.0027976975396388987,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "con_tilde": {
+        "clusters": {
+          "grupos": {
+            "con tilde o ñ": {
+              "personas": 1366,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9993640699523052,
+                "ic_inf": 0.9980225996545347,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9996819338422391,
+                "ic_inf": 0.9990103213316086,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9992679355783309,
+                "ic_inf": 0.9977694752389804,
+                "ic_sup": 1.0
+              }
+            },
+            "sin tilde": {
+              "personas": 634,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "con tilde o ñ - sin tilde": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.0006359300476947993,
+                "ic_inf": -0.001977400345465319,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.00031806615776086566,
+                "ic_inf": -0.0009896786683913693,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.0007320644216690653,
+                "ic_inf": -0.0022305247610196143,
+                "ic_sup": 0.0,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "con tilde o ñ": {
+              "personas": 1366,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9968203497615262,
+                "ic_inf": 0.9946982640832451,
+                "ic_sup": 0.9985576737428812
+              },
+              "f1": {
+                "valor": 0.9984076433121019,
+                "ic_inf": 0.9973420862564643,
+                "ic_sup": 0.9992783164194105
+              }
+            },
+            "sin tilde": {
+              "personas": 634,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9962049335863378,
+                "ic_inf": 0.9927537966814775,
+                "ic_sup": 0.9987114259002668
+              },
+              "f1": {
+                "valor": 0.9980988593155894,
+                "ic_inf": 0.9963637236983591,
+                "ic_sup": 0.9993552975742592
+              }
+            }
+          },
+          "diferencias": {
+            "con tilde o ñ - sin tilde": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.0006154161751884546,
+                "ic_inf": -0.0026198671345564195,
+                "ic_sup": 0.004570200775181609,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.0003087839965124628,
+                "ic_inf": -0.001314202407004905,
+                "ic_sup": 0.002293428552406781,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "rural": {
+        "clusters": {
+          "grupos": {
+            "dirección urbana": {
+              "personas": 1865,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9995449891934933,
+                "ic_inf": 0.9985830383553806,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9997724428262601,
+                "ic_inf": 0.9992910168767358,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9994638069705094,
+                "ic_inf": 0.998379210629426,
+                "ic_sup": 1.0
+              }
+            },
+            "dirección rural": {
+              "personas": 135,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "dirección urbana - dirección rural": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.0004550108065066727,
+                "ic_inf": -0.001416961644619369,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.0002275571737399007,
+                "ic_inf": -0.0007089831232641757,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.0005361930294905948,
+                "ic_inf": -0.0016207893705739746,
+                "ic_sup": 0.0,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "dirección urbana": {
+              "personas": 1865,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9974974405642134,
+                "ic_inf": 0.996088240829585,
+                "ic_sup": 0.9987329122524716
+              },
+              "f1": {
+                "valor": 0.99874715261959,
+                "ic_inf": 0.9980402874481177,
+                "ic_sup": 0.9993660544916423
+              }
+            },
+            "dirección rural": {
+              "personas": 135,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9848714069591528,
+                "ic_inf": 0.9681736709022821,
+                "ic_sup": 0.9980993953514966
+              },
+              "f1": {
+                "valor": 0.9923780487804879,
+                "ic_inf": 0.9838295118088549,
+                "ic_sup": 0.9990487937394212
+              }
+            }
+          },
+          "diferencias": {
+            "dirección urbana - dirección rural": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.01262603360506065,
+                "ic_inf": -0.00024898477329622073,
+                "ic_sup": 0.029643887894023425,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.006369103839102164,
+                "ic_inf": -0.0001247347316703173,
+                "ic_sup": 0.015078718332459821,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "con_apodo": {
+        "clusters": {
+          "grupos": {
+            "sin apodo": {
+              "personas": 1663,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9994405594405594,
+                "ic_inf": 0.9982744981773343,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9997202014549523,
+                "ic_inf": 0.999136504106647,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9993986770895971,
+                "ic_inf": 0.9981785063752276,
+                "ic_sup": 1.0
+              }
+            },
+            "con apodo": {
+              "personas": 337,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "sin apodo - con apodo": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.0005594405594405716,
+                "ic_inf": -0.0017255018226656953,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.00027979854504767143,
+                "ic_inf": -0.0008634958933529473,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.000601322910402935,
+                "ic_inf": -0.0018214936247723523,
+                "ic_sup": 0.0,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "sin apodo": {
+              "personas": 1663,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9967832167832168,
+                "ic_inf": 0.9947327678037032,
+                "ic_sup": 0.9985293250590002
+              },
+              "f1": {
+                "valor": 0.9983890173005533,
+                "ic_inf": 0.9973594296527843,
+                "ic_sup": 0.9992641214044719
+              }
+            },
+            "con apodo": {
+              "personas": 337,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9960903562119896,
+                "ic_inf": 0.9922892191427833,
+                "ic_sup": 0.9987788822725077
+              },
+              "f1": {
+                "valor": 0.9980413492927095,
+                "ic_inf": 0.9961296879680686,
+                "ic_sup": 0.999389068124968
+              }
+            }
+          },
+          "diferencias": {
+            "sin apodo - con apodo": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.000692860571227194,
+                "ic_inf": -0.0028556323282678594,
+                "ic_sup": 0.004940450793408734,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.00034766800784380436,
+                "ic_inf": -0.0014330144197009591,
+                "ic_sup": 0.002481922446647922,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "apellido_casada": {
+        "clusters": {
+          "grupos": {
+            "sin apellido de casada": {
+              "personas": 1864,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9995247148288974,
+                "ic_inf": 0.9985243437166956,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9997623009270263,
+                "ic_inf": 0.9992616270660178,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9994635193133047,
+                "ic_inf": 0.9983757444504602,
+                "ic_sup": 1.0
+              }
+            },
+            "apellido de casada": {
+              "personas": 136,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "sin apellido de casada - apellido de casada": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.000475285171102624,
+                "ic_inf": -0.0014756562833043358,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.00023769907297366277,
+                "ic_inf": -0.0007383729339821149,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.0005364806866953176,
+                "ic_inf": -0.0016242555495398214,
+                "ic_sup": 0.0,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "sin apellido de casada": {
+              "personas": 1864,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9969106463878327,
+                "ic_inf": 0.9950698673915135,
+                "ic_sup": 0.9983412371403177
+              },
+              "f1": {
+                "valor": 0.9984529334761394,
+                "ic_inf": 0.9975288421277042,
+                "ic_sup": 0.9991699301256193
+              }
+            },
+            "apellido de casada": {
+              "personas": 136,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9942084942084942,
+                "ic_inf": 0.9863401480358497,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9970958373668926,
+                "ic_inf": 0.9931231053191653,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "sin apellido de casada - apellido de casada": {
+              "precision": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.002702152179338446,
+                "ic_inf": -0.0033337231514817627,
+                "ic_sup": 0.010962497770450547,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.0013570961092468359,
+                "ic_inf": -0.0016712477111244322,
+                "ic_sup": 0.005521885419097793,
+                "significativa": false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "ciega_2_control_v1": {
+    "nota": "Modelo v1 congelado (hito2-congelado-r1) sobre la misma ciega 2.",
+    "umbral": 0.999999,
+    "bloqueo": {
+      "pares_comparados": 9655,
+      "pares_verdaderos": 5911,
+      "pares_verdaderos_comparados": 5904,
+      "recall_bloqueo": 0.9988157672136694,
+      "recall_perdido_por_bloqueo": 0.001184232786330619
+    },
+    "pares": {
+      "umbral": 0.999999,
+      "tp": 5375,
+      "fp": 13,
+      "fn": 536,
+      "precision": 0.9975872308834447,
+      "recall": 0.909321603789545,
+      "f1": 0.9514116293477299
+    },
+    "clusters": {
+      "umbral": 0.999999,
+      "tp": 5437,
+      "fp": 29,
+      "fn": 474,
+      "precision": 0.9946944749359679,
+      "recall": 0.9198105227541871,
+      "f1": 0.9557879933198559,
+      "clusters_predichos": 2174,
+      "clusters_reales": 2000,
+      "clusters_exactos": 1822,
+      "pct_clusters_exactos": 0.911
+    },
+    "intervalos": {
+      "metodo": "bootstrap percentil remuestreando personas",
+      "nivel": 0.95,
+      "replicas": 1000,
+      "personas": 2000,
+      "pares": {
+        "precision": {
+          "valor": 0.9975872308834447,
+          "ic_inf": 0.9913433821763152,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.909321603789545,
+          "ic_inf": 0.8963502929075305,
+          "ic_sup": 0.9222549691836949
+        },
+        "f1": {
+          "valor": 0.9514116293477299,
+          "ic_inf": 0.9442520463791415,
+          "ic_sup": 0.958733594975577
+        }
+      },
+      "clusters": {
+        "precision": {
+          "valor": 0.9946944749359679,
+          "ic_inf": 0.9772722274837464,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.9198105227541871,
+          "ic_inf": 0.9071933782296362,
+          "ic_sup": 0.9323208673053509
+        },
+        "f1": {
+          "valor": 0.9557879933198559,
+          "ic_inf": 0.9464407984264136,
+          "ic_sup": 0.9637154314057581
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.911,
+          "ic_inf": 0.8985,
+          "ic_sup": 0.923
+        }
+      }
+    },
+    "equidad": {
+      "nombre_compuesto": {
+        "clusters": {
+          "grupos": {
+            "nombre simple": {
+              "personas": 1218,
+              "precision": {
+                "valor": 0.9911934406316428,
+                "ic_inf": 0.9624762300104766,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9104602510460251,
+                "ic_inf": 0.8926476239190549,
+                "ic_sup": 0.9269048188572216
+              },
+              "f1": {
+                "valor": 0.9491131142774061,
+                "ic_inf": 0.9347336211003733,
+                "ic_sup": 0.9604015739570336
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.90311986863711,
+                "ic_inf": 0.8878245573818375,
+                "ic_sup": 0.9184193442230599
+              }
+            },
+            "nombre compuesto": {
+              "personas": 782,
+              "precision": {
+                "valor": 0.999540018399264,
+                "ic_inf": 0.9971575426085059,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9342218400687876,
+                "ic_inf": 0.9158325750682439,
+                "ic_sup": 0.9522368797378009
+              },
+              "f1": {
+                "valor": 0.9657777777777777,
+                "ic_inf": 0.9557512380069765,
+                "ic_sup": 0.9753955665140677
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9232736572890026,
+                "ic_inf": 0.9057301033470714,
+                "ic_sup": 0.9418692298702817
+              }
+            }
+          },
+          "diferencias": {
+            "nombre simple - nombre compuesto": {
+              "precision": {
+                "valor": -0.008346577767621155,
+                "ic_inf": -0.037207419673173134,
+                "ic_sup": 0.000346648251208184,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.023761589022762486,
+                "ic_inf": -0.049516394902726524,
+                "ic_sup": 0.0004118252176847632,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.016664663500371657,
+                "ic_inf": -0.033268241923497074,
+                "ic_sup": -0.0021620056206248395,
+                "significativa": true
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.020153788651892546,
+                "ic_inf": -0.04554388053258183,
+                "ic_sup": 0.0025043573748907253,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "nombre simple": {
+              "personas": 1218,
+              "precision": {
+                "valor": 0.996001230390649,
+                "ic_inf": 0.9858868444259015,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.903207810320781,
+                "ic_inf": 0.8846442675105424,
+                "ic_sup": 0.920129973255112
+              },
+              "f1": {
+                "valor": 0.9473376243417203,
+                "ic_inf": 0.9369677727917622,
+                "ic_sup": 0.9573239847877885
+              }
+            },
+            "nombre compuesto": {
+              "personas": 782,
+              "precision": {
+                "valor": 0.999532273152479,
+                "ic_inf": 0.9971152108433735,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9187446259673259,
+                "ic_inf": 0.8996678065470369,
+                "ic_sup": 0.9363385049000676
+              },
+              "f1": {
+                "valor": 0.9574372759856631,
+                "ic_inf": 0.9467759628677859,
+                "ic_sup": 0.9669192047916402
+              }
+            }
+          },
+          "diferencias": {
+            "nombre simple - nombre compuesto": {
+              "precision": {
+                "valor": -0.0035310427618299167,
+                "ic_inf": -0.01389792608239789,
+                "ic_sup": 0.0004582130040282736,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.015536815646544855,
+                "ic_inf": -0.0425603045103286,
+                "ic_sup": 0.008728702002633197,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.010099651643942775,
+                "ic_inf": -0.02538585627658541,
+                "ic_sup": 0.003762509933878027,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "dos_apellidos": {
+        "clusters": {
+          "grupos": {
+            "dos apellidos": {
+              "personas": 1719,
+              "precision": {
+                "valor": 0.9946729171105902,
+                "ic_inf": 0.9740875610586901,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9227119984186598,
+                "ic_inf": 0.9095978440699131,
+                "ic_sup": 0.9354537652890428
+              },
+              "f1": {
+                "valor": 0.9573420836751436,
+                "ic_inf": 0.9464758656087598,
+                "ic_sup": 0.9658447854699492
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9139034322280396,
+                "ic_inf": 0.9013336351641617,
+                "ic_sup": 0.9275333748438329
+              }
+            },
+            "un apellido": {
+              "personas": 281,
+              "precision": {
+                "valor": 0.9948253557567918,
+                "ic_inf": 0.9719811635272546,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9025821596244131,
+                "ic_inf": 0.8612784204228161,
+                "ic_sup": 0.9394651424037728
+              },
+              "f1": {
+                "valor": 0.9464615384615385,
+                "ic_inf": 0.922442172890221,
+                "ic_sup": 0.9676661579174788
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.8932384341637011,
+                "ic_inf": 0.8571303696303696,
+                "ic_sup": 0.9264252052295531
+              }
+            }
+          },
+          "diferencias": {
+            "dos apellidos - un apellido": {
+              "precision": {
+                "valor": -0.0001524386462015137,
+                "ic_inf": -0.02066067492892638,
+                "ic_sup": 0.02372839950739259,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.02012983879424668,
+                "ic_inf": -0.019396719871599497,
+                "ic_sup": 0.0646089935294135,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.010880545213605153,
+                "ic_inf": -0.01332676862252248,
+                "ic_sup": 0.03716172138101955,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.020664998064338524,
+                "ic_inf": -0.016490900570308043,
+                "ic_sup": 0.05967655041836907,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "dos apellidos": {
+              "personas": 1719,
+              "precision": {
+                "valor": 0.9980544747081712,
+                "ic_inf": 0.990790104267719,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9126309547341371,
+                "ic_inf": 0.8995871563508898,
+                "ic_sup": 0.9264541131311996
+              },
+              "f1": {
+                "valor": 0.9534331440371708,
+                "ic_inf": 0.9456954251050781,
+                "ic_sup": 0.9612219120380112
+              }
+            },
+            "un apellido": {
+              "personas": 281,
+              "precision": {
+                "valor": 0.994750656167979,
+                "ic_inf": 0.9716104985246156,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.8896713615023474,
+                "ic_inf": 0.8488421091202228,
+                "ic_sup": 0.927023149932047
+              },
+              "f1": {
+                "valor": 0.9392812887236679,
+                "ic_inf": 0.9152353348875307,
+                "ic_sup": 0.9609755875349415
+              }
+            }
+          },
+          "diferencias": {
+            "dos apellidos - un apellido": {
+              "precision": {
+                "valor": 0.003303818540192238,
+                "ic_inf": -0.006971244617110345,
+                "ic_sup": 0.026190447204238167,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.022959593231789754,
+                "ic_inf": -0.01764889794813142,
+                "ic_sup": 0.06696175886547476,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.014151855313502937,
+                "ic_inf": -0.009603684078287968,
+                "ic_sup": 0.0402679207237818,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "con_tilde": {
+        "clusters": {
+          "grupos": {
+            "sin tilde": {
+              "personas": 596,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9060838747784997,
+                "ic_inf": 0.8817327063030395,
+                "ic_sup": 0.9292933909478699
+              },
+              "f1": {
+                "valor": 0.9507282305546948,
+                "ic_inf": 0.9371497910925416,
+                "ic_sup": 0.9633510333947406
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9060402684563759,
+                "ic_inf": 0.8826530612244898,
+                "ic_sup": 0.9283333333333333
+              }
+            },
+            "con tilde o ñ": {
+              "personas": 1404,
+              "precision": {
+                "valor": 0.9926246185147508,
+                "ic_inf": 0.9686368231796191,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9253200568990043,
+                "ic_inf": 0.910453617645638,
+                "ic_sup": 0.9390426149442841
+              },
+              "f1": {
+                "valor": 0.9577914110429449,
+                "ic_inf": 0.944278481022413,
+                "ic_sup": 0.9670035597489167
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9131054131054132,
+                "ic_inf": 0.8992012541057032,
+                "ic_sup": 0.9273793836531028
+              }
+            }
+          },
+          "diferencias": {
+            "sin tilde - con tilde o ñ": {
+              "precision": {
+                "valor": 0.007375381485249188,
+                "ic_inf": 0.0,
+                "ic_sup": 0.03136317682038093,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.019236182120504597,
+                "ic_inf": -0.04897161586235594,
+                "ic_sup": 0.008864346330140445,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.007063180488250054,
+                "ic_inf": -0.025339313279283158,
+                "ic_sup": 0.011762050197460483,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.0070651446490372916,
+                "ic_inf": -0.03528995615974354,
+                "ic_sup": 0.019191050117796333,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "sin tilde": {
+              "personas": 596,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.8978145304193739,
+                "ic_inf": 0.8720398685526035,
+                "ic_sup": 0.9215234708933769
+              },
+              "f1": {
+                "valor": 0.9461562402738873,
+                "ic_inf": 0.9316466844978163,
+                "ic_sup": 0.9591592138523353
+              }
+            },
+            "con tilde o ñ": {
+              "personas": 1404,
+              "precision": {
+                "valor": 0.9966390899689762,
+                "ic_inf": 0.9879363136678202,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9139402560455192,
+                "ic_inf": 0.8984773492826008,
+                "ic_sup": 0.9283864233774182
+              },
+              "f1": {
+                "valor": 0.9534998763294583,
+                "ic_inf": 0.9447077266151211,
+                "ic_sup": 0.9618996272550268
+              }
+            }
+          },
+          "diferencias": {
+            "sin tilde - con tilde o ñ": {
+              "precision": {
+                "valor": 0.0033609100310237894,
+                "ic_inf": 0.0,
+                "ic_sup": 0.012063686332179848,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.016125725626145337,
+                "ic_inf": -0.046453656714632835,
+                "ic_sup": 0.01108428910200155,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.007343636055570979,
+                "ic_inf": -0.024602117578873917,
+                "ic_sup": 0.008090199511241982,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "rural": {
+        "clusters": {
+          "grupos": {
+            "dirección urbana": {
+              "personas": 1877,
+              "precision": {
+                "valor": 0.9942277070063694,
+                "ic_inf": 0.9755264673887664,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9187051682913371,
+                "ic_inf": 0.9052460809036348,
+                "ic_sup": 0.9321709017449809
+              },
+              "f1": {
+                "valor": 0.9549756237453398,
+                "ic_inf": 0.9446939928581253,
+                "ic_sup": 0.9631517594714258
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9099627064464572,
+                "ic_inf": 0.8972698932085886,
+                "ic_sup": 0.9229553268435123
+              }
+            },
+            "dirección rural": {
+              "personas": 123,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9324894514767933,
+                "ic_inf": 0.8849031084005509,
+                "ic_sup": 0.9723951992961057
+              },
+              "f1": {
+                "valor": 0.9650655021834061,
+                "ic_inf": 0.9389375017306788,
+                "ic_sup": 0.9860044270817199
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.926829268292683,
+                "ic_inf": 0.8780273855370133,
+                "ic_sup": 0.968503937007874
+              }
+            }
+          },
+          "diferencias": {
+            "dirección urbana - dirección rural": {
+              "precision": {
+                "valor": -0.005772292993630579,
+                "ic_inf": -0.024473532611233608,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.013784283185456214,
+                "ic_inf": -0.056015182217112276,
+                "ic_sup": 0.03395816139753117,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.010089878438066302,
+                "ic_inf": -0.03342100800273871,
+                "ic_sup": 0.015977099009287007,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.016866561846225814,
+                "ic_inf": -0.06047593415143633,
+                "ic_sup": 0.03309607450303832,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "dirección urbana": {
+              "personas": 1877,
+              "precision": {
+                "valor": 0.9973769168684423,
+                "ic_inf": 0.9905959359457757,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9091410704432592,
+                "ic_inf": 0.8956855028701636,
+                "ic_sup": 0.9228200998112199
+              },
+              "f1": {
+                "valor": 0.9512171653997883,
+                "ic_inf": 0.94373161294007,
+                "ic_sup": 0.9588081572010683
+              }
+            },
+            "dirección rural": {
+              "personas": 123,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9113924050632911,
+                "ic_inf": 0.8653072487273055,
+                "ic_sup": 0.9549673228766538
+              },
+              "f1": {
+                "valor": 0.9536423841059603,
+                "ic_inf": 0.9277905670971365,
+                "ic_sup": 0.9769649826615073
+              }
+            }
+          },
+          "diferencias": {
+            "dirección urbana - dirección rural": {
+              "precision": {
+                "valor": -0.0026230831315576797,
+                "ic_inf": -0.00940406405422432,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.0022513346200319084,
+                "ic_inf": -0.0464147146192908,
+                "ic_sup": 0.04516172962557971,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.002425218706171961,
+                "ic_inf": -0.026277411580444048,
+                "ic_sup": 0.024042444463420687,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "con_apodo": {
+        "clusters": {
+          "grupos": {
+            "sin apodo": {
+              "personas": 1771,
+              "precision": {
+                "valor": 0.9981269510926118,
+                "ic_inf": 0.9927229919483038,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9180704441041347,
+                "ic_inf": 0.904175091581607,
+                "ic_sup": 0.931904695233424
+              },
+              "f1": {
+                "valor": 0.9564263635457174,
+                "ic_inf": 0.9482916910455546,
+                "ic_sup": 0.9637243962659846
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9113495200451722,
+                "ic_inf": 0.8982838286992649,
+                "ic_sup": 0.9247316323227964
+              }
+            },
+            "con apodo": {
+              "personas": 229,
+              "precision": {
+                "valor": 0.9697428139183056,
+                "ic_inf": 0.8473136205434179,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9330422125181951,
+                "ic_inf": 0.8993242700625251,
+                "ic_sup": 0.9645175077368473
+              },
+              "f1": {
+                "valor": 0.9510385756676558,
+                "ic_inf": 0.8894728960766696,
+                "ic_sup": 0.9801973874453029
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9082969432314411,
+                "ic_inf": 0.8678365509199274,
+                "ic_sup": 0.9453222214366516
+              }
+            }
+          },
+          "diferencias": {
+            "sin apodo - con apodo": {
+              "precision": {
+                "valor": 0.028384137174306212,
+                "ic_inf": -0.005688514851467516,
+                "ic_sup": 0.14802763159041166,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.014971768414060338,
+                "ic_inf": -0.049015275940203766,
+                "ic_sup": 0.021714263142379012,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.005387787878061601,
+                "ic_inf": -0.025856823276826795,
+                "ic_sup": 0.06569952817622256,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.003052576813731167,
+                "ic_inf": -0.03791414240114656,
+                "ic_sup": 0.045086882217588706,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "sin apodo": {
+              "personas": 1771,
+              "precision": {
+                "valor": 0.9987355110642782,
+                "ic_inf": 0.9948511090762958,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9071592649310873,
+                "ic_inf": 0.8932777792571909,
+                "ic_sup": 0.9216467857983969
+              },
+              "f1": {
+                "valor": 0.9507473166817133,
+                "ic_inf": 0.9426220520071974,
+                "ic_sup": 0.9584518605189497
+              }
+            },
+            "con apodo": {
+              "personas": 229,
+              "precision": {
+                "valor": 0.9891135303265941,
+                "ic_inf": 0.9399076883232204,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.925764192139738,
+                "ic_inf": 0.8904420921544209,
+                "ic_sup": 0.9578087366156434
+              },
+              "f1": {
+                "valor": 0.956390977443609,
+                "ic_inf": 0.9275150858734335,
+                "ic_sup": 0.9764857972034121
+              }
+            }
+          },
+          "diferencias": {
+            "sin apodo - con apodo": {
+              "precision": {
+                "valor": 0.009621980737684055,
+                "ic_inf": -0.004152849369658661,
+                "ic_sup": 0.05738667263275635,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.0186049272086507,
+                "ic_inf": -0.05419526187048314,
+                "ic_sup": 0.018922630217237845,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.005643660761895708,
+                "ic_inf": -0.027952169962163848,
+                "ic_sup": 0.02286863432263285,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "apellido_casada": {
+        "clusters": {
+          "grupos": {
+            "sin apellido de casada": {
+              "personas": 1751,
+              "precision": {
+                "valor": 0.9940020682523267,
+                "ic_inf": 0.9742882289275562,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9189292543021033,
+                "ic_inf": 0.9052524628570514,
+                "ic_sup": 0.9327786933957533
+              },
+              "f1": {
+                "valor": 0.9549925484351713,
+                "ic_inf": 0.9448238965344115,
+                "ic_sup": 0.9636986607828232
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9097658480868075,
+                "ic_inf": 0.8972101735398323,
+                "ic_sup": 0.9237003997189372
+              }
+            },
+            "apellido de casada": {
+              "personas": 249,
+              "precision": {
+                "valor": 0.9937007874015747,
+                "ic_inf": 0.9640678042411418,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9265785609397944,
+                "ic_inf": 0.8894391004701729,
+                "ic_sup": 0.9593183855066898
+              },
+              "f1": {
+                "valor": 0.958966565349544,
+                "ic_inf": 0.9347051350955197,
+                "ic_sup": 0.9773520990859305
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9196787148594378,
+                "ic_inf": 0.8861726792172865,
+                "ic_sup": 0.9527696926989184
+              }
+            }
+          },
+          "diferencias": {
+            "sin apellido de casada - apellido de casada": {
+              "precision": {
+                "valor": 0.00030128085075198374,
+                "ic_inf": -0.020573524028196594,
+                "ic_sup": 0.025116743299477183,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.0076493066376911445,
+                "ic_inf": -0.0419349082725877,
+                "ic_sup": 0.03348479967756305,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.003974016914372713,
+                "ic_inf": -0.024920062075463087,
+                "ic_sup": 0.02140261049619054,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.009912866772630258,
+                "ic_inf": -0.04423646611733658,
+                "ic_sup": 0.025413086635880055,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "sin apellido de casada": {
+              "personas": 1751,
+              "precision": {
+                "valor": 0.9972763461135554,
+                "ic_inf": 0.9901845925385779,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9101338432122371,
+                "ic_inf": 0.8963900152782989,
+                "ic_sup": 0.9244429739762922
+              },
+              "f1": {
+                "valor": 0.9517144856543037,
+                "ic_inf": 0.9436502961264748,
+                "ic_sup": 0.9596312438018687
+              }
+            },
+            "apellido de casada": {
+              "personas": 249,
+              "precision": {
+                "valor": 0.9935379644588045,
+                "ic_inf": 0.9630625,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9030837004405287,
+                "ic_inf": 0.8628761319497005,
+                "ic_sup": 0.9416159181506358
+              },
+              "f1": {
+                "valor": 0.9461538461538462,
+                "ic_inf": 0.9204199280727734,
+                "ic_sup": 0.9669084401424326
+              }
+            }
+          },
+          "diferencias": {
+            "sin apellido de casada - apellido de casada": {
+              "precision": {
+                "valor": 0.003738381654750933,
+                "ic_inf": -0.006765149146281158,
+                "ic_sup": 0.029251645666047987,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.007050142771708456,
+                "ic_inf": -0.03106472169345895,
+                "ic_sup": 0.048821612945023234,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.005560639500457487,
+                "ic_inf": -0.01574356525356914,
+                "ic_sup": 0.03182897297047272,
+                "significativa": false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "mejora_v2_sobre_v1_en_ciega_2": {
+    "descripcion": "v2 - v1 sobre las mismas personas de la ciega 2 (pareado)",
+    "clusters": {
+      "precision": {
+        "valor": 0.003785254793761905,
+        "ic_inf": -0.0026979985277850197,
+        "ic_sup": 0.021480592548419667,
+        "significativa": false
+      },
+      "recall": {
+        "valor": 0.08018947724581293,
+        "ic_inf": 0.06767913269464905,
+        "ic_sup": 0.09280662177036383,
+        "significativa": true
+      },
+      "f1": {
+        "valor": 0.04345129330004105,
+        "ic_inf": 0.03550778061611255,
+        "ic_sup": 0.0526115233775956,
+        "significativa": true
+      },
+      "pct_clusters_exactos": {
+        "valor": 0.08599999999999997,
+        "ic_inf": 0.07399999999999995,
+        "ic_sup": 0.09799999999999998,
+        "significativa": true
+      }
+    },
+    "pares": {
+      "precision": {
+        "valor": 0.001904811107750648,
+        "ic_inf": -0.0006409126562374272,
+        "ic_sup": 0.008059061567674174,
+        "significativa": false
+      },
+      "recall": {
+        "valor": 0.0893249873117915,
+        "ic_inf": 0.07629846424182501,
+        "ic_sup": 0.10234183553607594,
+        "significativa": true
+      },
+      "f1": {
+        "valor": 0.04765750833526916,
+        "ic_inf": 0.04045928550323504,
+        "ic_sup": 0.054826181869157525,
+        "significativa": true
+      }
+    }
+  },
+  "ciega_2": {
+    "datos": {
+      "personas": 2000,
+      "semilla": 7777,
+      "registros": 4967,
+      "condiciones": {
+        "apellido_casada": 249,
+        "con_apodo": 229,
+        "rural": 123,
+        "doc_tarjeta_identidad": 47,
+        "doc_extranjero_alterno": 50,
+        "mujer_aparente": 940
+      }
+    },
+    "bloqueo": {
+      "pares_comparados": 6315,
+      "pares_verdaderos": 5911,
+      "pares_verdaderos_comparados": 5909,
+      "recall_bloqueo": 0.9996616477753342,
+      "recall_perdido_por_bloqueo": 0.0003383522246658277
+    },
+    "pares": {
+      "umbral": 0.9999,
+      "tp": 5903,
+      "fp": 3,
+      "fn": 8,
+      "precision": 0.9994920419911953,
+      "recall": 0.9986465911013365,
+      "f1": 0.9990691376829991
+    },
+    "clusters": {
+      "umbral": 0.9999,
+      "tp": 5911,
+      "fp": 9,
+      "fn": 0,
+      "precision": 0.9984797297297298,
+      "recall": 1.0,
+      "f1": 0.9992392866198969,
+      "clusters_predichos": 1997,
+      "clusters_reales": 2000,
+      "clusters_exactos": 1994,
+      "pct_clusters_exactos": 0.997
+    },
+    "intervalos": {
+      "metodo": "bootstrap percentil remuestreando personas",
+      "nivel": 0.95,
+      "replicas": 1000,
+      "personas": 2000,
+      "pares": {
+        "precision": {
+          "valor": 0.9994920419911953,
+          "ic_inf": 0.9983125408371175,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.9986465911013365,
+          "ic_inf": 0.9973407346960464,
+          "ic_sup": 0.9996672946101691
+        },
+        "f1": {
+          "valor": 0.9990691376829991,
+          "ic_inf": 0.9982204142644184,
+          "ic_sup": 0.9996663371725903
+        }
+      },
+      "clusters": {
+        "precision": {
+          "valor": 0.9984797297297298,
+          "ic_inf": 0.9944023681197188,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "f1": {
+          "valor": 0.9992392866198969,
+          "ic_inf": 0.9971933286997535,
+          "ic_sup": 1.0
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.997,
+          "ic_inf": 0.9945,
+          "ic_sup": 0.999
+        }
+      }
+    },
+    "equidad": {
+      "nombre_compuesto": {
+        "clusters": {
+          "grupos": {
+            "nombre simple": {
+              "personas": 1218,
+              "precision": {
+                "valor": 0.9974958263772955,
+                "ic_inf": 0.9905277212266888,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9987463435018805,
+                "ic_inf": 0.9952413228320385,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9958949096880131,
+                "ic_inf": 0.9918498745597626,
+                "ic_sup": 0.9991776821758559
+              }
+            },
+            "nombre compuesto": {
+              "personas": 782,
+              "precision": {
+                "valor": 0.9995702621400946,
+                "ic_inf": 0.997332147621165,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9997850848914679,
+                "ic_inf": 0.9986642920747997,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9987212276214834,
+                "ic_inf": 0.9961340206185567,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "nombre simple - nombre compuesto": {
+              "precision": {
+                "valor": -0.0020744357627990873,
+                "ic_inf": -0.008874406767208767,
+                "ic_sup": 0.0005445008779779268,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.001038741389587372,
+                "ic_inf": -0.00445697991087905,
+                "ic_sup": 0.00027262925503294944,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.0028263179334703237,
+                "ic_inf": -0.007413509060955503,
+                "ic_sup": 0.0012306296212271856,
+                "significativa": false
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "nombre simple": {
+              "personas": 1218,
+              "precision": {
+                "valor": 0.999163179916318,
+                "ic_inf": 0.9971889636257892,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.999163179916318,
+                "ic_inf": 0.9977862698397931,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.999163179916318,
+                "ic_inf": 0.9979912471744268,
+                "ic_sup": 0.9998774047529234
+              }
+            },
+            "nombre compuesto": {
+              "personas": 782,
+              "precision": {
+                "valor": 0.9995693367786391,
+                "ic_inf": 0.9973273346327649,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9978503869303526,
+                "ic_inf": 0.995284482316226,
+                "ic_sup": 0.9996022590700642
+              },
+              "f1": {
+                "valor": 0.9987091222030982,
+                "ic_inf": 0.99714512934048,
+                "ic_sup": 0.9997844455784695
+              }
+            }
+          },
+          "diferencias": {
+            "nombre simple - nombre compuesto": {
+              "precision": {
+                "valor": -0.0004061568623211498,
+                "ic_inf": -0.002189899240112272,
+                "ic_sup": 0.0006494850509204673,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.0013127929859654275,
+                "ic_inf": -0.0010093234990412336,
+                "ic_sup": 0.003955684790708768,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.00045405771321982424,
+                "ic_inf": -0.0010289502693438311,
+                "ic_sup": 0.001967803353971137,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "dos_apellidos": {
+        "clusters": {
+          "grupos": {
+            "dos apellidos": {
+              "personas": 1719,
+              "precision": {
+                "valor": 0.9982241515390686,
+                "ic_inf": 0.9934770639397509,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9991112866594253,
+                "ic_inf": 0.9967278599459429,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9965095986038395,
+                "ic_inf": 0.9935481028012585,
+                "ic_sup": 0.9988412849770396
+              }
+            },
+            "un apellido": {
+              "personas": 281,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "dos apellidos - un apellido": {
+              "precision": {
+                "valor": -0.001775848460931373,
+                "ic_inf": -0.006522936060249163,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.0008887133405747205,
+                "ic_inf": -0.003272140054057023,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.003490401396160525,
+                "ic_inf": -0.006451897198741535,
+                "ic_sup": -0.0011587150229603604,
+                "significativa": true
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "dos apellidos": {
+              "personas": 1719,
+              "precision": {
+                "valor": 0.9994067629029069,
+                "ic_inf": 0.9980430960297282,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9990116623838703,
+                "ic_inf": 0.9977999339207049,
+                "ic_sup": 0.9998071452503752
+              },
+              "f1": {
+                "valor": 0.9992091735863978,
+                "ic_inf": 0.9983404277653577,
+                "ic_sup": 0.9998016244209381
+              }
+            },
+            "un apellido": {
+              "personas": 281,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9964788732394366,
+                "ic_inf": 0.9902550913123346,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.998236331569665,
+                "ic_inf": 0.9951036885976597,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "dos apellidos - un apellido": {
+              "precision": {
+                "valor": -0.0005932370970931355,
+                "ic_inf": -0.001956903970271833,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.002532789144433667,
+                "ic_inf": -0.001442124461310687,
+                "ic_sup": 0.00884869382872722,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.0009728420167328666,
+                "ic_inf": -0.0011858584372038238,
+                "ic_sup": 0.004105387447110996,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "con_tilde": {
+        "clusters": {
+          "grupos": {
+            "sin tilde": {
+              "personas": 596,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            },
+            "con tilde o ñ": {
+              "personas": 1404,
+              "precision": {
+                "valor": 0.9978708303761533,
+                "ic_inf": 0.9920835379895397,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9989342806394316,
+                "ic_inf": 0.9960260391317801,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9957264957264957,
+                "ic_inf": 0.9920804909094304,
+                "ic_sup": 0.9985846468026917
+              }
+            }
+          },
+          "diferencias": {
+            "sin tilde - con tilde o ñ": {
+              "precision": {
+                "valor": 0.002129169623846683,
+                "ic_inf": 0.0,
+                "ic_sup": 0.007916462010460298,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.001065719360568429,
+                "ic_inf": 0.0,
+                "ic_sup": 0.003973960868219894,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.004273504273504258,
+                "ic_inf": 0.0014153531973083223,
+                "ic_sup": 0.007919509090569557,
+                "significativa": true
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "sin tilde": {
+              "personas": 596,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9970466627288836,
+                "ic_inf": 0.9933802738336528,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9985211475894705,
+                "ic_inf": 0.996679145335267,
+                "ic_sup": 1.0
+              }
+            },
+            "con tilde o ñ": {
+              "personas": 1404,
+              "precision": {
+                "valor": 0.9992887624466572,
+                "ic_inf": 0.9976271668690918,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9992887624466572,
+                "ic_inf": 0.9983172570697953,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9992887624466572,
+                "ic_inf": 0.9983677938821895,
+                "ic_sup": 0.9998784348949554
+              }
+            }
+          },
+          "diferencias": {
+            "sin tilde - con tilde o ñ": {
+              "precision": {
+                "valor": 0.0007112375533427917,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0023728331309081888,
+                "significativa": false
+              },
+              "recall": {
+                "valor": -0.00224209971777356,
+                "ic_inf": -0.005944341520948148,
+                "ic_sup": 0.0007062605257157822,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.0007676148571866825,
+                "ic_inf": -0.0027174723816744514,
+                "ic_sup": 0.0009522161528881492,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "rural": {
+        "clusters": {
+          "grupos": {
+            "dirección urbana": {
+              "personas": 1877,
+              "precision": {
+                "valor": 0.998347410943812,
+                "ic_inf": 0.9938759426909372,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9991730221446292,
+                "ic_inf": 0.9969285665279799,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.996803409696324,
+                "ic_inf": 0.9941174107564826,
+                "ic_sup": 0.9989401306216485
+              }
+            },
+            "dirección rural": {
+              "personas": 123,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "dirección urbana - dirección rural": {
+              "precision": {
+                "valor": -0.0016525890561880363,
+                "ic_inf": -0.006124057309062841,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.0008269778553707807,
+                "ic_inf": -0.003071433472020102,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.003196590303676028,
+                "ic_inf": -0.0058825892435174195,
+                "ic_sup": -0.0010598693783514356,
+                "significativa": true
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "dirección urbana": {
+              "personas": 1877,
+              "precision": {
+                "valor": 0.9994479205005521,
+                "ic_inf": 0.9981590463897677,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9988964502482987,
+                "ic_inf": 0.9976097958008504,
+                "ic_sup": 0.9998200489558263
+              },
+              "f1": {
+                "valor": 0.999172109281575,
+                "ic_inf": 0.9982936379414868,
+                "ic_sup": 0.9998103657795921
+              }
+            },
+            "dirección rural": {
+              "personas": 123,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9957805907172996,
+                "ic_inf": 0.9885314510176105,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9978858350951374,
+                "ic_inf": 0.9942326539592377,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "dirección urbana - dirección rural": {
+              "precision": {
+                "valor": -0.0005520794994479106,
+                "ic_inf": -0.0018409536102322458,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.003115859530999021,
+                "ic_inf": -0.001439561961767227,
+                "ic_sup": 0.010437663066228807,
+                "significativa": false
+              },
+              "f1": {
+                "valor": 0.0012862741864375637,
+                "ic_inf": -0.0010248723514202332,
+                "ic_sup": 0.004918065139721633,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "con_apodo": {
+        "clusters": {
+          "grupos": {
+            "sin apodo": {
+              "personas": 1771,
+              "precision": {
+                "valor": 0.9982801452321803,
+                "ic_inf": 0.9936774107430068,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9991393325045423,
+                "ic_inf": 0.9968286798564338,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9966120835686053,
+                "ic_inf": 0.993774317847638,
+                "ic_sup": 0.9988757886958334
+              }
+            },
+            "con apodo": {
+              "personas": 229,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "sin apodo - con apodo": {
+              "precision": {
+                "valor": -0.0017198547678196618,
+                "ic_inf": -0.006322589256993287,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.0008606674954576565,
+                "ic_inf": -0.0031713201435662215,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.0033879164313946886,
+                "ic_inf": -0.006225682152361925,
+                "ic_sup": -0.0011242113041665697,
+                "significativa": true
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "sin apodo": {
+              "personas": 1771,
+              "precision": {
+                "valor": 0.9994252873563219,
+                "ic_inf": 0.9980784265397347,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9986600306278713,
+                "ic_inf": 0.997282085776847,
+                "ic_sup": 0.9998006120830192
+              },
+              "f1": {
+                "valor": 0.9990425124473382,
+                "ic_inf": 0.9981133428454895,
+                "ic_sup": 0.9997122325242508
+              }
+            },
+            "con apodo": {
+              "personas": 229,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9985443959243085,
+                "ic_inf": 0.9948709122203099,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9992716678805535,
+                "ic_inf": 0.9974288623070593,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "sin apodo - con apodo": {
+              "precision": {
+                "valor": -0.0005747126436781436,
+                "ic_inf": -0.0019215734602653408,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.0001156347035627947,
+                "ic_inf": -0.0023304727625979207,
+                "ic_sup": 0.0038420881140147326,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.00022915543321533338,
+                "ic_inf": -0.0016172472558186823,
+                "ic_sup": 0.001695347012990658,
+                "significativa": false
+              }
+            }
+          }
+        }
+      },
+      "apellido_casada": {
+        "clusters": {
+          "grupos": {
+            "sin apellido de casada": {
+              "personas": 1751,
+              "precision": {
+                "valor": 0.9982821149074251,
+                "ic_inf": 0.9937153378765774,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9991403190371574,
+                "ic_inf": 0.996847763514555,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 0.9965733866362079,
+                "ic_inf": 0.993707003768474,
+                "ic_sup": 0.9988649262202043
+              }
+            },
+            "apellido de casada": {
+              "personas": 249,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "pct_clusters_exactos": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              }
+            }
+          },
+          "diferencias": {
+            "sin apellido de casada - apellido de casada": {
+              "precision": {
+                "valor": -0.0017178850925748668,
+                "ic_inf": -0.006284662123422572,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.0,
+                "ic_inf": 0.0,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "f1": {
+                "valor": -0.0008596809628426128,
+                "ic_inf": -0.0031522364854450857,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "pct_clusters_exactos": {
+                "valor": -0.0034266133637921303,
+                "ic_inf": -0.006292996231525983,
+                "ic_sup": -0.0011350737797957144,
+                "significativa": true
+              }
+            }
+          }
+        },
+        "pares": {
+          "grupos": {
+            "sin apellido de casada": {
+              "personas": 1751,
+              "precision": {
+                "valor": 0.9994266055045872,
+                "ic_inf": 0.9980922450660669,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9998087954110899,
+                "ic_inf": 0.9994038626359697,
+                "ic_sup": 1.0
+              },
+              "f1": {
+                "valor": 0.9996176639265915,
+                "ic_inf": 0.9988972167803082,
+                "ic_sup": 1.0
+              }
+            },
+            "apellido de casada": {
+              "personas": 249,
+              "precision": {
+                "valor": 1.0,
+                "ic_inf": 1.0,
+                "ic_sup": 1.0
+              },
+              "recall": {
+                "valor": 0.9897209985315712,
+                "ic_inf": 0.979093375302283,
+                "ic_sup": 0.9980955981636511
+              },
+              "f1": {
+                "valor": 0.9948339483394834,
+                "ic_inf": 0.9894362615890625,
+                "ic_sup": 0.9990468915297986
+              }
+            }
+          },
+          "diferencias": {
+            "sin apellido de casada - apellido de casada": {
+              "precision": {
+                "valor": -0.0005733944954128267,
+                "ic_inf": -0.001907754933933186,
+                "ic_sup": 0.0,
+                "significativa": false
+              },
+              "recall": {
+                "valor": 0.010087796879518662,
+                "ic_inf": 0.0019044018363488572,
+                "ic_sup": 0.020737959088408413,
+                "significativa": true
+              },
+              "f1": {
+                "valor": 0.004783715587108106,
+                "ic_inf": 0.0006325769154191116,
+                "ic_sup": 0.010229354231074048,
+                "significativa": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "diferencias_significativas": [
+      {
+        "atributo": "dos_apellidos",
+        "metrica": "pct_clusters_exactos",
+        "diferencia": "dos apellidos - un apellido",
+        "valor": -0.003490401396160525,
+        "falla_mas_con": "dos apellidos"
+      },
+      {
+        "atributo": "con_tilde",
+        "metrica": "pct_clusters_exactos",
+        "diferencia": "sin tilde - con tilde o ñ",
+        "valor": 0.004273504273504258,
+        "falla_mas_con": "con tilde o ñ"
+      },
+      {
+        "atributo": "rural",
+        "metrica": "pct_clusters_exactos",
+        "diferencia": "dirección urbana - dirección rural",
+        "valor": -0.003196590303676028,
+        "falla_mas_con": "dirección urbana"
+      },
+      {
+        "atributo": "con_apodo",
+        "metrica": "pct_clusters_exactos",
+        "diferencia": "sin apodo - con apodo",
+        "valor": -0.0033879164313946886,
+        "falla_mas_con": "sin apodo"
+      },
+      {
+        "atributo": "apellido_casada",
+        "metrica": "pct_clusters_exactos",
+        "diferencia": "sin apellido de casada - apellido de casada",
+        "valor": -0.0034266133637921303,
+        "falla_mas_con": "sin apellido de casada"
+      }
+    ]
+  }
+}

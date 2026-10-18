@@ -14,6 +14,10 @@ medir su precisión contra la verdad conocida.
   normal, precisión 1,000 y recall 0,998 por clúster. En la **prueba ciega** (modelo
   congelado, errores de un generador independiente), precisión 0,997 y recall 0,636: la
   cifra honesta. FEBRL3: precisión 1,000 y recall 0,997.
+- [Hito 2b: corregir y volver a medir a ciegas](hito2b.md): con las correcciones (apellido
+  de casada, apodos, nombres cruzados, documento, teléfonos y fechas), en una **segunda
+  prueba ciega**, precisión 0,998 y recall 1,000 por clúster; el modelo anterior, en esos
+  mismos datos, 0,995 y 0,920.
 
 ## Hito 1: fake_1000
 

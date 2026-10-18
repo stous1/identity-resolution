@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-2d5f678770a02ea2dac150146d90a6c9"}, "facet": {"column": {"field": "metrica", "title": null, "type": "nominal"}}, "spec": {"layer": [{"mark": {"type": "rule", "color": "#6b7280", "strokeWidth": 2}, "encoding": {"tooltip": [{"field": "grupo", "type": "nominal"}, {"field": "metrica", "type": "nominal"}, {"field": "valor", "format": ".3f", "type": "quantitative"}, {"field": "ic_inf", "format": ".3f", "title": "IC 95 % inferior", "type": "quantitative"}, {"field": "ic_sup", "format": ".3f", "title": "IC 95 % superior", "type": "quantitative"}], "x": {"field": "ic_inf", "scale": {"zero": false}, "title": "Valor (IC 95 %)", "type": "quantitative"}, "x2": {"field": "ic_sup"}, "y": {"field": "grupo", "sort": null, "title": null, "type": "nominal"}}}, {"mark": {"type": "point", "color": "#2563eb", "filled": true, "size": 70}, "encoding": {"tooltip": [{"field": "grupo", "type": "nominal"}, {"field": "metrica", "type": "nominal"}, {"field": "valor", "format": ".3f", "type": "quantitative"}, {"field": "ic_inf", "format": ".3f", "title": "IC 95 % inferior", "type": "quantitative"}, {"field": "ic_sup", "format": ".3f", "title": "IC 95 % superior", "type": "quantitative"}], "x": {"field": "valor", "type": "quantitative"}, "y": {"field": "grupo", "sort": null, "title": null, "type": "nominal"}}}], "height": {"step": 26}, "width": 260}, "resolve": {"scale": {"x": "independent"}}, "title": "Prueba ciega 2: m\u00e9tricas por cl\u00faster por grupo de personas", "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json", "datasets": {"data-2d5f678770a02ea2dac150146d90a6c9": [{"grupo": "nombre simple", "metrica": "Precisi\u00f3n", "valor": 0.9974958263772955, "ic_inf": 0.9905277212266888, "ic_sup": 1.0}, {"grupo": "nombre simple", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "nombre simple", "metrica": "F1", "valor": 0.9987463435018805, "ic_inf": 0.9952413228320385, "ic_sup": 1.0}, {"grupo": "nombre simple", "metrica": "Personas exactas", "valor": 0.9958949096880131, "ic_inf": 0.9918498745597626, "ic_sup": 0.9991776821758559}, {"grupo": "nombre compuesto", "metrica": "Precisi\u00f3n", "valor": 0.9995702621400946, "ic_inf": 0.997332147621165, "ic_sup": 1.0}, {"grupo": "nombre compuesto", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "nombre compuesto", "metrica": "F1", "valor": 0.9997850848914679, "ic_inf": 0.9986642920747997, "ic_sup": 1.0}, {"grupo": "nombre compuesto", "metrica": "Personas exactas", "valor": 0.9987212276214834, "ic_inf": 0.9961340206185567, "ic_sup": 1.0}, {"grupo": "dos apellidos", "metrica": "Precisi\u00f3n", "valor": 0.9982241515390686, "ic_inf": 0.9934770639397509, "ic_sup": 1.0}, {"grupo": "dos apellidos", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "dos apellidos", "metrica": "F1", "valor": 0.9991112866594253, "ic_inf": 0.9967278599459429, "ic_sup": 1.0}, {"grupo": "dos apellidos", "metrica": "Personas exactas", "valor": 0.9965095986038395, "ic_inf": 0.9935481028012585, "ic_sup": 0.9988412849770396}, {"grupo": "un apellido", "metrica": "Precisi\u00f3n", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "un apellido", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "un apellido", "metrica": "F1", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "un apellido", "metrica": "Personas exactas", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "sin tilde", "metrica": "Precisi\u00f3n", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "sin tilde", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "sin tilde", "metrica": "F1", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "sin tilde", "metrica": "Personas exactas", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "con tilde o \u00f1", "metrica": "Precisi\u00f3n", "valor": 0.9978708303761533, "ic_inf": 0.9920835379895397, "ic_sup": 1.0}, {"grupo": "con tilde o \u00f1", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "con tilde o \u00f1", "metrica": "F1", "valor": 0.9989342806394316, "ic_inf": 0.9960260391317801, "ic_sup": 1.0}, {"grupo": "con tilde o \u00f1", "metrica": "Personas exactas", "valor": 0.9957264957264957, "ic_inf": 0.9920804909094304, "ic_sup": 0.9985846468026917}, {"grupo": "direcci\u00f3n urbana", "metrica": "Precisi\u00f3n", "valor": 0.998347410943812, "ic_inf": 0.9938759426909372, "ic_sup": 1.0}, {"grupo": "direcci\u00f3n urbana", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "direcci\u00f3n urbana", "metrica": "F1", "valor": 0.9991730221446292, "ic_inf": 0.9969285665279799, "ic_sup": 1.0}, {"grupo": "direcci\u00f3n urbana", "metrica": "Personas exactas", "valor": 0.996803409696324, "ic_inf": 0.9941174107564826, "ic_sup": 0.9989401306216485}, {"grupo": "direcci\u00f3n rural", "metrica": "Precisi\u00f3n", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "direcci\u00f3n rural", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "direcci\u00f3n rural", "metrica": "F1", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "direcci\u00f3n rural", "metrica": "Personas exactas", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "sin apodo", "metrica": "Precisi\u00f3n", "valor": 0.9982801452321803, "ic_inf": 0.9936774107430068, "ic_sup": 1.0}, {"grupo": "sin apodo", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "sin apodo", "metrica": "F1", "valor": 0.9991393325045423, "ic_inf": 0.9968286798564338, "ic_sup": 1.0}, {"grupo": "sin apodo", "metrica": "Personas exactas", "valor": 0.9966120835686053, "ic_inf": 0.993774317847638, "ic_sup": 0.9988757886958334}, {"grupo": "con apodo", "metrica": "Precisi\u00f3n", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "con apodo", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "con apodo", "metrica": "F1", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "con apodo", "metrica": "Personas exactas", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "sin apellido de casada", "metrica": "Precisi\u00f3n", "valor": 0.9982821149074251, "ic_inf": 0.9937153378765774, "ic_sup": 1.0}, {"grupo": "sin apellido de casada", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "sin apellido de casada", "metrica": "F1", "valor": 0.9991403190371574, "ic_inf": 0.996847763514555, "ic_sup": 1.0}, {"grupo": "sin apellido de casada", "metrica": "Personas exactas", "valor": 0.9965733866362079, "ic_inf": 0.993707003768474, "ic_sup": 0.9988649262202043}, {"grupo": "apellido de casada", "metrica": "Precisi\u00f3n", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "apellido de casada", "metrica": "Recall", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "apellido de casada", "metrica": "F1", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "apellido de casada", "metrica": "Personas exactas", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

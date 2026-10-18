@@ -32,6 +32,8 @@ uv run ruff check . && uv run ruff format . # lint y formato
 uv run python scripts/hito1_fake1000.py     # flujo completo del hito 1 -> reports/
 uv run python scripts/hito2_colombia.py      # hito 2 (sintéticos colombianos) -> reports/hito2/
 uv run python scripts/validacion.py          # prueba ciega + FEBRL3 -> reports/validacion/
+uv run python scripts/hito2b.py desarrollar   # hito 2b: modelo v2 -> reports/hito2b/
+uv run python scripts/hito2b.py evaluar       # v2 congelado en prueba normal y ciegas
 uv run python scripts/publicar_resultados.py --hito 1  # o 2, o validacion -> docs/resultados/
 ```
 
@@ -49,6 +51,11 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, o validacion -> do
     `hito2-congelado-r1`: `estandarizacion.py`, `modelo_co.py` y
     `docs/resultados/hito2/modelo.json` no se cambian sin crear un tag nuevo y repetir la
     prueba ciega (lo verifica `tests/test_flujo_validacion.py`).
+  - Hito 2b: `estandarizacion_v2.py` y `modelo_co_v2.py` reutilizan v1 sin modificarla;
+    congelados en `hito2b-congelado` junto con `docs/resultados/hito2b/modelo.json` y
+    `desarrollo.json` (lo verifica `tests/test_flujo_hito2b.py`). `errores_ciegos_2.py` es
+    la segunda prueba ciega: no se usa para desarrollar. Una prueba ciega deja de serlo en
+    cuanto se miran sus errores; desde ahí solo sirve como desarrollo.
 - `scripts/`: puntos de entrada delgados que orquestan funciones de `src/`.
 - `notebooks/`: solo exploración. Nada en `src/` ni `scripts/` importa de notebooks.
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.

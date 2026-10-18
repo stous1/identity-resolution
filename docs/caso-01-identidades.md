@@ -77,6 +77,9 @@ de casos dudosos con un agente.
    estandarización y equidad entre grupos. Validado con una prueba ciega (modelo
    congelado, generador de errores independiente) y con FEBRL3. Resultados en
    [hito2.md](hito2.md).
+   **2b. Corrección** (completado): la prueba ciega 1 pasa a desarrollo, se corrigen el
+   apellido de casada, los apodos, los nombres cruzados, el documento y los teléfonos, y se
+   mide con una segunda prueba ciega. Resultados en [hito2b.md](hito2b.md).
 3. Registro de oro y grafo de identidad compartida.
 4. Agente para la zona gris.
 

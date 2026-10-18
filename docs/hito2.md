@@ -1,6 +1,6 @@
 # Hito 2: clientes sintéticos colombianos y estandarización
 
-[← Volver a la portada](index.md) ·
+[← Volver a la portada](index.md) · [Hito 2b: correcciones y segunda prueba ciega](hito2b.md) ·
 [Descripción completa en el README](https://github.com/stous1/identity-resolution#hito-2-clientes-sintéticos-colombianos-y-estandarización)
 
 2.000 personas sintéticas generadas con Faker `es_CO` (4.851 registros con errores de

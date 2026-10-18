@@ -9,6 +9,7 @@ dato y resolución de identidades**.
 |---|---|---|
 | [1. fake_1000](#hito-1-fake_1000-de-punta-a-punta) | Demo de Splink, 251 personas | Precisión 0,970 y recall 0,851 por clúster |
 | [2. Colombia](#hito-2-clientes-sintéticos-colombianos-y-estandarización) | Sintéticos es_CO, 2.000 personas | Prueba normal: precisión 1,000 y recall 0,998 por clúster. **[Prueba ciega](#validación-prueba-ciega-y-febrl3): precisión 0,997 y recall 0,636** |
+| [2b. Corrección](#hito-2b-corregir-y-volver-a-medir-a-ciegas) | Ciega 1 como desarrollo; ciega 2 nueva | **Ciega 2: precisión 0,998 y recall 1,000 por clúster** (v1 en la misma ciega 2: 0,995 y 0,920) |
 
 ## Qué problema resuelve
 
@@ -392,6 +393,108 @@ Métricas completas en
 [docs/resultados/validacion/metricas.json](docs/resultados/validacion/metricas.json) y una
 [muestra de registros ciegos](docs/resultados/validacion/ciega_muestra_registros.csv).
 
+## Hito 2b: corregir y volver a medir a ciegas
+
+La prueba ciega 1 dejó de ser ciega en cuanto se vieron sus errores, así que pasó a ser
+**desarrollo**. Con ella se corrigió el modelo, se congeló de nuevo y se midió con una
+**prueba ciega 2** que nadie había visto.
+
+**Correcciones** ([`estandarizacion_v2.py`](src/identidades/estandarizacion_v2.py) y
+[`modelo_co_v2.py`](src/identidades/modelo_co_v2.py); la versión 1 no se modifica, para que
+sus cifras sigan siendo reproducibles), en orden de impacto:
+
+1. **Apellido de casada:** "Arango de Ramírez" se separa en apellido ARANGO y apellido de
+   casada RAMIREZ, que es una comparación propia. Si un registro lo tiene y el otro no, es
+   neutral; ya no choca con el segundo apellido.
+2. **Apodos:** un diccionario de 133 apodos y 23 formas abreviadas colombianas (Pepe,
+   Pacho, Toño, Betty, Mafe, Juanda...) que pasan a su nombre formal.
+3. **Nombres en otro campo:** niveles para nombre y apellido intercambiados, y para "el
+   primer nombre de uno y otra palabra aparecen en cualquier campo de nombre del otro". La
+   primera versión de este nivel (dos palabras en común) unía hermanos, que comparten los
+   dos apellidos, y se endureció en desarrollo.
+4. **Documento:** corrección de errores de lectura (O por 0, l por 1...) y un nivel de
+   hasta dos ediciones.
+5. **Teléfonos:** cualquier teléfono contra cualquier teléfono. Si uno de los dos solo tiene
+   un fijo, el nivel es aparte y no cuenta como teléfonos distintos. Los números que
+   aparecen en más registros de los que puede tener una persona (relleno) se ignoran.
+6. **Extras,** fuera de la lista original: fechas en otros formatos ("20 de octubre de
+   1999", "12/10/88", "09-ABR-1998") normalizadas a ISO, que antes perdían la evidencia de
+   la fecha, y texto mal codificado ("RamÃ­rez").
+
+**Desarrollo:** el del hito 2 (1.200 personas) más toda la ciega 1 (2.000 personas). Ahí se
+eligieron el bloqueo y el umbral (0,9999), y el modelo se congeló en el tag
+`hito2b-congelado`. Después, **un subagente nuevo**, sin acceso a la estandarización (v1 ni
+v2), los esquemas, los generadores anteriores ni sus resultados, escribió el
+[generador de la ciega 2](src/identidades/errores_ciegos_2.py): 2.000 personas nuevas, otra
+semilla, su propio diccionario de apodos y sus propias formas de apellido de casada, y 17
+tipos de error nuevos (grafías como Brayan, Jhon o Leidy; "María del Carmen"; iniciales;
+títulos; apellidos con guion; dígito de verificación; tarjeta de identidad antigua;
+pasaporte o PPT en vez de cédula de extranjería; correo corporativo; vías con nombre
+propio; dirección anterior; año de dos dígitos...).
+
+### Evolución (por clúster, IC 95 % por bootstrap de personas)
+
+| Evaluación | Precisión | Recall | Personas exactas |
+|---|---|---|---|
+| Prueba normal · modelo v1 | 1,000 [1,000 – 1,000] | 0,998 [0,993 – 1,000] | 99,8 % |
+| Prueba normal · modelo v2 | 1,000 [1,000 – 1,000] | 0,993 [0,986 – 0,999] | 99,5 % |
+| Ciega 1 · modelo v1 | 0,997 [0,987 – 1,000] | 0,636 [0,616 – 0,657] | 60,2 % |
+| Ciega 1 · modelo v2 (*es desarrollo: optimista*) | 1,000 | 1,000 | 100 % |
+| Ciega 2 · modelo v1 (control) | 0,995 [0,977 – 1,000] | 0,920 [0,907 – 0,932] | 91,1 % |
+| **Ciega 2 · modelo v2** | **0,998** [0,994 – 1,000] | **1,000** [1,000 – 1,000] | **99,7 %** [99,5 – 99,9] |
+
+![Evolución](docs/resultados/hito2b/evolucion.png)
+
+**Cómo leer esta tabla.** La ciega 2 resultó **más fácil** que la ciega 1: el mismo modelo
+v1, que en la ciega 1 tenía recall 0,636, en la ciega 2 llega a 0,920. Comparar "ciega 1 con
+v1" contra "ciega 2 con v2" mezclaría la mejora del modelo con la diferencia entre
+generadores. Por eso se aplicó también el modelo v1 congelado a la ciega 2 como control. La
+comparación justa es sobre las mismas personas de la ciega 2 (diferencia pareada v2 − v1):
+
+| Métrica (por clúster) | v2 − v1 en la ciega 2 | IC 95 % | ¿Significativa? |
+|---|---|---|---|
+| Recall | +0,080 | [+0,068, +0,093] | Sí |
+| Personas exactas | +8,6 puntos | [+7,4, +9,8] | Sí |
+| Precisión | +0,004 | [−0,003, +0,021] | No |
+
+- **El modelo v2 mejora a ciegas:** recuperó todos los pares verdaderos de la ciega 2 sin
+  perder precisión. Quedan 3 uniones erróneas (1.997 clústeres para 2.000 personas).
+- **En la prueba normal empeora un poco:** el recall baja de 0,998 a 0,993 (15 pares
+  faltantes en vez de 5). Los intervalos se solapan; es el costo de los niveles más
+  tolerantes.
+
+### Brecha de equidad: antes y después
+
+Personas reconstruidas exactamente, por grupo:
+
+| Grupo | Antes (ciega 1, v1) | Control (ciega 2, v1) | Después (ciega 2, v2) |
+|---|---|---|---|
+| Con apellido de casada | 41,2 % | 92,0 % | 100 % |
+| Sin apellido de casada | 61,5 % | 91,0 % | 99,7 % |
+| **Brecha** | **−20,4 puntos [−29,1, −11,4]** | +1,0 [−2,5, +4,4] | +0,3 [+0,1, +0,6] |
+| Con apodo | 49,3 % | 90,8 % | 100 % |
+| Sin apodo | 62,4 % | 91,1 % | 99,7 % |
+| **Brecha** | **−13,1 puntos [−19,0, −7,4]** | −0,3 [−4,5, +3,8] | +0,3 [+0,1, +0,6] |
+
+**¿Se cerró la brecha?** En la ciega 2 no hay brecha en contra de las mujeres con apellido
+de casada ni de las personas con apodo: con v2 quedan reconstruidas al 100 %, y el
+"+0,3 puntos" a su favor no tiene peso práctico (sale de las 3 uniones erróneas, que cayeron
+en personas de los otros grupos). Pero hay que ser honesto con lo que esto demuestra:
+
+- **Con el control no aparece brecha tampoco con v1** (92,0 % frente a 91,0 %). Las formas de
+  apellido de casada y los apodos del generador de la ciega 2 perjudican menos que los de la
+  ciega 1, así que la ciega 2 no puede confirmar por sí sola que la corrección cerró la
+  brecha que se vio en la ciega 1.
+- **Lo que sí se puede afirmar:** la corrección elimina la brecha en los casos de la ciega 1
+  (en desarrollo, optimista), y en datos que el modelo nunca vio no aparece ninguna brecha
+  nueva. Para confirmar a ciegas la corrección del caso difícil haría falta una tercera
+  prueba que incluya, a propósito, el apellido de casada en la posición del segundo apellido.
+
+![Brecha de equidad](docs/resultados/hito2b/brecha_equidad.png)
+
+Métricas completas en [docs/resultados/hito2b/metricas.json](docs/resultados/hito2b/metricas.json)
+y [muestra de registros de la ciega 2](docs/resultados/hito2b/ciega2_muestra_registros.csv).
+
 ## Cómo correrlo
 
 Requiere [uv](https://docs.astral.sh/uv/). uv instala Python 3.11 si hace falta.
@@ -403,7 +506,9 @@ uv run pytest                                 # pruebas (sin internet)
 uv run python scripts/hito1_fake1000.py       # hito 1 completo -> reports/ (~1,5 min)
 uv run python scripts/hito2_colombia.py       # hito 2 completo -> reports/hito2/ (~2,5 min)
 uv run python scripts/validacion.py           # prueba ciega + FEBRL3 -> reports/validacion/
-uv run python scripts/publicar_resultados.py --hito 1   # o 2, o validacion: a docs/resultados/
+uv run python scripts/hito2b.py desarrollar   # hito 2b: modelo v2 -> reports/hito2b/
+uv run python scripts/hito2b.py evaluar       # v2 congelado en prueba normal y ciegas
+uv run python scripts/publicar_resultados.py --hito 1   # o 2, validacion, 2b: a docs/resultados/
 ```
 
 La primera ejecución del hito descarga fake_1000 y lo guarda en `data/raw/`.
@@ -413,7 +518,8 @@ La primera ejecución del hito descarga fake_1000 y lo guarda en `data/raw/`.
 ```
 src/identidades/   datos, modelo, bloqueo, evaluación, tableros y flujo del hito 1;
                    sinteticos, estandarizacion, modelo_co y flujo_hito2 (hito 2);
-                   errores_ciegos, modelo_febrl y flujo_validacion (validación)
+                   errores_ciegos, modelo_febrl y flujo_validacion (validación);
+                   estandarizacion_v2, modelo_co_v2, errores_ciegos_2 y flujo_hito2b (2b)
 scripts/           puntos de entrada
 tests/             pruebas con pytest
 notebooks/         solo exploración
