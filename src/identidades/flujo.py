@@ -18,7 +18,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-import numpy as np
 import pandas as pd
 from splink import DuckDBAPI, Linker
 from splink.internals.splink_dataframe import SplinkDataFrame
@@ -131,7 +130,7 @@ def curva_umbral_clusters(
 ) -> pd.DataFrame:
     """Métricas por clúster para una serie de umbrales (agrupa una vez por umbral)."""
     if umbrales is None:
-        umbrales = np.round(np.arange(0.01, 1.0, 0.01), 2)
+        umbrales = evaluacion.UMBRALES
     filas = []
     for umbral in umbrales:
         clusters = modelo.agrupar(linker, df_pred, float(umbral)).as_pandas_dataframe()

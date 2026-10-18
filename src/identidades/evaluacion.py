@@ -9,10 +9,17 @@ normalizan para que el identificador menor quede a la izquierda.
 from __future__ import annotations
 
 from collections.abc import Sequence
+from typing import Any
 
 import duckdb
 import numpy as np
 import pandas as pd
+
+# Umbrales de las curvas: cada centésima y, cerca de 1, donde se concentran las
+# probabilidades de un buen modelo, también 0,995, 0,999 y 0,9999.
+UMBRALES: np.ndarray = np.concatenate(
+    [np.round(np.arange(0.01, 1.0, 0.01), 2), [0.995, 0.999, 0.9999]]
+)
 
 
 def _proporcion(numerador: int, denominador: int) -> float:
@@ -121,7 +128,7 @@ def curva_umbral(
 ) -> pd.DataFrame:
     """Precisión, recall y F1 por par para una serie de umbrales."""
     if umbrales is None:
-        umbrales = np.round(np.arange(0.01, 1.0, 0.01), 2)
+        umbrales = UMBRALES
     marcadas = marcar_verdaderos(pred, verdaderos)
     filas = []
     for umbral in umbrales:
@@ -280,6 +287,66 @@ def contribuciones_por_persona(
     return por_persona.drop(columns="pares").reset_index(drop=True), cruzados
 
 
+def _pesos_bootstrap(n_personas: int, n: int, semilla: int) -> np.ndarray:
+    """Pesos multinomiales por réplica; la fila 0 es la muestra original (todos 1)."""
+    rng = np.random.default_rng(semilla)
+    pesos = rng.multinomial(n_personas, np.full(n_personas, 1 / n_personas), size=n)
+    return np.vstack([np.ones(n_personas, dtype=int), pesos])
+
+
+def _series_bootstrap(
+    por_persona: pd.DataFrame,
+    cruzados: pd.DataFrame,
+    pesos: np.ndarray,
+    personas: np.ndarray,
+    mascara: np.ndarray | None = None,
+) -> dict[str, np.ndarray]:
+    """Métricas en cada réplica de ``pesos`` (columnas en el orden de ``personas``).
+
+    Con ``mascara`` (booleana por persona) se miden solo las personas del grupo: sus
+    aciertos y faltantes, y los falsos positivos en que participa al menos una de ellas.
+    """
+    alineado = por_persona.set_index("persona").loc[personas]
+    m = np.ones(len(personas), dtype=bool) if mascara is None else mascara
+    indice = {p: i for i, p in enumerate(personas)}
+
+    tp = pesos @ (alineado["tp"].to_numpy() * m)
+    fn = pesos @ (alineado["fn"].to_numpy() * m)
+    if len(cruzados):
+        ia = cruzados["persona_a"].map(indice).to_numpy(dtype=int)
+        ib = cruzados["persona_b"].map(indice).to_numpy(dtype=int)
+        cuenta = cruzados["fp"].to_numpy() * (m[ia] | m[ib])
+        fp = (pesos[:, ia] * pesos[:, ib]) @ cuenta
+    else:
+        fp = np.zeros(len(pesos))
+
+    # Misma convención que ``_metricas``: 0.0 cuando el denominador es cero (así el valor
+    # observado coincide con las métricas puntuales y el JSON nunca lleva NaN).
+    with np.errstate(divide="ignore", invalid="ignore"):
+        precision = np.where(tp + fp > 0, tp / (tp + fp), 0.0)
+        recall = np.where(tp + fn > 0, tp / (tp + fn), 0.0)
+        f1 = np.where(precision + recall > 0, 2 * precision * recall / (precision + recall), 0.0)
+        series = {"precision": precision, "recall": recall, "f1": f1}
+        if "exacto" in alineado:
+            en_grupo = pesos @ m
+            exactos = pesos @ (alineado["exacto"].to_numpy() * m)
+            series["pct_clusters_exactos"] = np.where(en_grupo > 0, exactos / en_grupo, 0.0)
+    return series
+
+
+def _intervalos(series: dict[str, np.ndarray], nivel: float) -> dict[str, dict[str, float]]:
+    """Valor observado (fila 0) e intervalo percentil de las réplicas."""
+    alfa = (1 - nivel) / 2
+    return {
+        nombre: {
+            "valor": float(valores[0]),
+            "ic_inf": float(np.quantile(valores[1:], alfa)),
+            "ic_sup": float(np.quantile(valores[1:], 1 - alfa)),
+        }
+        for nombre, valores in series.items()
+    }
+
+
 def bootstrap_por_persona(
     por_persona: pd.DataFrame,
     cruzados: pd.DataFrame,
@@ -296,35 +363,67 @@ def bootstrap_por_persona(
     intervalo percentil.
     """
     personas = por_persona["persona"].to_numpy()
-    indice = {p: i for i, p in enumerate(personas)}
-    rng = np.random.default_rng(semilla)
-    pesos = rng.multinomial(len(personas), np.full(len(personas), 1 / len(personas)), size=n)
-    pesos = np.vstack([np.ones(len(personas), dtype=int), pesos])  # fila 0: muestra original
+    pesos = _pesos_bootstrap(len(personas), n, semilla)
+    return _intervalos(_series_bootstrap(por_persona, cruzados, pesos, personas), nivel)
 
-    tp = pesos @ por_persona["tp"].to_numpy()
-    fn = pesos @ por_persona["fn"].to_numpy()
-    ia = cruzados["persona_a"].map(indice).to_numpy(dtype=int)
-    ib = cruzados["persona_b"].map(indice).to_numpy(dtype=int)
-    fp = (pesos[:, ia] * pesos[:, ib]) @ cruzados["fp"].to_numpy() if len(cruzados) else 0 * tp
 
-    # Misma convención que ``_metricas``: 0.0 cuando el denominador es cero (así el valor
-    # observado coincide con las métricas puntuales y el JSON nunca lleva NaN).
-    with np.errstate(divide="ignore", invalid="ignore"):
-        precision = np.where(tp + fp > 0, tp / (tp + fp), 0.0)
-        recall = np.where(tp + fn > 0, tp / (tp + fn), 0.0)
-        f1 = np.where(precision + recall > 0, 2 * precision * recall / (precision + recall), 0.0)
-    series = {"precision": precision, "recall": recall, "f1": f1}
-    if "exacto" in por_persona:
-        series["pct_clusters_exactos"] = (pesos @ por_persona["exacto"].to_numpy()) / pesos.sum(
-            axis=1
-        )
+def bootstrap_por_grupo(
+    por_persona: pd.DataFrame,
+    cruzados: pd.DataFrame,
+    grupos: pd.Series,
+    n: int = 1000,
+    semilla: int = 0,
+    nivel: float = 0.95,
+) -> dict[str, Any]:
+    """Métricas por grupo de personas y diferencias entre grupos, con intervalos.
 
-    alfa = (1 - nivel) / 2
-    return {
-        nombre: {
-            "valor": float(valores[0]),
-            "ic_inf": float(np.quantile(valores[1:], alfa)),
-            "ic_sup": float(np.quantile(valores[1:], 1 - alfa)),
-        }
-        for nombre, valores in series.items()
+    ``grupos`` asigna a cada persona una etiqueta (índice: persona). Todas las réplicas
+    usan los mismos pesos, así que las diferencias son pareadas. Una diferencia es
+    ``significativa`` si su intervalo no incluye el cero.
+    """
+    personas = por_persona["persona"].to_numpy()
+    etiquetas = grupos.reindex(personas).to_numpy()
+    pesos = _pesos_bootstrap(len(personas), n, semilla)
+    series = {
+        g: _series_bootstrap(por_persona, cruzados, pesos, personas, etiquetas == g)
+        for g in pd.unique(etiquetas)
     }
+    resultado: dict[str, Any] = {
+        "grupos": {
+            str(g): {"personas": int((etiquetas == g).sum()), **_intervalos(s, nivel)}
+            for g, s in series.items()
+        },
+        "diferencias": {},
+    }
+    nombres = list(series)
+    for i, a in enumerate(nombres):
+        for b in nombres[i + 1 :]:
+            diferencia = _intervalos({k: series[a][k] - series[b][k] for k in series[a]}, nivel)
+            for d in diferencia.values():
+                d["significativa"] = bool(d["ic_inf"] > 0 or d["ic_sup"] < 0)
+            resultado["diferencias"][f"{a} - {b}"] = diferencia
+    return resultado
+
+
+def bootstrap_diferencia(
+    contribuciones_a: tuple[pd.DataFrame, pd.DataFrame],
+    contribuciones_b: tuple[pd.DataFrame, pd.DataFrame],
+    n: int = 1000,
+    semilla: int = 0,
+    nivel: float = 0.95,
+) -> dict[str, dict[str, float]]:
+    """Diferencia pareada ``b - a`` entre dos modelos medidos sobre las mismas personas.
+
+    Ambos juegos de contribuciones (de ``contribuciones_por_persona``) deben venir de las
+    mismas personas; cada réplica usa los mismos pesos para los dos modelos.
+    """
+    personas = contribuciones_a[0]["persona"].to_numpy()
+    if set(personas) != set(contribuciones_b[0]["persona"]):
+        raise ValueError("Los dos modelos deben medirse sobre las mismas personas")
+    pesos = _pesos_bootstrap(len(personas), n, semilla)
+    serie_a = _series_bootstrap(*contribuciones_a, pesos, personas)
+    serie_b = _series_bootstrap(*contribuciones_b, pesos, personas)
+    diferencia = _intervalos({k: serie_b[k] - serie_a[k] for k in serie_a}, nivel)
+    for d in diferencia.values():
+        d["significativa"] = bool(d["ic_inf"] > 0 or d["ic_sup"] < 0)
+    return diferencia

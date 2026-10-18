@@ -89,7 +89,7 @@ def test_curva_umbral(pred, verdaderos):
 def test_curva_umbral_por_defecto(pred, verdaderos):
     curva = evaluacion.curva_umbral(pred, verdaderos)
 
-    assert len(curva) == 99
+    assert len(curva) == len(evaluacion.UMBRALES) == 102
     assert curva["umbral"].between(0, 1).all()
 
 
@@ -217,3 +217,47 @@ def test_bootstrap_sin_positivos_coincide_con_metricas_y_no_da_nan(
     for metrica in ("precision", "recall", "f1"):
         assert ic[metrica]["valor"] == directas[metrica] == 0.0
         assert not any(np.isnan(v) for v in ic[metrica].values())
+
+
+def test_bootstrap_por_grupo_separa_aciertos_y_errores(registros_pequenos):
+    # Persona 0 (grupo A) encontrada; personas 1 y 2 (grupo B) no; error entre 0 y 1.
+    positivos = pd.DataFrame({"id_l": [0, 1], "id_r": [1, 2]})
+    por_persona, cruzados = evaluacion.contribuciones_por_persona(positivos, registros_pequenos)
+    grupos = pd.Series({0: "A", 1: "B", 2: "B"})
+
+    r = evaluacion.bootstrap_por_grupo(por_persona, cruzados, grupos, n=200)
+
+    a, b = r["grupos"]["A"], r["grupos"]["B"]
+    assert (a["personas"], b["personas"]) == (1, 2)
+    # El falso positivo (0,1) cuenta en ambos grupos.
+    assert a["precision"]["valor"] == pytest.approx(0.5) and a["recall"]["valor"] == 1.0
+    assert b["precision"]["valor"] == 0.0 and b["recall"]["valor"] == 0.0
+    diferencia = r["diferencias"]["A - B"]["recall"]
+    assert diferencia["valor"] == 1.0 and "significativa" in diferencia
+
+
+def test_bootstrap_diferencia_pareada(registros_pequenos):
+    mejor = evaluacion.contribuciones_por_persona(
+        pd.DataFrame({"id_l": [0, 2], "id_r": [1, 3]}), registros_pequenos
+    )
+    peor = evaluacion.contribuciones_por_persona(
+        pd.DataFrame({"id_l": [0], "id_r": [1]}), registros_pequenos
+    )
+
+    d = evaluacion.bootstrap_diferencia(peor, mejor, n=200)
+
+    assert d["recall"]["valor"] == pytest.approx(2 / 3 - 1 / 3)
+    assert d["recall"]["ic_inf"] >= 0  # mejor nunca encuentra menos que peor
+    assert d["precision"]["valor"] == 0.0
+
+
+def test_bootstrap_diferencia_exige_mismas_personas(registros_pequenos):
+    a = evaluacion.contribuciones_por_persona(
+        pd.DataFrame({"id_l": [0], "id_r": [1]}), registros_pequenos
+    )
+    otras = evaluacion.contribuciones_por_persona(
+        pd.DataFrame({"id_l": [0], "id_r": [1]}), registros_pequenos.iloc[:4]
+    )
+
+    with pytest.raises(ValueError, match="mismas personas"):
+        evaluacion.bootstrap_diferencia(a, otras, n=10)
