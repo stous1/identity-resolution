@@ -4,10 +4,14 @@ from __future__ import annotations
 
 import json
 import shutil
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
+import numpy as np
 import pandas as pd
+from splink import Linker
+from splink.internals.splink_dataframe import SplinkDataFrame
 
 from identidades import evaluacion, modelo, tableros
 
@@ -23,6 +27,10 @@ ARCHIVOS_PUBLICABLES: list[str] = [
     "comparison_viewer.png",
     "curva_umbral.html",
     "curva_umbral.png",
+    "curva_umbral_clusters.html",
+    "curva_umbral_clusters.png",
+    "costo_umbral.html",
+    "costo_umbral.png",
     "parametros_mu.html",
     "parametros_mu.png",
     "pesos.html",
@@ -91,17 +99,55 @@ def comparar_bloqueos(
     return pd.DataFrame(filas)
 
 
+UMBRAL_FIJO: float = 0.9
+
+# Etiquetas legibles de cada criterio de umbral (para métricas y gráficos).
+CRITERIOS_UMBRAL: dict[str, str] = {
+    "fijo": "fijo 0,9",
+    "max_f1_par": "mejor F1 por par",
+    "min_costo_par": "mín. costo por par",
+    "min_costo_cluster": "mín. costo por clúster",
+}
+
+
+def curva_umbral_clusters(
+    linker: Linker,
+    df_pred: SplinkDataFrame,
+    df: pd.DataFrame,
+    umbrales: Sequence[float] | None = None,
+) -> pd.DataFrame:
+    """Métricas por clúster para una serie de umbrales (agrupa una vez por umbral)."""
+    if umbrales is None:
+        umbrales = np.round(np.arange(0.01, 1.0, 0.01), 2)
+    filas = []
+    for umbral in umbrales:
+        clusters = modelo.agrupar(linker, df_pred, float(umbral)).as_pandas_dataframe()
+        filas.append({"umbral": float(umbral), **evaluacion.metricas_cluster(clusters, df)})
+    return pd.DataFrame(filas)
+
+
+def _resumen(metricas: dict[str, Any], claves: Sequence[str]) -> dict[str, Any]:
+    return {k: metricas[k] for k in claves}
+
+
 def ejecutar_hito1(
     df: pd.DataFrame,
     directorio: Path,
-    umbral: float = 0.9,
+    umbral: float | None = None,
+    costo_fp: float = 10.0,
+    costo_fn: float = 1.0,
     capturas: bool = True,
     comparar: bool = True,
 ) -> dict[str, Any]:
     """Entrena el modelo sobre ``df``, lo evalúa contra ``cluster`` y genera los tableros.
 
-    Escribe en ``directorio``: ``modelo.json``, ``metricas.json``, ``curva_umbral.csv``,
-    los tableros HTML y sus PNG. Si ``capturas`` es falso, omite las capturas con
+    El umbral de operación es ``umbral`` si se da; si no, el que minimiza el costo de
+    errores por clúster (``costo_fp`` por cada par unido por error y ``costo_fn`` por
+    cada par verdadero sin unir). También se reportan el umbral fijo de 0,9, el de mejor
+    F1 por par y el de menor costo por par.
+
+    Escribe en ``directorio``: ``modelo.json``, ``metricas.json``, las curvas por umbral
+    (CSV), los tableros HTML y sus PNG. Si ``capturas`` es falso, omite las capturas con
     Playwright de los tableros interactivos (los PNG de Altair se generan siempre).
     Si ``comparar`` es verdadero, escribe también ``comparacion_bloqueos.csv``.
     Devuelve el diccionario de métricas.
@@ -116,9 +162,42 @@ def ejecutar_hito1(
     pred = df_pred.as_pandas_dataframe()
     verdaderos = evaluacion.pares_verdaderos(df)
 
-    curva = evaluacion.curva_umbral(pred, verdaderos)
+    curva = evaluacion.agregar_costo(evaluacion.curva_umbral(pred, verdaderos), costo_fp, costo_fn)
+    curva_cl = evaluacion.agregar_costo(
+        curva_umbral_clusters(linker, df_pred, df), costo_fp, costo_fn
+    )
     curva.to_csv(directorio / "curva_umbral.csv", index=False, lineterminator="\n")
-    umbral_f1 = evaluacion.umbral_max_f1(curva)
+    curva_cl.to_csv(directorio / "curva_umbral_clusters.csv", index=False, lineterminator="\n")
+
+    candidatos = {
+        "fijo": UMBRAL_FIJO,
+        "max_f1_par": evaluacion.umbral_max_f1(curva),
+        "min_costo_par": evaluacion.umbral_min_costo(curva, costo_fp, costo_fn),
+        "min_costo_cluster": evaluacion.umbral_min_costo(curva_cl, costo_fp, costo_fn),
+    }
+    if umbral is None:
+        criterio, umbral = "min_costo_cluster", candidatos["min_costo_cluster"]
+    else:
+        criterio = next((c for c, u in candidatos.items() if u == umbral), "manual")
+
+    comparacion_umbrales = []
+    for nombre, valor in candidatos.items():
+        pares = evaluacion.metricas_pares(pred, verdaderos, valor)
+        cl = evaluacion.metricas_cluster(
+            modelo.agrupar(linker, df_pred, valor).as_pandas_dataframe(), df
+        )
+        comparacion_umbrales.append(
+            {
+                "criterio": nombre,
+                "umbral": valor,
+                "pares": _resumen(pares, ("tp", "fp", "fn", "precision", "recall", "f1")),
+                "costo_pares": costo_fp * pares["fp"] + costo_fn * pares["fn"],
+                "clusters": _resumen(
+                    cl, ("tp", "fp", "fn", "precision", "recall", "f1", "clusters_exactos")
+                ),
+                "costo_clusters": costo_fp * cl["fp"] + costo_fn * cl["fn"],
+            }
+        )
 
     df_clusters = modelo.agrupar(linker, df_pred, umbral)
     clusters = df_clusters.as_pandas_dataframe()
@@ -135,9 +214,15 @@ def ejecutar_hito1(
             "bloqueos_prediccion": [list(b) for b in modelo.BLOQUEOS_PREDICCION],
             "bloqueos_em": [list(b) for b in modelo.BLOQUEOS_EM],
         },
+        "umbral": {
+            "criterio": criterio,
+            "valor": umbral,
+            "costo_fp": costo_fp,
+            "costo_fn": costo_fn,
+        },
+        "umbrales": comparacion_umbrales,
         "bloqueo": evaluacion.recall_bloqueo(pred, verdaderos),
         "pares": evaluacion.metricas_pares(pred, verdaderos, umbral),
-        "pares_umbral_max_f1": evaluacion.metricas_pares(pred, verdaderos, umbral_f1),
         "clusters": {"umbral": umbral, **evaluacion.metricas_cluster(clusters, df)},
     }
     (directorio / "metricas.json").write_text(
@@ -149,10 +234,27 @@ def ejecutar_hito1(
             directorio / "comparacion_bloqueos.csv", index=False, lineterminator="\n"
         )
 
+    marcas = {CRITERIOS_UMBRAL[c]: u for c, u in candidatos.items()}
+    tableros.guardar_curva_umbral(
+        curva, marcas, "Precisión, recall y F1 por par", directorio / "curva_umbral.html"
+    )
+    tableros.guardar_curva_umbral(
+        curva_cl,
+        marcas,
+        "Precisión, recall y F1 por clúster",
+        directorio / "curva_umbral_clusters.html",
+    )
+    tableros.guardar_costo(
+        {"par": curva, "clúster": curva_cl},
+        marcas,
+        costo_fp,
+        costo_fn,
+        directorio / "costo_umbral.html",
+    )
+
     ejemplos = tableros.seleccionar_ejemplos_cascada(pred, verdaderos, umbral)
     tableros.guardar_cascada(linker, ejemplos, directorio / "cascada.html")
     tableros.guardar_parametros(linker, directorio)
-    tableros.guardar_curva_umbral(curva, umbral, directorio / "curva_umbral.html")
     tableros.guardar_comparison_viewer(linker, df_pred, directorio / "comparison_viewer.html")
 
     ids, nombres = tableros.seleccionar_clusters(clusters, df)

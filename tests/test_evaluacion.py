@@ -116,3 +116,33 @@ def test_metricas_cluster_perfectas(registros_pequenos):
 
     assert (m["precision"], m["recall"], m["f1"]) == (1.0, 1.0, 1.0)
     assert m["pct_clusters_exactos"] == 1.0
+
+
+@pytest.fixture
+def curva_costos() -> pd.DataFrame:
+    return pd.DataFrame(
+        {
+            "umbral": [0.2, 0.5, 0.8, 0.95],
+            "fp": [5, 1, 0, 0],
+            "fn": [0, 2, 6, 6],
+        }
+    )
+
+
+def test_agregar_costo(curva_costos):
+    con_costo = evaluacion.agregar_costo(curva_costos, costo_fp=10, costo_fn=1)
+
+    assert con_costo["costo"].tolist() == [50, 12, 6, 6]
+    assert "costo" not in curva_costos.columns
+
+
+def test_umbral_min_costo_desempata_hacia_el_mas_conservador(curva_costos):
+    # Costos 50, 12, 6, 6: empate entre 0.8 y 0.95 -> 0.95.
+    assert evaluacion.umbral_min_costo(curva_costos) == 0.95
+
+
+def test_umbral_min_costo_depende_de_los_costos(curva_costos):
+    # Con FP y FN al mismo costo: 5, 3, 6, 6 -> 0.5.
+    assert evaluacion.umbral_min_costo(curva_costos, costo_fp=1, costo_fn=1) == 0.5
+    # Si el FN es mucho más caro: 5, 21, 60, 60 -> 0.2.
+    assert evaluacion.umbral_min_costo(curva_costos, costo_fp=1, costo_fn=10) == 0.2

@@ -82,8 +82,33 @@ def guardar_parametros(linker: Linker, directorio: Path) -> None:
     )
 
 
-def grafico_curva_umbral(curva: pd.DataFrame, umbral: float) -> alt.LayerChart:
-    """Precisión, recall y F1 por par según el umbral, con el umbral elegido marcado."""
+def _marcas_umbral(marcas: dict[str, float], tope: float = 1.0) -> alt.LayerChart:
+    """Líneas verticales punteadas con etiqueta para cada umbral de ``marcas``.
+
+    Las etiquetas se ubican en la parte baja del eje Y, cuyo máximo es ``tope``.
+    """
+    datos = pd.DataFrame(
+        {
+            "criterio": list(marcas),
+            "umbral": list(marcas.values()),
+            # Etiquetas escalonadas para que no se encimen si dos umbrales coinciden.
+            "y": [tope * (0.04 + 0.07 * i) for i in range(len(marcas))],
+        }
+    )
+    base = alt.Chart(datos)
+    reglas = base.mark_rule(strokeDash=[4, 4], color="#6b7280").encode(
+        x="umbral:Q", tooltip=["criterio:N", "umbral:Q"]
+    )
+    textos = base.mark_text(align="right", dx=-4, fontSize=11, color="#374151").encode(
+        x="umbral:Q", y="y:Q", text="criterio:N"
+    )
+    return reglas + textos
+
+
+def grafico_curva_umbral(
+    curva: pd.DataFrame, marcas: dict[str, float], titulo: str
+) -> alt.LayerChart:
+    """Precisión, recall y F1 según el umbral, con los umbrales de ``marcas`` señalados."""
     largo = curva.melt(
         id_vars="umbral",
         value_vars=list(COLORES_METRICAS),
@@ -101,18 +126,47 @@ def grafico_curva_umbral(curva: pd.DataFrame, umbral: float) -> alt.LayerChart:
             tooltip=["umbral:Q", "metrica:N", alt.Tooltip("valor:Q", format=".3f")],
         )
     )
-    regla = (
-        alt.Chart(pd.DataFrame({"umbral": [umbral]}))
-        .mark_rule(strokeDash=[4, 4], color="#6b7280")
-        .encode(x="umbral:Q")
-    )
-    return (lineas + regla).properties(
-        title="Precisión, recall y F1 por par según el umbral", width=560, height=320
-    )
+    return (lineas + _marcas_umbral(marcas)).properties(title=titulo, width=560, height=320)
 
 
-def guardar_curva_umbral(curva: pd.DataFrame, umbral: float, ruta_html: Path) -> None:
-    _guardar_grafico(grafico_curva_umbral(curva, umbral), ruta_html)
+def grafico_costo(
+    curvas: dict[str, pd.DataFrame], marcas: dict[str, float], costo_fp: float, costo_fn: float
+) -> alt.LayerChart:
+    """Costo total de errores según el umbral, una línea por nivel (par, clúster)."""
+    largo = pd.concat([c[["umbral", "costo"]].assign(nivel=nivel) for nivel, c in curvas.items()])
+    tope = float(largo["costo"].max())
+    lineas = (
+        alt.Chart(largo)
+        .mark_line(strokeWidth=2)
+        .encode(
+            x=alt.X("umbral:Q", title="Umbral de match_probability"),
+            y=alt.Y("costo:Q", title="Costo total", scale=alt.Scale(domain=[0, tope])),
+            color=alt.Color(
+                "nivel:N",
+                title="Nivel",
+                scale=alt.Scale(range=[COLORES_METRICAS["precision"], COLORES_METRICAS["f1"]]),
+            ),
+            tooltip=["umbral:Q", "nivel:N", "costo:Q"],
+        )
+    )
+    titulo = f"Costo de errores según el umbral (FP = {costo_fp:g}, FN = {costo_fn:g})"
+    return (lineas + _marcas_umbral(marcas, tope)).properties(title=titulo, width=560, height=320)
+
+
+def guardar_curva_umbral(
+    curva: pd.DataFrame, marcas: dict[str, float], titulo: str, ruta_html: Path
+) -> None:
+    _guardar_grafico(grafico_curva_umbral(curva, marcas, titulo), ruta_html)
+
+
+def guardar_costo(
+    curvas: dict[str, pd.DataFrame],
+    marcas: dict[str, float],
+    costo_fp: float,
+    costo_fn: float,
+    ruta_html: Path,
+) -> None:
+    _guardar_grafico(grafico_costo(curvas, marcas, costo_fp, costo_fn), ruta_html)
 
 
 def guardar_comparison_viewer(linker: Linker, df_pred: SplinkDataFrame, ruta_html: Path) -> None:

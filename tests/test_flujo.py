@@ -42,7 +42,7 @@ def _muestra_sintetica(n_personas: int = 60, semilla: int = 7) -> pd.DataFrame:
 def test_flujo_completo_genera_salidas(tmp_path):
     df = _muestra_sintetica()
 
-    metricas = ejecutar_hito1(df, tmp_path, umbral=0.9, capturas=False, comparar=False)
+    metricas = ejecutar_hito1(df, tmp_path, capturas=False, comparar=False)
 
     for nombre in [
         "modelo.json",
@@ -55,15 +55,28 @@ def test_flujo_completo_genera_salidas(tmp_path):
         "parametros_mu.png",
         "curva_umbral.html",
         "curva_umbral.png",
+        "curva_umbral_clusters.csv",
+        "curva_umbral_clusters.png",
+        "costo_umbral.html",
+        "costo_umbral.png",
         "comparison_viewer.html",
         "cluster_studio.html",
     ]:
         assert (tmp_path / nombre).stat().st_size > 0, nombre
 
     assert json.loads((tmp_path / "metricas.json").read_text(encoding="utf-8")) == metricas
-    for seccion in ("pares", "pares_umbral_max_f1", "clusters"):
+    for seccion in ("pares", "clusters"):
         for clave in ("precision", "recall", "f1"):
             assert 0 <= metricas[seccion][clave] <= 1
+
+    # Sin umbral explícito se usa el de menor costo por clúster.
+    umbrales = {u["criterio"]: u for u in metricas["umbrales"]}
+    assert set(umbrales) == {"fijo", "max_f1_par", "min_costo_par", "min_costo_cluster"}
+    assert metricas["umbral"]["criterio"] == "min_costo_cluster"
+    assert metricas["umbral"]["valor"] == umbrales["min_costo_cluster"]["umbral"]
+    assert metricas["clusters"]["umbral"] == metricas["umbral"]["valor"]
+    costo_elegido = umbrales["min_costo_cluster"]["costo_clusters"]
+    assert all(costo_elegido <= u["costo_clusters"] for u in umbrales.values())
     assert 0 <= metricas["bloqueo"]["recall_bloqueo"] <= 1
     assert metricas["dataset"]["registros"] == len(df)
 

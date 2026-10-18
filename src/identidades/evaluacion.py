@@ -192,3 +192,25 @@ def metricas_cluster(
 def umbral_max_f1(curva: pd.DataFrame) -> float:
     """Umbral con mayor F1 en una curva (el menor, si hay empate)."""
     return float(curva.loc[curva["f1"].idxmax(), "umbral"])
+
+
+def agregar_costo(
+    curva: pd.DataFrame, costo_fp: float = 10.0, costo_fn: float = 1.0
+) -> pd.DataFrame:
+    """Agrega la columna ``costo = costo_fp * fp + costo_fn * fn`` a una curva por umbral.
+
+    Sirve para cualquier curva con columnas ``fp`` y ``fn`` (por par o por clúster).
+    """
+    return curva.assign(costo=costo_fp * curva["fp"] + costo_fn * curva["fn"])
+
+
+def umbral_min_costo(curva: pd.DataFrame, costo_fp: float = 10.0, costo_fn: float = 1.0) -> float:
+    """Umbral que minimiza el costo total de errores en una curva.
+
+    Por defecto un falso positivo (unir a dos personas distintas) cuesta 10 veces más
+    que un falso negativo (dejar un duplicado sin unir). Si hay empate, devuelve el
+    umbral más alto, que es el más conservador.
+    """
+    con_costo = agregar_costo(curva, costo_fp, costo_fn)
+    minimo = con_costo["costo"].min()
+    return float(con_costo.loc[con_costo["costo"] == minimo, "umbral"].max())
