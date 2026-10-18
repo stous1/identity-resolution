@@ -433,3 +433,105 @@ def generar(
 def describir_tasas(tasas: TasasError | None = None) -> dict[str, float]:
     """Las tasas de error como diccionario (para documentar una corrida)."""
     return asdict(tasas or TasasError())
+
+
+# ---------- Historia de vida (hito 6) ----------
+
+# Desplazamiento de la semilla para que la historia no altere el sorteo de ``generar``.
+DESPLAZAMIENTO_HISTORIA: int = 606_060
+
+
+@dataclass(frozen=True)
+class Historia:
+    """Cambios de vida entre los registros de una persona.
+
+    ``generar`` no cambia nunca la ciudad ni la dirección de una persona, y no produce
+    apellido de casada. Un modelo entrenado así aprende que "municipio distinto" casi no
+    ocurre en la misma persona y lo convierte en un veto (auditoría, hallazgo A1). Las
+    tasas se aplican a personas con dos o más registros; los registros de una persona se
+    toman en orden de ``unique_id`` como orden en el tiempo.
+    """
+
+    # Personas que se mudan: los registros desde un punto llevan la dirección nueva.
+    mudanza: float = 0.20
+    # Entre las mudanzas, las que además cambian de ciudad (y a veces de departamento).
+    mudanza_otra_ciudad: float = 0.5
+    # Mujeres que usan apellido de casada desde un punto ("Pérez de Gómez").
+    casada: float = 0.30
+    # Entre las casadas, las que cambian de apellido de casada (divorcio y nuevo matrimonio).
+    nuevo_matrimonio: float = 0.20
+
+
+def _es_nombre_femenino(nombre: str) -> bool:
+    from faker.providers.person.es_CO import Provider as Personas
+
+    femeninos = {_sin_tildes(n).upper() for n in Personas.first_names_female}
+    return _sin_tildes(nombre).upper() in femeninos
+
+
+def _forma_casada(rng: random.Random, apellidos: str, esposo: str) -> str:
+    """ "Pérez Gómez" -> "Pérez Gómez de Ruiz" o "Pérez de Ruiz" (sin el segundo apellido)."""
+    partes = apellidos.split()
+    base = partes[0] if len(partes) > 1 and rng.random() < 0.4 else apellidos
+    return f"{base} {rng.choice(['de', 'DE', 'De'])} {esposo}"
+
+
+def agregar_historia(
+    registros: pd.DataFrame,
+    personas: pd.DataFrame,
+    semilla: int = 42,
+    historia: Historia | None = None,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Agrega mudanzas y apellidos de casada a la salida de ``generar``.
+
+    No modifica ``generar``: los mismos registros y personas, salvo los campos que cambian
+    por la historia. Usa un sorteo propio (``semilla`` + ``DESPLAZAMIENTO_HISTORIA``).
+    Devuelve ``(registros, personas)``; ``personas`` gana las columnas ``mudanza``,
+    ``mudanza_otra_ciudad``, ``apellido_casada``, ``nuevo_matrimonio`` y ``mujer``.
+    """
+    historia = historia or Historia()
+    gen = Generador(semilla + DESPLAZAMIENTO_HISTORIA)
+    rng = gen.rng
+    registros = registros.copy()
+    personas = personas.copy()
+    marcas = {
+        c: pd.Series(False, index=personas.index)
+        for c in ("mudanza", "mudanza_otra_ciudad", "apellido_casada", "nuevo_matrimonio")
+    }
+    personas["mujer"] = personas["primer_nombre"].map(_es_nombre_femenino)
+    filas_por_persona = registros.sort_values("unique_id").groupby("cluster").groups
+
+    for i, p in personas.iterrows():
+        filas = list(filas_por_persona.get(p["cluster"], []))
+        if len(filas) < 2:
+            continue
+        if rng.random() < historia.mudanza:
+            desde = rng.randrange(1, len(filas))
+            nueva = gen._direccion()
+            marcas["mudanza"][i] = True
+            ciudad = departamento = None
+            if rng.random() < historia.mudanza_otra_ciudad:
+                ciudad, departamento = gen._ciudad()
+                marcas["mudanza_otra_ciudad"][i] = ciudad != p["ciudad"]
+            for f in filas[desde:]:
+                registros.at[f, "direccion"] = gen._direccion_capturada(nueva)
+                if ciudad is not None:
+                    registros.at[f, "ciudad"] = gen._mayusculas(ciudad)
+                    registros.at[f, "departamento"] = departamento
+        if personas.at[i, "mujer"] and rng.random() < historia.casada:
+            desde = rng.randrange(0, len(filas))
+            esposos = [gen.fake.last_name()]
+            cambio = None
+            if len(filas) - desde >= 2 and rng.random() < historia.nuevo_matrimonio:
+                cambio = rng.randrange(desde + 1, len(filas))
+                esposos.append(gen.fake.last_name())
+                marcas["nuevo_matrimonio"][i] = esposos[0] != esposos[1]
+            for k, f in enumerate(filas[desde:], start=desde):
+                apellidos = registros.at[f, "apellidos"]
+                if not isinstance(apellidos, str) or not apellidos.strip():
+                    continue
+                esposo = esposos[1] if cambio is not None and k >= cambio else esposos[0]
+                registros.at[f, "apellidos"] = _forma_casada(rng, apellidos, esposo)
+                marcas["apellido_casada"][i] = True
+
+    return registros, personas.assign(**marcas)
