@@ -28,6 +28,11 @@ def test_grupos_de_personas_combina_atributos_y_condiciones():
     grupos = flujo_validacion.grupos_de_personas(personas, condiciones)
 
     assert {"nombre_compuesto", "dos_apellidos", "con_tilde", "rural", "con_apodo"} <= set(grupos)
+    assert "un_solo_registro" not in grupos and "documento_alterado" not in grupos
+    diagnostico = flujo_validacion.grupos_de_personas(
+        personas, condiciones, flujo_validacion.GRUPOS_DIAGNOSTICO
+    )
+    assert set(diagnostico) == set(flujo_validacion.GRUPOS_DIAGNOSTICO)
     assert set(grupos["rural"].unique()) <= {"dirección rural", "dirección urbana"}
     assert all(len(g) == 30 for g in grupos.values())
 
@@ -53,6 +58,9 @@ def test_prueba_ciega_en_pequeno(tmp_path):
         for ic in metricas["prueba"]["intervalos"][nivel].values():
             assert 0 <= ic["ic_inf"] <= ic["ic_sup"] <= 1
     assert "rural" in metricas["equidad"]
+    assert "documento_alterado" in metricas["diagnostico_por_error"]["detalle"]
+    umbrales = metricas["diagnostico_otros_umbrales"]["clusters"]
+    assert [u["umbral"] for u in umbrales] == flujo_validacion.UMBRALES_DIAGNOSTICO
     assert (tmp_path / "ciega_equidad.png").exists()
 
 

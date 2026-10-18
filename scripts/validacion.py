@@ -29,7 +29,15 @@ def main() -> None:
         rutas.REPORTS_VALIDACION, n_bootstrap=args.bootstrap, capturas=not args.sin_capturas
     )
     print(json.dumps(metricas["tres_cifras_clusters"], indent=2, ensure_ascii=False))
-    print(json.dumps(metricas["prueba_ciega"]["diferencias_significativas"], indent=2))
+    ciega = metricas["prueba_ciega"]
+    print(json.dumps(ciega["diferencias_significativas"], indent=2, ensure_ascii=False))
+    print(
+        json.dumps(
+            ciega["diagnostico_por_error"]["diferencias_significativas"],
+            indent=2,
+            ensure_ascii=False,
+        )
+    )
     print(f"\nResultados en {rutas.REPORTS_VALIDACION}")
 
 

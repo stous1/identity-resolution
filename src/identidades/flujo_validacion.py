@@ -24,6 +24,7 @@ from identidades import (
     evaluacion,
     flujo,
     flujo_hito2,
+    modelo,
     modelo_co,
     rutas,
     sinteticos,
@@ -58,10 +59,24 @@ ARCHIVOS_PUBLICABLES: list[str] = [
 ]
 
 # Condiciones de persona del generador ciego -> (etiqueta si es verdadera, si es falsa).
-ETIQUETAS_CONDICIONES: dict[str, tuple[str, str]] = {
+# Equidad: grupos de población (atributos de la persona), además de los del hito 2.
+GRUPOS_POBLACION: dict[str, tuple[str, str]] = {
     "rural": ("dirección rural", "dirección urbana"),
     "con_apodo": ("con apodo", "sin apodo"),
+    "apellido_casada": ("apellido de casada", "sin apellido de casada"),
 }
+
+# Diagnóstico: personas a las que el generador ciego les aplicó un error concreto. No son
+# grupos de población: dicen dónde falla el modelo, no a quién perjudica. Se excluye
+# "un_solo_registro": quien tiene un solo registro no tiene pares que encontrar.
+GRUPOS_DIAGNOSTICO: dict[str, tuple[str, str]] = {
+    "documento_alterado": ("documento alterado", "documento sin alterar"),
+    "celular_fijo": ("celular cambiado por fijo", "con celular"),
+    "nombres_cruzados": ("nombres en otro campo", "nombres en su campo"),
+}
+
+# Umbrales para el diagnóstico de la prueba ciega (no se usan para la cifra principal).
+UMBRALES_DIAGNOSTICO: list[float] = [0.5, 0.9, 0.99, 0.999, 0.9999, 0.99999]
 
 NIVELES: tuple[str, ...] = ("clusters", "pares")
 
@@ -106,17 +121,42 @@ def cargar_congelado(directorio: Path | None = None) -> tuple[dict[str, Any], fl
     return configuracion, metricas["variantes"]["estandarizado"]["umbral"]["valor"]
 
 
-def grupos_de_personas(personas: pd.DataFrame, condiciones: pd.DataFrame) -> dict[str, pd.Series]:
-    """Etiqueta de grupo por persona para cada atributo de equidad (índice: persona)."""
+def grupos_de_personas(
+    personas: pd.DataFrame,
+    condiciones: pd.DataFrame,
+    etiquetas: dict[str, tuple[str, str]] | None = None,
+) -> dict[str, pd.Series]:
+    """Etiqueta de grupo por persona para cada atributo (índice: persona).
+
+    Por defecto, los grupos de equidad: los del hito 2 más ``GRUPOS_POBLACION``.
+    """
     tabla = personas.set_index("cluster").join(condiciones.set_index("cluster"))
-    etiquetas = {**flujo_hito2.GRUPOS_EQUIDAD, **ETIQUETAS_CONDICIONES}
-    for columna in condiciones.columns:
-        if columna != "cluster" and columna not in etiquetas and condiciones[columna].dtype == bool:
-            etiquetas[columna] = (columna, f"sin {columna}")
+    etiquetas = etiquetas or {**flujo_hito2.GRUPOS_EQUIDAD, **GRUPOS_POBLACION}
     return {
         atributo: tabla[atributo].astype(bool).map({True: si, False: no})
         for atributo, (si, no) in etiquetas.items()
         if atributo in tabla
+    }
+
+
+def _por_grupo(
+    ev: flujo.Evaluacion,
+    registros: pd.DataFrame,
+    grupos: dict[str, pd.Series],
+    n_bootstrap: int,
+    semilla: int,
+) -> dict[str, Any]:
+    return {
+        atributo: {
+            nivel: evaluacion.bootstrap_por_grupo(
+                *flujo_hito2._contribuciones(ev, registros, nivel),
+                serie,
+                n=n_bootstrap,
+                semilla=semilla,
+            )
+            for nivel in NIVELES
+        }
+        for atributo, serie in grupos.items()
     }
 
 
@@ -142,17 +182,20 @@ def ejecutar_prueba_ciega(
     linker = flujo.aplicar_configuracion(configuracion, registros, esquema)
     ev = flujo.evaluar(linker, registros, umbral, n_bootstrap, semilla)
 
-    equidad = {}
-    for atributo, grupos in grupos_de_personas(personas, condiciones).items():
-        equidad[atributo] = {
-            nivel: evaluacion.bootstrap_por_grupo(
-                *flujo_hito2._contribuciones(ev, registros, nivel),
-                grupos,
-                n=n_bootstrap,
-                semilla=semilla,
-            )
-            for nivel in NIVELES
-        }
+    equidad = _por_grupo(
+        ev, registros, grupos_de_personas(personas, condiciones), n_bootstrap, semilla
+    )
+    diagnostico = _por_grupo(
+        ev,
+        registros,
+        grupos_de_personas(personas, condiciones, GRUPOS_DIAGNOSTICO),
+        n_bootstrap,
+        semilla,
+    )
+    otros_umbrales = []
+    for valor in UMBRALES_DIAGNOSTICO:
+        clusters = modelo.agrupar(linker, ev.df_pred, valor).as_pandas_dataframe()
+        otros_umbrales.append({"umbral": valor, **evaluacion.metricas_cluster(clusters, registros)})
 
     filas = {
         grupo: valores
@@ -199,6 +242,17 @@ def ejecutar_prueba_ciega(
         "prueba": ev.metricas,
         "equidad": equidad,
         "diferencias_significativas": flujo_hito2.resumir_equidad(equidad),
+        "diagnostico_por_error": {
+            "nota": "Personas con un error concreto del generador ciego; no son grupos de "
+            "población.",
+            "detalle": diagnostico,
+            "diferencias_significativas": flujo_hito2.resumir_equidad(diagnostico),
+        },
+        "diagnostico_otros_umbrales": {
+            "nota": "Solo diagnóstico: el umbral congelado es el único que se usa para la "
+            "cifra principal. Elegir otro mirando estos datos sería ajustar el modelo.",
+            "clusters": otros_umbrales,
+        },
     }
 
 
