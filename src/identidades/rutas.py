@@ -8,6 +8,8 @@ DATA: Path = RAIZ / "data"
 DATA_RAW: Path = DATA / "raw"
 
 REPORTS: Path = RAIZ / "reports"
+REPORTS_HITO2: Path = REPORTS / "hito2"
 
 DOCS: Path = RAIZ / "docs"
 DOCS_RESULTADOS: Path = DOCS / "resultados"
+DOCS_RESULTADOS_HITO2: Path = DOCS_RESULTADOS / "hito2"

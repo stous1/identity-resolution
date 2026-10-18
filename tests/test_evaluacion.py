@@ -89,7 +89,7 @@ def test_curva_umbral(pred, verdaderos):
 def test_curva_umbral_por_defecto(pred, verdaderos):
     curva = evaluacion.curva_umbral(pred, verdaderos)
 
-    assert len(curva) == len(evaluacion.UMBRALES) == 102
+    assert len(curva) == len(evaluacion.UMBRALES) == 105
     assert curva["umbral"].between(0, 1).all()
 
 

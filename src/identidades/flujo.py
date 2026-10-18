@@ -468,13 +468,15 @@ def ejecutar_hito1(
     return metricas
 
 
-def publicar_resultados(origen: Path, destino: Path) -> list[Path]:
-    """Copia las salidas publicables de ``origen`` a ``destino``.
+def publicar_resultados(
+    origen: Path, destino: Path, archivos: Sequence[str] = tuple(ARCHIVOS_PUBLICABLES)
+) -> list[Path]:
+    """Copia las salidas publicables (``archivos``) de ``origen`` a ``destino``.
 
     Falla si falta alguna, para no publicar un conjunto incompleto.
     """
-    faltantes = [n for n in ARCHIVOS_PUBLICABLES if not (origen / n).exists()]
+    faltantes = [n for n in archivos if not (origen / n).exists()]
     if faltantes:
         raise FileNotFoundError(f"Faltan salidas en {origen}: {faltantes}")
     destino.mkdir(parents=True, exist_ok=True)
-    return [Path(shutil.copy2(origen / n, destino / n)) for n in ARCHIVOS_PUBLICABLES]
+    return [Path(shutil.copy2(origen / n, destino / n)) for n in archivos]

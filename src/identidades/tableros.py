@@ -279,3 +279,36 @@ def capturar_png(
                 pagina.wait_for_timeout(espera_ms)
         pagina.screenshot(path=str(ruta_png))
         navegador.close()
+
+
+def grafico_intervalos(tabla: pd.DataFrame, titulo: str) -> alt.FacetChart:
+    """Puntos con intervalo de confianza: una fila por ``grupo``, un panel por ``metrica``.
+
+    ``tabla`` tiene columnas ``grupo``, ``metrica``, ``valor``, ``ic_inf`` e ``ic_sup``.
+    """
+    base = alt.Chart(tabla).encode(
+        y=alt.Y("grupo:N", title=None, sort=None),
+        tooltip=[
+            "grupo:N",
+            "metrica:N",
+            alt.Tooltip("valor:Q", format=".3f"),
+            alt.Tooltip("ic_inf:Q", format=".3f", title="IC 95 % inferior"),
+            alt.Tooltip("ic_sup:Q", format=".3f", title="IC 95 % superior"),
+        ],
+    )
+    barras = base.mark_rule(strokeWidth=2, color="#6b7280").encode(
+        x=alt.X("ic_inf:Q", title="Valor (IC 95 %)", scale=alt.Scale(zero=False)), x2="ic_sup:Q"
+    )
+    puntos = base.mark_point(filled=True, size=70, color=COLORES_METRICAS["precision"]).encode(
+        x="valor:Q"
+    )
+    return (
+        (barras + puntos)
+        .properties(width=260, height=alt.Step(26))
+        .facet(column=alt.Column("metrica:N", title=None), title=titulo)
+        .resolve_scale(x="independent")
+    )
+
+
+def guardar_intervalos(tabla: pd.DataFrame, titulo: str, ruta_html: Path) -> None:
+    _guardar_grafico(grafico_intervalos(tabla, titulo), ruta_html)

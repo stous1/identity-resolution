@@ -1,21 +1,30 @@
-"""Copia los resultados finales del hito 1 de reports/ a docs/resultados/.
+"""Copia los resultados finales de reports/ a docs/resultados/ (GitHub Pages).
 
 Uso:
-    uv run python scripts/publicar_resultados.py
+    uv run python scripts/publicar_resultados.py [--hito 1|2]
 
-Correr después de scripts/hito1_fake1000.py, solo cuando se quiera actualizar lo
-publicado en GitHub Pages.
+Correr después del script del hito, solo cuando se quiera actualizar lo publicado.
 """
 
 from __future__ import annotations
 
-from identidades import rutas
-from identidades.flujo import publicar_resultados
+import argparse
+
+from identidades import flujo, flujo_hito2, rutas
+
+HITOS = {
+    1: (rutas.REPORTS, rutas.DOCS_RESULTADOS, flujo.ARCHIVOS_PUBLICABLES),
+    2: (rutas.REPORTS_HITO2, rutas.DOCS_RESULTADOS_HITO2, flujo_hito2.ARCHIVOS_PUBLICABLES),
+}
 
 
 def main() -> None:
-    copiados = publicar_resultados(rutas.REPORTS, rutas.DOCS_RESULTADOS)
-    for ruta in copiados:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--hito", type=int, choices=sorted(HITOS), default=1)
+    args = parser.parse_args()
+
+    origen, destino, archivos = HITOS[args.hito]
+    for ruta in flujo.publicar_resultados(origen, destino, archivos):
         print(ruta.relative_to(rutas.RAIZ))
 
 

@@ -16,9 +16,13 @@ import numpy as np
 import pandas as pd
 
 # Umbrales de las curvas: cada centésima y, cerca de 1, donde se concentran las
-# probabilidades de un buen modelo, también 0,995, 0,999 y 0,9999.
+# probabilidades de un modelo con mucha evidencia, también de 0,995 a 0,9999999 (pesos
+# de coincidencia de ~7,6 a ~23).
 UMBRALES: np.ndarray = np.concatenate(
-    [np.round(np.arange(0.01, 1.0, 0.01), 2), [0.995, 0.999, 0.9999]]
+    [
+        np.round(np.arange(0.01, 1.0, 0.01), 2),
+        [0.995, 0.999, 0.9999, 0.99999, 0.999999, 0.9999999],
+    ]
 )
 
 
