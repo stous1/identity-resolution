@@ -73,7 +73,7 @@ def pares_verdaderos(
     ).df()
 
 
-def _marcar_verdaderos(pred: pd.DataFrame, verdaderos: pd.DataFrame) -> pd.DataFrame:
+def marcar_verdaderos(pred: pd.DataFrame, verdaderos: pd.DataFrame) -> pd.DataFrame:
     """Agrega a las predicciones normalizadas la columna booleana ``es_match``."""
     return _sql(
         """
@@ -93,7 +93,7 @@ def metricas_pares(
 
     Los falsos negativos incluyen los pares verdaderos que el bloqueo nunca comparó.
     """
-    marcadas = _marcar_verdaderos(pred, verdaderos)
+    marcadas = marcar_verdaderos(pred, verdaderos)
     positivos = marcadas[marcadas["match_probability"] >= umbral]
     tp = int(positivos["es_match"].sum())
     fp = len(positivos) - tp
@@ -103,7 +103,7 @@ def metricas_pares(
 
 def recall_bloqueo(pred: pd.DataFrame, verdaderos: pd.DataFrame) -> dict[str, float | int]:
     """Qué parte de los pares verdaderos llegó a compararse tras el bloqueo."""
-    marcadas = _marcar_verdaderos(pred, verdaderos)
+    marcadas = marcar_verdaderos(pred, verdaderos)
     en_bloqueo = int(marcadas["es_match"].sum())
     return {
         "pares_comparados": len(marcadas),
@@ -122,7 +122,7 @@ def curva_umbral(
     """Precisión, recall y F1 por par para una serie de umbrales."""
     if umbrales is None:
         umbrales = np.round(np.arange(0.01, 1.0, 0.01), 2)
-    marcadas = _marcar_verdaderos(pred, verdaderos)
+    marcadas = marcar_verdaderos(pred, verdaderos)
     filas = []
     for umbral in umbrales:
         positivos = marcadas[marcadas["match_probability"] >= umbral]
