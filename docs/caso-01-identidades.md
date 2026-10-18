@@ -74,7 +74,9 @@ de casos dudosos con un agente.
 2. **Sintéticos colombianos y estandarización** (completado): generador con Faker es_CO
    (errores de captura, familiares y datos de relleno), estandarización de nombres,
    documento, celular, correo y direcciones, modelo con documento por niveles, aporte de la
-   estandarización y equidad entre grupos. Resultados en [hito2.md](hito2.md).
+   estandarización y equidad entre grupos. Validado con una prueba ciega (modelo
+   congelado, generador de errores independiente) y con FEBRL3. Resultados en
+   [hito2.md](hito2.md).
 3. Registro de oro y grafo de identidad compartida.
 4. Agente para la zona gris.
 

@@ -10,9 +10,10 @@ medir su precisión contra la verdad conocida.
 ## Hitos
 
 - [Hito 1: fake_1000](#hito-1-fake_1000): dataset de demostración de Splink.
-- [Hito 2: clientes sintéticos colombianos y estandarización](hito2.md): precisión 1,000 y
-  recall 0,998 por clúster en prueba; la estandarización suma +3,6 puntos de personas
-  reconstruidas exactamente y el modelo no falla más con ningún grupo.
+- [Hito 2: clientes sintéticos colombianos y estandarización](hito2.md): en la prueba
+  normal, precisión 1,000 y recall 0,998 por clúster. En la **prueba ciega** (modelo
+  congelado, errores de un generador independiente), precisión 0,997 y recall 0,636: la
+  cifra honesta. FEBRL3: precisión 1,000 y recall 0,997.
 
 ## Hito 1: fake_1000
 

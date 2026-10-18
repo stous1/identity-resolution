@@ -31,7 +31,8 @@ uv run pytest -m "not integracion"          # solo pruebas rápidas
 uv run ruff check . && uv run ruff format . # lint y formato
 uv run python scripts/hito1_fake1000.py     # flujo completo del hito 1 -> reports/
 uv run python scripts/hito2_colombia.py      # hito 2 (sintéticos colombianos) -> reports/hito2/
-uv run python scripts/publicar_resultados.py --hito 1  # o --hito 2 -> docs/resultados/
+uv run python scripts/validacion.py          # prueba ciega + FEBRL3 -> reports/validacion/
+uv run python scripts/publicar_resultados.py --hito 1  # o 2, o validacion -> docs/resultados/
 ```
 
 ## Estructura
@@ -43,6 +44,11 @@ uv run python scripts/publicar_resultados.py --hito 1  # o --hito 2 -> docs/resu
   - Hito 2: `sinteticos.py` (generador), `estandarizacion.py`, `modelo_co.py` (esquema
     colombiano) y `flujo_hito2.py`. Un `modelo.Esquema` agrupa comparaciones, preparación
     y reglas de cada conjunto de datos.
+  - Validación: `errores_ciegos.py` (generador escrito sin leer la estandarización),
+    `modelo_febrl.py` y `flujo_validacion.py`. El modelo del hito 2 está congelado en el tag
+    `hito2-congelado-r1`: `estandarizacion.py`, `modelo_co.py` y
+    `docs/resultados/hito2/modelo.json` no se cambian sin crear un tag nuevo y repetir la
+    prueba ciega (lo verifica `tests/test_flujo_validacion.py`).
 - `scripts/`: puntos de entrada delgados que orquestan funciones de `src/`.
 - `notebooks/`: solo exploración. Nada en `src/` ni `scripts/` importa de notebooks.
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.

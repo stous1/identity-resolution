@@ -8,7 +8,7 @@ dato y resolución de identidades**.
 | Hito | Datos | Resultado principal (prueba) |
 |---|---|---|
 | [1. fake_1000](#hito-1-fake_1000-de-punta-a-punta) | Demo de Splink, 251 personas | Precisión 0,970 y recall 0,851 por clúster |
-| [2. Colombia](#hito-2-clientes-sintéticos-colombianos-y-estandarización) | Sintéticos es_CO, 2.000 personas | Precisión 1,000 y recall 0,998 por clúster; estandarizar suma +3,6 puntos de personas exactas |
+| [2. Colombia](#hito-2-clientes-sintéticos-colombianos-y-estandarización) | Sintéticos es_CO, 2.000 personas | Prueba normal: precisión 1,000 y recall 0,998 por clúster. **[Prueba ciega](#validación-prueba-ciega-y-febrl3): precisión 0,997 y recall 0,636** |
 
 ## Qué problema resuelve
 
@@ -299,11 +299,98 @@ ese tipo. Son los casos para el agente de la zona gris (hito 4).
 
 - Los datos son sintéticos y el generador y la estandarización los escribió la misma
   persona: la estandarización conoce los errores que se inyectaron. Las métricas son una
-  cota optimista de lo que se lograría con datos reales.
+  cota optimista; la cifra honesta es la de la
+  [prueba ciega](#validación-prueba-ciega-y-febrl3).
 - El bloqueo elegido en desarrollo para la variante estandarizada agrega solo
   `domicilio_clave` (vía, número y placa) a las reglas exactas.
 - [Comparación de bloqueos](docs/resultados/hito2/comparacion_bloqueos.csv) y
   [selección](docs/resultados/hito2/seleccion_bloqueos.csv) en desarrollo.
+
+### Validación: prueba ciega y FEBRL3
+
+Las métricas del hito 2 tienen un problema de circularidad: el generador de errores y la
+estandarización los escribió la misma persona, así que la estandarización ya "conoce" los
+errores que va a ver. Para tener una cifra honesta:
+
+1. **Se congeló el modelo** (estandarización, esquema y parámetros entrenados) en el tag
+   `hito2-congelado`, con su umbral de 0,999999.
+2. **Un subagente que no leyó la estandarización ni el modelo** escribió un generador de
+   errores nuevo ([`errores_ciegos.py`](src/identidades/errores_ciegos.py)) con errores no
+   contemplados: más tipos y abreviaturas de vía (Ak, Ac, Avda, Transv., Km), direcciones
+   rurales (veredas, fincas, corregimientos), apodos (Pepe, Pacho, Chucho, Mafe...), errores
+   de lectura de documentos (O por 0, l por 1, S por 5, B por 8), espacios y puntuación
+   irregulares, fechas en otros formatos ("07 de marzo de 1985", 07-MAR-1985), apellido de
+   casada ("Figueroa de Ortiz"), campos cruzados, fijos de 7 dígitos, dominios de correo mal
+   escritos, ciudades abreviadas (Bta, B/quilla) y texto mal codificado ("JosÃ©").
+3. **El modelo congelado se aplicó sin ajustar nada** a 2.000 personas nuevas (6.032
+   registros, otra semilla). Solo se vuelve a estimar λ, como en cualquier lote nuevo, con
+   reglas que no usan etiquetas.
+4. **Validación externa:** el mismo procedimiento del hito 2 (bloqueo y umbral elegidos en
+   desarrollo, métricas en prueba) sobre FEBRL3, un generador de registros con errores
+   ajeno a este proyecto (5.000 registros de 2.000 personas).
+
+**Las tres cifras** (por clúster, en prueba, IC 95 % por bootstrap de personas):
+
+| Evaluación | Precisión | Recall | F1 | Personas exactas |
+|---|---|---|---|---|
+| Prueba normal del hito 2 (800 personas) | 1,000 [1,000 – 1,000] | 0,998 [0,993 – 1,000] | 0,999 [0,997 – 1,000] | 99,8 % [99,4 – 100] |
+| **Prueba ciega (2.000 personas)** | **0,997** [0,987 – 1,000] | **0,636** [0,616 – 0,657] | **0,777** [0,762 – 0,792] | **60,2 %** [58,1 – 62,3] |
+| FEBRL3 (800 personas) | 1,000 [1,000 – 1,000] | 0,997 [0,992 – 1,000] | 0,998 [0,996 – 1,000] | 99,6 % [99,1 – 100] |
+
+![Prueba normal, prueba ciega y FEBRL3](docs/resultados/validacion/tres_cifras.png)
+
+**Por qué la prueba ciega es la cifra más honesta.** En la prueba normal, la separación
+desarrollo/prueba evita que el modelo vea a las mismas personas, pero no evita que el
+diseño (qué normalizar, qué comparaciones usar) se haya hecho a la medida de los errores
+del generador: ambos salieron de la misma cabeza. FEBRL es externo, pero el procedimiento
+se ajustó a FEBRL (bloqueo, entrenamiento y umbral sobre sus datos), y sus errores son
+sencillos (digitación y valores faltantes sobre campos bien separados). La prueba ciega es
+la única donde ni el diseño ni los parámetros pudieron adaptarse a los datos evaluados, que
+es lo que le pasa a un modelo en producción cuando llega un canal o un sistema nuevo.
+
+**Lo que muestra:**
+
+- **La precisión aguanta:** 0,997. El modelo casi nunca une personas distintas, que en
+  banca es el error caro.
+- **El recall se cae:** de 0,998 a 0,636. Una de cada tres duplicaciones queda sin unir, y
+  solo el 60 % de las personas queda reconstruida exactamente (3.128 clústeres para 2.000
+  personas).
+- **No es solo el umbral:** a umbral 0,5 el recall sube a 0,807, pero la precisión cae a
+  0,803. Los puntajes ya no separan bien; la solución es mejorar la estandarización y las
+  comparaciones, no mover el umbral. Este diagnóstico no se usa para la cifra principal:
+  elegir otro umbral mirando estos datos sería ajustar el modelo.
+- **Dónde falla** (personas reconstruidas exactamente, diagnóstico por tipo de error):
+  nombres en otro campo 29,7 % (frente a 62,8 %), documento alterado 45,4 % (frente a
+  63,4 %) y celular cambiado por un fijo 49,1 % (frente a 61,5 %). Todas las diferencias
+  son significativas.
+- **Primer hallazgo:** con el tag original, el modelo **se caía** con 66 registros sin
+  apellidos (pandas convierte el `None` en `NaN` y la estandarización no lo esperaba). Se
+  corrigió la robustez sin cambiar ningún resultado del hito 2 (métricas idénticas) y se
+  congeló de nuevo como `hito2-congelado-r1`. La validación verifica contra ese tag.
+
+**Equidad en la prueba ciega** (personas reconstruidas exactamente, por clúster):
+
+| Grupo | Exactas | Frente a | Diferencia | ¿Significativa? |
+|---|---|---|---|---|
+| Apellido de casada (136) | 41,2 % | 61,5 % sin él | −20,4 puntos [−29,1, −11,4] | **Sí** |
+| Con apodo (337) | 49,3 % | 62,4 % sin apodo | −13,1 puntos [−19,0, −7,4] | **Sí** |
+| Nombre compuesto (788) | 61,8 % | 59,1 % simple | +2,7 [−1,3, +7,1] | No |
+| Un apellido (301) | 59,1 % | 60,3 % con dos | −1,2 [−7,0, +4,5] | No |
+| Sin tilde (634) | 59,6 % | 60,4 % con tilde | −0,8 [−5,6, +3,9] | No |
+| Dirección rural (135) | 59,3 % | 60,2 % urbana | −1,0 [−9,9, +7,5] | No |
+
+El hallazgo de equidad más importante: **el modelo falla más con mujeres que usan apellido
+de casada**. La estandarización separa "Ramírez de Vargas" en primer apellido RAMIREZ y
+segundo apellido DE VARGAS, que choca con el segundo apellido verdadero (OSORIO): el campo
+resta evidencia en vez de quedar neutral, y esos registros quedan sin unir. Con los apodos
+pasa algo parecido: "Pepe" no se reconoce como "José". La prueba normal no lo podía mostrar, porque su
+generador no producía esos casos. La precisión no difiere entre grupos.
+
+![Equidad en la prueba ciega](docs/resultados/validacion/ciega_equidad.png)
+
+Métricas completas en
+[docs/resultados/validacion/metricas.json](docs/resultados/validacion/metricas.json) y una
+[muestra de registros ciegos](docs/resultados/validacion/ciega_muestra_registros.csv).
 
 ## Cómo correrlo
 
@@ -315,7 +402,8 @@ uv run playwright install chromium            # una sola vez, para las capturas 
 uv run pytest                                 # pruebas (sin internet)
 uv run python scripts/hito1_fake1000.py       # hito 1 completo -> reports/ (~1,5 min)
 uv run python scripts/hito2_colombia.py       # hito 2 completo -> reports/hito2/ (~2,5 min)
-uv run python scripts/publicar_resultados.py --hito 1   # o --hito 2: copia a docs/resultados/
+uv run python scripts/validacion.py           # prueba ciega + FEBRL3 -> reports/validacion/
+uv run python scripts/publicar_resultados.py --hito 1   # o 2, o validacion: a docs/resultados/
 ```
 
 La primera ejecución del hito descarga fake_1000 y lo guarda en `data/raw/`.
@@ -324,7 +412,8 @@ La primera ejecución del hito descarga fake_1000 y lo guarda en `data/raw/`.
 
 ```
 src/identidades/   datos, modelo, bloqueo, evaluación, tableros y flujo del hito 1;
-                   sinteticos, estandarizacion, modelo_co y flujo_hito2 (hito 2)
+                   sinteticos, estandarizacion, modelo_co y flujo_hito2 (hito 2);
+                   errores_ciegos, modelo_febrl y flujo_validacion (validación)
 scripts/           puntos de entrada
 tests/             pruebas con pytest
 notebooks/         solo exploración
