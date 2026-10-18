@@ -19,6 +19,7 @@ from __future__ import annotations
 import random
 import unicodedata
 from dataclasses import asdict, dataclass
+from datetime import date
 
 import pandas as pd
 from faker import Faker
@@ -48,12 +49,14 @@ VARIANTES_NUMERO: list[str] = ["#", "No.", "N°", "No", "#"]
 class TasasError:
     """Probabilidad de cada error al capturar un registro (los duplicados la sufren)."""
 
-    documento_transpuesto: float = 0.05
-    documento_digito_faltante: float = 0.03
-    documento_digito_errado: float = 0.04
+    documento_transpuesto: float = 0.08
+    documento_digito_faltante: float = 0.05
+    documento_digito_errado: float = 0.06
+    documento_vacio: float = 0.05
     documento_con_puntos: float = 0.25
-    digitacion_nombre: float = 0.06
-    digitacion_apellido: float = 0.06
+    digitacion_nombre: float = 0.10
+    digitacion_apellido: float = 0.10
+    fecha_errada: float = 0.06
     tilde_cambiada: float = 0.30
     nombres_invertidos: float = 0.20
     segundo_apellido_omitido: float = 0.25
@@ -75,6 +78,11 @@ class Composicion:
     nombre_compuesto: float = 0.40
     dos_apellidos: float = 0.85
     cedula_extranjeria: float = 0.08
+    # Fracción de personas que son familiares de otra (hermanos o padre/hijo): comparten
+    # apellidos, dirección y ciudad, y a veces el teléfono. Son la fuente típica de
+    # falsos positivos.
+    familiares: float = 0.25
+    familiar_comparte_telefono: float = 0.30
     en_ciudad_grande: float = 0.55
     # Probabilidad de que una persona tenga 1, 2, 3, ... registros.
     registros_por_persona: tuple[float, ...] = (0.35, 0.25, 0.18, 0.12, 0.06, 0.04)
@@ -88,6 +96,14 @@ def tiene_tilde(texto: str) -> bool:
 def _sin_tildes(texto: str) -> str:
     descompuesto = unicodedata.normalize("NFD", texto)
     return "".join(c for c in descompuesto if unicodedata.category(c) != "Mn")
+
+
+def _fecha_valida(texto: str) -> bool:
+    try:
+        date.fromisoformat(texto)
+    except ValueError:
+        return False
+    return True
 
 
 def _ascii(texto: str) -> str:
@@ -177,6 +193,28 @@ class Generador:
             codigo = self.rng.choice(list(self._municipios))
         return self._municipios[codigo], self._departamentos[codigo[:2]]
 
+    def familiar(self, persona_id: int, base: dict) -> dict:
+        """Un familiar de ``base``: hermano (mismos dos apellidos) o hijo (primer apellido).
+
+        Comparte dirección y ciudad, y a veces el teléfono; tiene otros nombres,
+        documento, fecha de nacimiento y correo.
+        """
+        p = self.persona(persona_id)
+        hermano = self.rng.random() < 0.5
+        p["primer_apellido"] = base["primer_apellido"]
+        p["segundo_apellido"] = base["segundo_apellido"] if hermano else p["segundo_apellido"]
+        p["direccion"] = dict(base["direccion"])
+        p["ciudad"], p["departamento"] = base["ciudad"], base["departamento"]
+        if self._ocurre(self.composicion.familiar_comparte_telefono):
+            p["celular"] = base["celular"]
+        p["correo"] = self._correo(p["primer_nombre"], p["primer_apellido"])
+        nombres = " ".join(n for n in (p["primer_nombre"], p["segundo_nombre"]) if n)
+        apellidos = " ".join(a for a in (p["primer_apellido"], p["segundo_apellido"]) if a)
+        p["dos_apellidos"] = p["segundo_apellido"] is not None
+        p["con_tilde"] = tiene_tilde(nombres + apellidos)
+        p["familiar_de"] = base["cluster"]
+        return p
+
     def persona(self, persona_id: int) -> dict:
         """Datos verdaderos de una persona."""
         femenino = self.rng.random() < 0.5
@@ -204,6 +242,7 @@ class Generador:
             "nombre_compuesto": segundo_nombre is not None,
             "dos_apellidos": segundo_apellido is not None,
             "con_tilde": tiene_tilde(nombres + apellidos),
+            "familiar_de": None,
         }
 
     # ---------- Errores ----------
@@ -259,6 +298,24 @@ class Generador:
                 texto = texto[:-3]
             texto = self.rng.choice([".", " ", ","]).join(grupos)
         return texto
+
+    def _fecha_capturada(self, fecha: str) -> str:
+        """Fecha ISO con, a veces, día y mes intercambiados o un dígito errado."""
+        if not self._ocurre(self.tasas.fecha_errada):
+            return fecha
+        anio, mes, dia = fecha.split("-")
+        if int(dia) <= 12 and dia != mes and self.rng.random() < 0.5:
+            return f"{anio}-{dia}-{mes}"
+        digitos = list(anio + mes + dia)
+        for _ in range(10):
+            i = self.rng.randrange(len(digitos))
+            candidato = digitos.copy()
+            candidato[i] = self.rng.choice("0123456789")
+            texto = "".join(candidato)
+            nueva = f"{texto[:4]}-{texto[4:6]}-{texto[6:]}"
+            if nueva != fecha and _fecha_valida(nueva):
+                return nueva
+        return fecha
 
     def _nombres_capturados(self, p: dict) -> str:
         nombres = [p["primer_nombre"]] + ([p["segundo_nombre"]] if p["segundo_nombre"] else [])
@@ -328,10 +385,12 @@ class Generador:
         return {
             "unique_id": unique_id,
             "tipo_documento": p["tipo_documento"],
-            "numero_documento": self._documento_capturado(p["numero_documento"]),
+            "numero_documento": None
+            if self._ocurre(self.tasas.documento_vacio)
+            else self._documento_capturado(p["numero_documento"]),
             "nombres": self._nombres_capturados(p),
             "apellidos": self._apellidos_capturados(p),
-            "fecha_nacimiento": p["fecha_nacimiento"],
+            "fecha_nacimiento": self._fecha_capturada(p["fecha_nacimiento"]),
             "celular": self._celular_capturado(p["celular"]),
             "correo": self._correo_capturado(p),
             "direccion": self._direccion_capturada(p["direccion"]),
@@ -357,7 +416,10 @@ def generar(
     pesos = generador.composicion.registros_por_persona
     personas, registros = [], []
     for persona_id in range(n_personas):
-        p = generador.persona(persona_id)
+        if personas and generador.rng.random() < generador.composicion.familiares:
+            p = generador.familiar(persona_id, generador.rng.choice(personas))
+        else:
+            p = generador.persona(persona_id)
         personas.append(p)
         cantidad = generador.rng.choices(range(1, len(pesos) + 1), weights=pesos)[0]
         for _ in range(cantidad):
