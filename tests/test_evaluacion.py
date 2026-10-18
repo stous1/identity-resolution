@@ -11,6 +11,7 @@ Predicciones simuladas:
 El par (4, 5) nunca se comparó: lo perdió el bloqueo.
 """
 
+import numpy as np
 import pandas as pd
 import pytest
 
@@ -201,3 +202,18 @@ def test_bootstrap_clusters_y_exactos(registros_pequenos):
     assert ic["pct_clusters_exactos"]["valor"] == pytest.approx(directas["pct_clusters_exactos"])
     for metrica in ("precision", "recall", "f1"):
         assert ic[metrica]["valor"] == pytest.approx(directas[metrica])
+
+
+def test_bootstrap_sin_positivos_coincide_con_metricas_y_no_da_nan(
+    pred, verdaderos, registros_pequenos
+):
+    # A umbral 0.99 no hay positivos: precisión indefinida, convención 0.0 en ambos lados.
+    positivos = pd.DataFrame({"id_l": [], "id_r": []}, dtype=int)
+    por_persona, cruzados = evaluacion.contribuciones_por_persona(positivos, registros_pequenos)
+
+    ic = evaluacion.bootstrap_por_persona(por_persona, cruzados, n=100)
+    directas = evaluacion.metricas_pares(pred, verdaderos, umbral=0.99)
+
+    for metrica in ("precision", "recall", "f1"):
+        assert ic[metrica]["valor"] == directas[metrica] == 0.0
+        assert not any(np.isnan(v) for v in ic[metrica].values())

@@ -307,9 +307,11 @@ def bootstrap_por_persona(
     ib = cruzados["persona_b"].map(indice).to_numpy(dtype=int)
     fp = (pesos[:, ia] * pesos[:, ib]) @ cruzados["fp"].to_numpy() if len(cruzados) else 0 * tp
 
+    # Misma convención que ``_metricas``: 0.0 cuando el denominador es cero (así el valor
+    # observado coincide con las métricas puntuales y el JSON nunca lleva NaN).
     with np.errstate(divide="ignore", invalid="ignore"):
-        precision = np.where(tp + fp > 0, tp / (tp + fp), np.nan)
-        recall = np.where(tp + fn > 0, tp / (tp + fn), np.nan)
+        precision = np.where(tp + fp > 0, tp / (tp + fp), 0.0)
+        recall = np.where(tp + fn > 0, tp / (tp + fn), 0.0)
         f1 = np.where(precision + recall > 0, 2 * precision * recall / (precision + recall), 0.0)
     series = {"precision": precision, "recall": recall, "f1": f1}
     if "exacto" in por_persona:
@@ -321,8 +323,8 @@ def bootstrap_por_persona(
     return {
         nombre: {
             "valor": float(valores[0]),
-            "ic_inf": float(np.nanquantile(valores[1:], alfa)),
-            "ic_sup": float(np.nanquantile(valores[1:], 1 - alfa)),
+            "ic_inf": float(np.quantile(valores[1:], alfa)),
+            "ic_sup": float(np.quantile(valores[1:], 1 - alfa)),
         }
         for nombre, valores in series.items()
     }
