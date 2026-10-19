@@ -7,13 +7,15 @@ bits, dos vecinos del mismo edificio suman 5,4 y dos predios de la misma cuadra 
 predio y unidad (``estandarizacion_v4``) y la compara por niveles:
 
 1. misma dirección: mismo predio y misma unidad (o ninguno de los dos con unidad);
-2. mismo predio, unidad desconocida o incompleta en uno de los dos ("Torre 2 Apto 301"
+2. mismo predio, uno sin unidad y el otro con piso (casa de varios pisos: los padres sin
+   piso y el hijo en el "Piso 2", o la misma persona antes y después de subir);
+3. mismo predio, unidad desconocida o incompleta en uno de los dos ("Torre 2 Apto 301"
    contra "Apto 301", o contra la dirección sin unidad);
-3. mismo predio, otra unidad (vecinos);
-4. predio parecido (error de digitación);
-5. distinta.
+4. mismo predio, otra unidad (vecinos);
+5. predio parecido (error de digitación);
+6. distinta.
 
-Los niveles 1 y 2 se ajustan por frecuencia (``term_frequency_adjustments``): en un
+Los niveles 1 y 3 se ajustan por frecuencia (``term_frequency_adjustments``): en un
 conjunto donde viven muchos clientes, compartir el predio dice menos que en una casa. El
 piso a las m del v3 (``modelo.aplicar_piso_m``) se vuelve a elegir en desarrollo.
 """
@@ -73,6 +75,11 @@ def comparacion_domicilio_v4() -> ComparisonCreator:
             cll.ExactMatchLevel("domicilio").configure(
                 tf_adjustment_column="domicilio",
                 label_for_charts="Misma dirección (predio y unidad)",
+            ),
+            cll.CustomLevel(
+                f"{pl} = {pr} and (({ul} is null and starts_with({ur}, 'PI')) "
+                f"or ({ur} is null and starts_with({ul}, 'PI')))",
+                label_for_charts="Mismo predio, uno sin unidad y otro con piso",
             ),
             cll.CustomLevel(
                 f"{pl} = {pr} and ({ul} is null or {ur} is null "

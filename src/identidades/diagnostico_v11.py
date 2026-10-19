@@ -212,24 +212,23 @@ PARES_DIRECCION: list[tuple[str, str, str]] = [
 ]  # fmt: skip
 
 
-def niveles_direccion_v3(configuracion: dict | None = None) -> list[dict[str, Any]]:
-    """Nivel y bits que da a la dirección el v3 congelado en cada par típico.
+def niveles_direccion(
+    configuracion: dict, preparar: Any, pares: list[tuple[str, str, str]] | None = None
+) -> list[dict[str, Any]]:
+    """Nivel y bits que da a la dirección un modelo guardado en cada par de direcciones.
 
-    Prepara las direcciones con la estandarización del v2 (la que usa el v3) y evalúa los
-    niveles de ``modelo_co.comparacion_domicilio`` en DuckDB. Los bits son log2(m/u) del
-    nivel, sin el ajuste por frecuencia (que depende de toda la base).
+    Prepara las direcciones con ``preparar`` (la del esquema del modelo) y evalúa en DuckDB
+    los niveles de la comparación ``domicilio``. Los bits son log2(m/u) del nivel, sin el
+    ajuste por frecuencia (que depende de toda la base).
     """
     import duckdb
 
-    from identidades import flujo_hito6, modelo_co_v2
-
-    if configuracion is None:
-        configuracion = flujo_hito6.cargar_congelado_v3()[0]
+    pares = pares or PARES_DIRECCION
     (domicilio,) = [
         c for c in configuracion["comparisons"] if c["output_column_name"] == "domicilio"
     ]
     niveles = [n for n in domicilio["comparison_levels"] if not n.get("is_null_level")]
-    textos = list(dict.fromkeys(t for _, a, b in PARES_DIRECCION for t in (a, b)))
+    textos = list(dict.fromkeys(t for _, a, b in pares for t in (a, b)))
     base = pd.DataFrame(
         {
             "unique_id": range(len(textos)),
@@ -238,17 +237,23 @@ def niveles_direccion_v3(configuracion: dict | None = None) -> list[dict[str, An
             "direccion": textos, "ciudad": "BOGOTA",
         }
     )  # fmt: skip
-    preparado = modelo_co_v2.preparar(base).set_index(base["direccion"])
+    preparado = preparar(base).set_index(base["direccion"])
+    columnas = [
+        c
+        for c in ("domicilio", "domicilio_clave", "predio", "unidad", "unidad_partes")
+        if c in preparado
+    ]
     salida = []
-    for descripcion, a, b in PARES_DIRECCION:
-        izq, der = preparado.loc[a], preparado.loc[b]
-        fila = {
-            "domicilio_l": izq["domicilio"],
-            "domicilio_r": der["domicilio"],
-            "domicilio_clave_l": izq["domicilio_clave"],
-            "domicilio_clave_r": der["domicilio_clave"],
-        }
-        tabla = pd.DataFrame([fila]).astype("string")  # noqa: F841 (lo lee DuckDB)
+    for descripcion, a, b in pares:
+        fila = {}
+        for c in columnas:
+            for lado, texto in (("l", a), ("r", b)):
+                valor = preparado.loc[texto, c]
+                fila[f"{c}_{lado}"] = valor if isinstance(valor, list | str) else None
+        tabla = pd.DataFrame([fila])  # noqa: F841 (lo lee DuckDB)
+        for c in columnas:
+            if c != "unidad_partes":
+                tabla[[f"{c}_l", f"{c}_r"]] = tabla[[f"{c}_l", f"{c}_r"]].astype("string")
         for nivel in niveles:
             condicion = nivel["sql_condition"]
             if condicion.strip().upper() == "ELSE":
@@ -261,11 +266,23 @@ def niveles_direccion_v3(configuracion: dict | None = None) -> list[dict[str, An
                 "par": descripcion,
                 "a": a,
                 "b": b,
-                "nivel_v3": nivel.get("label_for_charts", nivel["sql_condition"]),
-                "bits_v3": round(bits, 2),
+                "nivel": nivel.get("label_for_charts", nivel["sql_condition"]),
+                "bits": round(bits, 2),
             }
         )
     return salida
+
+
+def niveles_direccion_v3(configuracion: dict | None = None) -> list[dict[str, Any]]:
+    """Nivel y bits que da a la dirección el v3 congelado en cada par típico."""
+    from identidades import flujo_hito6, modelo_co_v2
+
+    if configuracion is None:
+        configuracion = flujo_hito6.cargar_congelado_v3()[0]
+    return [
+        {**{k: n[k] for k in ("par", "a", "b")}, "nivel_v3": n["nivel"], "bits_v3": n["bits"]}
+        for n in niveles_direccion(configuracion, modelo_co_v2.preparar)
+    ]
 
 
 # Fecha en que se generó el universo publicado del hito 3 (commit 638ec65). Faker calcula
