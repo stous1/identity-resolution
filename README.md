@@ -11,11 +11,15 @@ y una auditoría independiente.
 [![Python 3.11](https://img.shields.io/badge/python-3.11-3776ab?logo=python&logoColor=white)](.python-version)
 [![Licencia MIT](https://img.shields.io/badge/licencia-MIT-blue)](LICENSE)
 
-[![Universo de registros en Cosmograph](docs/resultados/portada.jpg)](https://stous1.github.io/identity-resolution/hito3_universo.html)
+[![Recorrido por el universo de registros en Cosmograph](docs/resultados/gifs/universo.gif)](https://stous1.github.io/identity-resolution/hito3_universo.html)
 
 <sub>Cada punto es un registro; los enlaces del modelo los agrupan en clientes. En morado,
 datos de relleno; en verde, hogares; en rojo, patrones sospechosos.
 [Abrir el universo interactivo →](https://stous1.github.io/identity-resolution/hito3_universo.html)</sub>
+
+**[Probar la demo](https://stous1.github.io/identity-resolution/demo.html)** ·
+**[Calculadora de impacto](https://stous1.github.io/identity-resolution/calculadora.html)** ·
+**[Tableros](https://stous1.github.io/identity-resolution/)**
 
 </div>
 
@@ -25,6 +29,8 @@ datos de relleno; en verde, hogares; en rojo, patrones sospechosos.
 la cédula con un dígito errado, el nombre sin tilde, "Pepe" en vez de "José", un teléfono
 viejo, la dirección de antes de mudarse. Eso duplica comunicaciones, parte el historial y
 esconde riesgos.
+
+<p align="center"><img src="docs/resultados/gifs/agrupacion.gif" width="640" alt="Antes: 14 registros sueltos; después: 5 clientes agrupados por el modelo v3"></p>
 
 **Qué se construyó.** Un modelo Fellegi-Sunter con [Splink](https://moj-analytical-services.github.io/splink/)
 sobre DuckDB, con estandarización colombiana, que une registros, construye un registro de
@@ -50,6 +56,8 @@ tiempo real. Todo con datos sintéticos.
 | Enlace | Qué es |
 |---|---|
 | [Portada de los tableros](https://stous1.github.io/identity-resolution/) | Resumen navegable de todos los hitos en GitHub Pages |
+| [Demo: ¿son la misma persona?](https://stous1.github.io/identity-resolution/demo.html) | Escribe dos registros y mira la probabilidad, la banda y la explicación, en el navegador |
+| [Calculadora de impacto](https://stous1.github.io/identity-resolution/calculadora.html) | Las métricas del v3 convertidas en pesos al año, con supuestos editables |
 | [Hito 1: fake_1000](https://stous1.github.io/identity-resolution/#hito-1-fake_1000) | El flujo completo sobre el dataset de demostración de Splink |
 | [Hito 2: sintéticos colombianos](https://stous1.github.io/identity-resolution/hito2.html) | Estandarización, primera prueba ciega y FEBRL3 |
 | [Hito 2b: corregir a ciegas](https://stous1.github.io/identity-resolution/hito2b.html) | Modelo v2 y segunda prueba ciega |
@@ -141,6 +149,7 @@ uv run python scripts/hito6.py evaluar      # v3 congelado en la prueba normal y
 uv run python scripts/hito6.py diagnostico-umbral  # v3 con el umbral del v2
 uv run python scripts/hito6.py escala       # 100 mil y 1 millón (~8 GB de RAM)
 uv run python scripts/servicio_local.py     # API local en http://127.0.0.1:8000/docs
+uv run python scripts/gifs.py               # GIF del README (Playwright)
 uv run python scripts/publicar_resultados.py --hito 6   # copia a docs/resultados/
 ```
 

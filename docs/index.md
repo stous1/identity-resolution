@@ -7,6 +7,9 @@ sintéticos.
 
 [![Universo de registros en Cosmograph](resultados/portada.jpg)](hito3_universo.html)
 
+**[Probar la demo →](demo.html)** · **[Calculadora de impacto →](calculadora.html)** ·
+[universo en Cosmograph](hito3_universo.html)
+
 ## En un minuto
 
 - **Prueba ciega 3** (modelo v3 congelado, errores de un generador independiente):
@@ -27,6 +30,8 @@ sintéticos.
 | Ciega 1 | v1 | 0,997 | 0,636 | 0,777 | 0,960 |
 | FEBRL3 | propio | 1,000 | 0,997 | 0,998 | 0,957 |
 | 1 millón de registros | v3 | 0,998 | 0,995 | 0,997 | 0,924 |
+
+![Antes: registros sueltos; después: clientes agrupados por el modelo v3](resultados/gifs/agrupacion.gif)
 
 Limitaciones: datos sintéticos, generadores de errores escritos por agentes de IA y sin
 validación con datos reales.

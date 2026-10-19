@@ -5,7 +5,7 @@
 
 **[Abrir el universo de registros en Cosmograph →](hito3_universo.html)**
 
-[![Universo de registros](resultados/hito3/universo.png)](hito3_universo.html)
+[![Recorrido por el universo de registros](resultados/gifs/universo.gif)](hito3_universo.html)
 
 Escenario con historia en el tiempo (cambios de celular, correo y domicilio), metadatos por
 registro (fecha, canal y validación) y datos compartidos con verdad conocida: relleno,

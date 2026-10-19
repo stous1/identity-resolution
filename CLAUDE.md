@@ -90,9 +90,13 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
   - Tiempo real con el v3: la zona gris sale de las bandas congeladas
     (`calibracion.json`), trasladadas a la previa 1/N (`tiempo_real.peso_con_otra_previa`).
     `scripts/servicio_local.py` usa el v3 por defecto; `--modelo v2` reproduce el hito 5.
-  - Demo: `demo.py` exporta el modelo v2 a `docs/demo/modelo_demo.json`; `docs/demo/motor.js`
-    lo reimplementa en JavaScript y `tests/test_demo.py` (con Node.js) verifica que da los
-    mismos niveles y pesos que Splink.
+  - Demo: `demo.py` exporta los modelos v2 y v3 a `docs/demo/modelo_demo.json` y
+    `modelo_demo_v3.json` (este con las bandas); `docs/demo/motor.js` los reimplementa en
+    JavaScript y `tests/test_demo.py` (con Node.js) verifica que da los mismos niveles y
+    pesos que Splink. `docs/demo.html` (v3) y `docs/calculadora.html` (lee
+    `docs/resultados/hito6/metricas.json`) son páginas estáticas, sin servidor.
+  - GIF: `gifs.py` y `scripts/gifs.py` graban con Playwright el recorrido por Cosmograph
+    (requiere internet) y el antes y después, en `docs/resultados/gifs/`.
 - `scripts/`: puntos de entrada delgados que orquestan funciones de `src/`.
 - `notebooks/`: solo exploración. Nada en `src/` ni `scripts/` importa de notebooks.
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.
