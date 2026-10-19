@@ -411,19 +411,25 @@ def generar(
     Devuelve ``(registros, personas)``. ``registros`` tiene los datos capturados y la
     verdad en ``cluster``; ``personas`` tiene los datos verdaderos y los atributos de
     equidad (``nombre_compuesto``, ``dos_apellidos``, ``con_tilde``).
+
+    Corre con la fecha de Faker fija (``sinteticos_fecha.HOY_FIJO``): las fechas de
+    nacimiento, y con ellas el resto del sorteo, no dependen del día en que se corre.
     """
+    from identidades.sinteticos_fecha import fecha_generadores
+
     generador = Generador(semilla, tasas, composicion)
     pesos = generador.composicion.registros_por_persona
     personas, registros = [], []
-    for persona_id in range(n_personas):
-        if personas and generador.rng.random() < generador.composicion.familiares:
-            p = generador.familiar(persona_id, generador.rng.choice(personas))
-        else:
-            p = generador.persona(persona_id)
-        personas.append(p)
-        cantidad = generador.rng.choices(range(1, len(pesos) + 1), weights=pesos)[0]
-        for _ in range(cantidad):
-            registros.append(generador.registro(p, len(registros)))
+    with fecha_generadores():
+        for persona_id in range(n_personas):
+            if personas and generador.rng.random() < generador.composicion.familiares:
+                p = generador.familiar(persona_id, generador.rng.choice(personas))
+            else:
+                p = generador.persona(persona_id)
+            personas.append(p)
+            cantidad = generador.rng.choices(range(1, len(pesos) + 1), weights=pesos)[0]
+            for _ in range(cantidad):
+                registros.append(generador.registro(p, len(registros)))
 
     tabla_personas = pd.DataFrame(personas)
     direcciones = pd.DataFrame(tabla_personas.pop("direccion").tolist()).add_prefix("direccion_")

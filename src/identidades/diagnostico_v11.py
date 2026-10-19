@@ -285,9 +285,9 @@ def niveles_direccion_v3(configuracion: dict | None = None) -> list[dict[str, An
     ]
 
 
-# Fecha en que se generó el universo publicado del hito 3 (commit 638ec65). Faker calcula
-# las fechas de nacimiento desde la fecha de hoy y eso cambia el resto del sorteo, así que
-# el escenario del hito 3 solo se reproduce con la fecha fija.
+# Fecha en que se generó el universo del hito 3 de la v1.1 (commit 638ec65). Faker calculaba
+# las fechas de nacimiento desde la fecha de hoy; desde la v1.1.1 los generadores usan
+# HOY_FIJO, y ese escenario se reproduce forzando esta fecha.
 FECHA_UNIVERSO_HITO3: tuple[int, int, int] = (2026, 10, 18)
 
 
@@ -299,9 +299,9 @@ def caso_esther(documento: str = "1064372368") -> dict[str, Any]:
     escenario y la etiqueta verdadera del grupo.
     """
     from identidades import escenario_hito3
-    from identidades.sinteticos_fecha import fecha_fija
+    from identidades.sinteticos_fecha import forzar_fecha
 
-    with fecha_fija(*FECHA_UNIVERSO_HITO3):
+    with forzar_fecha(*FECHA_UNIVERSO_HITO3):
         registros, personas, verdad = escenario_hito3.generar_escenario(2000, 3131)
     clave = registros["numero_documento"].map(lambda v: escenario_hito3.normalizar("documento", v))
     filas = registros[clave == documento]
