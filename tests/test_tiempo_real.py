@@ -21,6 +21,37 @@ def vinculador():
     return v, consultas
 
 
+def test_peso_con_otra_previa_conserva_la_evidencia():
+    previa_origen, previa_destino = 0.00026, 1 / 2705
+    evidencia = 17.0
+    peso_origen = evidencia + tiempo_real.log_odds(previa_origen)
+
+    peso_destino = tiempo_real.peso_con_otra_previa(peso_origen, previa_origen, previa_destino)
+
+    assert peso_destino - tiempo_real.log_odds(previa_destino) == pytest.approx(evidencia)
+
+
+def _vinculador_sin_base(peso_revisar: float | None) -> tiempo_real.Vinculador:
+    v = object.__new__(tiempo_real.Vinculador)
+    v.umbral, v.zona_gris, v.peso_revisar = 0.999999, 0.9, peso_revisar
+    return v
+
+
+def test_decidir_con_bandas_usa_el_peso_y_no_la_probabilidad():
+    v = _vinculador_sin_base(peso_revisar=6.0)
+
+    assert v.decidir(0.9999999, 25.0) == "cliente"
+    assert v.decidir(0.95, 4.0) == "nuevo"  # p >= 0,9 pero bajo la banda revisar
+    assert v.decidir(0.5, 6.0) == "revisar"
+
+
+def test_decidir_sin_bandas_conserva_la_zona_gris_del_hito5():
+    v = _vinculador_sin_base(peso_revisar=None)
+
+    assert v.decidir(0.95, 4.0) == "revisar"
+    assert v.decidir(0.5, 6.0) == "nuevo"
+
+
 def test_preparar_evaluacion_separa_existentes_y_nuevas():
     registros_base, consultas, _ = tiempo_real.preparar_evaluacion(300, 5, max_consultas=10)
 

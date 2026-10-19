@@ -7,9 +7,18 @@ nuevo se prepara con la estandarización v2 y se compara contra la base con
 
 Decisión (umbrales fijados de antemano, sin ajustar con las consultas):
 
-- ``cliente`` si la mejor coincidencia tiene probabilidad >= umbral congelado (0,9999);
-- ``revisar`` si está en la zona gris [0,9, umbral);
+- ``cliente`` si la mejor coincidencia tiene probabilidad >= umbral congelado;
+- ``revisar`` si está en la zona gris;
 - ``nuevo`` en otro caso.
+
+La zona gris depende de lo que se le dé al ``Vinculador``:
+
+- **con bandas** (modelo v3, hito 6): desde la banda ``revisar`` de la calibración
+  isotónica congelada en desarrollo (``calibracion.bandas``). Las bandas están en peso de
+  coincidencia con la previa del desarrollo; aquí se trasladan a la previa 1/N (ver
+  ``peso_con_otra_previa``), de modo que exigen la misma evidencia de los campos;
+- **sin bandas** (modelo v2, hito 5): probabilidad >= 0,9. La auditoría (A3) mostró que
+  esa probabilidad no está calibrada; se conserva solo para reproducir el hito 5.
 
 La probabilidad a priori (lambda) se fija en 1/N clientes: una consulta corresponde a lo
 sumo a un cliente de la base.
@@ -70,6 +79,20 @@ def telefonos_de_relleno(registros: pd.DataFrame) -> set[str]:
     return set(frecuencia[frecuencia > MAX_REGISTROS_POR_TELEFONO].index)
 
 
+def log_odds(probabilidad: float) -> float:
+    """log2(p / (1 - p))."""
+    return math.log2(probabilidad / (1 - probabilidad))
+
+
+def peso_con_otra_previa(peso: float, previa_origen: float, previa_destino: float) -> float:
+    """El mismo peso de coincidencia con otra probabilidad a priori.
+
+    El peso de Splink es la previa en log-odds más la evidencia de los campos; al cambiar
+    la previa la evidencia no cambia.
+    """
+    return peso - log_odds(previa_origen) + log_odds(previa_destino)
+
+
 def construir_base(registros: pd.DataFrame, configuracion: dict, umbral: float) -> pd.DataFrame:
     """Registros de oro (formato crudo, un renglón por cliente) a partir de registros.
 
@@ -127,12 +150,21 @@ class Vinculador:
     umbral: float
     zona_gris: float = ZONA_GRIS
     relleno: set[str] = field(default_factory=set)
+    bandas: dict | None = None
 
     def __post_init__(self) -> None:
-        configuracion = {
-            **self.configuracion,
-            "probability_two_random_records_match": 1 / max(len(self.base), 1),
-        }
+        previa = 1 / max(len(self.base), 1)
+        configuracion = {**self.configuracion, "probability_two_random_records_match": previa}
+        # Las bandas se definieron con la previa del modelo congelado (la del desarrollo).
+        self.peso_revisar: float | None = (
+            None
+            if self.bandas is None
+            else peso_con_otra_previa(
+                self.bandas["peso_desde_revisar"],
+                self.configuracion["probability_two_random_records_match"],
+                previa,
+            )
+        )
         preparada = ESQUEMA_V2.preparar(self.base)
         self.linker = Linker(preparada, configuracion, db_api=DuckDBAPI())
         for columna in COLUMNAS_TF:
@@ -210,6 +242,27 @@ class Vinculador:
             self._con.execute(sql)
         return self._con.sql(f"select * from {self._salida}").df()
 
+    def decidir(self, probabilidad: float, peso: float) -> str:
+        """``cliente``, ``revisar`` o ``nuevo`` para la mejor coincidencia."""
+        if probabilidad >= self.umbral:
+            return "cliente"
+        en_zona_gris = (
+            peso >= self.peso_revisar
+            if self.peso_revisar is not None
+            else probabilidad >= self.zona_gris
+        )
+        return "revisar" if en_zona_gris else "nuevo"
+
+    def descripcion_zona_gris(self) -> dict[str, Any]:
+        """Cómo se define la zona gris (para el servicio y los resultados)."""
+        if self.peso_revisar is None:
+            return {"criterio": "probabilidad sin calibrar", "desde_probabilidad": self.zona_gris}
+        return {
+            "criterio": "banda revisar de la calibración congelada en desarrollo",
+            "peso_desde_revisar_desarrollo": self.bandas["peso_desde_revisar"],
+            "peso_desde_revisar_tiempo_real": self.peso_revisar,
+        }
+
     def explicar(self, fila: pd.Series) -> list[dict[str, Any]]:
         """Aporte de cada campo al peso de coincidencia, de mayor a menor efecto."""
         aportes = []
@@ -231,10 +284,7 @@ class Vinculador:
             decision, mejor = "nuevo", None
         else:
             mejor = resultado.sort_values("match_weight", ascending=False).iloc[0]
-            p = float(mejor["match_probability"])
-            decision = (
-                "cliente" if p >= self.umbral else "revisar" if p >= self.zona_gris else "nuevo"
-            )
+            decision = self.decidir(float(mejor["match_probability"]), float(mejor["match_weight"]))
         respuesta: dict[str, Any] = {
             "decision": decision,
             "probabilidad": None if mejor is None else float(mejor["match_probability"]),
@@ -326,6 +376,7 @@ def resultados_por_consulta(vinculador: Vinculador, consultas: pd.DataFrame) -> 
                 "decision": r["decision"],
                 "correcto": bool(correcto),
                 "probabilidad": r["probabilidad"],
+                "peso": r["peso"],
                 "milisegundos": r["milisegundos"],
             }
         )

@@ -294,6 +294,7 @@ ARCHIVOS_PUBLICABLES: list[str] = [
     "tiempo_real.json",
     "escala.json",
     "hito3_semillas.json",
+    "diagnostico_umbral.json",
 ]
 
 
@@ -525,6 +526,78 @@ def evaluar_congelado_v3(directorio: Path, n_bootstrap: int = 1000) -> dict[str,
     return metricas
 
 
+def diagnostico_umbral(
+    directorio: Path, n_bootstrap: int = 1000, umbral_alternativo: float = 0.9999
+) -> dict[str, Any]:
+    """Diagnóstico: el v3 congelado con el umbral del v2 (0,9999) en la ciega 3.
+
+    La ciega 3 ya se miró, así que esto no es una medición ciega ni cambia el umbral
+    congelado: solo separa cuánto de la diferencia v3 - v2 se debe al umbral y cuánto al
+    modelo. Compara el v3 a su umbral congelado y a ``umbral_alternativo`` contra el v2 a
+    su umbral congelado (0,9999), con diferencias pareadas por persona.
+    """
+    from identidades import flujo_hito2
+
+    verificar_congelado()
+    directorio.mkdir(parents=True, exist_ok=True)
+    modelos = modelos_congelados()
+    registros, _, _ = registros_ciega_3()
+    configuracion_3, umbral_3, esquema_3 = modelos["v3"]
+    configuracion_2, umbral_2, esquema_2 = modelos["v2"]
+
+    linker_3 = flujo.aplicar_configuracion(configuracion_3, registros, esquema_3)
+    linker_2 = flujo.aplicar_configuracion(configuracion_2, registros, esquema_2)
+    corridas = {
+        f"v3 a {umbral_3}": (linker_3, umbral_3),
+        f"v3 a {umbral_alternativo}": (linker_3, umbral_alternativo),
+        f"v2 a {umbral_2}": (linker_2, umbral_2),
+    }
+    evs = {
+        k: flujo.evaluar(linker, registros, umbral, n_bootstrap, SEMILLA_CIEGA_3)
+        for k, (linker, umbral) in corridas.items()
+    }
+    contribuciones = {
+        k: flujo_hito2._contribuciones(ev, registros, "clusters") for k, ev in evs.items()
+    }
+    referencia = f"v2 a {umbral_2}"
+    resultado: dict[str, Any] = {
+        "descripcion": (
+            "Diagnóstico en la prueba ciega 3 (ya mirada): v3 congelado con el umbral del v2. "
+            "No es una cifra principal ni cambia el umbral congelado."
+        ),
+        "modelos": {
+            k: {
+                "umbral": corridas[k][1],
+                "clusters": ev.metricas["intervalos"]["clusters"],
+                "pares": {
+                    m: ev.metricas["pares"][m] for m in ("tp", "fp", "fn", "precision", "recall")
+                },
+                "vetos": pares_vetados(ev.pred, ev.verdaderos, corridas[k][1]),
+            }
+            for k, ev in evs.items()
+        },
+        "diferencias_pareadas": {
+            f"{k} - {referencia}": evaluacion.bootstrap_diferencia(
+                contribuciones[referencia],
+                contribuciones[k],
+                n=n_bootstrap,
+                semilla=SEMILLA_CIEGA_3,
+            )
+            for k in evs
+            if k != referencia
+        },
+    }
+    resultado["resumen"] = {
+        k: {
+            m: round(v["clusters"][m]["valor"], 4)
+            for m in ("precision", "recall", "f1", "pct_clusters_exactos")
+        }
+        for k, v in resultado["modelos"].items()
+    }
+    _escribir(resultado, directorio / "diagnostico_umbral.json")
+    return resultado
+
+
 # ---------------------------------------------------------------------------
 # Tiempo real, escala y hito 3 con varias semillas
 # ---------------------------------------------------------------------------
@@ -543,7 +616,7 @@ def tiempo_real_prevalencias(
     """
     from identidades import tiempo_real
 
-    configuracion, umbral, _, _ = cargar_congelado_v3()
+    configuracion, umbral, _, bandas = cargar_congelado_v3()
     registros_3, _, _ = registros_ciega_3(SEMILLA_CIEGA_3 + 1, n_personas)
     poblaciones = {"normal": None, "ciega_3": registros_3}
     resultado: dict[str, Any] = {"modelo": {"tag": TAG_CONGELADO, "umbral": umbral}}
@@ -553,11 +626,21 @@ def tiempo_real_prevalencias(
         )
         base = tiempo_real.construir_base(base_registros, configuracion, umbral)
         vinculador = tiempo_real.Vinculador(
-            base, configuracion, umbral, relleno=tiempo_real.telefonos_de_relleno(base_registros)
+            base,
+            configuracion,
+            umbral,
+            relleno=tiempo_real.telefonos_de_relleno(base_registros),
+            bandas=bandas,
         )
         t = tiempo_real.resultados_por_consulta(vinculador, consultas)
         tp, fp, fn = int(t["tp"].sum()), int(t["fp"].sum()), int(t["fn"].sum())
+        # Mismas consultas con la zona gris anterior (p >= 0,9 sin calibrar), para comparar.
+        p = t["probabilidad"].astype(float).fillna(0.0)
+        anterior = np.where(
+            p >= umbral, "cliente", np.where(p >= tiempo_real.ZONA_GRIS, "revisar", "nuevo")
+        )
         resultado[nombre] = {
+            "zona_gris": vinculador.descripcion_zona_gris(),
             "base": {"clientes": len(base), "registros_usados": len(base_registros)},
             "consultas": {
                 "existentes": int(t["existe"].sum()),
@@ -570,6 +653,10 @@ def tiempo_real_prevalencias(
             "decisiones": {
                 "existentes": t[t["existe"]]["decision"].value_counts().to_dict(),
                 "nuevas": t[~t["existe"]]["decision"].value_counts().to_dict(),
+            },
+            "decisiones_zona_gris_p_0_9": {
+                "existentes": pd.Series(anterior[t["existe"]]).value_counts().to_dict(),
+                "nuevas": pd.Series(anterior[~t["existe"]]).value_counts().to_dict(),
             },
             **tiempo_real.precision_por_prevalencia(t, n_bootstrap=n_bootstrap),
             "latencia_ms": {

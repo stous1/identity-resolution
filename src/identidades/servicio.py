@@ -4,7 +4,8 @@ Uso:
     uv run python scripts/servicio_local.py   # http://127.0.0.1:8000/docs
 
 ``POST /consultar`` recibe un registro crudo y devuelve la decisión (``cliente``,
-``revisar`` o ``nuevo``), el cliente encontrado y la explicación por campo.
+``revisar`` o ``nuevo``), el cliente encontrado y la explicación por campo. La zona gris
+sale de las bandas congeladas del v3 si el ``Vinculador`` las tiene (ver ``tiempo_real``).
 """
 
 from __future__ import annotations
@@ -32,11 +33,11 @@ class Registro(BaseModel):
     departamento: str | None = Field(None, examples=["Antioquia"])
 
 
-def crear_app(vinculador: Vinculador) -> FastAPI:
+def crear_app(vinculador: Vinculador, modelo: str = "v3 congelado") -> FastAPI:
     app = FastAPI(
         title="¿Ya es cliente?",
         description=(
-            "Vinculación en tiempo real con el modelo v2 congelado (datos sintéticos). "
+            f"Vinculación en tiempo real con el modelo {modelo} (datos sintéticos). "
             "Solo para uso local."
         ),
         version="1.0",
@@ -48,7 +49,7 @@ def crear_app(vinculador: Vinculador) -> FastAPI:
             "estado": "ok",
             "clientes_en_base": len(vinculador.base),
             "umbral": vinculador.umbral,
-            "zona_gris": vinculador.zona_gris,
+            "zona_gris": vinculador.descripcion_zona_gris(),
         }
 
     @app.post("/consultar")

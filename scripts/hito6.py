@@ -6,6 +6,7 @@ Uso:
     uv run python scripts/hito6.py tiempo-real    # "¿ya es cliente?" con prevalencias
     uv run python scripts/hito6.py escala         # 100 mil y 1 millón con el v3 congelado
     uv run python scripts/hito6.py hito3          # hito 3 con varias semillas
+    uv run python scripts/hito6.py diagnostico-umbral  # v3 con el umbral del v2
 
 Entre desarrollar y evaluar, el modelo se publica y se congela con el tag
 ``hito6-congelado``.
@@ -22,7 +23,8 @@ from identidades import flujo_hito6, rutas
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument(
-        "fase", choices=["desarrollar", "evaluar", "tiempo-real", "escala", "hito3"]
+        "fase",
+        choices=["desarrollar", "evaluar", "tiempo-real", "escala", "hito3", "diagnostico-umbral"],
     )
     parser.add_argument("--bootstrap", type=int, default=1000)
     parser.add_argument("--tamano", type=int, help="solo para escala: un tamaño")
@@ -42,6 +44,8 @@ def main() -> None:
         salida = flujo_hito6.tiempo_real_prevalencias(directorio, args.bootstrap)["resumen"]
     elif args.fase == "escala":
         salida = flujo_hito6.escala_congelada(directorio, args.tamano)
+    elif args.fase == "diagnostico-umbral":
+        salida = flujo_hito6.diagnostico_umbral(directorio, args.bootstrap)["resumen"]
     else:
         salida = flujo_hito6.estabilidad_hito3(directorio)["resumen"]
     print(json.dumps(salida, indent=2, ensure_ascii=False, default=str))
