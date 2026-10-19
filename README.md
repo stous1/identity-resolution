@@ -37,7 +37,13 @@ sobre DuckDB, con estandarización colombiana, que une registros, construye un r
 oro por cliente, detecta datos compartidos sospechosos y responde "¿ya es cliente?" en
 tiempo real. Todo con datos sintéticos.
 
-**Resultados vigentes** (modelo v3 congelado):
+**Resultados vigentes** (modelos v3 y v4 congelados):
+
+- **v1.1, realidad residencial colombiana** ([página](https://stous1.github.io/identity-resolution/v11.html)):
+  parejas sin apellidos en común, convivientes, conjuntos y casas de varios pisos. En la
+  **prueba ciega 4**, el modelo v4 sube el F1 de 0,987 (v3) a **0,994**, y el grafo
+  residencial baja las personas inocentes marcadas como sospechosas de 36,7 % a **1,6 %**,
+  aunque detecta menos patrones sospechosos (66,7 % de sus personas frente a 81,6 %).
 
 - **Prueba ciega 3** (errores escritos por un generador independiente, nunca vistos):
   precisión **0,997** y recall **0,966** por clúster; 94,5 % de las personas reconstruidas
@@ -64,6 +70,8 @@ tiempo real. Todo con datos sintéticos.
 | [Hito 3: registro de oro y grafo](https://stous1.github.io/identity-resolution/hito3.html) | Supervivencia por campo, datos compartidos y puentes |
 | [Hito 5: tiempo real y escala](https://stous1.github.io/identity-resolution/hito5.html) | "¿Ya es cliente?" y 1 millón de registros en DuckDB |
 | [Hito 6: correcciones post-auditoría](https://stous1.github.io/identity-resolution/hito6.html) | Modelo v3, tercera prueba ciega, línea base y calibración |
+| [v1.1: realidad residencial](https://stous1.github.io/identity-resolution/v11.html) | Modelo v4, grafo residencial y cuarta prueba ciega ([diagnóstico previo](https://stous1.github.io/identity-resolution/v11_diagnostico.html)) |
+| [Universo residencial](https://stous1.github.io/identity-resolution/v11_universo.html) | Hogares, convivencia, multifamiliar, sospechosos, víctimas y suplantadores en Cosmograph |
 | [Universo del hito 3](https://stous1.github.io/identity-resolution/hito3_universo.html) | 5 mil registros y sus enlaces en Cosmograph |
 | [Universo grande](https://stous1.github.io/identity-resolution/hito5_universo.html) | 200 mil registros del conjunto de 1 millón, desde Parquet |
 | [Informe de auditoría](audit/INFORME.md) | Auditoría independiente de los hitos 1 a 5 |
@@ -79,7 +87,9 @@ generador.
 
 | Prueba | Modelo | Precisión | Recall | F1 Splink | F1 mejor regla |
 |---|---|---|---|---|---|
-| **Ciega 3** | **v3** | **0,997** | **0,966** | **0,981** | 0,916 |
+| **Ciega 4** | **v4** | **0,995** | **0,993** | **0,994** | |
+| Ciega 4 | v3 | 0,995 | 0,979 | 0,987 | |
+| Ciega 3 | v3 | 0,997 | 0,966 | 0,981 | 0,916 |
 | Ciega 3 | v2 | 0,994 | 0,978 | 0,985 | |
 | Ciega 2 | v2 | 0,998 | 1,000 | 0,999 | 0,990 |
 | Ciega 1 | v1 | 0,997 | 0,636 | 0,777 | 0,960 |
@@ -90,7 +100,8 @@ generador.
 <sub>"Mejor regla": "mismo documento o mismo nombre y fecha de nacimiento", con la misma
 estandarización y unión transitiva (en fake_1000, correo en lugar de documento). Las filas
 de las ciegas 1 y 2, FEBRL3 y fake_1000 salen de la [auditoría](audit/INFORME.md#2-línea-base-determinística-a2_linea_basepy);
-las del v3, de [docs/resultados/hito6](docs/resultados/hito6/). Intervalos de confianza
+las del v3, de [docs/resultados/hito6](docs/resultados/hito6/); las de la ciega 4, de
+[docs/resultados/v11](docs/resultados/v11/). Intervalos de confianza
 en el [informe técnico](INFORME_TECNICO.md).</sub>
 
 En la ciega 3, el v3 a su umbral no supera al v2. Un diagnóstico muestra que la causa es
@@ -115,6 +126,9 @@ no cambió.
    escala con el modelo congelado, calibración, línea base y 8 semillas. Una **verificación
    posterior** encontró cifras mal atribuidas y conclusiones demasiado fuertes, y también
    se corrigieron.
+4. En la **v1.1**, un diagnóstico mostró que el grafo marcaba como sospechosas a las
+   parejas y tomaba por relleno toda dirección con apartamento. El grafo residencial lo
+   corrige, pero en la ciega 4 se le escaparon anillos grandes: queda para una ciega 5.
 
 **Limitaciones.**
 
@@ -123,7 +137,12 @@ no cambió.
 - Los generadores de errores, incluidos los de las pruebas ciegas, los **escribieron
   agentes de IA**. "Independiente" quiere decir que no vieron el modelo, no que reproduzcan
   la realidad.
-- Las ciegas 1, 2 y 3 ya se miraron: la próxima corrección necesita una cuarta.
+- Las ciegas 1 a 4 ya se miraron: la próxima corrección necesita una quinta.
+- La distribución real de conjuntos, edificios y casas de varios pisos (cuántos clientes
+  comparten un predio, cómo se escribe la unidad) **solo se puede calibrar con datos
+  reales**.
+- Los generadores que parten de `sinteticos` (prueba normal, ciegas 1 a 3, hito 3) cambian
+  con la fecha del día; los de la v1.1 usan una fecha fija.
 - El umbral elegido en desarrollo varía con la muestra, y la calibración no se transfiere a
   poblaciones nuevas.
 
@@ -148,6 +167,7 @@ uv run python scripts/hito5.py tiempo-real  # "¿ya es cliente?"
 uv run python scripts/hito6.py evaluar      # v3 congelado en la prueba normal y la ciega 3
 uv run python scripts/hito6.py diagnostico-umbral  # v3 con el umbral del v2
 uv run python scripts/hito6.py escala       # 100 mil y 1 millón (~8 GB de RAM)
+uv run python scripts/v11.py evaluar        # v3 y v4 congelados y grafos en la ciega 4
 uv run python scripts/servicio_local.py     # API local en http://127.0.0.1:8000/docs
 uv run python scripts/gifs.py               # GIF del README (Playwright)
 uv run python scripts/publicar_resultados.py --hito 6   # copia a docs/resultados/
@@ -163,7 +183,7 @@ La lista completa de comandos, con el desarrollo de cada modelo, está en
 
 ```
 src/identidades/   toda la lógica, como funciones reutilizables con type hints
-                   (generadores, estandarización, modelos v1-v3, evaluación, registro de
+                   (generadores, estandarización, modelos v1-v4, evaluación, registro de
                    oro, grafo, tiempo real, escala, calibración y línea base)
 scripts/           puntos de entrada delgados, uno por hito
 tests/             pruebas con pytest (las lentas, marcadas como integración)
@@ -194,7 +214,8 @@ data/, reports/    datos y salidas de trabajo (no versionados)
 - **Hito 4: agente de revisión.** Un agente que revise la zona gris (pares entre 5,2 y
   19,9 bits) y la [cola de revisión](docs/resultados/hito3/cola_revision.csv) del hito 3,
   con la explicación por campo como evidencia.
-- **Cuarta prueba ciega** para cualquier corrección nueva, **umbral estable** por
+- **Quinta prueba ciega** para cualquier corrección nueva (la primera: que el grafo no
+  tome por relleno un anillo grande), **umbral estable** por
   remuestreo del desarrollo, un **híbrido solo con "mismo documento"** y un **escenario
   ciego** para los patrones sospechosos. Lista completa en el
   [informe técnico](INFORME_TECNICO.md#trabajo-futuro).

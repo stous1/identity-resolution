@@ -12,6 +12,12 @@ sintéticos.
 
 ## En un minuto
 
+- **v1.1, realidad residencial colombiana** ([página](v11.md)): parejas sin apellidos en
+  común, convivientes, conjuntos y casas de varios pisos. En la **prueba ciega 4**, el
+  modelo v4 (dirección por predio y unidad) sube el F1 de 0,987 a **0,994** frente al v3, y
+  el grafo residencial baja las personas inocentes marcadas como sospechosas de 36,7 % a
+  **1,6 %**, aunque detecta menos patrones sospechosos (66,7 % de sus personas frente a
+  81,6 %).
 - **Prueba ciega 3** (modelo v3 congelado, errores de un generador independiente):
   precisión **0,997** y recall **0,966** por clúster; 94,5 % de las personas reconstruidas
   exactamente.
@@ -68,6 +74,10 @@ validación con datos reales.
   [universo grande en Cosmograph](hito5_universo.html) (200 mil registros desde Parquet).
   *Con las mismas tasas, la precisión sería 0,991 con 10 % de clientes existentes en las
   consultas y 0,909 con 1 %.*
+- [v1.1: realidad residencial y familiar colombiana](v11.md): [diagnóstico](v11_diagnostico.md),
+  generador con predios y hogares, modelo v4 con la dirección en predio y unidad, grafo
+  residencial (convivencia probable, multifamiliar, parejas por apellido de casada y por la
+  convención de los hijos) y **prueba ciega 4**; [universo residencial](v11_universo.html).
 - [Hito 6: correcciones post-auditoría](hito6.md): modelo v3 sin vetos extremos (ningún
   campo resta más de 10 bits), generador con mudanzas, **prueba ciega 3** (v3: precisión
   0,997 y recall 0,966; v2: 0,994 y 0,978; v1: 0,989 y 0,693; con el umbral del v2, el v3

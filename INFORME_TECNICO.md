@@ -17,6 +17,7 @@ dato y resolución de identidades**.
 | [3. Registro de oro y grafo](#hito-3-registro-de-oro-grafo-de-identidad-compartida-y-puentes) | Escenario con historia, metadatos y patrones sospechosos | En 8 pares de semillas: registro de oro a 4,1 ± 0,5 puntos del techo (peor campo); grafo con exactitud 98,6 % ± 0,8; puentes que evitan en promedio 3 de cada 10 mezclas (entre 1 y 6 según la semilla) |
 | [5. Tiempo real y escala](#hito-5-vinculación-en-tiempo-real-y-escala) | Base de registros de oro; 100 mil y 1 millón de registros | "¿Ya es cliente?": precisión 0,999 con 50 % de clientes; con las mismas tasas, 0,991 con 10 % y **0,909 con 1 %**; 1 millón de registros en DuckDB en 134 s |
 | [6. Correcciones post-auditoría](#hito-6-correcciones-post-auditoría) | Generador con mudanzas; **prueba ciega 3** nueva | Modelo v3 sin vetos extremos. **Ciega 3: v3 precisión 0,997 y recall 0,966** (v2: 0,994 y 0,978; v1: 0,989 y 0,693). Splink aporta +0,065 de F1 global sobre la mejor regla; la ganancia se concentra donde el documento falla |
+| [v1.1. Realidad residencial](#v11-realidad-residencial-y-familiar-colombiana) | Predios, hogares y familias; **prueba ciega 4** nueva | **Ciega 4: v4 F1 0,994 frente a 0,987 del v3** (+0,007, IC 0,004 a 0,011), sin brechas de equidad significativas. Grafo residencial: personas inocentes marcadas 1,6 % frente a 36,7 %, pero detecta menos patrones sospechosos (66,7 % frente a 81,6 % de sus personas) |
 
 **Auditoría independiente:** [audit/INFORME.md](audit/INFORME.md) ·
 [qué encontró y qué cambió](#qué-encontró-la-auditoría-y-qué-cambió)
@@ -982,11 +983,253 @@ evitadas con puentes 33 % ± 14 %.
 
 Métricas completas en [docs/resultados/hito6/](docs/resultados/hito6/).
 
+## v1.1: realidad residencial y familiar colombiana
+
+Página: [docs/v11.md](docs/v11.md). Código: `diagnostico_v11.py`, `escenario_residencial.py`,
+`estandarizacion_v4.py`, `modelo_co_v4.py`, `grafo_residencial.py`, `flujo_v11.py` y
+`errores_ciegos_4.py`. Resultados: [docs/resultados/v11](docs/resultados/v11/). Tags:
+`v4-congelado` (modelo, estandarización y su desarrollo) y `grafo-v11-congelado`
+(clasificador y sus parámetros).
+
+### Diagnóstico previo
+
+Detalle en [docs/v11_diagnostico.md](docs/v11_diagnostico.md); cada hallazgo tiene su
+prueba en `tests/test_diagnostico_v11.py`.
+
+- **Grafo del hito 3 con ejemplos escritos a mano** (clústeres verdaderos, parámetros
+  publicados 15 y 0,5):
+  - pareja sin apellidos en común: sospechosa;
+  - pareja casada ("Rincón de Salazar"): sospechosa;
+  - estudiantes en el mismo apartamento: relleno;
+  - seis hogares de un conjunto: ningún grupo;
+  - casa de dos pisos: padres sospechosos e hijos relleno.
+
+  Hay tres causas. La estandarización v1 no reconoce una dirección con complemento, y el
+  grafo toma por genérica toda dirección sin vía reconocida. La única señal de hogar es
+  compartir apellido, y "DE" cuenta como apellido. La sospecha no depende del tipo de dato
+  ni del tamaño.
+- **Caso "Esther Nancy MONTENEGRO MUÑOZ":** reconstruido con la fecha del universo publicado
+  (18 de octubre de 2026). Sus cinco registros son de la misma persona (la 1057), y el
+  registro 4838 de otra persona (la 199) usa su documento: es una suplantación inyectada
+  por el escenario. El clasificador acierta, pero el universo pintaba de rojo a la víctima.
+- **El escenario del hito 3 cambia con la fecha del día.** Faker calcula las fechas de
+  nacimiento desde hoy, y eso cambia el resto del sorteo. Pasa lo mismo con todo lo que
+  parte de `sinteticos.generar` (prueba normal, ciegas 1 a 3). La v1.1 usa
+  `sinteticos_fecha.fecha_fija`; los generadores anteriores no se cambian.
+- **Ajuste por frecuencia del v3:** existe, pero solo en el nivel "dirección exacta"
+  (`tf_adjustment_column = domicilio`). Bits del v3:
+  - mismo apartamento escrito de otra forma: −1,7;
+  - mismo edificio, otro apartamento: +5,4;
+  - casa contra "Piso 2": −1,7;
+  - otro predio de la misma cuadra: +8,8. "Misma vía, número y placa" no incluye el
+    consecutivo.
+
+### Generador residencial
+
+`EscenarioResidencial` hereda la captura del escenario del hito 3 (canales, validación,
+errores, relleno, anillos y suplantaciones) y genera la población desde los predios:
+
+- **Predios:** casa 55 %, casa de varios pisos 17 %, edificio 14 % (2 a 6 hogares
+  clientes) y conjunto 14 % (3 a 10 hogares).
+- **Hogares:** solo 30 %, pareja 22 % (55 % casada, el resto en unión libre, sin apellidos
+  en común), familia 23 % (hijos con el primer apellido de cada padre), monoparental 8 %,
+  hermanos 5 % y convivientes 12 % (2 a 4).
+- **Casa de varios pisos:** el hijo vivió con sus padres y después subió con su pareja;
+  el 60 % escribe "piso 2" y el resto la misma dirección. A veces hay un arrendatario.
+- **Captura:** apellido de casada en el 55 % de los registros de las casadas; la unidad se
+  escribe de muchas formas y se omite el 15 % de las veces en edificios y conjuntos; el
+  nombre del conjunto aparece a veces, antes o después.
+- **Historia:** llegadas, mudanzas, ocupación sucesiva, fijo del hogar y correo familiar.
+
+La verdad de cada grupo compartido (`etiquetar_personas`) es hogar, pareja, convivencia,
+multifamiliar, coincidencia, relleno o sospechoso.
+
+### Modelo v4
+
+Igual al v3 salvo la dirección: `preparar` agrega predio, unidad y sus partes, y la
+comparación tiene seis niveles, con ajuste por frecuencia en "misma dirección" (predio y
+unidad) y en "unidad desconocida" (predio). Desarrollo: el del v3 (hito 2 con historia,
+ciegas 1 y 2) más un escenario residencial (semilla 4040), en total 19.042 registros de
+7.233 personas.
+
+- **Piso de las m:** 10 bits. Los valores de 10 a 20 empatan en costo (73) y se toma el
+  más estricto, como en el v3.
+- **Umbral:** 0,999999.
+
+En el primer desarrollo, la casa sin piso contra "Piso 2" caía en "unidad desconocida"
+con +10,6 bits. Eso empuja a unir a padres e hijos de una casa de dos pisos, así que,
+antes de congelar, se agregó un nivel propio para ese caso, que aprendió +7,3.
+
+| Nivel de dirección (bits, sin frecuencia) | v4 |
+|---|---|
+| Misma dirección (predio y unidad) | +11,8 |
+| Mismo predio, uno sin unidad y otro con piso | +7,3 |
+| Mismo predio, unidad desconocida o incompleta | +10,7 |
+| Mismo predio, otra unidad | +3,6 |
+| Predio parecido (digitación) | +4,8 |
+| Distinta | −2,6 |
+
+Al evaluar apareció un fallo de tipos: con datos sin ninguna unidad (prueba normal), DuckDB
+lee `unidad_partes` toda nula como entero. El flujo la tipa como lista de texto
+(`flujo_v11.preparar_v4_tipado`) sin cambiar el modelo congelado: en datos con unidades,
+el F1 es idéntico.
+
+### Grafo residencial
+
+- **Grupos:** la dirección se agrupa por predio y, dentro del grupo, se miran las unidades
+  de cada cliente.
+- **Señales de hogar entre dos clientes:**
+  - apellido propio en común, sin partículas;
+  - apellido de casada de uno igual al primer apellido del otro;
+  - convención de los hijos: el primer apellido del hijo es el de uno y su segundo apellido
+    es el primero del otro;
+  - un teléfono o correo compartido (solo para la dirección).
+- **Tipo de predio estimado:** torre, bloque, interior o casa numerada: conjunto; solo
+  apartamentos: edificio; pisos, o varias familias sin unidades: casa de varios pisos; si
+  no, casa.
+- **Reglas:**
+  - documento compartido: sospechoso;
+  - forma de anillo (poca validación, canal digital, valor que los clientes casi no usan
+    en sus otros registros) sin parentesco: sospechoso;
+  - edificio o conjunto con varias unidades: multifamiliar, salvo que todos sean familia;
+  - con parentesco: hogar;
+  - pocos clientes sin otras señales: convivencia probable;
+  - un fijo compartido por pocos clientes, o un contacto entre co-residentes: convivencia;
+  - demasiados clientes para el tipo de predio: sospechoso.
+
+Los parámetros se eligen por exactitud balanceada; una predicción es aceptable si
+corresponde a la etiqueta, y para una pareja se acepta hogar o convivencia. Los ajustes
+que siguieron se decidieron mirando solo los 8 escenarios de desarrollo: el fijo del hogar
+y la exclusividad 0,5 en la grilla. Parámetros congelados: convivencia hasta 4 clientes,
+casa hasta 5, unidad hasta 6, familia ≥ 0,75, anillo con validación ≤ 0,10, digital ≥ 0,75
+y exclusividad ≤ 0,4, contacto hasta 6 clientes.
+
+**8 pares de semillas** (desarrollo 4040, 4011 … 4077; prueba 4141, 4111 … 4177). Cada
+clasificador elige parámetros en su desarrollo y se mide una vez en la prueba. El del hito
+3 usa los clústeres del v3 y su propio procedimiento:
+
+| Media ± DE | Grafo del hito 3 | Residencial (v3) | Residencial (v4) |
+|---|---|---|---|
+| Exactitud balanceada | 0,508 ± 0,035 | 0,925 ± 0,034 | 0,925 ± 0,034 |
+| Falsa sospecha (grupos benignos) | 0,391 ± 0,037 | 0,005 ± 0,003 | 0,005 ± 0,003 |
+| Personas inocentes marcadas | 0,368 ± 0,040 | 0,002 ± 0,001 | 0,002 ± 0,001 |
+| Recall de sospechosos | 0,976 ± 0,028 | 0,990 ± 0,021 | 0,990 ± 0,021 |
+| Precisión de sospechosos | 0,194 ± 0,020 | 0,926 ± 0,024 | 0,945 ± 0,027 |
+
+- Falsa sospecha del grafo del hito 3 por tipo de grupo: parejas 0,83, convivientes 0,86,
+  multifamiliar 0,80, hogar 0,03.
+- Con la semilla 4141, la exactitud del grafo del hito 3 tiene un IC 95 % de 0,46 a 0,56,
+  y la falsa sospecha del residencial, de 0,0 a 0,018.
+- El tipo de predio se estima bien en el 0,879 ± 0,017 de los grupos de dirección. El
+  error más común es una casa de varios pisos sin "piso" escrito que se toma por casa.
+- La unión es casi igual: F1 0,9984 ± 0,0004 con el v3 y 0,9986 ± 0,0004 con el v4.
+
+### Prueba ciega 4
+
+`errores_ciegos_4.py` lo escribió un subagente nuevo, con las mismas prohibiciones de las
+ciegas anteriores, más los módulos de la v1.1: no leyó la estandarización, los modelos, los
+generadores, la documentación, las pruebas ni el historial. Recibió la interfaz (columnas y
+vocabularios de la verdad) y la descripción de la realidad que debía reflejar, sin
+indicaciones sobre cómo son los patrones sospechosos ni cómo los detecta el grafo. Se lanzó
+a las 08:09:36, después de los tags `v4-congelado` (209da33) y `grafo-v11-congelado`
+(9d8fb1b, 08:09:30), y su commit es 8f638c5.
+
+**Qué generó:** 2.000 personas y 4.844 registros.
+
+- **Predios:** conjunto 698 personas, casa 544, edificio 470, casa de varios pisos 288.
+- **Hogares:** 15 % de los miembros de un hogar no son clientes. Incluye parejas del mismo
+  sexo, estudiantes con correo universitario, abuelos con nietos y ocupación sucesiva.
+- **Errores de captura propios:**
+  - formatos de fecha por canal;
+  - tarjeta de identidad que pasa a cédula;
+  - Soacha anotada como Bogotá;
+  - indicativos de fijo de 1 y de 3 cifras;
+  - unidades escritas como "T2 504".
+- **23 valores sospechosos inyectados:** documento ajeno, anillos de celular de 4 a 7
+  personas (a veces con el celular real de un "controlador"), correos de tramitador y
+  direcciones de fachada.
+
+**Unión** (por clúster, IC 95 % por bootstrap de personas):
+
+| Modelo | Precisión | Recall | F1 | Personas exactas | Vetados |
+|---|---|---|---|---|---|
+| v3 | 0,995 (0,983 a 1,000) | 0,979 (0,972 a 0,985) | 0,987 (0,980 a 0,992) | 0,965 | 132 |
+| v4 | 0,995 (0,984 a 1,000) | 0,993 (0,990 a 0,996) | 0,994 (0,988 a 0,997) | 0,980 | 64 |
+
+Diferencia pareada v4 − v3: F1 +0,0070 (0,0040 a 0,0105), recall +0,0138 (0,0080 a
+0,0206), precisión +0,0001 (0,0000 a 0,0003).
+
+**Equidad** (diferencias pareadas entre grupos de personas):
+
+- **v3:**
+  - más personas exactas entre las mujeres: +0,018 (0,002 a 0,034);
+  - más recall para quienes usan apellido de casada que para quienes no: +0,017 (0,005 a
+    0,027);
+  - más personas exactas en casa que en edificio o conjunto: +0,017 (0,001 a 0,032);
+  - más recall en casa que en edificio o conjunto: +0,012 (0,000 a 0,025).
+- **v4:** ninguna diferencia significativa en mujer, apellido de casada, edificio o
+  conjunto, casa de varios pisos ni convivientes.
+
+**Grafo.** Los dos están congelados: el del hito 3, con sus parámetros publicados y los
+clústeres del v3; el residencial, con `clasificador.json` y los clústeres del v4.
+
+| | Grafo del hito 3 | Residencial |
+|---|---|---|
+| Exactitud (aceptable) | 0,641 (0,594 a 0,684) | 0,942 (0,922 a 0,960) |
+| Exactitud balanceada | 0,444 | 0,921 |
+| Falsa sospecha (grupos) | 0,360 (0,311 a 0,410) | 0,006 (0,000 a 0,012) |
+| Recall de sospechosos (grupos) | 0,824 (0,619 a 1,000) | 0,765 (0,545 a 0,957) |
+| Precisión de sospechosos | 0,074 | 0,394 |
+| Personas inocentes marcadas | 289 de 788 | 28 de 1.697 |
+| Personas de patrones detectadas | 71 de 87 | 58 de 87 |
+
+- **Diferencias pareadas por persona** (residencial − hito 3):
+  - inocentes marcadas: −0,340 (−0,373 a −0,307);
+  - personas de patrones detectadas: −0,149 (−0,276 a −0,023).
+- **Lo que se escapa:**
+  - tres anillos de celular de 7 clientes quedan como relleno, porque un contacto en más
+    de 6 clientes es relleno y los anillos propios eran de 3 a 6;
+  - una dirección de fachada con 9 clientes y un tercio de registros validados queda como
+    multifamiliar.
+- **Precisión de sospechosos:** la mayoría de los falsos positivos son documentos que
+  comparten dos clústeres de la misma persona (12 de 20), es decir, uniones que el modelo
+  no hizo. Revisarlos también tiene valor.
+- **Tipo de predio:** se estima bien en el 0,852 de los grupos de dirección.
+
+### Otras pruebas (v3 frente a v4)
+
+| Conjunto | F1 v3 | F1 v4 | Diferencia pareada |
+|---|---|---|---|
+| Prueba normal del hito 2 (sin unidades) | 0,9978 | 0,9978 | 0,000 |
+| Ciega 3 (ya mirada; referencia) | 0,980 | 0,982 | +0,002 (−0,002 a 0,005) |
+| Residencial de prueba (4141) | 0,9985 | 0,9985 | 0,000 |
+
+En la ciega 3, el recall sube +0,006 (0,002 a 0,010) y la precisión baja 0,003 (−0,010 a
+0,000). El v3 da allí 0,961 de recall y no el 0,966 publicado: el generador parte de
+personas que dependen de la fecha del día.
+
+### Limitaciones de la v1.1
+
+- **La distribución real de conjuntos, edificios y casas de varios pisos solo se puede
+  calibrar con datos reales:** cuántos clientes viven en un mismo predio, con qué
+  frecuencia se omite la unidad o se escribe el piso, la mezcla de tipos de hogar y los
+  umbrales de tamaño del grafo salen de supuestos sintéticos.
+- La pareja sin otra señal que la dirección no se distingue de dos convivientes.
+- El clasificador residencial depende de los metadatos de canal y validación para
+  reconocer anillos; en una base sin esos metadatos perdería esa señal.
+- Las ciegas 1 a 4 ya se miraron.
+
 ## Trabajo futuro
 
-- **Cuarta prueba ciega:** las ciegas 1, 2 y 3 ya se miraron. Cualquier corrección nueva
-  (por ejemplo, la brecha del apellido de casada que queda en la ciega 3, o un umbral más
-  estable) necesita otra prueba que nadie haya visto.
+- **Quinta prueba ciega:** las ciegas 1 a 4 ya se miraron. Cualquier corrección nueva
+  necesita otra prueba que nadie haya visto. La primera candidata es el grafo: mirar la
+  forma de anillo antes que el tamaño, para no tomar por relleno un anillo grande
+  (ciega 4).
+- **Fecha fija en los generadores anteriores:** `sinteticos.generar` y lo que parte de él
+  (prueba normal, ciegas 1 a 3, hito 3) cambian con la fecha del día. Fijarla cambiaría sus
+  datos, así que necesita volver a medir y publicar las cifras.
+- **v4 en la demo y en tiempo real:** el motor JavaScript y "¿ya es cliente?" siguen con el
+  v3.
 - **Umbral estable:** elegirlo con remuestreo del desarrollo (por ejemplo, la mediana de
   los umbrales de menor costo) en lugar de un solo mínimo, que varía con la muestra.
 - **Híbrido solo con "mismo documento"** y recalibración con una muestra etiquetada de la

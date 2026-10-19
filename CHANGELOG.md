@@ -4,6 +4,29 @@ Historia por hitos del caso 1 (calidad del dato y resolución de identidades). T
 cambios están en la rama `main`; los modelos congelados tienen su tag. El hito 4 (agente de
 revisión de la zona gris) está pendiente.
 
+## v1.1: realidad residencial y familiar colombiana (tags `v4-congelado` y `grafo-v11-congelado`)
+
+- **Diagnóstico previo** ([docs/v11_diagnostico.md](docs/v11_diagnostico.md)):
+  - el grafo del hito 3 marcaba sospechosas a las parejas sin apellido común, tomaba por
+    relleno toda dirección con apartamento y no veía a los vecinos de un edificio;
+  - el v3 restaba 1,7 bits al mismo apartamento escrito distinto y sumaba 5,4 a dos vecinos;
+    ajusta por frecuencia solo el nivel de dirección exacta;
+  - "Esther Nancy MONTENEGRO MUÑOZ" es una suplantación inyectada: la víctima se veía igual
+    que la suplantadora;
+  - los escenarios del hito 3 y de la ciega 3 cambian con la fecha del día (Faker).
+- **Generador residencial** con predios, hogares, parejas, convivientes, conjuntos, casas de
+  varios pisos, apellido de casada y convención de apellidos de los hijos.
+- **Modelo v4:** dirección en predio y unidad, comparada por niveles con ajuste por
+  frecuencia.
+- **Grafo residencial:** agrupa la dirección por predio, estima el tipo de predio, reconoce
+  parejas y la convención de apellidos, y agrega convivencia probable y multifamiliar. En 8
+  pares de semillas, la falsa sospecha pasa de 39,1 % a 0,5 %.
+- **Prueba ciega 4:** v4 F1 0,994 frente a 0,987 del v3 (+0,007, IC 0,004 a 0,011), sin
+  brechas de equidad significativas. Las personas inocentes marcadas por el grafo pasan de
+  36,7 % a 1,6 %, pero las personas de patrones sospechosos detectadas bajan de 81,6 % a
+  66,7 % (anillos de 7 clientes tomados como relleno).
+- Universo de Cosmograph con las categorías nuevas y con víctima y suplantador distinguidos.
+
 ## v1.0: cierre del portafolio
 
 - **Verificación del hito 6** ([audit/verificacion_hito6.md](audit/verificacion_hito6.md))

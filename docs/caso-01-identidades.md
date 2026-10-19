@@ -91,6 +91,15 @@ de casos dudosos con un agente.
    y 1 millón de registros en DuckDB; universo grande en Cosmograph desde Parquet.
    Resultados en [hito5.md](hito5.md).
 
+6. **Correcciones post-auditoría** (completado): modelo v3, prueba ciega 3, línea base,
+   calibración y estabilidad. Resultados en [hito6.md](hito6.md).
+7. **v1.1: realidad residencial y familiar colombiana** (completado): parejas que solo
+   comparten la dirección, convivientes, conjuntos y edificios distinguidos por torre,
+   bloque, interior o apartamento, y casas de varios pisos. Generador residencial,
+   estandarización de la dirección en predio y unidad, modelo v4, grafo que estima el tipo
+   de predio y reconoce parejas y la convención de apellidos, y prueba ciega 4. Resultados
+   en [v11.md](v11.md).
+
 ## Notas
 
 - Es un prototipo de "cliente único". Con datos reales pasaría por gobierno de datos y
