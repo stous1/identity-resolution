@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-1475b7c288592ea19d3bc79de3e0df55"}, "facet": {"column": {"field": "metrica", "title": null, "type": "nominal"}}, "spec": {"layer": [{"mark": {"type": "rule", "color": "#6b7280", "strokeWidth": 2}, "encoding": {"tooltip": [{"field": "grupo", "type": "nominal"}, {"field": "metrica", "type": "nominal"}, {"field": "valor", "format": ".3f", "type": "quantitative"}, {"field": "ic_inf", "format": ".3f", "title": "IC 95 % inferior", "type": "quantitative"}, {"field": "ic_sup", "format": ".3f", "title": "IC 95 % superior", "type": "quantitative"}], "x": {"field": "ic_inf", "scale": {"zero": false}, "title": "Valor (IC 95 %)", "type": "quantitative"}, "x2": {"field": "ic_sup"}, "y": {"field": "grupo", "sort": null, "title": null, "type": "nominal"}}}, {"mark": {"type": "point", "color": "#2563eb", "filled": true, "size": 70}, "encoding": {"tooltip": [{"field": "grupo", "type": "nominal"}, {"field": "metrica", "type": "nominal"}, {"field": "valor", "format": ".3f", "type": "quantitative"}, {"field": "ic_inf", "format": ".3f", "title": "IC 95 % inferior", "type": "quantitative"}, {"field": "ic_sup", "format": ".3f", "title": "IC 95 % superior", "type": "quantitative"}], "x": {"field": "valor", "type": "quantitative"}, "y": {"field": "grupo", "sort": null, "title": null, "type": "nominal"}}}], "height": {"step": 26}, "width": 260}, "resolve": {"scale": {"x": "independent"}}, "title": "Grafo del hito 3 contra el residencial, por grupo compartido (IC 95 %)", "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json", "datasets": {"data-1475b7c288592ea19d3bc79de3e0df55": [{"grupo": "residencial prueba \u00b7 anterior v3", "metrica": "Exactitud", "valor": 0.48868778280542985, "ic_inf": 0.4457013574660634, "ic_sup": 0.5361990950226244}, {"grupo": "residencial prueba \u00b7 anterior v3", "metrica": "Recall de sospechosos", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "residencial prueba \u00b7 anterior v3", "metrica": "Falsa sospecha", "valor": 0.4517766497461929, "ic_inf": 0.3984828141783029, "ic_sup": 0.4987962962962963}, {"grupo": "residencial prueba \u00b7 residencial v4", "metrica": "Exactitud", "valor": 0.9363636363636364, "ic_inf": 0.9113636363636364, "ic_sup": 0.9590909090909091}, {"grupo": "residencial prueba \u00b7 residencial v4", "metrica": "Recall de sospechosos", "valor": 1.0, "ic_inf": 1.0, "ic_sup": 1.0}, {"grupo": "residencial prueba \u00b7 residencial v4", "metrica": "Falsa sospecha", "valor": 0.007653061224489796, "ic_inf": 0.0, "ic_sup": 0.017811704834605598}, {"grupo": "ciega 4 \u00b7 anterior v3", "metrica": "Exactitud", "valor": 0.6412556053811659, "ic_inf": 0.594170403587444, "ic_sup": 0.6838565022421524}, {"grupo": "ciega 4 \u00b7 anterior v3", "metrica": "Recall de sospechosos", "valor": 0.8235294117647058, "ic_inf": 0.6190476190476191, "ic_sup": 1.0}, {"grupo": "ciega 4 \u00b7 anterior v3", "metrica": "Falsa sospecha", "valor": 0.3597733711048159, "ic_inf": 0.31140852471778907, "ic_sup": 0.4097513763240076}, {"grupo": "ciega 4 \u00b7 residencial v4", "metrica": "Exactitud", "valor": 0.941923774954628, "ic_inf": 0.9219600725952813, "ic_sup": 0.9600725952813067}, {"grupo": "ciega 4 \u00b7 residencial v4", "metrica": "Recall de sospechosos", "valor": 0.7647058823529411, "ic_inf": 0.5454545454545454, "ic_sup": 0.9565670289855073}, {"grupo": "ciega 4 \u00b7 residencial v4", "metrica": "Falsa sospecha", "valor": 0.006036217303822937, "ic_inf": 0.0, "ic_sup": 0.012270567233229408}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

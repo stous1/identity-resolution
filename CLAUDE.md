@@ -45,7 +45,12 @@ uv run python scripts/hito6.py tiempo-real   # precisión con 1 %, 10 % y 50 % d
 uv run python scripts/hito6.py hito3         # hito 3 con 8 pares de semillas (v2 y v3)
 uv run python scripts/hito6.py escala        # 100 mil y 1 millón con el v3 congelado
 uv run python scripts/hito6.py diagnostico-umbral  # v3 con el umbral del v2 en la ciega 3
-uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3, 5, 6 -> docs/resultados/
+uv run python scripts/v11.py diagnostico     # v1.1: diagnóstico previo -> reports/v11/
+uv run python scripts/v11.py desarrollar     # v1.1: modelo v4 en desarrollo
+uv run python scripts/v11.py grafo           # grafo residencial con 8 pares de semillas
+uv run python scripts/v11.py evaluar         # v3 y v4 congelados, grafos, ciega 4
+uv run python scripts/v11.py universo        # universo de Cosmograph de la v1.1
+uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3, 5, 6, v11 -> docs/resultados/
 ```
 
 ## Estructura
@@ -83,7 +88,7 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
     `flujo_hito6.py`. El v3 está congelado en `hito6-congelado` junto con
     `docs/resultados/hito6/{modelo,desarrollo,calibracion}.json` (lo verifica
     `tests/test_hito6.py`). `errores_ciegos_3.py` es la tercera prueba ciega, escrita después
-    de congelar. Las ciegas 1, 2 y 3 ya se miraron: la próxima corrección necesita una ciega 4.
+    de congelar. Las ciegas 1, 2 y 3 ya se miraron.
   - `audit/` es el registro de una auditoría independiente: sus archivos existentes no se
     modifican. Sí se pueden agregar archivos nuevos de verificaciones posteriores (por
     ejemplo, `audit/verificacion_hito6.md`), sin tocar los anteriores.
@@ -97,6 +102,17 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
     `docs/resultados/hito6/metricas.json`) son páginas estáticas, sin servidor.
   - GIF: `gifs.py` y `scripts/gifs.py` graban con Playwright el recorrido por Cosmograph
     (requiere internet) y el antes y después, en `docs/resultados/gifs/`.
+  - v1.1 (realidad residencial): `diagnostico_v11.py` (diagnóstico previo),
+    `sinteticos_fecha.py` (fecha de Faker fija: el escenario del hito 3 cambia con la fecha
+    de hoy), `escenario_residencial.py` (predios, hogares y familias, sin cambiar los
+    generadores anteriores), `estandarizacion_v4.py` (dirección en predio y unidad),
+    `modelo_co_v4.py`, `grafo_residencial.py` y `flujo_v11.py`. El v4 está congelado en
+    `v4-congelado` junto con `docs/resultados/v11/{modelo,desarrollo,calibracion}.json` y
+    `estandarizacion_v4.py`; el grafo residencial, en `grafo-v11-congelado` con
+    `clasificador.json` (lo verifica `tests/test_v11.py`). `errores_ciegos_4.py` es la
+    cuarta prueba ciega, escrita por un subagente después de congelar. Las ciegas 1 a 4 ya
+    se miraron: la próxima corrección necesita una ciega 5. `docs/v11_universo.html` lee
+    `docs/resultados/v11/universo_*.json`.
 - `scripts/`: puntos de entrada delgados que orquestan funciones de `src/`.
 - `notebooks/`: solo exploración. Nada en `src/` ni `scripts/` importa de notebooks.
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.

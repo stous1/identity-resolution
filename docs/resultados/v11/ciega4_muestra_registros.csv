@@ -1,0 +1,41 @@
+unique_id,tipo_documento,numero_documento,nombres,apellidos,fecha_nacimiento,celular,correo,direccion,ciudad,departamento,cluster,fecha_actualizacion,canal,validado,origen
+327,CC,83002996,Diana,ALZATE TRUJILLO,1972-03-06,602 2589471,diana.alzate72@gmail.com,CL 122 #79-75,CALI,Valle del Cauca,43,2023-01-22,app,True,normal
+4386,CC,1003663830,Milena,FAJARDO SILVA,06/09/1993,3206210374,milena.fajardo93@gmail.com,DIAG 92A # 112-41 APTO 402,Bucaramanga,SANTANDER,55,2018-02-21,sucursal,True,normal
+2848,CC,48947258,Alexandra Verónica,rivera guerrero,28/05/1950,316 728 3129,ariverag195059@live.com,CRA 116 #74-3 Casa 14,Manizales,Caldas,118,2021-12-25,call_center,False,normal
+3016,CC,59855334,Yamile,DELGADO GARCÍA,05-07-1973,3518177946,ydelgadog1973@yahoo.es,"Cl 166 # 111-70, Apto. 605 Edificio Altos de los Cerezos",Cartagena,BOLIVAR,157,2018-10-19,call_center,True,normal
+2621,CC,31017185,ANDREA NANCY,TORRES BURBANO,05/01/1953,3205271198,torresandrea@gmail.com,CL 20 85-86,Bogota,Bogotá D.C.,190,2024-05-24,sucursal,True,normal
+488,CC,1008341545,jhon jesús,rico suarez,19/01/2000,3049742931,jhon.rico561@gmail.com,"Cl 102A 118-55, Bloq. 6 Ap. 202 Conjunto Villas de Fatima",Bogotá,Bogotá D.C.,249,2025-01-22,call_center,False,normal
+545,CC,1094139992,NIDIA,Jiménez,16082002,3014255463,nidia.jimenez@gmail.com,KRA 84 # 116 - 75 APTO. 302,Pereira,RISARALDA,302,2025-07-30,corresponsal,False,normal
+4257,TI,1049936078,JHONATAN,Cardona,20-12-2002,312-0479106, jhonatan.cardona02449@gmail.com,"CALLE 137 # 28-48 S Int 1, AP 101 Conjunto Residencial Torres de Castilla",Bogotá,Bogota D.C,336,2020-10-12,call_center,False,normal
+3991,CC,1093406317,mayerli,Castroo Vega,28011995,+57 3017017317,,CR 106 #40-58,Bogotá D.C.,,357,2024-01-31,corresponsal,False,normal
+2110,CC,44512446,IGNACIO,HURTADO ÁLVAREZ,1983-06-02,301 889 7151,,CRA. 55 N° 8-28 SUR APARTAMENTO 702,Bogota DC,Bogotá D.C.,382,2019-11-16,sucursal,True,normal
+1342,CC,91301521,Silvia Lorena,Garzon Sanchez,1964-04-04,3246695908,silvia.garzon@gmail.com,"CALLE 124 N° 43-80 BL 3, APTO. 301",Cúcuta,N. de Santander,512,2016-04-24,sucursal,True,normal
+2641,CC,1098984202,PAULA,LÓPEZ MARTÍNEZ,01/05/1986,(320) 4856932,paula.lopez@hotmail.com,CARRERA 1 # 69-72 APTO 401,Bogotá,Bogotá D.C.,536,2012-01-27,sucursal,True,normal
+2169,CC,30201230,Henry Jonathan,Jaramillo Galvis,,+57 3146219821,hjaramillo@hotmail.com,Av. Cl 108 No. 43-52,Bogotá D.C.,Bogotá D.C.,558,2024-05-14,web,True,normal
+1118,CE,580915,Andres,Cruz Flórez,1977-08-16,3186785656,andres.cruz77@hotmail.com,CL 35 Nro 87A 77 Ap. 102 BQ 6,Medellín,Antioquia,665,2024-04-09,web,False,normal
+3621,CC,1040189127,Wilmar Wilson,Ruiz Aala,1996-07-19,316-7192081,wilmer.ruiz96@hotmail.com,Cra 62 No 133 62,Barranquila,Atlantico,682,2020-02-09,app,False,normal
+442,CC,1021837903,Ruth,Sánchez,02/05/02,3183903127,rsanchezg2002@gmail.com,CALLE 17 No. 30-33,Bogota DC,,776,2021-04-20,corresponsal,True,normal
+273,CC,21344178,Simón Luis,Gomez Ruiz,1969-11-13,350 781 4740,simongomezr@hotmail.co,Cra. 143 No. 91-45 Casa No 141,Medellín,Ant.,825,2023-07-01,app,True,normal
+2205,C.C.,1093428225,Omar Luis,CASTAÑEDA BONILLA,2003-09-11,3046046915,ocastanedab2003@hotmail.com,TV 97 # 13 89 CASA #71 CONJUNTO ALTOS DE LOS CEREZOS,Bogota DC,BOGOTA,834,2025-10-28,app,False,normal
+851,CC,46558117,YULI EUGENIA,HENAO GONZALES,25/01/1952,324-3901444,yuli.henao@hotmail.com,"CRA 2 B # 96-25, Ap. 301",Barranquilla,Atlántico,837,2024-08-10,sucursal,True,normal
+571,CC,1070556326,Iván,Mendoza Mendoza,1991-07-06,3047283495,ivanmendozam@hotmail.com,Carrera 69 N° 123 - 65,Bogota DC,,1100,2012-03-01,app,True,normal
+739,CC,47335322,Cecilia,Castrillón Parra de Duarte,1951-09-10,321-2323795,ceciliacastrillonp@gmail.com,Cr 116 74-3 Casa 69 Cjto Balcones de Granada,Manizales,Caldas,1159,2025-12-17,app,True,normal
+4246,CC,26081179,NESTOR,DUARTE CASTRILLÓN,1972-06-28,318-9889583,nestor_duarte@outlook.com,Carrera 116 74-3 Casa 69,Manizales,,1162,2011-04-25,sucursal,True,normal
+1669,CC,84435450,JAIRO CARLOS,ALVAREZ SIERRA,10/08/1972,3194305239,jalvarez@hotmail.com,"CL 152 NO 21-55 TOR 4, AP. 102",Medellín,Antioquia,1179,2018-07-04,corresponsal,True,normal
+1484,CC,71847186,David,CARDENAS SALGADO,1901-01-01,3158636616,davidcardenass@hotmail.es,"Cll 137 # 28 - 48 S IN 8, APTO 401",Bogotá D.C.,Bogota D.C,1194,2014-01-13,call_center,True,normal
+1008,CC,1011617045,PATRICIA VALENTINA,Arenas Martínez,2004-05-05,322 492 6464,patriciaarenasm@unicauca.edu.co,Cra. 37 57 58,Cartagena,Bolívar,1210,2025-04-15,app,True,normal
+4310,CC,1043085983,DAYANA MILENA,Chavez Torres,01101985,321 458 1400,sincorreo@hotmail.com,Cl. 29 33-48 1 piso,Bucaramnga,Santander,1243,2020-09-12,corresponsal,True,normal
+2186,CC,4538121,Alirio Efrain,Benavides López,20/05/1948,311 040 1994,alirio.benavides48@hotmail.com,CLL 154A BIS NO 15-71,Bta,Bogotá D.C.,1386,2024-03-09,call_center,True,normal
+3347,CC,45497297,Yurany Elena,CASTRO MARTÍNEZ,20/02/1977,312 171 0641,yurany.castro77@hotmail.com,,Bogotá,Distrito Capital,1407,2023-11-01,sucursal,True,normal
+275,CC,1033658444,David,carrillo suárez,20/02/1985,6015266102,DCARRILLOS1985218@HOTMAIL.COM,Calle 65 #129-95,Bogotá,Bogotá D.C.,1408,2024-02-23,sucursal,True,normal
+3924,CC,27090892,YURAN GLORIA,GONZÁLEZ RENDÓN,31/10/1954,3059528635,gonzalezyurani@hotmail.com,Cra 90 N° 131-58 TORRE 2 - 1002,Pereira,Risaralda,1482,2018-11-26,sucursal,True,normal
+1371,CC,12576547,Arley Antonio,Quintero Palacio,10/06/1978,(8) 3363626,ARLEY_QUINTERO@HOTMAIL.COM,Av Cra 85A 86-63,VILLAVICENCIO,Meta,1519,2012-09-06,sucursal,True,normal
+743,CC,94083497,PAULA,HERNANDEZ BEDOYA,1960-01-19,3205257859,,Cl. 127 No. 71-63 Br Ciudad Verde,SOACHA,Cundinamarca,1644,2025-03-22,sucursal,True,normal
+939,CC,42.943.665,Janeth Sandra,Ospina,1973-10-22,3108144606,,CRA 29 Nro 71B-80 CS 55,Cali,,1681,2025-05-24,app,True,normal
+335,CC,1026238761,GERALDINE,Torres,,3153511102,GERALDINE.TORRES899@HOTMAIL.COM,"CL 113Bis 18 - 16, Casa No 64 Cjto Parque Castilla",Cartagena,Bolívar,1726,2013-05-28,sucursal,True,normal
+4057,CC,1063849158,ángel,Soto,1999-12-08,,,CR 90 NO 131 58,Pereira,RISARALDA,1772,2025-01-26,app,True,normal
+4311,CC,19540891,DEISY,SALGADO RUIZ,18/07/1979,304 921 7801,DSALGADO@YAHOO.COM,,,,1782,2013-04-22,sucursal,True,normal
+1302,CC,22892473,rafael josé,RAMIREZ RENTERIA,17/05/1968,3000019619,rramirez@yahoo.es,CLL 142 B NO. 32-23 BR KENNEDY,Bogotá,Bogotá D.C.,1828,2023-01-16,sucursal,True,normal
+3550,CC,99856710,Omar,García Rodríguez,1962-09-15,3223037460,omargarcia139@gmail.com,CL. 150 #114-37 APTO 505,SOACHA,Cund.,1835,2011-12-12,sucursal,True,normal
+1141,TI,96040298973,Mariela,Morales Gomez,1996-04-02,318 766 2192,mariela.morales96@hotmail.es,KR 29 N° 71B-80 Casa #40,Cali,Valle del Cauca,1889,2010-06-07,web,False,normal
+2028,CC,1090817855,Lilia,Rodriguez Pinzon,31/08/1997,3052886807,lrodriguez@gmail.com,KR 45 No 75-45 Apt 102,BOGOTA,Cundinamarca,1902,2021-08-04,call_center,False,normal
