@@ -334,9 +334,13 @@ def clasificar_fila(f: pd.Series | dict, p: ParametrosGrafo) -> str:
             return "sospechoso"
         if familia:
             return "hogar"
-        # Personas sin parentesco visible que viven en el mismo predio y comparten un fijo o
-        # un correo: un hogar o una convivencia, no un anillo.
-        return "convivencia" if f["frac_coresidentes"] >= p.min_familia else "sospechoso"
+        # Personas sin parentesco visible que viven en el mismo predio y comparten un
+        # contacto, o pocas personas con el mismo teléfono fijo (el fijo es del hogar): un
+        # hogar o una convivencia, no un anillo.
+        fijo = f["tipo"] == "celular" and str(f["valor"]).startswith("60")
+        if f["frac_coresidentes"] >= p.min_familia or (fijo and f["clientes"] <= p.max_convivencia):
+            return "convivencia"
+        return "sospechoso"
     # Dirección (agrupada por predio).
     if es_anillo(f, p) and not familia:
         return "sospechoso"
@@ -505,7 +509,7 @@ GRILLA: dict[str, tuple] = {
     "min_familia": (0.5, 0.75, 1.0),
     "anillo_max_validado": (0.1, 0.25, 0.4),
     "anillo_min_digital": (0.6, 0.75, 0.9),
-    "anillo_max_exclusividad": (0.4, 0.6, 0.8),
+    "anillo_max_exclusividad": (0.4, 0.5, 0.6, 0.8),
 }
 
 
