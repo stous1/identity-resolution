@@ -1,0 +1,422 @@
+{
+  "parametros_grafo_hito3": {
+    "max_clientes": 15,
+    "min_apellido": 0.5
+  },
+  "casos": [
+    {
+      "caso": "pareja_sin_apellidos",
+      "esperado": "normal (pareja que convive)",
+      "personas": 2,
+      "personas_en_algun_grupo": 2,
+      "grupos": [
+        {
+          "tipo": "direccion",
+          "valor": "CL 45 # 12-30",
+          "clientes": 2,
+          "frac_apellido_comun": 0.0,
+          "generico": false,
+          "clase": "sospechoso"
+        }
+      ]
+    },
+    {
+      "caso": "pareja_casada",
+      "esperado": "hogar (apellido de casada)",
+      "personas": 2,
+      "personas_en_algun_grupo": 2,
+      "grupos": [
+        {
+          "tipo": "direccion",
+          "valor": "KR 19 # 63-15",
+          "clientes": 2,
+          "frac_apellido_comun": 0.0,
+          "generico": false,
+          "clase": "sospechoso"
+        }
+      ]
+    },
+    {
+      "caso": "vecinas_casadas",
+      "esperado": "normal (vecinas, apartamentos distintos)",
+      "personas": 2,
+      "personas_en_algun_grupo": 0,
+      "grupos": []
+    },
+    {
+      "caso": "companeros_apto",
+      "esperado": "normal (convivencia)",
+      "personas": 3,
+      "personas_en_algun_grupo": 2,
+      "grupos": [
+        {
+          "tipo": "direccion",
+          "valor": "CARRERA 7 # 40-62 APTO 502",
+          "clientes": 2,
+          "frac_apellido_comun": 0.0,
+          "generico": true,
+          "clase": "relleno"
+        }
+      ]
+    },
+    {
+      "caso": "conjunto",
+      "esperado": "normal (mismo predio, hogares distintos)",
+      "personas": 6,
+      "personas_en_algun_grupo": 0,
+      "grupos": []
+    },
+    {
+      "caso": "casa_dos_pisos",
+      "esperado": "hogar (familia en dos pisos)",
+      "personas": 4,
+      "personas_en_algun_grupo": 4,
+      "grupos": [
+        {
+          "tipo": "celular",
+          "valor": "6017384512",
+          "clientes": 2,
+          "frac_apellido_comun": 0.0,
+          "generico": false,
+          "clase": "sospechoso"
+        },
+        {
+          "tipo": "direccion",
+          "valor": "CALLE 23 SUR # 5-10 PISO 2",
+          "clientes": 2,
+          "frac_apellido_comun": 0.0,
+          "generico": true,
+          "clase": "relleno"
+        },
+        {
+          "tipo": "direccion",
+          "valor": "CL 23 SUR # 5-10",
+          "clientes": 2,
+          "frac_apellido_comun": 0.0,
+          "generico": false,
+          "clase": "sospechoso"
+        }
+      ]
+    },
+    {
+      "caso": "casa_dos_pisos_sin_piso",
+      "esperado": "hogar (familia en dos pisos)",
+      "personas": 4,
+      "personas_en_algun_grupo": 4,
+      "grupos": [
+        {
+          "tipo": "direccion",
+          "valor": "KR 30 # 8-44",
+          "clientes": 4,
+          "frac_apellido_comun": 0.33,
+          "generico": false,
+          "clase": "sospechoso"
+        }
+      ]
+    },
+    {
+      "caso": "familia_convencion",
+      "esperado": "hogar (convención de apellidos)",
+      "personas": 3,
+      "personas_en_algun_grupo": 3,
+      "grupos": [
+        {
+          "tipo": "direccion",
+          "valor": "DG 48 # 22-15",
+          "clientes": 3,
+          "frac_apellido_comun": 0.67,
+          "generico": false,
+          "clase": "hogar"
+        }
+      ]
+    },
+    {
+      "caso": "anillo_control",
+      "esperado": "sospechoso",
+      "personas": 3,
+      "personas_en_algun_grupo": 3,
+      "grupos": [
+        {
+          "tipo": "celular",
+          "valor": "3183334455",
+          "clientes": 3,
+          "frac_apellido_comun": 0.0,
+          "generico": false,
+          "clase": "sospechoso"
+        }
+      ]
+    }
+  ],
+  "direcciones_v1": [
+    {
+      "texto": "Calle 45 # 12-30",
+      "canonica": "CL 45 # 12-30",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Cl 45 # 12-30",
+      "canonica": "CL 45 # 12-30",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Carrera 19 # 63-15",
+      "canonica": "KR 19 # 63-15",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Kr 19 # 63-15",
+      "canonica": "KR 19 # 63-15",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Calle 100 # 15-20 Apto 401",
+      "canonica": "CALLE 100 # 15-20 APTO 401",
+      "reconocida": false,
+      "generica_para_el_grafo": true
+    },
+    {
+      "texto": "Calle 100 # 15-20 Apto 402",
+      "canonica": "CALLE 100 # 15-20 APTO 402",
+      "reconocida": false,
+      "generica_para_el_grafo": true
+    },
+    {
+      "texto": "Carrera 7 # 40-62 Apto 502",
+      "canonica": "CARRERA 7 # 40-62 APTO 502",
+      "reconocida": false,
+      "generica_para_el_grafo": true
+    },
+    {
+      "texto": "Cra 7 # 40-62 Ap 502",
+      "canonica": "CRA 7 # 40-62 AP 502",
+      "reconocida": false,
+      "generica_para_el_grafo": true
+    },
+    {
+      "texto": "Calle 140 # 9-50 Torre 1 Apto 101",
+      "canonica": "CALLE 140 # 9-50 TORRE 1 APTO 101",
+      "reconocida": false,
+      "generica_para_el_grafo": true
+    },
+    {
+      "texto": "Calle 140 # 9-50 Torre 1 Apto 302",
+      "canonica": "CALLE 140 # 9-50 TORRE 1 APTO 302",
+      "reconocida": false,
+      "generica_para_el_grafo": true
+    },
+    {
+      "texto": "Calle 140 # 9-50 Torre 2 Apto 204",
+      "canonica": "CALLE 140 # 9-50 TORRE 2 APTO 204",
+      "reconocida": false,
+      "generica_para_el_grafo": true
+    },
+    {
+      "texto": "Cl 140 # 9-50 T 2 Ap 501",
+      "canonica": "CL 140 # 9-50 T 2 AP 501",
+      "reconocida": false,
+      "generica_para_el_grafo": true
+    },
+    {
+      "texto": "Calle 140 # 9-50 Interior 3 Apto 201",
+      "canonica": "CALLE 140 # 9-50 INTERIOR 3 APTO 201",
+      "reconocida": false,
+      "generica_para_el_grafo": true
+    },
+    {
+      "texto": "Calle 140 # 9-50",
+      "canonica": "CL 140 # 9-50",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Calle 23 Sur # 5-10",
+      "canonica": "CL 23 SUR # 5-10",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Calle 23 Sur # 5-10 Piso 2",
+      "canonica": "CALLE 23 SUR # 5-10 PISO 2",
+      "reconocida": false,
+      "generica_para_el_grafo": true
+    },
+    {
+      "texto": "Carrera 30 # 8-44",
+      "canonica": "KR 30 # 8-44",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Diagonal 48 # 22-15",
+      "canonica": "DG 48 # 22-15",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Dg 48 # 22-15",
+      "canonica": "DG 48 # 22-15",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Calle 12 # 3-40",
+      "canonica": "CL 12 # 3-40",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Carrera 80 # 33-12",
+      "canonica": "KR 80 # 33-12",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    },
+    {
+      "texto": "Transversal 5 # 61-07",
+      "canonica": "TV 5 # 61-07",
+      "reconocida": true,
+      "generica_para_el_grafo": false
+    }
+  ],
+  "niveles_direccion_v3": [
+    {
+      "par": "misma casa, otra escritura",
+      "a": "Calle 45 # 12-30",
+      "b": "Cl 45 # 12-30",
+      "nivel_v3": "Exact match on domicilio",
+      "bits_v3": 11.34
+    },
+    {
+      "par": "mismo apartamento, otra escritura",
+      "a": "Carrera 7 # 40-62 Apto 502",
+      "b": "Cra 7 # 40-62 Ap 502",
+      "nivel_v3": "All other comparisons",
+      "bits_v3": -1.7
+    },
+    {
+      "par": "mismo edificio, otro apartamento",
+      "a": "Calle 100 # 15-20 Apto 401",
+      "b": "Calle 100 # 15-20 Apto 402",
+      "nivel_v3": "Jaro-Winkler distance of domicilio >= 0.9",
+      "bits_v3": 5.44
+    },
+    {
+      "par": "mismo conjunto, otra torre",
+      "a": "Calle 140 # 9-50 Torre 1 Apto 101",
+      "b": "Calle 140 # 9-50 Torre 2 Apto 204",
+      "nivel_v3": "Jaro-Winkler distance of domicilio >= 0.9",
+      "bits_v3": 5.44
+    },
+    {
+      "par": "conjunto con y sin apartamento",
+      "a": "Calle 140 # 9-50 Torre 1 Apto 101",
+      "b": "Calle 140 # 9-50",
+      "nivel_v3": "All other comparisons",
+      "bits_v3": -1.7
+    },
+    {
+      "par": "casa: primer piso y piso 2",
+      "a": "Calle 23 Sur # 5-10",
+      "b": "Calle 23 Sur # 5-10 Piso 2",
+      "nivel_v3": "All other comparisons",
+      "bits_v3": -1.7
+    },
+    {
+      "par": "predios distintos en la misma cuadra",
+      "a": "Calle 45 # 12-30",
+      "b": "Calle 45 # 12-38",
+      "nivel_v3": "Misma vía, número y placa",
+      "bits_v3": 8.77
+    }
+  ],
+  "caso_esther": {
+    "documento": "1064372368",
+    "dueno_del_documento": [
+      1057
+    ],
+    "registros": [
+      {
+        "unique_id": 2530,
+        "nombre": "Esther Nancy Montenegro Muñoz",
+        "persona_verdadera": 1057,
+        "origen": "normal",
+        "canal": "sucursal",
+        "fecha_actualizacion": "2016-02-15",
+        "papel": "víctima (dueña del documento)"
+      },
+      {
+        "unique_id": 2531,
+        "nombre": "Esther Nancy MONTENEGRO MUÑOZ",
+        "persona_verdadera": 1057,
+        "origen": "normal",
+        "canal": "app",
+        "fecha_actualizacion": "2014-01-12",
+        "papel": "víctima (dueña del documento)"
+      },
+      {
+        "unique_id": 2532,
+        "nombre": "Esther Nancy Montenegro Muñoz",
+        "persona_verdadera": 1057,
+        "origen": "normal",
+        "canal": "app",
+        "fecha_actualizacion": "2017-08-07",
+        "papel": "víctima (dueña del documento)"
+      },
+      {
+        "unique_id": 2533,
+        "nombre": "Etsher Nancy montenegro muuñoz",
+        "persona_verdadera": 1057,
+        "origen": "normal",
+        "canal": "corresponsal",
+        "fecha_actualizacion": "2016-04-27",
+        "papel": "víctima (dueña del documento)"
+      },
+      {
+        "unique_id": 2534,
+        "nombre": "Esthe Rnancy montenegro muñoz",
+        "persona_verdadera": 1057,
+        "origen": "normal",
+        "canal": "call_center",
+        "fecha_actualizacion": "2020-02-10",
+        "papel": "víctima (dueña del documento)"
+      },
+      {
+        "unique_id": 4838,
+        "nombre": "NATHALIA méndez udque",
+        "persona_verdadera": 199,
+        "origen": "suplantacion",
+        "canal": "web",
+        "fecha_actualizacion": "2024-10-22",
+        "papel": "suplantador (usa el documento de otra persona)"
+      }
+    ],
+    "etiqueta_verdadera_del_grupo": [
+      "sospechoso"
+    ]
+  },
+  "ajuste_frecuencia_v3": [
+    {
+      "nivel": "Exact match on domicilio",
+      "bits": 11.34,
+      "frecuencia": "domicilio"
+    },
+    {
+      "nivel": "Misma vía, número y placa",
+      "bits": 8.77,
+      "frecuencia": null
+    },
+    {
+      "nivel": "Jaro-Winkler distance of domicilio >= 0.9",
+      "bits": 5.44,
+      "frecuencia": null
+    },
+    {
+      "nivel": "All other comparisons",
+      "bits": -1.7,
+      "frecuencia": null
+    }
+  ]
+}
