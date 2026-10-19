@@ -93,3 +93,29 @@ def test_demo_igual_a_splink(tmp_path: Path, version: str) -> None:
             diferencias.append((par, esperado, resultado))
     assert len(pares) >= 600
     assert not diferencias, f"{len(diferencias)} de {len(pares)} pares difieren: {diferencias[:3]}"
+
+
+@pytest.mark.skipif(NODE is None, reason="requiere Node.js")
+def test_jaro_winkler_del_motor_igual_a_duckdb() -> None:
+    """Incluye transposiciones impares: DuckDB las cuenta con división entera."""
+    import duckdb
+
+    pares = [
+        ("MACRELA", "GRACIELA"),
+        ("MARTHA", "MARHTA"),
+        ("DWAYNE", "DUANE"),
+        ("JOSE LUIS", "LUIS JOSE"),
+        ("ABCDEF", "BADCFE"),
+        ("RAMIREZ", "RAMRIEZ"),
+        ("", "A"),
+    ]
+    codigo = (
+        f"import('{(RAIZ / 'docs' / 'demo' / 'motor.js').as_uri()}').then(m => "
+        f"console.log(JSON.stringify({json.dumps(pares)}.map(([a, b]) => m.jaroWinkler(a, b)))))"
+    )
+    js = json.loads(
+        subprocess.run([NODE, "-e", codigo], capture_output=True, text=True, check=True).stdout
+    )
+    for (a, b), valor in zip(pares, js, strict=True):
+        esperado = duckdb.sql("select jaro_winkler_similarity(?, ?)", params=[a, b]).fetchone()[0]
+        assert valor == pytest.approx(esperado, abs=1e-12), (a, b)

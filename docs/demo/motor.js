@@ -71,7 +71,8 @@ export function jaroWinkler(a, b) {
     k++;
   }
   const c = coincidencias;
-  const jaro = (c / s.length + c / t.length + (c - medias / 2) / c) / 3;
+  // Transposiciones con división entera, como DuckDB (3 caracteres fuera de orden = 1).
+  const jaro = (c / s.length + c / t.length + (c - Math.floor(medias / 2)) / c) / 3;
   if (jaro <= 0.7) return jaro;
   let prefijo = 0;
   while (prefijo < Math.min(4, s.length, t.length) && s[prefijo] === t[prefijo]) prefijo++;
