@@ -8,14 +8,19 @@ apodos, los nombres en otro campo, el documento alterado, los teléfonos y, como
 fechas en otros formatos. El modelo se congeló (tag `hito2b-congelado`) y se midió con una
 prueba ciega 2, escrita por un subagente que no conocía nada de lo anterior.
 
+
+> **Cifras de la v1.1.1.** Los generadores dependían de la fecha del día (Faker); desde la
+> v1.1.1 usan una fecha fija y las evaluaciones con modelos congelados se volvieron a correr.
+> La fila de la prueba normal con el v1 es de la corrida original del hito 2. Tabla de cambios en [v1.1.1](v111.md).
+
 ## Evolución (por clúster, IC 95 %)
 
 | Evaluación | Precisión | Recall | Personas exactas |
 |---|---|---|---|
-| Ciega 1 · modelo v1 | 0,997 | 0,636 | 60,2 % |
-| Ciega 2 · modelo v1 (control) | 0,995 [0,977 – 1,000] | 0,920 [0,907 – 0,932] | 91,1 % |
-| **Ciega 2 · modelo v2** | **0,998** [0,994 – 1,000] | **1,000** [1,000 – 1,000] | **99,7 %** |
-| Prueba normal · modelo v2 | 1,000 | 0,993 [0,986 – 0,999] | 99,5 % |
+| Ciega 1 · modelo v1 | 0,989 | 0,635 | 60,5 % |
+| Ciega 2 · modelo v1 (control) | 1,000 [0,998 – 1,000] | 0,914 [0,901 – 0,927] | 90,9 % |
+| **Ciega 2 · modelo v2** | **1,000** [0,998 – 1,000] | **1,000** [0,999 – 1,000] | **99,9 %** |
+| Prueba normal · modelo v2 | 0,998 | 0,998 [0,995 – 1,000] | 99,4 % |
 
 La ciega 2 es más fácil que la ciega 1 (el control lo muestra), así que la mejora atribuible
 al modelo es la diferencia pareada sobre las mismas personas: **+8,0 puntos de recall y

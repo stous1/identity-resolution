@@ -11,13 +11,15 @@ y una auditoría independiente.
 [![Python 3.11](https://img.shields.io/badge/python-3.11-3776ab?logo=python&logoColor=white)](.python-version)
 [![Licencia MIT](https://img.shields.io/badge/licencia-MIT-blue)](LICENSE)
 
-[![Recorrido por el universo de registros en Cosmograph](docs/resultados/gifs/universo.gif)](https://stous1.github.io/identity-resolution/hito3_universo.html)
+[![Recorrido por el universo residencial en Cosmograph](docs/resultados/gifs/universo.gif)](https://stous1.github.io/identity-resolution/v11_universo.html)
 
-<sub>Cada punto es un registro; los enlaces del modelo los agrupan en clientes. En morado,
-datos de relleno; en verde, hogares; en rojo, patrones sospechosos.
-[Abrir el universo interactivo →](https://stous1.github.io/identity-resolution/hito3_universo.html)</sub>
+<sub>Cada punto es un registro; los enlaces del modelo v4 los agrupan en clientes. Las
+estrellas son datos compartidos: en morado, relleno; en verde, hogares; en cian,
+convivencia probable; en azul, varios hogares en un mismo predio; en rojo, patrones
+sospechosos. [Abrir el universo interactivo →](https://stous1.github.io/identity-resolution/v11_universo.html)</sub>
 
 **[Probar la demo](https://stous1.github.io/identity-resolution/demo.html)** ·
+**[Ficha de cliente único](https://stous1.github.io/identity-resolution/ficha.html)** ·
 **[Calculadora de impacto](https://stous1.github.io/identity-resolution/calculadora.html)** ·
 **[Tableros](https://stous1.github.io/identity-resolution/)**
 
@@ -37,7 +39,8 @@ sobre DuckDB, con estandarización colombiana, que une registros, construye un r
 oro por cliente, detecta datos compartidos sospechosos y responde "¿ya es cliente?" en
 tiempo real. Todo con datos sintéticos.
 
-**Resultados vigentes** (modelos v3 y v4 congelados):
+**Resultados vigentes** (modelos v3 y v4 congelados; cifras de la v1.1.1, con los datos
+generados con una fecha fija: [qué cambió](https://stous1.github.io/identity-resolution/v111.html)):
 
 - **v1.1, realidad residencial colombiana** ([página](https://stous1.github.io/identity-resolution/v11.html)):
   parejas sin apellidos en común, convivientes, conjuntos y casas de varios pisos. En la
@@ -46,14 +49,16 @@ tiempo real. Todo con datos sintéticos.
   aunque detecta menos patrones sospechosos (66,7 % de sus personas frente a 81,6 %).
 
 - **Prueba ciega 3** (errores escritos por un generador independiente, nunca vistos):
-  precisión **0,997** y recall **0,966** por clúster; 94,5 % de las personas reconstruidas
-  exactamente.
-- **Frente a reglas simples:** +0,065 de F1 sobre la mejor regla determinística en esa
+  v3 con precisión **0,996** y recall **0,955** por clúster; 92,9 % de las personas
+  reconstruidas exactamente.
+- **Frente a reglas simples:** +0,055 de F1 sobre la mejor regla determinística en esa
   prueba. La ganancia está donde el documento falta o viene alterado.
-- **1 millón de registros** en una sola máquina, en 129 s y con 7,1 GB de pico, con
-  precisión 0,998 y recall 0,995.
-- **"¿Ya es cliente?"** en unos 120 ms por consulta: precisión 0,999 si la mitad de las
-  consultas son de clientes, y **0,938** si solo lo es el 1 %.
+- **1 millón de registros** en una sola máquina, en 128 s y con 7,1 GB de pico, con
+  precisión 0,999 y recall 0,995.
+- **"¿Ya es cliente?"** con el v4, en unos 110 ms por consulta: recall 0,989 y ninguna
+  falsa alarma en 1.500 consultas de personas nuevas. Con tan pocas consultas, la
+  precisión cuando solo el 1 % son clientes es frágil: con los datos anteriores, una sola
+  falsa alarma la dejaba en 0,938.
 - **Auditoría independiente:** sin fugas de etiquetas y con todas las cifras reproducibles;
   sus hallazgos se corrigieron o matizaron en el [hito 6](https://stous1.github.io/identity-resolution/hito6.html).
 
@@ -62,7 +67,8 @@ tiempo real. Todo con datos sintéticos.
 | Enlace | Qué es |
 |---|---|
 | [Portada de los tableros](https://stous1.github.io/identity-resolution/) | Resumen navegable de todos los hitos en GitHub Pages |
-| [Demo: ¿son la misma persona?](https://stous1.github.io/identity-resolution/demo.html) | Escribe dos registros y mira la probabilidad, la banda y la explicación, en el navegador |
+| [Demo: ¿son la misma persona?](https://stous1.github.io/identity-resolution/demo.html) | Escribe dos registros y mira la probabilidad, la banda y la explicación con el v4, en el navegador |
+| [Ficha de cliente único](https://stous1.github.io/identity-resolution/ficha.html) | Busca un cliente y mira sus registros, su registro de oro, con quién comparte datos, su historia y sus alertas |
 | [Calculadora de impacto](https://stous1.github.io/identity-resolution/calculadora.html) | Las métricas del v3 convertidas en pesos al año, con supuestos editables |
 | [Hito 1: fake_1000](https://stous1.github.io/identity-resolution/#hito-1-fake_1000) | El flujo completo sobre el dataset de demostración de Splink |
 | [Hito 2: sintéticos colombianos](https://stous1.github.io/identity-resolution/hito2.html) | Estandarización, primera prueba ciega y FEBRL3 |
@@ -70,6 +76,7 @@ tiempo real. Todo con datos sintéticos.
 | [Hito 3: registro de oro y grafo](https://stous1.github.io/identity-resolution/hito3.html) | Supervivencia por campo, datos compartidos y puentes |
 | [Hito 5: tiempo real y escala](https://stous1.github.io/identity-resolution/hito5.html) | "¿Ya es cliente?" y 1 millón de registros en DuckDB |
 | [Hito 6: correcciones post-auditoría](https://stous1.github.io/identity-resolution/hito6.html) | Modelo v3, tercera prueba ciega, línea base y calibración |
+| [v1.1.1: reproducibilidad](https://stous1.github.io/identity-resolution/v111.html) | Fecha fija en los generadores y todas las cifras recalculadas, con lo que cambió |
 | [v1.1: realidad residencial](https://stous1.github.io/identity-resolution/v11.html) | Modelo v4, grafo residencial y cuarta prueba ciega ([diagnóstico previo](https://stous1.github.io/identity-resolution/v11_diagnostico.html)) |
 | [Universo residencial](https://stous1.github.io/identity-resolution/v11_universo.html) | Hogares, convivencia, multifamiliar, sospechosos, víctimas y suplantadores en Cosmograph |
 | [Universo del hito 3](https://stous1.github.io/identity-resolution/hito3_universo.html) | 5 mil registros y sus enlaces en Cosmograph |
@@ -89,24 +96,25 @@ generador.
 |---|---|---|---|---|---|
 | **Ciega 4** | **v4** | **0,995** | **0,993** | **0,994** | |
 | Ciega 4 | v3 | 0,995 | 0,979 | 0,987 | |
-| Ciega 3 | v3 | 0,997 | 0,966 | 0,981 | 0,916 |
-| Ciega 3 | v2 | 0,994 | 0,978 | 0,985 | |
-| Ciega 2 | v2 | 0,998 | 1,000 | 0,999 | 0,990 |
-| Ciega 1 | v1 | 0,997 | 0,636 | 0,777 | 0,960 |
+| Ciega 3 | v3 | 0,996 | 0,955 | 0,975 | 0,920 |
+| Ciega 3 | v2 | 0,996 | 0,972 | 0,984 | |
+| Ciega 2 | v2 | 1,000 | 1,000 | 1,000 | 0,990 |
+| Ciega 1 | v1 | 0,989 | 0,635 | 0,774 | 0,960 |
 | FEBRL3 (público) | propio | 1,000 | 0,997 | 0,998 | 0,957 |
 | fake_1000 (sin documento) | propio | 0,970 | 0,851 | 0,907 | 0,572 |
-| 1 millón de registros | v3 | 0,998 | 0,995 | 0,997 | 0,924 |
+| 1 millón de registros | v3 | 0,999 | 0,995 | 0,997 | 0,925 |
 
 <sub>"Mejor regla": "mismo documento o mismo nombre y fecha de nacimiento", con la misma
 estandarización y unión transitiva (en fake_1000, correo en lugar de documento). Las filas
-de las ciegas 1 y 2, FEBRL3 y fake_1000 salen de la [auditoría](audit/INFORME.md#2-línea-base-determinística-a2_linea_basepy);
+de las ciegas 1 y 2, FEBRL3 y fake_1000 salen de la [auditoría](audit/INFORME.md#2-línea-base-determinística-a2_linea_basepy)
+(en las ciegas 1 y 2, con los datos anteriores a la fecha fija);
 las del v3, de [docs/resultados/hito6](docs/resultados/hito6/); las de la ciega 4, de
 [docs/resultados/v11](docs/resultados/v11/). Intervalos de confianza
 en el [informe técnico](INFORME_TECNICO.md).</sub>
 
-En la ciega 3, el v3 a su umbral no supera al v2. Un diagnóstico muestra que la causa es
-el umbral elegido en desarrollo: con el mismo umbral del v2, el v3 tendría más recall
-(0,984).
+En la ciega 3, el v3 a su umbral queda por debajo del v2 (F1 −0,009, significativo). Un
+diagnóstico muestra que la causa es el umbral elegido en desarrollo: con el mismo umbral
+del v2, el v3 tendría más recall que el v2 (0,975 frente a 0,972).
 
 ## Rigor, historia y limitaciones
 
@@ -141,8 +149,9 @@ no cambió.
 - La distribución real de conjuntos, edificios y casas de varios pisos (cuántos clientes
   comparten un predio, cómo se escribe la unidad) **solo se puede calibrar con datos
   reales**.
-- Los generadores que parten de `sinteticos` (prueba normal, ciegas 1 a 3, hito 3) cambian
-  con la fecha del día; los de la v1.1 usan una fecha fija.
+- Hasta la v1.1, los generadores cambiaban con la fecha del día (Faker); desde la v1.1.1
+  usan una fecha fija y las cifras se recalcularon. Brechas de equidad pequeñas y la
+  precisión con prevalencias bajas cambiaron con los datos: hay que leerlas como señales.
 - El umbral elegido en desarrollo varía con la muestra, y la calibración no se transfiere a
   poblaciones nuevas.
 
@@ -168,7 +177,8 @@ uv run python scripts/hito6.py evaluar      # v3 congelado en la prueba normal y
 uv run python scripts/hito6.py diagnostico-umbral  # v3 con el umbral del v2
 uv run python scripts/hito6.py escala       # 100 mil y 1 millón (~8 GB de RAM)
 uv run python scripts/v11.py evaluar        # v3 y v4 congelados y grafos en la ciega 4
-uv run python scripts/servicio_local.py     # API local en http://127.0.0.1:8000/docs
+uv run python scripts/v111.py fichas        # datos de la ficha de cliente único
+uv run python scripts/servicio_local.py     # API local con el v4 en http://127.0.0.1:8000/docs
 uv run python scripts/gifs.py               # GIF del README (Playwright)
 uv run python scripts/publicar_resultados.py --hito 6   # copia a docs/resultados/
 ```
@@ -214,8 +224,11 @@ data/, reports/    datos y salidas de trabajo (no versionados)
 - **Hito 4: agente de revisión.** Un agente que revise la zona gris (pares entre 5,2 y
   19,9 bits) y la [cola de revisión](docs/resultados/hito3/cola_revision.csv) del hito 3,
   con la explicación por campo como evidencia.
-- **Quinta prueba ciega** para cualquier corrección nueva (la primera: que el grafo no
-  tome por relleno un anillo grande), **umbral estable** por
+- **Anillos por su forma, no solo por su tamaño:** en la
+  [ciega 4](https://stous1.github.io/identity-resolution/v11.html#prueba-ciega-4) el grafo
+  tomó por relleno tres anillos de 7 clientes. Debe mirar la forma de anillo (registros
+  recientes, digitales, sin validar, de personas sin relación) antes que el tamaño.
+- **Quinta prueba ciega** para cualquier corrección nueva, **umbral estable** por
   remuestreo del desarrollo, un **híbrido solo con "mismo documento"** y un **escenario
   ciego** para los patrones sospechosos. Lista completa en el
   [informe técnico](INFORME_TECNICO.md#trabajo-futuro).

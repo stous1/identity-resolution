@@ -50,6 +50,9 @@ uv run python scripts/v11.py desarrollar     # v1.1: modelo v4 en desarrollo
 uv run python scripts/v11.py grafo           # grafo residencial con 8 pares de semillas
 uv run python scripts/v11.py evaluar         # v3 y v4 congelados, grafos, ciega 4
 uv run python scripts/v11.py universo        # universo de Cosmograph de la v1.1
+uv run python scripts/v111.py hito2          # v1 congelado en la prueba normal con fecha fija
+uv run python scripts/v111.py fichas         # datos de la ficha de cliente único (tras --hito 3)
+uv run python scripts/v111.py tiempo-real    # "¿ya es cliente?" con el v4 y el v3
 uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3, 5, 6, v11 -> docs/resultados/
 ```
 
@@ -95,10 +98,10 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
   - Tiempo real con el v3: la zona gris sale de las bandas congeladas
     (`calibracion.json`), trasladadas a la previa 1/N (`tiempo_real.peso_con_otra_previa`).
     `scripts/servicio_local.py` usa el v3 por defecto; `--modelo v2` reproduce el hito 5.
-  - Demo: `demo.py` exporta los modelos v2 y v3 a `docs/demo/modelo_demo.json` y
+  - Demo: `demo.py` exporta los modelos v2, v3 y v4 a `docs/demo/modelo_demo.json`, `modelo_demo_v3.json` y
     `modelo_demo_v3.json` (este con las bandas); `docs/demo/motor.js` los reimplementa en
     JavaScript y `tests/test_demo.py` (con Node.js) verifica que da los mismos niveles y
-    pesos que Splink. `docs/demo.html` (v3) y `docs/calculadora.html` (lee
+    pesos que Splink. `docs/demo.html` (v4 desde la v1.1.1) y `docs/calculadora.html` (lee
     `docs/resultados/hito6/metricas.json`) son páginas estáticas, sin servidor.
   - GIF: `gifs.py` y `scripts/gifs.py` graban con Playwright el recorrido por Cosmograph
     (requiere internet) y el antes y después, en `docs/resultados/gifs/`.
@@ -113,6 +116,13 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
     cuarta prueba ciega, escrita por un subagente después de congelar. Las ciegas 1 a 4 ya
     se miraron: la próxima corrección necesita una ciega 5. `docs/v11_universo.html` lee
     `docs/resultados/v11/universo_*.json`.
+  - v1.1.1: `sinteticos.generar` corre con la fecha de Faker fija (`sinteticos_fecha.HOY_FIJO`;
+    `forzar_fecha` reproduce datos anteriores) y `tests/test_reproducibilidad.py` lo
+    verifica para cada generador. Los datos de escala se guardan en caché en `data/escala/`:
+    si cambia el generador, hay que borrarla. `flujo_v111.py` tiene la reevaluación del
+    hito 2, la ficha de cliente único (`docs/ficha.html`, lee
+    `docs/resultados/v11/fichas.json`) y el tiempo real del v4. La demo (`docs/demo.html`)
+    y el servicio local usan el v4; `tiempo_real.Vinculador` recibe el esquema del modelo.
 - `scripts/`: puntos de entrada delgados que orquestan funciones de `src/`.
 - `notebooks/`: solo exploración. Nada en `src/` ni `scripts/` importa de notebooks.
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.

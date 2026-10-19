@@ -8,6 +8,11 @@ captura, familiares que comparten apellidos y dirección, y datos de relleno com
 Bloqueo y umbral se eligen en desarrollo (1.200 personas) y las métricas se miden en prueba
 (800 personas), con intervalos de confianza del 95 % por bootstrap de personas.
 
+
+> **Cifras de la v1.1.1.** Los generadores dependían de la fecha del día (Faker); desde la
+> v1.1.1 usan una fecha fija y las evaluaciones con modelos congelados se volvieron a correr.
+> La prueba normal es de la corrida original, que entrenó el modelo (volver a correrla daría otro modelo); con los datos nuevos, el mismo v1 congelado da precisión y recall 1,000. Tabla de cambios en [v1.1.1](v111.md).
+
 ## Resultados en prueba
 
 | Variante | Precisión por clúster | Recall por clúster | Personas exactas |
@@ -34,7 +39,7 @@ por un subagente que no conocía la estandarización. Esa es la cifra honesta:
 | Evaluación | Precisión por clúster | Recall por clúster | Personas exactas |
 |---|---|---|---|
 | Prueba normal | 1,000 [1,000 – 1,000] | 0,998 [0,993 – 1,000] | 99,8 % |
-| **Prueba ciega** | **0,997** [0,987 – 1,000] | **0,636** [0,616 – 0,657] | **60,2 %** |
+| **Prueba ciega** | **0,989** [0,963 – 1,000] | **0,635** [0,614 – 0,655] | **60,5 %** |
 | FEBRL3 | 1,000 [1,000 – 1,000] | 0,997 [0,992 – 1,000] | 99,6 % |
 
 La precisión aguanta y el recall se cae.
@@ -44,7 +49,7 @@ la causa principal del recall perdido no son los nombres cruzados ni los documen
 dos **vetos** que el modelo aprendió (−48 bits por municipio distinto y −43 por dirección
 parecida) porque el generador del hito 2 nunca cambia la ciudad ni la dirección de nadie.
 Sin ellos, el recall sube a 0,943. En esta prueba, la regla "mismo documento" es mejor que
-el modelo (F1 0,931 frente a 0,777). La brecha del apellido de casada (41 % de personas
+el modelo (F1 0,931 frente a 0,777, con los datos anteriores). La brecha del apellido de casada (41 % de personas
 exactas frente a 62 %) era casi toda efecto de esos vetos: sin ellos es de −3,6 puntos y no
 es significativa. La de los apodos sí es real (−11,5 puntos). El
 [hito 6](hito6.md) corrige los vetos en el origen.

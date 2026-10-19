@@ -4,6 +4,38 @@ Historia por hitos del caso 1 (calidad del dato y resolución de identidades). T
 cambios están en la rama `main`; los modelos congelados tienen su tag. El hito 4 (agente de
 revisión de la zona gris) está pendiente.
 
+## v1.1.1: reproducibilidad, demo con el v4 y ficha de cliente único
+
+- **Fecha fija en los generadores:** `sinteticos.generar` (y lo que parte de él: hito 2,
+  ciegas 1 a 3, escenario del hito 3, tiempo real y escala) corre con `HOY_FIJO` (15 de
+  enero de 2026). Antes, el mismo generador con la misma semilla daba datos distintos otro
+  día. `tests/test_reproducibilidad.py` mueve el reloj de Faker a 2031 y 2040 y exige los
+  mismos datos en cada generador.
+- **Todas las evaluaciones publicadas se volvieron a correr** con los modelos congelados,
+  sin reentrenar (la escala, sin la caché de `data/escala`). Lo que cambió, en
+  [docs/v111.md](docs/v111.md):
+  - ciega 3 con el v3: de 0,997 / 0,966 / 0,981 a 0,996 / 0,955 / 0,975 (precisión /
+    recall / F1); el v3 queda por debajo del v2 de forma significativa (F1 −0,009);
+  - Splink frente a la mejor regla: de +0,065 a +0,055 de F1;
+  - la brecha de equidad significativa del v3 pasa del apellido de casada a las direcciones
+    urbanas frente a rurales;
+  - tiempo real del v3 con 1 % de clientes: de 0,938 a 1,000 (sin falsas alarmas; cifra
+    frágil);
+  - hito 3: exactitud del grafo en 8 semillas de 98,6 % ± 0,8 a 98,3 % ± 0,6 y otras reglas
+    de supervivencia para nombres, apellidos y dirección;
+  - 1 millón de registros: precisión de 0,998 a 0,999.
+- **Demo y "¿ya es cliente?" con el v4:** el motor en JavaScript reimplementa la dirección
+  en predio y unidad; la prueba de equivalencia con Splink pasa de ~630 a ~990 pares (con
+  pares residenciales) para el v2, el v3 y el v4. El servicio local usa el v4 por defecto.
+  Tiempo real del v4: mismo recall que el v3 en la población normal (0,989) y algo más en la
+  residencial (0,997 frente a 0,995), sin falsas alarmas.
+- **Ficha de cliente único** ([docs/ficha.html](docs/ficha.html)): registros como grafo con
+  la fuerza de cada enlace, registro de oro con origen y regla, datos compartidos con su
+  categoría, historia de contacto y alertas; ejemplos de una familia, una pareja de un
+  conjunto, una casa de varios pisos y el caso Esther.
+- GIF del README con el universo de la v1.1. Trabajo futuro: que el grafo reconozca los
+  anillos por su forma y no solo por su tamaño (hallazgo de la ciega 4).
+
 ## v1.1: realidad residencial y familiar colombiana (tags `v4-congelado` y `grafo-v11-congelado`)
 
 - **Diagnóstico previo** ([docs/v11_diagnostico.md](docs/v11_diagnostico.md)):

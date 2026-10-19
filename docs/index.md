@@ -7,8 +7,11 @@ sintéticos.
 
 [![Universo de registros en Cosmograph](resultados/portada.jpg)](hito3_universo.html)
 
-**[Probar la demo →](demo.html)** · **[Calculadora de impacto →](calculadora.html)** ·
-[universo en Cosmograph](hito3_universo.html)
+**[Probar la demo →](demo.html)** · **[Ficha de cliente único →](ficha.html)** ·
+**[Calculadora de impacto →](calculadora.html)** · [universo residencial](v11_universo.html)
+
+<sub>Cifras de la v1.1.1: los generadores usan una fecha fija y todas las evaluaciones se
+recalcularon con los mismos modelos congelados ([qué cambió](v111.md)).</sub>
 
 ## En un minuto
 
@@ -19,23 +22,25 @@ sintéticos.
   **1,6 %**, aunque detecta menos patrones sospechosos (66,7 % de sus personas frente a
   81,6 %).
 - **Prueba ciega 3** (modelo v3 congelado, errores de un generador independiente):
-  precisión **0,997** y recall **0,966** por clúster; 94,5 % de las personas reconstruidas
+  precisión **0,996** y recall **0,955** por clúster; 92,9 % de las personas reconstruidas
   exactamente.
-- **Frente a reglas simples:** +0,065 de F1 sobre la mejor regla determinística; la
+- **Frente a reglas simples:** +0,055 de F1 sobre la mejor regla determinística; la
   ganancia está donde el documento falta o viene alterado.
-- **1 millón de registros** en una máquina en 129 s (7,1 GB de pico), con precisión 0,998.
-- **"¿Ya es cliente?"** en unos 120 ms: precisión 0,999 si la mitad de las consultas son de
-  clientes, 0,938 si solo lo es el 1 %.
+- **1 millón de registros** en una máquina en 128 s (7,1 GB de pico), con precisión 0,999.
+- **"¿Ya es cliente?"** con el v4 en unos 110 ms: recall 0,989 y ninguna falsa alarma en
+  1.500 consultas de personas nuevas; con el 1 % de clientes, la precisión es frágil (una
+  sola falsa alarma la baja a cerca de 0,94).
 - **Auditoría independiente:** sin fugas de etiquetas y con todas las cifras reproducibles;
   sus hallazgos se corrigieron o matizaron en el [hito 6](hito6.md).
 
 | Prueba | Modelo | Precisión | Recall | F1 Splink | F1 mejor regla |
 |---|---|---|---|---|---|
-| **Ciega 3** | **v3** | **0,997** | **0,966** | **0,981** | 0,916 |
-| Ciega 2 | v2 | 0,998 | 1,000 | 0,999 | 0,990 |
-| Ciega 1 | v1 | 0,997 | 0,636 | 0,777 | 0,960 |
+| **Ciega 4** | **v4** | **0,995** | **0,993** | **0,994** | |
+| Ciega 3 | v3 | 0,996 | 0,955 | 0,975 | 0,920 |
+| Ciega 2 | v2 | 1,000 | 1,000 | 1,000 | 0,990 |
+| Ciega 1 | v1 | 0,989 | 0,635 | 0,774 | 0,960 |
 | FEBRL3 | propio | 1,000 | 0,997 | 0,998 | 0,957 |
-| 1 millón de registros | v3 | 0,998 | 0,995 | 0,997 | 0,924 |
+| 1 millón de registros | v3 | 0,999 | 0,995 | 0,997 | 0,925 |
 
 ![Antes: registros sueltos; después: clientes agrupados por el modelo v3](resultados/gifs/agrupacion.gif)
 
@@ -53,35 +58,39 @@ validación con datos reales.
 - [Hito 1: fake_1000](#hito-1-fake_1000): el flujo completo sobre el dataset de
   demostración de Splink.
 - [Hito 2: clientes sintéticos colombianos y estandarización](hito2.md): en la prueba
-  normal, precisión 1,000 y recall 0,998 por clúster. En la **prueba ciega** (modelo
-  congelado, errores de un generador independiente), precisión 0,997 y recall 0,636: la
-  cifra honesta. FEBRL3: precisión 1,000 y recall 0,997. *La auditoría mostró que ese
+  normal, precisión 1,000 y recall 0,998 por clúster (con la fecha fija de la v1.1.1, el
+  mismo modelo congelado da 1,000 y 1,000). En la **prueba ciega** (modelo congelado,
+  errores de un generador independiente), precisión 0,989 y recall 0,635: la cifra
+  honesta. FEBRL3: precisión 1,000 y recall 0,997. *La auditoría mostró que ese
   recall se perdió sobre todo por dos vetos aprendidos (municipio y dirección), no por los
   errores de nombre, y que la brecha del apellido de casada no era significativa sin
   ellos.*
 - [Hito 2b: corregir y volver a medir a ciegas](hito2b.md): con las correcciones (apellido
   de casada, apodos, nombres cruzados, documento, teléfonos y fechas), en una **segunda
-  prueba ciega**, precisión 0,998 y recall 1,000 por clúster; el modelo anterior, en esos
-  mismos datos, 0,995 y 0,920.
+  prueba ciega**, precisión 1,000 y recall 1,000 por clúster; el modelo anterior, en esos
+  mismos datos, 1,000 y 0,914.
 - [Hito 3: registro de oro, grafo de identidad compartida y puentes](hito3.md): registro de
   oro a menos de 5 puntos del techo alcanzable, grupos de datos compartidos clasificados
-  en relleno, hogar o sospechoso (98,6 % ± 0,8 en 8 semillas), puentes que evitan en
-  promedio 3 de cada 10 mezclas (sin perder recall con la semilla publicada), y el
+  en relleno, hogar o sospechoso (98,3 % ± 0,6 en 8 semillas), puentes que evitan en
+  promedio 3 a 4 de cada 10 mezclas, y el
   [universo de registros en Cosmograph](hito3_universo.html).
 - [Hito 5: vinculación en tiempo real y escala](hito5.md): "¿ya es cliente?" contra la base
-  de registros de oro con precisión 0,999, recall 0,993 y 60 ms de mediana por consulta;
-  1 millón de registros en DuckDB en 134 s con 9,1 GB de pico, y el
+  de registros de oro con precisión 1,000, recall 0,992 y 68 ms de mediana por consulta;
+  1 millón de registros en DuckDB en 155 s con 9,1 GB de pico, y el
   [universo grande en Cosmograph](hito5_universo.html) (200 mil registros desde Parquet).
-  *Con las mismas tasas, la precisión sería 0,991 con 10 % de clientes existentes en las
-  consultas y 0,909 con 1 %.*
+  *Con los datos anteriores a la v1.1.1 hubo una falsa alarma, y con esas tasas la
+  precisión sería 0,909 con 1 % de clientes; con los datos nuevos no hubo ninguna.*
 - [v1.1: realidad residencial y familiar colombiana](v11.md): [diagnóstico](v11_diagnostico.md),
   generador con predios y hogares, modelo v4 con la dirección en predio y unidad, grafo
   residencial (convivencia probable, multifamiliar, parejas por apellido de casada y por la
   convención de los hijos) y **prueba ciega 4**; [universo residencial](v11_universo.html).
+- [v1.1.1: reproducibilidad](v111.md): fecha fija en todos los generadores, todas las
+  evaluaciones recalculadas (con la tabla de lo que cambió), demo y "¿ya es cliente?" con
+  el v4, y la [ficha de cliente único](ficha.html).
 - [Hito 6: correcciones post-auditoría](hito6.md): modelo v3 sin vetos extremos (ningún
   campo resta más de 10 bits), generador con mudanzas, **prueba ciega 3** (v3: precisión
-  0,997 y recall 0,966; v2: 0,994 y 0,978; v1: 0,989 y 0,693; con el umbral del v2, el v3
-  tendría más recall), línea base determinística (Splink aporta +0,065 de F1 global sobre
+  0,996 y recall 0,955; v2: 0,996 y 0,972; v1: 0,995 y 0,715; con el umbral del v2, el v3
+  tendría más recall), línea base determinística (Splink aporta +0,055 de F1 global sobre
   la mejor regla, sobre todo donde el documento falla), calibración y zona gris por bandas
   de peso (también en "¿ya es cliente?"), escala con el modelo congelado y hito 3 con
   varias semillas.

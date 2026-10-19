@@ -7,6 +7,11 @@
 
 [![Universo grande](resultados/hito5/universo_grande.png)](hito5_universo.html)
 
+
+> **Cifras de la v1.1.1.** Los generadores dependían de la fecha del día (Faker); desde la
+> v1.1.1 usan una fecha fija, y el tiempo real y la escala de esta página se volvieron a
+> correr (la escala, sin la caché de datos anterior). Tabla de cambios en [v1.1.1](v111.md).
+
 ## ¿Ya es cliente? (tiempo real)
 
 Llega un registro nuevo por un canal y hay que responder en el momento si la persona ya es
@@ -30,25 +35,26 @@ correcto**.
 
 | Métrica | Valor | IC 95 % |
 |---|---|---|
-| Precisión (decisión "cliente") | 0,999 | 0,997 – 1,000 |
-| Recall (clientes existentes reconocidos) | 0,993 | 0,987 – 0,998 |
-| Cliente equivocado | 0 de 994 | |
-| Latencia mediana | 60 ms | |
-| Latencia p95 | 74 ms | |
-| Latencia máxima | 162 ms | |
+| Precisión (decisión "cliente") | 1,000 | 1,000 – 1,000 |
+| Recall (clientes existentes reconocidos) | 0,992 | 0,986 – 0,997 |
+| Cliente equivocado | 0 de 992 | |
+| Latencia mediana | 68 ms | |
+| Latencia p95 | 89 ms | |
+| Latencia máxima | 199 ms | |
 
 *Corrección de la auditoría:* esa precisión supone 50 % de consultas de clientes
-existentes. Con las tasas de esta misma evaluación (993 aciertos entre 1.000 existentes y
-1 falsa alarma entre 1.000 nuevas), con 10 % de clientes la precisión sería **0,991** y con
-1 %, **0,909**: una falsa alarma cada 1.000 personas nuevas pesa mucho más cuando casi
-todas las consultas son nuevas. Las cifras de 0,994 y 0,94 del [hito 6](hito6.md) son del
-modelo v3, con otra base y otro umbral.
+existentes. Con los datos anteriores a la v1.1.1 hubo 1 falsa alarma entre 1.000 personas
+nuevas, y con esas tasas la precisión habría sido 0,991 con 10 % de clientes y **0,909**
+con 1 %: una falsa alarma cada 1.000 personas nuevas pesa mucho más cuando casi todas las
+consultas son nuevas. Con los datos nuevos no hubo ninguna, así que la precisión estimada
+es 1,000 con cualquier mezcla; con solo 1.000 consultas nuevas, esa cifra es frágil (por la
+regla del tres, la tasa de falsas alarmas podría llegar a 0,3 %).
 
 | Decisión | Existentes | Nuevas |
 |---|---|---|
-| cliente | 993 | 1 |
-| revisar | 0 | 6 |
-| nuevo | 7 | 993 |
+| cliente | 992 | 0 |
+| revisar | 0 | 8 |
+| nuevo | 8 | 992 |
 
 Intervalos por bootstrap de consultas (1.000 réplicas). La latencia es por consulta e
 incluye bloqueo, comparación y explicación; Splink genera el SQL una vez y después solo se
@@ -57,9 +63,9 @@ vuelve a ejecutar en DuckDB (sin esto, unos 280 ms por consulta).
 **Servicio local:** `uv run python scripts/servicio_local.py` levanta una API con FastAPI
 en `http://127.0.0.1:8000/docs`. `POST /consultar` recibe un registro crudo y devuelve la
 decisión, la probabilidad, el cliente encontrado y la explicación por campo (peso de cada
-comparación). Es solo para uso local: no se publica ningún servicio. *Desde el hito 6, el
-servicio usa por defecto el modelo v3 con la zona gris por bandas de peso;
-`--modelo v2` reproduce el de esta página (zona gris p ≥ 0,9).*
+comparación). Es solo para uso local: no se publica ningún servicio. *Desde la v1.1.1, el
+servicio usa por defecto el modelo v4 con la zona gris por bandas de peso; `--modelo v3`
+usa el del hito 6 y `--modelo v2` reproduce el de esta página (zona gris p ≥ 0,9).*
 
 ## Escala con DuckDB
 
@@ -71,25 +77,27 @@ entrenamiento 1,54 GB).
 
 | Registros | Etapa | Segundos | Memoria pico (GB) |
 |---|---|---|---|
-| 99.088 | Preparación | 8,3 | 0,44 |
-| 99.088 | Entrenamiento | 13,1 | 1,54 |
-| 99.088 | Predicción | 1,1 | 1,03 |
-| 99.088 | Agrupación | 0,8 | 1,11 |
-| 995.688 | Preparación | 90,6 | 3,08 |
-| 995.688 | Entrenamiento | 35,6 | 6,46 |
-| 995.688 | Predicción | 1,9 | 7,74 |
-| 995.688 | Agrupación | 5,8 | **9,08** |
+| 99.837 | Preparación | 10,2 | 0,43 |
+| 99.837 | Entrenamiento | 15,3 | 1,52 |
+| 99.837 | Predicción | 1,2 | 1,03 |
+| 99.837 | Agrupación | 0,9 | 1,11 |
+| 996.688 | Preparación | 102,8 | 3,10 |
+| 996.688 | Entrenamiento | 43,3 | 6,49 |
+| 996.688 | Predicción | 2,4 | 7,75 |
+| 996.688 | Agrupación | 6,7 | **9,10** |
 
 | Registros | Precisión | Recall | Clientes exactos |
 |---|---|---|---|
-| 99.088 | 0,982 | 0,997 | 97,8 % |
-| 995.688 | 0,971 | 0,996 | 96,6 % |
+| 99.837 | 0,981 | 0,997 | 97,6 % |
+| 996.688 | 0,970 | 0,996 | 96,5 % |
 
 ![Tiempo por etapa](resultados/hito5/escala_tiempo.png)
 ![Memoria por etapa](resultados/hito5/escala_memoria.png)
 
 - **El cuello de botella es la preparación** (estandarización en Python, fila por fila):
-  91 s de 134 s con 1 millón. Entrenar, predecir y agrupar en DuckDB toma 43 s.
+  103 s de 155 s con 1 millón. Entrenar, predecir y agrupar en DuckDB toma 52 s (los
+  tiempos de la v1.1.1 se midieron con la máquina ocupada por otras corridas; antes eran
+  91 s de 134 s).
 - **5 millones no cabe en esta máquina.** Con 1 millón el proceso llega a **9,1 GB** en la
   agrupación; la corrida de 5 millones se detuvo por falta de memoria del sistema y no se
   reporta. Escalar más pide liberar artefactos entre etapas, DuckDB sobre disco o un motor
