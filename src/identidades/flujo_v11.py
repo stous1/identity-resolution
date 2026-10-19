@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import json
 import subprocess
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any
 
@@ -202,6 +202,26 @@ SEMILLAS_GRAFO: list[tuple[int, int]] = [(4040, 4141)] + [
 PARAMETROS_GRAFO_HITO3: tuple[int, float] = (15, 0.5)  # docs/resultados/hito3/metricas.json
 
 
+def preparar_v4_tipado(df: pd.DataFrame) -> pd.DataFrame:
+    """``modelo_co_v4.preparar`` con ``unidad_partes`` tipada como lista de texto.
+
+    Si ningún registro trae unidad (por ejemplo, la prueba normal del hito 2), la columna
+    queda toda en nulos y DuckDB la lee como entero, y la comparación de dirección falla.
+    Solo cambia el tipo de la columna: los valores y el modelo congelado son los mismos.
+    """
+    import pyarrow as pa
+
+    from identidades import modelo_co_v4
+
+    modelo = modelo_co_v4.preparar(df)
+    partes = pd.Series(
+        modelo["unidad_partes"].tolist(),
+        index=modelo.index,
+        dtype=pd.ArrowDtype(pa.list_(pa.string())),
+    )
+    return modelo.assign(unidad_partes=partes)
+
+
 def modelos_congelados() -> dict[str, tuple[dict, float, Any]]:
     """v3 y v4 congelados con su umbral y esquema."""
     from identidades.modelo_co_v3 import ESQUEMA_V3
@@ -210,7 +230,7 @@ def modelos_congelados() -> dict[str, tuple[dict, float, Any]]:
     configuracion_4, umbral_4, _, _ = cargar_congelado_v4()
     return {
         "v3": (configuracion_3, umbral_3, ESQUEMA_V3),
-        "v4": (configuracion_4, umbral_4, ESQUEMA_V4),
+        "v4": (configuracion_4, umbral_4, replace(ESQUEMA_V4, preparar=preparar_v4_tipado)),
     }
 
 
