@@ -28,9 +28,23 @@ HOY_V11: tuple[int, int, int] = (2026, 10, 19)
 _forzada: tuple[int, int, int] | None = None
 
 
+def _segundos_enteros(self, inicio: int, fin: int) -> int:  # noqa: ANN001
+    """Segundos aleatorios como los genera Faker en Windows (``randint``)."""
+    return self.generator.random.randint(inicio, fin)
+
+
 @contextmanager
 def fecha_fija(anio: int, mes: int, dia: int) -> Iterator[None]:
-    """Dentro del bloque, Faker cree que hoy es ``anio-mes-dia`` a mediodía."""
+    """Dentro del bloque, Faker cree que hoy es ``anio-mes-dia`` a mediodía.
+
+    Fija también cómo sortea Faker los segundos de una fecha: en Windows usa ``randint`` y en
+    Linux ``uniform``, que consume el generador aleatorio de otra forma, así que la misma
+    semilla daba otras fechas de nacimiento (y otros datos) en la integración continua. Se
+    usa ``randint`` en todas las plataformas, como en la máquina donde se generaron las
+    cifras publicadas.
+    """
+    from faker.providers.date_time import Provider
+
     hoy = datetime(anio, mes, dia, 12, 0, 0)
 
     class _Fijo(datetime):
@@ -38,7 +52,10 @@ def fecha_fija(anio: int, mes: int, dia: int) -> Iterator[None]:
         def now(cls, tz=None):  # noqa: ANN001, ANN206
             return hoy if tz is None else hoy.replace(tzinfo=tz)
 
-    with mock.patch("faker.providers.date_time.datetime", _Fijo):
+    with (
+        mock.patch("faker.providers.date_time.datetime", _Fijo),
+        mock.patch.object(Provider, "_rand_seconds", _segundos_enteros),
+    ):
         yield
 
 

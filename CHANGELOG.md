@@ -4,6 +4,14 @@ Historia por hitos del caso 1 (calidad del dato y resolución de identidades). T
 cambios están en la rama `main`; los modelos congelados tienen su tag. El hito 4 (agente de
 revisión de la zona gris) está pendiente.
 
+## v1.1.2: generadores iguales en Windows y en Linux
+
+- Faker sortea los segundos de una fecha con `randint` en Windows y con `uniform` en Linux;
+  con la misma semilla, la integración continua generaba otros datos (falló la prueba del
+  caso Esther). `fecha_fija` usa `randint` en todas las plataformas: los datos de Windows,
+  y con ellos todas las cifras publicadas, no cambian. Pruebas nuevas con huellas fijas de
+  los generadores y con el sorteo de Linux simulado.
+
 ## v1.1.1: reproducibilidad, demo con el v4 y ficha de cliente único
 
 - **Fecha fija en los generadores:** `sinteticos.generar` (y lo que parte de él: hito 2,

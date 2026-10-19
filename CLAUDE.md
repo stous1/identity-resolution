@@ -119,7 +119,8 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
     `docs/resultados/v11/universo_*.json`.
   - v1.1.1: `sinteticos.generar` corre con la fecha de Faker fija (`sinteticos_fecha.HOY_FIJO`;
     `forzar_fecha` reproduce datos anteriores) y `tests/test_reproducibilidad.py` lo
-    verifica para cada generador. Los datos de escala se guardan en caché en `data/escala/`:
+    verifica para cada generador. `fecha_fija` fija además el sorteo de segundos de Faker
+    (`randint`, como en Windows; en Linux usaría `uniform` y daría otros datos). Los datos de escala se guardan en caché en `data/escala/`:
     si cambia el generador, hay que borrarla. `flujo_v111.py` tiene la reevaluación del
     hito 2, la ficha de cliente único (`docs/ficha.html`, lee
     `docs/resultados/v11/fichas.json`) y el tiempo real del v4. La demo (`docs/demo.html`)
