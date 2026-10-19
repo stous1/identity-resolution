@@ -3,7 +3,7 @@
 Uso:
     uv run python scripts/gifs.py                 # los dos
     uv run python scripts/gifs.py agrupacion      # antes y después (ciega 3, v3 congelado)
-    uv run python scripts/gifs.py universo        # recorrido por Cosmograph (requiere internet)
+    uv run python scripts/gifs.py universo        # universo de la v1.1 (requiere internet)
 
 Escribe en docs/resultados/gifs/.
 """
@@ -24,7 +24,7 @@ def main() -> None:
         ruta = gifs.grabar_agrupacion(destino / "agrupacion.gif")
         print(f"{ruta} ({ruta.stat().st_size / 1024:.0f} KB)")
     if args.gif in (None, "universo"):
-        ruta = gifs.grabar_universo(rutas.DOCS, destino / "universo.gif")
+        ruta = gifs.grabar_universo(rutas.DOCS, destino / "universo.gif", "v11_universo.html")
         print(f"{ruta} ({ruta.stat().st_size / 1024:.0f} KB)")
 
 

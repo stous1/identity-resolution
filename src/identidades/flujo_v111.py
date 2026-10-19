@@ -372,3 +372,86 @@ def exportar_fichas(directorio: Path, n_muestra: int = 130, semilla: int = 11) -
         newline="\n",
     )
     return {"clientes": len(fichas), "destacados": destacados}
+
+
+# ---------------------------------------------------------------------------
+# "¿Ya es cliente?" con el v4
+# ---------------------------------------------------------------------------
+
+
+def tiempo_real_v4(
+    directorio: Path, n_bootstrap: int = 1000, n_personas: int = 6000, max_consultas: int = 1500
+) -> dict[str, Any]:
+    """ "¿Ya es cliente?" con el v4 y el v3 congelados, en las mismas consultas.
+
+    Dos poblaciones: la del generador del hito 2 (como en el hito 6) y una residencial de la
+    v1.1 (semilla 4242, distinta de las de desarrollo y prueba). Precisión según la
+    prevalencia de clientes en las consultas (1 %, 10 % y 50 %), con la zona gris de las
+    bandas congeladas de cada modelo.
+    """
+    import numpy as np
+
+    from identidades import flujo_hito6, tiempo_real
+    from identidades.escenario_residencial import generar_escenario_residencial
+
+    modelos = flujo_v11.modelos_congelados()
+    bandas = {"v3": flujo_hito6.cargar_congelado_v3()[3], "v4": flujo_v11.cargar_congelado_v4()[3]}
+    residencial, _, _ = generar_escenario_residencial(n_personas, 4242)
+    poblaciones = {"normal": None, "residencial": residencial}
+    resultado: dict[str, Any] = {
+        "modelos": {v: {"umbral": modelos[v][1]} for v in modelos},
+        "descripcion": "Mismas consultas y misma base de registros para los dos modelos.",
+    }
+    for nombre, registros in poblaciones.items():
+        base_registros, consultas, _ = tiempo_real.preparar_evaluacion(
+            n_personas, max_consultas=max_consultas, registros=registros
+        )
+        resultado[nombre] = {}
+        for version, (configuracion, umbral, esquema) in modelos.items():
+            base = tiempo_real.construir_base(base_registros, configuracion, umbral, esquema)
+            vinculador = tiempo_real.Vinculador(
+                base,
+                configuracion,
+                umbral,
+                relleno=tiempo_real.telefonos_de_relleno(base_registros),
+                bandas=bandas[version],
+                esquema=esquema,
+            )
+            t = tiempo_real.resultados_por_consulta(vinculador, consultas)
+            tp, fp, fn = int(t["tp"].sum()), int(t["fp"].sum()), int(t["fn"].sum())
+            resultado[nombre][version] = {
+                "base": {"clientes": len(base), "registros_usados": len(base_registros)},
+                "consultas": {
+                    "existentes": int(t["existe"].sum()),
+                    "nuevas": int((~t["existe"]).sum()),
+                },
+                "mezcla_evaluada": {
+                    "precision": tp / (tp + fp) if tp + fp else 0.0,
+                    "recall": tp / (tp + fn) if tp + fn else 0.0,
+                },
+                "decisiones": {
+                    "existentes": t[t["existe"]]["decision"].value_counts().to_dict(),
+                    "nuevas": t[~t["existe"]]["decision"].value_counts().to_dict(),
+                },
+                **tiempo_real.precision_por_prevalencia(t, n_bootstrap=n_bootstrap),
+                "latencia_ms": {
+                    "mediana": float(np.median(t["milisegundos"])),
+                    "p95": float(t["milisegundos"].quantile(0.95)),
+                },
+            }
+    resultado["resumen"] = {
+        n: {
+            v: {
+                "recall": round(resultado[n][v]["mezcla_evaluada"]["recall"], 4),
+                **{
+                    f"precision_{float(pi):.0%}": round(x["valor"], 4)
+                    for pi, x in resultado[n][v]["precision"].items()
+                },
+                "mediana_ms": round(resultado[n][v]["latencia_ms"]["mediana"], 1),
+            }
+            for v in modelos
+        }
+        for n in poblaciones
+    }
+    _escribir(resultado, directorio / "tiempo_real_v4.json")
+    return resultado

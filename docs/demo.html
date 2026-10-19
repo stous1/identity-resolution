@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Demo: ¿son la misma persona?</title>
-<meta name="description" content="Compara dos registros con el modelo v3 congelado, en el navegador: probabilidad, banda de zona gris y explicación por campo.">
+<meta name="description" content="Compara dos registros con el modelo v4 congelado, en el navegador: probabilidad, banda de zona gris y explicación por campo.">
 <link rel="icon" type="image/png" href="favicon.png">
 <style>
   :root {
@@ -66,7 +66,7 @@
 <main>
   <p><a href="./">← Portada</a></p>
   <h1>¿Son la misma persona?</h1>
-  <p class="sub">Escribe dos registros y el modelo v3 congelado los compara aquí mismo, en tu
+  <p class="sub">Escribe dos registros y el modelo v4 congelado los compara aquí mismo, en tu
     navegador (no se envía nada a ningún servidor). Verás la probabilidad, la banda de zona
     gris y cuánto suma o resta cada campo.</p>
 
@@ -76,6 +76,8 @@
       <button type="button" data-ejemplo="mudanza">Se mudó y cambió de celular</button>
       <button type="button" data-ejemplo="hermanos">Hermanos que viven juntos</button>
       <button type="button" data-ejemplo="distintas">Personas distintas</button>
+      <button type="button" data-ejemplo="apartamento">Mismo apartamento, otra escritura</button>
+      <button type="button" data-ejemplo="vecinos">Vecinos del mismo edificio</button>
     </div>
     <p class="nota" id="nota-ejemplo" hidden></p>
     <form class="registros" id="formulario" autocomplete="off">
@@ -102,13 +104,14 @@
     <div class="fijo" aria-hidden="true"><b id="fijo-texto">–</b><a href="#resultado">Ver explicación ↓</a></div>
   </div>
 
-  <p class="nota">Modelo v3 congelado (<code>hito6-congelado</code>), reimplementado en
-    JavaScript y verificado contra Splink sobre ~630 pares (mismos niveles y mismo peso).
-    No aplica el ajuste por frecuencia de términos, que depende de la base completa. Las bandas
-    vienen de la calibración ajustada en desarrollo: <b>aceptar</b> desde el umbral de operación
-    (19,9 bits), <b>revisar</b> desde 5,2 bits y <b>rechazar</b> por debajo. La probabilidad no
-    está calibrada: úsala como puntaje, no como frecuencia. Datos ficticios.
-    <a href="hito6.html">Detalle en el hito 6</a>.</p>
+  <p class="nota">Modelo v4 congelado (<code>v4-congelado</code>), con la dirección separada
+    en predio y unidad, reimplementado en JavaScript y verificado contra Splink sobre ~990
+    pares (mismos niveles y mismo peso), incluidos apartamentos, torres y pisos. No aplica el
+    ajuste por frecuencia de términos, que depende de la base completa. Las bandas vienen de la
+    calibración ajustada en desarrollo: <b>aceptar</b> desde el umbral de operación (19,9
+    bits), <b>revisar</b> desde 8,3 bits y <b>rechazar</b> por debajo. La probabilidad no está
+    calibrada: úsala como puntaje, no como frecuencia. Datos ficticios.
+    <a href="v11.html">Detalle en la v1.1</a>.</p>
 </main>
 
 <script type="module">
@@ -144,6 +147,18 @@ const EJEMPLOS = {
     { numero_documento: "1.098.765.987", nombres: "Camilo Andrés", apellidos: "Zapata Romero", fecha_nacimiento: "1995-01-20",
       celular: "3112223344", correo: "camilo.zapata@gmail.com", direccion: "Calle 10 # 20-30", ciudad: "Pereira" },
   ],
+  apartamento: [
+    { numero_documento: "1.019.876.543", nombres: "Valentina", apellidos: "Mejía Arango", fecha_nacimiento: "1999-08-21",
+      celular: "3011234567", correo: "vale.mejia@gmail.com", direccion: "Carrera 7 # 40-62 Apto 502", ciudad: "Bogotá" },
+    { numero_documento: "1019876543", nombres: "VALENTINA", apellidos: "Mejia", fecha_nacimiento: "21/08/1999",
+      celular: null, correo: null, direccion: "Cra 7 No 40-62 Ap 502 Edificio Bellavista", ciudad: "Bogota" },
+  ],
+  vecinos: [
+    { numero_documento: "1.015.333.444", nombres: "Felipe", apellidos: "Ortiz Lara", fecha_nacimiento: "1988-02-11",
+      celular: "3102020202", correo: "felipe.ortiz@gmail.com", direccion: "Calle 140 # 9-50 Torre 1 Apto 302", ciudad: "Bogotá" },
+    { numero_documento: "1.015.555.666", nombres: "Natalia", apellidos: "Suárez Díaz", fecha_nacimiento: "1991-07-30",
+      celular: "3103030303", correo: "natalia.suarez@hotmail.com", direccion: "Cl 140 # 9-50 T 2 Ap 204", ciudad: "Bogotá" },
+  ],
   distintas: [
     { numero_documento: "71.234.567", nombres: "Luis Fernando", apellidos: "Ospina Restrepo", fecha_nacimiento: "1968-09-30",
       celular: "3014445566", correo: "lfospina@yahoo.com", direccion: "Carrera 50 # 30-12", ciudad: "Medellín" },
@@ -158,8 +173,12 @@ const NOTAS = {
     "aunque el documento y la fecha de nacimiento no coinciden. Fellegi-Sunter supone campos " +
     "independientes y dentro de un hogar no lo son. La auditoría encontró que todos los falsos " +
     "positivos a escala son familiares; por eso el error caro se vigila con la línea base y la revisión.",
-  mudanza: "Celular, dirección y ciudad nuevos restan, pero con el piso del v3 ningún campo resta " +
+  mudanza: "Celular, dirección y ciudad nuevos restan, pero con el piso del modelo ningún campo resta " +
     "más de 10 bits: el documento, el nombre, la fecha y el correo bastan.",
+  apartamento: "El v4 lee la dirección como predio y unidad: \"Apto 502\" y \"Ap 502\" son la misma " +
+    "unidad y suman como misma dirección. El v3 las tomaba por direcciones distintas (−1,7 bits).",
+  vecinos: "Mismo predio, otra unidad: dos vecinos del conjunto. La dirección suma poco (unos 3,6 bits; " +
+    "en el v3 sumaba 5,4) y el resto de los campos los separa.",
 };
 
 const fieldsets = [...document.querySelectorAll("fieldset[data-registro]")];
@@ -264,7 +283,7 @@ let ancho = window.innerWidth;
 window.addEventListener("resize", () => { if (Math.abs(window.innerWidth - ancho) > 40) { ancho = window.innerWidth; actualizar(); } });
 
 try {
-  modelo = await (await fetch("./demo/modelo_demo_v3.json")).json();
+  modelo = await (await fetch("./demo/modelo_demo_v4.json")).json();
   motor = crearMotor(modelo);
   EJEMPLOS.errores.forEach((r, i) => escribir(fieldsets[i], r));
   actualizar();

@@ -5,7 +5,8 @@ Uso:
 
 ``POST /consultar`` recibe un registro crudo y devuelve la decisión (``cliente``,
 ``revisar`` o ``nuevo``), el cliente encontrado y la explicación por campo. La zona gris
-sale de las bandas congeladas del v3 si el ``Vinculador`` las tiene (ver ``tiempo_real``).
+sale de las bandas congeladas del modelo (v4 por defecto) si el ``Vinculador`` las tiene
+(ver ``tiempo_real``).
 """
 
 from __future__ import annotations
@@ -33,7 +34,7 @@ class Registro(BaseModel):
     departamento: str | None = Field(None, examples=["Antioquia"])
 
 
-def crear_app(vinculador: Vinculador, modelo: str = "v3 congelado") -> FastAPI:
+def crear_app(vinculador: Vinculador, modelo: str = "v4 congelado") -> FastAPI:
     app = FastAPI(
         title="¿Ya es cliente?",
         description=(

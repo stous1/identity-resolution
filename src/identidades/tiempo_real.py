@@ -93,7 +93,39 @@ def peso_con_otra_previa(peso: float, previa_origen: float, previa_destino: floa
     return peso - log_odds(previa_origen) + log_odds(previa_destino)
 
 
-def construir_base(registros: pd.DataFrame, configuracion: dict, umbral: float) -> pd.DataFrame:
+def columnas_tf(configuracion: dict) -> list[str]:
+    """Columnas con ajuste por frecuencia en un modelo guardado."""
+    return sorted(
+        {
+            n["tf_adjustment_column"]
+            for c in configuracion["comparisons"]
+            for n in c["comparison_levels"]
+            if n.get("tf_adjustment_column")
+        }
+    )
+
+
+def tabla_tipada(filas: list[dict[str, Any]] | pd.DataFrame) -> pd.DataFrame:
+    """DataFrame para DuckDB con las columnas de listas del v4 tipadas como texto.
+
+    Si en una consulta la lista de partes de la unidad es nula, DuckDB la leería como
+    entero y la comparación de dirección del v4 fallaría.
+    """
+    import pyarrow as pa
+
+    tabla = pd.DataFrame(filas)
+    if "unidad_partes" in tabla:
+        tabla["unidad_partes"] = pd.Series(
+            [list(v) if isinstance(v, list | np.ndarray) else None for v in tabla["unidad_partes"]],
+            index=tabla.index,
+            dtype=pd.ArrowDtype(pa.list_(pa.string())),
+        )
+    return tabla
+
+
+def construir_base(
+    registros: pd.DataFrame, configuracion: dict, umbral: float, esquema: Any = None
+) -> pd.DataFrame:
     """Registros de oro (formato crudo, un renglón por cliente) a partir de registros.
 
     Los clientes salen del modelo congelado; cada campo, de la regla de supervivencia del
@@ -101,7 +133,7 @@ def construir_base(registros: pd.DataFrame, configuracion: dict, umbral: float) 
     reciente"; ver ``registro_oro``). ``cluster`` es la persona verdadera mayoritaria (solo
     para evaluar). El relleno no sobrevive.
     """
-    linker = flujo.aplicar_configuracion(configuracion, registros, ESQUEMA_V2)
+    linker = flujo.aplicar_configuracion(configuracion, registros, esquema or ESQUEMA_V2)
     clusters = modelo.agrupar(linker, modelo.predecir(linker), umbral).as_pandas_dataframe()
     con_meta = registros.assign(
         fecha_actualizacion=registros.get("fecha_actualizacion", "2020-01-01"),
@@ -151,8 +183,11 @@ class Vinculador:
     zona_gris: float = ZONA_GRIS
     relleno: set[str] = field(default_factory=set)
     bandas: dict | None = None
+    # Esquema del modelo (preparación de columnas); por defecto, el del v2 y el v3.
+    esquema: Any = None
 
     def __post_init__(self) -> None:
+        self.esquema = self.esquema or ESQUEMA_V2
         previa = 1 / max(len(self.base), 1)
         configuracion = {**self.configuracion, "probability_two_random_records_match": previa}
         # Las bandas se definieron con la previa del modelo congelado (la del desarrollo).
@@ -165,9 +200,9 @@ class Vinculador:
                 previa,
             )
         )
-        preparada = ESQUEMA_V2.preparar(self.base)
+        preparada = tabla_tipada(self.esquema.preparar(self.base))
         self.linker = Linker(preparada, configuracion, db_api=DuckDBAPI())
-        for columna in COLUMNAS_TF:
+        for columna in columnas_tf(configuracion):
             self.linker.table_management.compute_tf_table(columna)
         self.reglas_bloqueo = configuracion["blocking_rules_to_generate_predictions"]
         self.clientes = self.base.set_index("unique_id")
@@ -182,7 +217,7 @@ class Vinculador:
     def _preparar(self, registro: dict[str, Any]) -> list[dict[str, Any]]:
         fila = {c: registro.get(c) for c in COLUMNAS_CRUDAS}
         fila["unique_id"] = -1
-        preparado = ESQUEMA_V2.preparar(pd.DataFrame([fila]))
+        preparado = self.esquema.preparar(pd.DataFrame([fila]))
         telefonos = preparado.at[0, "telefonos"]
         if isinstance(telefonos, list):
             utiles = [t for t in telefonos if t not in self.relleno] or None
@@ -192,7 +227,10 @@ class Vinculador:
             )
         registros = preparado.drop(columns=["cluster"], errors="ignore").to_dict("records")
         return [
-            {k: (None if not isinstance(v, list) and pd.isna(v) else v) for k, v in r.items()}
+            {
+                k: list(v) if isinstance(v, list | np.ndarray) else (None if pd.isna(v) else v)
+                for k, v in r.items()
+            }
             for r in registros
         ]
 
@@ -206,7 +244,7 @@ class Vinculador:
         una tabla de consulta de nombre fijo y luego solo se reejecuta en DuckDB.
         """
         db_api = self.linker._db_api
-        ejemplo = pd.DataFrame(self._preparar({c: None for c in COLUMNAS_CRUDAS}))
+        ejemplo = tabla_tipada(self._preparar({c: None for c in COLUMNAS_CRUDAS}))
         self.linker.table_management.register_table(ejemplo, self.TABLA_CONSULTA, overwrite=True)
         capturadas: list[str] = []
         original = db_api._execute_sql_against_backend
@@ -237,7 +275,7 @@ class Vinculador:
             return self.linker.inference.find_matches_to_new_records(
                 preparado, blocking_rules=self.reglas_bloqueo, match_weight_threshold=-30
             ).as_pandas_dataframe()
-        self._con.register(self.TABLA_CONSULTA, pd.DataFrame(preparado))
+        self._con.register(self.TABLA_CONSULTA, tabla_tipada(preparado))
         for sql in self._sql:
             self._con.execute(sql)
         return self._con.sql(f"select * from {self._salida}").df()

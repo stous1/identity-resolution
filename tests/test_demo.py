@@ -1,4 +1,4 @@
-"""La demo en JavaScript da los mismos niveles y el mismo peso que Splink (v2 y v3)."""
+"""La demo en JavaScript da los mismos niveles y el mismo peso que Splink (v2, v3 y v4)."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from unittest import mock
 import pandas as pd
 import pytest
 
-from identidades import demo, errores_ciegos, errores_ciegos_2, sinteticos
+from identidades import demo, errores_ciegos, errores_ciegos_2, escenario_residencial, sinteticos
 
 RAIZ = Path(__file__).resolve().parents[1]
 NODE = shutil.which("node")
@@ -43,8 +43,32 @@ def _pares(registros: pd.DataFrame, n_mismos: int, n_azar: int, rng: random.Rand
     ]
 
 
+def _pares_mismo_predio(registros: pd.DataFrame, personas: pd.DataFrame, n: int,
+                        rng: random.Random) -> list:  # fmt: skip
+    """Pares de personas distintas que viven en el mismo predio (vecinos, familia, pisos)."""
+    predio = personas.set_index("cluster")["predio"]
+    filas = registros.astype(object).where(registros.notna(), None).to_dict("records")
+    por_predio: dict = {}
+    for f in filas:
+        por_predio.setdefault(predio[f["cluster"]], []).append(f)
+    candidatos = [
+        (a, b)
+        for g in por_predio.values()
+        for i, a in enumerate(g)
+        for b in g[:i]
+        if a["cluster"] != b["cluster"]
+    ]
+    pares = rng.sample(candidatos, min(n, len(candidatos)))
+    return [
+        [{c: (None if r[c] is None else str(r[c])) for c in demo.CAMPOS_CRUDOS} for r in par]
+        for par in pares
+    ]
+
+
 def muestra_de_pares(semilla: int = 11) -> list:
-    """~630 pares: de la misma persona y al azar, de los tres generadores sintéticos.
+    """~990 pares: de la misma persona y al azar de los tres generadores sintéticos, y del
+    escenario residencial de la v1.1 (misma persona, al azar y vecinos del mismo predio, con
+    apartamentos, torres y pisos que ejercitan la dirección del v4).
 
     Determinista: semilla fija y fecha de hoy fija (HOY_FIJO) para Faker.
     """
@@ -54,9 +78,11 @@ def muestra_de_pares(semilla: int = 11) -> list:
         ciegos_1, _ = errores_ciegos.capturar(personas, semilla=semilla)
         _, personas_2 = sinteticos.generar(150, semilla + 1)
         ciegos_2, _ = errores_ciegos_2.capturar(personas_2, semilla=semilla + 1)
+    residencial, personas_r, _ = escenario_residencial.generar_escenario_residencial(250, semilla)
     pares = []
-    for registros in (normales, ciegos_1, ciegos_2):
+    for registros in (normales, ciegos_1, ciegos_2, residencial):
         pares += _pares(registros, 150, 60, rng)
+    pares += _pares_mismo_predio(residencial, personas_r, 150, rng)
     return pares
 
 
@@ -74,7 +100,7 @@ def test_muestra_de_pares_no_depende_de_la_fecha() -> None:
     assert en_otro_dia == referencia
 
 
-@pytest.mark.parametrize("version", ["v2", "v3"])
+@pytest.mark.parametrize("version", ["v2", "v3", "v4"])
 def test_exportacion_coincide_con_modelo_congelado(tmp_path: Path, version: str) -> None:
     ruta = tmp_path / "modelo.json"
     demo.exportar_modelo(ruta, version)
@@ -91,9 +117,17 @@ def test_modelo_v3_lleva_las_bandas_congeladas() -> None:
     assert niveles["apellido_casada"] == 4  # el v3 agrega Jaro-Winkler >= 0,88
 
 
+def test_modelo_v4_lleva_la_direccion_en_predio_y_unidad() -> None:
+    modelo = json.loads(demo.RUTA_MODELO_V4.read_text(encoding="utf-8"))
+    niveles = {c["columna"]: len(c["niveles"]) for c in modelo["comparaciones"]}
+    assert niveles["domicilio"] == 7
+    assert "direccion_v4" in modelo["diccionarios"]
+    assert modelo["bandas"]["peso_desde_revisar"] < modelo["bandas"]["peso_desde_aceptar"]
+
+
 @pytest.mark.integracion
 @pytest.mark.skipif(NODE is None, reason="requiere Node.js")
-@pytest.mark.parametrize("version", ["v2", "v3"])
+@pytest.mark.parametrize("version", ["v2", "v3", "v4"])
 def test_demo_igual_a_splink(tmp_path: Path, version: str) -> None:
     pares = muestra_de_pares()
     ruta_pares = tmp_path / "pares.json"
@@ -120,7 +154,7 @@ def test_demo_igual_a_splink(tmp_path: Path, version: str) -> None:
             or abs(esperado["peso"] - resultado["peso"]) > TOLERANCIA
         ):
             diferencias.append((par, esperado, resultado))
-    assert len(pares) >= 600
+    assert len(pares) >= 900
     assert not diferencias, f"{len(diferencias)} de {len(pares)} pares difieren: {diferencias[:3]}"
 
 

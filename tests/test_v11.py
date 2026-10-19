@@ -122,3 +122,23 @@ def test_escenario_aplicado_pequeno():
     a = flujo_v11.escenario_aplicado(4999, modelos, n_personas=300)
     assert set(a["grupos"]) == {"anterior_v3", "residencial_v3", "residencial_v4"}
     assert a["union"]["v4"]["precision"] > 0.9
+
+
+@pytest.mark.integracion
+def test_ya_es_cliente_con_el_v4():
+    """El vinculador de tiempo real acepta el esquema v4 (dirección en predio y unidad)."""
+    from identidades import tiempo_real
+    from identidades.escenario_residencial import generar_escenario_residencial
+
+    configuracion, umbral, esquema = flujo_v11.modelos_congelados()["v4"]
+    registros, _, _ = generar_escenario_residencial(300, 4999)
+    base_registros, consultas, _ = tiempo_real.preparar_evaluacion(
+        300, registros=registros, max_consultas=40
+    )
+    base = tiempo_real.construir_base(base_registros, configuracion, umbral, esquema)
+    vinculador = tiempo_real.Vinculador(
+        base, configuracion, umbral, bandas=flujo_v11.cargar_congelado_v4()[3], esquema=esquema
+    )
+    t = tiempo_real.resultados_por_consulta(vinculador, consultas)
+    assert t["fp"].sum() == 0
+    assert t["tp"].sum() >= 0.9 * t["existe"].sum()

@@ -1,0 +1,789 @@
+{
+ "origen": "docs/resultados/v11/modelo.json (tag v4-congelado)",
+ "lambda": 0.00018471653643890808,
+ "umbral": 0.999999,
+ "zona_gris": 0.9,
+ "comparaciones": [
+  {
+   "columna": "documento",
+   "descripcion": "CustomComparison",
+   "niveles": [
+    {
+     "etiqueta": "documento is NULL",
+     "nulo": true,
+     "m": null,
+     "u": null,
+     "sql": "\"documento_l\" IS NULL OR \"documento_r\" IS NULL"
+    },
+    {
+     "etiqueta": "Exact match on documento",
+     "nulo": false,
+     "m": 0.8741002545716485,
+     "u": 0.00011942492306278995,
+     "sql": "\"documento_l\" = \"documento_r\""
+    },
+    {
+     "etiqueta": "Un dígito distinto",
+     "nulo": false,
+     "m": 0.047778473476569334,
+     "u": 7.3492260346332275e-06,
+     "sql": "length(\"documento_l\") = length(\"documento_r\") and levenshtein(\"documento_l\", \"documento_r\") = 1"
+    },
+    {
+     "etiqueta": "Dos dígitos transpuestos",
+     "nulo": false,
+     "m": 0.019293634902786815,
+     "u": 3.6746130173166138e-06,
+     "sql": "length(\"documento_l\") = length(\"documento_r\") and damerau_levenshtein(\"documento_l\", \"documento_r\") = 1"
+    },
+    {
+     "etiqueta": "Un dígito de más o de menos",
+     "nulo": false,
+     "m": 0.03266325681265801,
+     "u": 6.4305727803040745e-06,
+     "sql": "abs(length(\"documento_l\") - length(\"documento_r\")) = 1 and levenshtein(\"documento_l\", \"documento_r\") = 1"
+    },
+    {
+     "etiqueta": "Dos ediciones",
+     "nulo": false,
+     "m": 0.009101595141485327,
+     "u": 1.1942492306278995e-05,
+     "sql": "damerau_levenshtein(\"documento_l\", \"documento_r\") = 2"
+    },
+    {
+     "etiqueta": "All other comparisons",
+     "nulo": false,
+     "m": 0.017062785094851887,
+     "u": 0.9998511781727987,
+     "sql": "ELSE"
+    }
+   ]
+  },
+  {
+   "columna": "nombres",
+   "descripcion": "CustomComparison",
+   "niveles": [
+    {
+     "etiqueta": "nombre_completo is NULL",
+     "nulo": true,
+     "m": null,
+     "u": null,
+     "sql": "\"nombre_completo_l\" IS NULL OR \"nombre_completo_r\" IS NULL"
+    },
+    {
+     "etiqueta": "Exact match on nombre_completo",
+     "nulo": false,
+     "m": 0.7435734316755609,
+     "u": 0.0028907772191691526,
+     "sql": "\"nombre_completo_l\" = \"nombre_completo_r\""
+    },
+    {
+     "etiqueta": "Mismos nombres en otro orden",
+     "nulo": false,
+     "m": 0.012979685594815705,
+     "u": 1.1656359754714325e-05,
+     "sql": "\"nombres_ordenados_l\" = \"nombres_ordenados_r\""
+    },
+    {
+     "etiqueta": "Mismo primer nombre",
+     "nulo": false,
+     "m": 0.07874553293271244,
+     "u": 0.003864531580216826,
+     "sql": "\"primer_nombre_l\" = \"primer_nombre_r\""
+    },
+    {
+     "etiqueta": "Nombre y apellido en campos intercambiados",
+     "nulo": false,
+     "m": 0.009209716403698725,
+     "u": 6.455830017995626e-05,
+     "sql": "\"primer_nombre_l\" = \"primer_apellido_r\""
+    },
+    {
+     "etiqueta": "Primer nombre y otra palabra en común (cualquier campo)",
+     "nulo": false,
+     "m": 0.020124464646722726,
+     "u": 0.00010939045308270366,
+     "sql": "len(list_intersect(\"tokens_nombre_l\", \"tokens_nombre_r\")) >= 2 and (list_contains(\"tokens_nombre_r\", \"primer_nombre_l\") or list_contains(\"tokens_nombre_l\", \"primer_nombre_r\"))"
+    },
+    {
+     "etiqueta": "Jaro-Winkler distance of nombre_completo >= 0.92",
+     "nulo": false,
+     "m": 0.07873223213336739,
+     "u": 0.001053555593214564,
+     "sql": "jaro_winkler_similarity(\"nombre_completo_l\", \"nombre_completo_r\") >= 0.92"
+    },
+    {
+     "etiqueta": "Jaro-Winkler distance of nombre_completo >= 0.8",
+     "nulo": false,
+     "m": 0.03199435165451752,
+     "u": 0.006798347666172616,
+     "sql": "jaro_winkler_similarity(\"nombre_completo_l\", \"nombre_completo_r\") >= 0.8"
+    },
+    {
+     "etiqueta": "All other comparisons",
+     "nulo": false,
+     "m": 0.024640584958604647,
+     "u": 0.9852071828282095,
+     "sql": "ELSE"
+    }
+   ]
+  },
+  {
+   "columna": "primer_apellido",
+   "descripcion": "CustomComparison",
+   "niveles": [
+    {
+     "etiqueta": "primer_apellido is NULL",
+     "nulo": true,
+     "m": null,
+     "u": null,
+     "sql": "\"primer_apellido_l\" IS NULL OR \"primer_apellido_r\" IS NULL"
+    },
+    {
+     "etiqueta": "Exact match on primer_apellido",
+     "nulo": false,
+     "m": 0.8992795358500776,
+     "u": 0.0068224326061367595,
+     "sql": "\"primer_apellido_l\" = \"primer_apellido_r\""
+    },
+    {
+     "etiqueta": "Jaro-Winkler distance of primer_apellido >= 0.92",
+     "nulo": false,
+     "m": 0.05932289675274367,
+     "u": 0.000988431291839078,
+     "sql": "jaro_winkler_similarity(\"primer_apellido_l\", \"primer_apellido_r\") >= 0.92"
+    },
+    {
+     "etiqueta": "Jaro-Winkler distance of primer_apellido >= 0.8",
+     "nulo": false,
+     "m": 0.022281066084748103,
+     "u": 0.006527257234053309,
+     "sql": "jaro_winkler_similarity(\"primer_apellido_l\", \"primer_apellido_r\") >= 0.8"
+    },
+    {
+     "etiqueta": "Apellido en otro campo de nombre del otro registro",
+     "nulo": false,
+     "m": 0.015337233562649717,
+     "u": 0.010514381449627014,
+     "sql": "list_contains(\"tokens_nombre_r\", \"primer_apellido_l\") or list_contains(\"tokens_nombre_l\", \"primer_apellido_r\")"
+    },
+    {
+     "etiqueta": "All other comparisons",
+     "nulo": false,
+     "m": 0.0037792677497809953,
+     "u": 0.9751474974183438,
+     "sql": "ELSE"
+    }
+   ]
+  },
+  {
+   "columna": "segundo_apellido",
+   "descripcion": "JaroWinklerAtThresholds",
+   "niveles": [
+    {
+     "etiqueta": "segundo_apellido is NULL",
+     "nulo": true,
+     "m": null,
+     "u": null,
+     "sql": "\"segundo_apellido_l\" IS NULL OR \"segundo_apellido_r\" IS NULL"
+    },
+    {
+     "etiqueta": "Exact match on segundo_apellido",
+     "nulo": false,
+     "m": 0.9277473758556397,
+     "u": 0.007007243230317104,
+     "sql": "\"segundo_apellido_l\" = \"segundo_apellido_r\""
+    },
+    {
+     "etiqueta": "Jaro-Winkler distance of segundo_apellido >= 0.9",
+     "nulo": false,
+     "m": 0.05020370151831675,
+     "u": 0.001515037097170043,
+     "sql": "jaro_winkler_similarity(\"segundo_apellido_l\", \"segundo_apellido_r\") >= 0.9"
+    },
+    {
+     "etiqueta": "All other comparisons",
+     "nulo": false,
+     "m": 0.022202000901492006,
+     "u": 0.9914777196725129,
+     "sql": "ELSE"
+    }
+   ]
+  },
+  {
+   "columna": "apellido_casada",
+   "descripcion": "CustomComparison",
+   "niveles": [
+    {
+     "etiqueta": "apellido_casada is NULL",
+     "nulo": true,
+     "m": null,
+     "u": null,
+     "sql": "\"apellido_casada_l\" IS NULL OR \"apellido_casada_r\" IS NULL"
+    },
+    {
+     "etiqueta": "Exact match on apellido_casada",
+     "nulo": false,
+     "m": 0.9218009478711879,
+     "u": 0.013664596273291925,
+     "sql": "\"apellido_casada_l\" = \"apellido_casada_r\""
+    },
+    {
+     "etiqueta": "Jaro-Winkler distance of apellido_casada >= 0.88",
+     "nulo": false,
+     "m": 0.03807099975436283,
+     "u": 0.0008281573498964803,
+     "sql": "jaro_winkler_similarity(\"apellido_casada_l\", \"apellido_casada_r\") >= 0.88"
+    },
+    {
+     "etiqueta": "All other comparisons",
+     "nulo": false,
+     "m": 0.03791469193906752,
+     "u": 0.9855072463768116,
+     "sql": "ELSE"
+    }
+   ]
+  },
+  {
+   "columna": "fecha_nacimiento",
+   "descripcion": "DateOfBirthComparison",
+   "niveles": [
+    {
+     "etiqueta": "transformed fecha_nacimiento is NULL",
+     "nulo": true,
+     "m": null,
+     "u": null,
+     "sql": "try_strptime(\"fecha_nacimiento_l\", '%Y-%m-%d') IS NULL OR try_strptime(\"fecha_nacimiento_r\", '%Y-%m-%d') IS NULL"
+    },
+    {
+     "etiqueta": "Exact match on date of birth",
+     "nulo": false,
+     "m": 0.9797835156359691,
+     "u": 0.0001851102972586589,
+     "sql": "\"fecha_nacimiento_l\" = \"fecha_nacimiento_r\""
+    },
+    {
+     "etiqueta": "DamerauLevenshtein distance <= 1",
+     "nulo": false,
+     "m": 0.011741527756646313,
+     "u": 0.001211285842574609,
+     "sql": "damerau_levenshtein(\"fecha_nacimiento_l\", \"fecha_nacimiento_r\") <= 1"
+    },
+    {
+     "etiqueta": "Abs date difference <= 1 month",
+     "nulo": false,
+     "m": 0.0008576577302170704,
+     "u": 0.0020333654191181916,
+     "sql": "ABS(EPOCH(try_strptime(\"fecha_nacimiento_l\", '%Y-%m-%d')) - EPOCH(try_strptime(\"fecha_nacimiento_r\", '%Y-%m-%d'))) <= 2629800.0"
+    },
+    {
+     "etiqueta": "Abs date difference <= 1 year",
+     "nulo": false,
+     "m": 0.0062769923051621,
+     "u": 0.026536273074710515,
+     "sql": "ABS(EPOCH(try_strptime(\"fecha_nacimiento_l\", '%Y-%m-%d')) - EPOCH(try_strptime(\"fecha_nacimiento_r\", '%Y-%m-%d'))) <= 31557600.0"
+    },
+    {
+     "etiqueta": "Abs date difference <= 10 year",
+     "nulo": false,
+     "m": 0.0002705995293691486,
+     "u": 0.24486010407945125,
+     "sql": "ABS(EPOCH(try_strptime(\"fecha_nacimiento_l\", '%Y-%m-%d')) - EPOCH(try_strptime(\"fecha_nacimiento_r\", '%Y-%m-%d'))) <= 315576000.0"
+    },
+    {
+     "etiqueta": "All other comparisons",
+     "nulo": false,
+     "m": 0.0010697070426363986,
+     "u": 0.7251738612868868,
+     "sql": "ELSE"
+    }
+   ]
+  },
+  {
+   "columna": "telefonos",
+   "descripcion": "CustomComparison",
+   "niveles": [
+    {
+     "etiqueta": "telefonos is NULL",
+     "nulo": true,
+     "m": null,
+     "u": null,
+     "sql": "\"telefonos_l\" IS NULL OR \"telefonos_r\" IS NULL"
+    },
+    {
+     "etiqueta": "Algún teléfono en común",
+     "nulo": false,
+     "m": 0.8434336411901282,
+     "u": 0.00012137487388392011,
+     "sql": "array_length(list_intersect(\"telefonos_l\", \"telefonos_r\")) >= 1"
+    },
+    {
+     "etiqueta": "Alguno de los dos sin celular (solo fijo)",
+     "nulo": false,
+     "m": 0.04725725113301882,
+     "u": 0.05086365808698027,
+     "sql": "len(list_filter(\"telefonos_l\", x -> starts_with(x, '3'))) = 0 or len(list_filter(\"telefonos_r\", x -> starts_with(x, '3'))) = 0"
+    },
+    {
+     "etiqueta": "All other comparisons",
+     "nulo": false,
+     "m": 0.10930910767685303,
+     "u": 0.9490149670391358,
+     "sql": "ELSE"
+    }
+   ]
+  },
+  {
+   "columna": "email",
+   "descripcion": "EmailComparison",
+   "niveles": [
+    {
+     "etiqueta": "email is NULL",
+     "nulo": true,
+     "m": null,
+     "u": null,
+     "sql": "\"email_l\" IS NULL OR \"email_r\" IS NULL"
+    },
+    {
+     "etiqueta": "Exact match on email",
+     "nulo": false,
+     "m": 0.8378057497886408,
+     "u": 0.0001803666469544648,
+     "sql": "\"email_l\" = \"email_r\""
+    },
+    {
+     "etiqueta": "Exact match on username",
+     "nulo": false,
+     "m": 0.041935232172852076,
+     "u": 3.942440370589395e-06,
+     "sql": "NULLIF(regexp_extract(\"email_l\", '^[^@]+', 0), '') = NULLIF(regexp_extract(\"email_r\", '^[^@]+', 0), '')"
+    },
+    {
+     "etiqueta": "Jaro-Winkler distance of email >= 0.88",
+     "nulo": false,
+     "m": 0.05400658580039764,
+     "u": 0.0007441356199487483,
+     "sql": "jaro_winkler_similarity(\"email_l\", \"email_r\") >= 0.88"
+    },
+    {
+     "etiqueta": "Jaro-Winkler >0.88 on username",
+     "nulo": false,
+     "m": 0.015307846117151356,
+     "u": 0.00021190616991917998,
+     "sql": "jaro_winkler_similarity(NULLIF(regexp_extract(\"email_l\", '^[^@]+', 0), ''), NULLIF(regexp_extract(\"email_r\", '^[^@]+', 0), '')) >= 0.88"
+    },
+    {
+     "etiqueta": "All other comparisons",
+     "nulo": false,
+     "m": 0.04850379379669481,
+     "u": 0.998859649122807,
+     "sql": "ELSE"
+    }
+   ]
+  },
+  {
+   "columna": "domicilio",
+   "descripcion": "CustomComparison",
+   "niveles": [
+    {
+     "etiqueta": "domicilio is NULL",
+     "nulo": true,
+     "m": null,
+     "u": null,
+     "sql": "\"domicilio_l\" IS NULL OR \"domicilio_r\" IS NULL"
+    },
+    {
+     "etiqueta": "Misma dirección (predio y unidad)",
+     "nulo": false,
+     "m": 0.6877254361302555,
+     "u": 0.0001943832946996535,
+     "sql": "\"domicilio_l\" = \"domicilio_r\""
+    },
+    {
+     "etiqueta": "Mismo predio, uno sin unidad y otro con piso",
+     "nulo": false,
+     "m": 0.00047243770124518077,
+     "u": 2.9157494204948028e-06,
+     "sql": "\"predio_l\" = \"predio_r\" and ((\"unidad_l\" is null and starts_with(\"unidad_r\", 'PI')) or (\"unidad_r\" is null and starts_with(\"unidad_l\", 'PI')))"
+    },
+    {
+     "etiqueta": "Mismo predio, unidad desconocida o incompleta",
+     "nulo": false,
+     "m": 0.12173805500496623,
+     "u": 7.48375684593666e-05,
+     "sql": "\"predio_l\" = \"predio_r\" and (\"unidad_l\" is null or \"unidad_r\" is null or list_has_all(\"unidad_partes_l\", \"unidad_partes_r\") or list_has_all(\"unidad_partes_r\", \"unidad_partes_l\"))"
+    },
+    {
+     "etiqueta": "Mismo predio, otra unidad",
+     "nulo": false,
+     "m": 0.002329500476344519,
+     "u": 0.00019632712764665005,
+     "sql": "\"predio_l\" = \"predio_r\""
+    },
+    {
+     "etiqueta": "Predio parecido (digitación)",
+     "nulo": false,
+     "m": 0.025909744439939302,
+     "u": 0.0009067980697738836,
+     "sql": "jaro_winkler_similarity(coalesce(\"predio_l\", \"domicilio_l\"), coalesce(\"predio_r\", \"domicilio_r\")) >= 0.92"
+    },
+    {
+     "etiqueta": "All other comparisons",
+     "nulo": false,
+     "m": 0.1623363328741186,
+     "u": 0.99862473819,
+     "sql": "ELSE"
+    }
+   ]
+  },
+  {
+   "columna": "municipio",
+   "descripcion": "ExactMatch",
+   "niveles": [
+    {
+     "etiqueta": "municipio is NULL",
+     "nulo": true,
+     "m": null,
+     "u": null,
+     "sql": "\"municipio_l\" IS NULL OR \"municipio_r\" IS NULL"
+    },
+    {
+     "etiqueta": "Exact match on municipio",
+     "nulo": false,
+     "m": 0.8306534302034939,
+     "u": 0.05915264676326623,
+     "sql": "\"municipio_l\" = \"municipio_r\""
+    },
+    {
+     "etiqueta": "All other comparisons",
+     "nulo": false,
+     "m": 0.16934656979650609,
+     "u": 0.9408473532367337,
+     "sql": "ELSE"
+    }
+   ]
+  }
+ ],
+ "diccionarios": {
+  "apodos": {
+   "PEPE": "JOSE",
+   "PEPITO": "JOSE",
+   "CHEPE": "JOSE",
+   "JOSECITO": "JOSE",
+   "PACHO": "FRANCISCO",
+   "PANCHO": "FRANCISCO",
+   "PAQUITO": "FRANCISCO",
+   "KIKO": "FRANCISCO",
+   "MEMO": "GUILLERMO",
+   "GUILLE": "GUILLERMO",
+   "CHUCHO": "JESUS",
+   "CHUY": "JESUS",
+   "CHARO": "ROSARIO",
+   "CHAYO": "ROSARIO",
+   "CONCHA": "CONCEPCION",
+   "CONCHITA": "CONCEPCION",
+   "NACHO": "IGNACIO",
+   "ALEJO": "ALEJANDRO",
+   "ALE": "ALEJANDRA",
+   "ALEJA": "ALEJANDRA",
+   "SANDRITA": "SANDRA",
+   "MARGO": "MARGARITA",
+   "MAGO": "MARGARITA",
+   "LUCHO": "LUIS",
+   "LUCHA": "LUISA",
+   "LUCHITO": "LUIS",
+   "MANOLO": "MANUEL",
+   "MANU": "MANUEL",
+   "TONO": "ANTONIO",
+   "TONY": "ANTONIO",
+   "TOÑO": "ANTONIO",
+   "LOLA": "DOLORES",
+   "LOLITA": "DOLORES",
+   "BETO": "ALBERTO",
+   "BETTY": "BEATRIZ",
+   "BEA": "BEATRIZ",
+   "CAMI": "CAMILO",
+   "CAMILITO": "CAMILO",
+   "PIPE": "FELIPE",
+   "FELO": "RAFAEL",
+   "RAFA": "RAFAEL",
+   "NANDO": "FERNANDO",
+   "FER": "FERNANDO",
+   "FERCHO": "FERNANDO",
+   "QUIQUE": "ENRIQUE",
+   "KIKE": "ENRIQUE",
+   "PACO": "FRANCISCO",
+   "CHICO": "FRANCISCO",
+   "TATO": "ARTURO",
+   "TURO": "ARTURO",
+   "GUSTI": "GUSTAVO",
+   "TAVO": "GUSTAVO",
+   "BENJA": "BENJAMIN",
+   "NICO": "NICOLAS",
+   "SEBAS": "SEBASTIAN",
+   "SANTI": "SANTIAGO",
+   "DANI": "DANIEL",
+   "GABO": "GABRIEL",
+   "GABI": "GABRIELA",
+   "VALE": "VALENTINA",
+   "CATA": "CATALINA",
+   "CARO": "CAROLINA",
+   "PATO": "PATRICIA",
+   "PATY": "PATRICIA",
+   "PATI": "PATRICIA",
+   "LUPE": "GUADALUPE",
+   "MECHE": "MERCEDES",
+   "MECHAS": "MERCEDES",
+   "CHELA": "GRACIELA",
+   "CHELO": "CONSUELO",
+   "TERE": "TERESA",
+   "TERESITA": "TERESA",
+   "LULU": "LUCIA",
+   "CHUCHA": "JESUSA",
+   "NENA": "ELENA",
+   "ELE": "ELENA",
+   "MAYE": "MARIA",
+   "MARU": "MARIA",
+   "MARI": "MARIA",
+   "MARUJA": "MARIA",
+   "TOMY": "TOMAS",
+   "ANDY": "ANDRES",
+   "ANDRESITO": "ANDRES",
+   "JUANCHO": "JUAN",
+   "JUANITO": "JUAN",
+   "JUANCHITO": "JUAN",
+   "CARLITOS": "CARLOS",
+   "CHARLY": "CARLOS",
+   "PEDRITO": "PEDRO",
+   "PERICO": "PEDRO",
+   "RICHI": "RICARDO",
+   "RICKY": "RICARDO",
+   "TITO": "ALBERTO",
+   "BERNA": "BERNARDO",
+   "LEO": "LEONARDO",
+   "LALO": "EDUARDO",
+   "EDU": "EDUARDO",
+   "MIGUE": "MIGUEL",
+   "MIGUELITO": "MIGUEL",
+   "JORGITO": "JORGE",
+   "ANITA": "ANA",
+   "ROSITA": "ROSA",
+   "JUANA": "JUANA",
+   "VICKY": "VICTORIA",
+   "SUSI": "SUSANA",
+   "SUSY": "SUSANA",
+   "CLAU": "CLAUDIA",
+   "MONI": "MONICA",
+   "NATY": "NATALIA",
+   "NATI": "NATALIA",
+   "PAU": "PAULA",
+   "LAU": "LAURA",
+   "LAURITA": "LAURA",
+   "DIANITA": "DIANA",
+   "MARTICA": "MARTA",
+   "GLORITA": "GLORIA",
+   "AMPARITO": "AMPARO",
+   "CRISTI": "CRISTINA",
+   "TINA": "CRISTINA",
+   "MILE": "MILENA",
+   "YOLI": "YOLANDA",
+   "ADRI": "ADRIANA",
+   "XIMENITA": "XIMENA",
+   "FABI": "FABIOLA",
+   "LUCHI": "LUCIA",
+   "CUCHO": "AGUSTIN",
+   "TINO": "AGUSTIN",
+   "HUGUITO": "HUGO",
+   "OSQUITAR": "OSCAR",
+   "GERMANCITO": "GERMAN",
+   "WILL": "WILLIAM",
+   "WILLY": "WILLIAM",
+   "JHONNY": "JOHN"
+  },
+  "compuestos": {
+   "ANAMARIA": "ANA MARIA",
+   "MAFE": "MARIA FERNANDA",
+   "MAJO": "MARIA JOSE",
+   "MAJITO": "MARIA JOSE",
+   "MALE": "MARIA ALEJANDRA",
+   "MACA": "MARIA CAMILA",
+   "MAPI": "MARIA PAULA",
+   "MAPA": "MARIA PAULA",
+   "MAGA": "MARIA GABRIELA",
+   "MARIAJOSE": "MARIA JOSE",
+   "MARIAFERNANDA": "MARIA FERNANDA",
+   "JUANDA": "JUAN DAVID",
+   "JUANPA": "JUAN PABLO",
+   "JUANCA": "JUAN CARLOS",
+   "JUANSE": "JUAN SEBASTIAN",
+   "JUANES": "JUAN ESTEBAN",
+   "JUANFE": "JUAN FELIPE",
+   "JUANJO": "JUAN JOSE",
+   "JOSEMA": "JOSE MANUEL",
+   "LUISFE": "LUIS FELIPE",
+   "MARIAN": "MARIA ANGELICA",
+   "MA": "MARIA",
+   "MARIA DEL": "MARIA DEL"
+  },
+  "apellidos_con_de": [
+   "MONTES DE OCA",
+   "PEREZ DE GUZMAN",
+   "PONCE DE LEON"
+  ],
+  "particulas": [
+   "DE",
+   "DEL",
+   "LA",
+   "LAS",
+   "LOS",
+   "Y"
+  ],
+  "alias_via": {
+   "CALLE": "CL",
+   "CL": "CL",
+   "CLL": "CL",
+   "CALL": "CL",
+   "CLLE": "CL",
+   "CARRERA": "KR",
+   "KR": "KR",
+   "KRA": "KR",
+   "CRA": "KR",
+   "CR": "KR",
+   "CARR": "KR",
+   "DIAGONAL": "DG",
+   "DG": "DG",
+   "DIAG": "DG",
+   "TRANSVERSAL": "TV",
+   "TV": "TV",
+   "TRANS": "TV",
+   "TR": "TV",
+   "AVENIDA": "AV",
+   "AV": "AV",
+   "AVE": "AV"
+  },
+  "meses": {
+   "ENE": 1,
+   "ENERO": 1,
+   "FEB": 2,
+   "FEBRERO": 2,
+   "MAR": 3,
+   "MARZO": 3,
+   "ABR": 4,
+   "ABRIL": 4,
+   "MAY": 5,
+   "MAYO": 5,
+   "JUN": 6,
+   "JUNIO": 6,
+   "JUL": 7,
+   "JULIO": 7,
+   "AGO": 8,
+   "AGOSTO": 8,
+   "SEP": 9,
+   "SEPT": 9,
+   "SEPTIEMBRE": 9,
+   "SETIEMBRE": 9,
+   "OCT": 10,
+   "OCTUBRE": 10,
+   "NOV": 11,
+   "NOVIEMBRE": 11,
+   "DIC": 12,
+   "DICIEMBRE": 12
+  },
+  "direccion_v4": {
+   "alias_via": {
+    "CALLE": "CL",
+    "CL": "CL",
+    "CLL": "CL",
+    "CALL": "CL",
+    "CLLE": "CL",
+    "CARRERA": "KR",
+    "KR": "KR",
+    "KRA": "KR",
+    "CRA": "KR",
+    "CR": "KR",
+    "CARR": "KR",
+    "DIAGONAL": "DG",
+    "DG": "DG",
+    "DIAG": "DG",
+    "TRANSVERSAL": "TV",
+    "TV": "TV",
+    "TRANS": "TV",
+    "TR": "TV",
+    "AVENIDA": "AV",
+    "AV": "AV",
+    "AVE": "AV",
+    "K": "KR",
+    "AK": "KR",
+    "AC": "CL",
+    "TRANSV": "TV",
+    "AVDA": "AV"
+   },
+   "cuadrantes": {
+    "S": "SUR",
+    "E": "ESTE"
+   },
+   "palabras_unidad": {
+    "TORRE": "torre",
+    "TORR": "torre",
+    "TO": "torre",
+    "TR": "torre",
+    "T": "torre",
+    "BLOQUE": "bloque",
+    "BLOQ": "bloque",
+    "BLQ": "bloque",
+    "BL": "bloque",
+    "BQ": "bloque",
+    "INTERIOR": "interior",
+    "INTER": "interior",
+    "INT": "interior",
+    "IN": "interior",
+    "CASA": "casa",
+    "CS": "casa",
+    "CAS": "casa",
+    "APARTAMENTO": "apto",
+    "APARTAMIENTO": "apto",
+    "APTO": "apto",
+    "APT": "apto",
+    "AP": "apto",
+    "APTOS": "apto",
+    "DPTO": "apto",
+    "DEPTO": "apto",
+    "APART": "apto",
+    "PISO": "piso",
+    "P": "piso",
+    "LOCAL": "local",
+    "LC": "local",
+    "OFICINA": "local",
+    "OF": "local"
+   },
+   "ordinales": {
+    "PRIMER": "1",
+    "PRIMERO": "1",
+    "SEGUNDO": "2",
+    "TERCER": "3",
+    "TERCERO": "3",
+    "CUARTO": "4",
+    "QUINTO": "5",
+    "SEXTO": "6"
+   },
+   "componentes": {
+    "torre": "TO",
+    "bloque": "BL",
+    "interior": "IN",
+    "casa": "CA",
+    "apto": "AP",
+    "piso": "PI",
+    "local": "LC"
+   }
+  }
+ },
+ "bandas": {
+  "probabilidad_calibrada": [
+   0.1,
+   0.9
+  ],
+  "peso_desde_revisar": 8.25044580289028,
+  "peso_calibrado_0_9": 19.721908800558932,
+  "peso_desde_aceptar": 19.931567126586927
+ }
+}

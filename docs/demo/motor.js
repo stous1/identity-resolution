@@ -1,4 +1,5 @@
-// Motor de la demo: estandarización v2 y comparaciones de los modelos v2 y v3 congelados, en JavaScript.
+// Motor de la demo: estandarización v2 (y la dirección en predio y unidad de la v4) y
+// comparaciones de los modelos v2, v3 y v4 congelados, en JavaScript.
 //
 // Reimplementa src/identidades/estandarizacion.py, estandarizacion_v2.py y la preparación de
 // modelo_co_v2.py, y evalúa los niveles de cada comparación con la misma lógica que el SQL
@@ -272,6 +273,79 @@ function crearEstandarizador(dic) {
 
   const textoNombre = (v) => quitarTildes(normalizarNombre(repararCodificacion(v)));
 
+  // Dirección en predio y unidad (como estandarizacion_v4.normalizar_direccion_v4).
+  const d4 = dic.direccion_v4 || null;
+  const ORDINAL_NUMERICO = /^(\d+)(?:ER|RO|DO|O|TO|VO|NO)$/;
+  function limpiarV4(v) {
+    const texto = quitarTildes(normalizarTexto(v));
+    if (texto === null) return null;
+    let limpio = texto.replace(/[^A-Z0-9#\- ]/g, " ");
+    limpio = limpio.replace(/(?<=\s)(?:N|NO|NRO|NUMERO)(?=\s)/g, "#");
+    limpio = limpio.replace(/\b(CALLE|CLL|CL|CARRERA|KRA|KR|CRA|CR|DG|TV|AV|AK|AC|K)(\d)/g, "$1 $2");
+    limpio = limpio.replace(/\b(TORRE|TO|TR|T|BL|BLQ|BLOQUE|AP|APTO|APT|INT|CS|CASA|P)(\d+)\b/g, "$1 $2");
+    limpio = limpio.replace(/\s+/g, " ").trim();
+    return limpio || null;
+  }
+  function leerComplemento(palabras) {
+    const unidad = {};
+    const poner = (c, v) => { if (!(c in unidad)) unidad[c] = v; };
+    let i = 0;
+    while (i < palabras.length) {
+      const p = palabras[i];
+      const siguiente = i + 1 < palabras.length ? palabras[i + 1] : null;
+      const ordinal = p.match(ORDINAL_NUMERICO);
+      const esNumero = /^\d+$/.test(p);
+      if (siguiente === "PISO" && (esNumero || ordinal || p in d4.ordinales)) {
+        poner("piso", esNumero ? p : ordinal ? ordinal[1] : d4.ordinales[p]);
+        i += 2;
+        continue;
+      }
+      const componente = d4.palabras_unidad[p];
+      if (componente && siguiente !== null) {
+        const valorOrdinal = siguiente.match(ORDINAL_NUMERICO);
+        if (/^(?:\d+[A-Z]?|[A-Z])$/.test(siguiente)) {
+          if (!(componente === "torre" && p === "T" && !/^\d/.test(siguiente))) {
+            poner(componente, siguiente.replace(/^0+/, "") || "0");
+            i += 2;
+            continue;
+          }
+        }
+        if (componente === "piso" && valorOrdinal) {
+          poner("piso", valorOrdinal[1]);
+          i += 2;
+          continue;
+        }
+      }
+      if (esNumero && Object.keys(unidad).length === 0 && i === palabras.length - 1 && p.length >= 3) {
+        unidad.apto = p;
+        i += 1;
+        continue;
+      }
+      i += 1;
+    }
+    const partes = Object.entries(d4.componentes).filter(([c]) => c in unidad).map(([c, e]) => `${e}${unidad[c]}`);
+    return partes.length ? partes.join(" ") : null;
+  }
+  function normalizarDireccionV4(v) {
+    const vacio = { predio: null, unidad: null, unidad_partes: null, direccion: null };
+    const limpio = limpiarV4(v);
+    if (limpio === null) return vacio;
+    const patron = /(?:^|(?<=\s))([A-Z]+)\s+(\d+\s?[A-Z]?(?:\s?BIS)?)(?:\s+(SUR|ESTE|NORTE|OESTE|S|E))?(?:\s*#\s*|\s+)(\d+\s?[A-Z]?)(?:\s*-\s*|\s+)(\d+)(?:\s+(SUR|ESTE|NORTE|OESTE))?(?=\s|$)/g;
+    for (const m of limpio.matchAll(patron)) {
+      const via = d4.alias_via[m[1]];
+      if (via === undefined) continue;
+      const numero = m[2].replace(/\s+/g, "").replace("BIS", " BIS");
+      const placa = m[4].replace(/\s+/g, "");
+      let cuadrante = m[3] || m[6] || null;
+      cuadrante = d4.cuadrantes[cuadrante] || cuadrante;
+      const predio = `${via} ${numero}${cuadrante ? ` ${cuadrante}` : ""} # ${placa}-${m[5]}`;
+      const resto = (limpio.slice(0, m.index) + " " + limpio.slice(m.index + m[0].length)).split(/\s+/).filter(Boolean);
+      const clave = leerComplemento(resto);
+      return { predio, unidad: clave, unidad_partes: clave ? clave.split(" ") : null, direccion: clave ? `${predio} ${clave}` : predio };
+    }
+    return { ...vacio, direccion: limpio };
+  }
+
   // Columnas del modelo v2 (como modelo_co_v2.preparar) para un registro crudo.
   return function preparar(crudo) {
     const r = Object.fromEntries(Object.entries(crudo).map(([k, v]) => [k, repararCodificacion(v)]));
@@ -310,6 +384,10 @@ function crearEstandarizador(dic) {
       domicilio: dir.direccion,
       domicilio_clave: clave,
       municipio: quitarTildes(normalizarTexto(r.ciudad)),
+      ...(d4 ? (() => {
+        const v4 = normalizarDireccionV4(r.direccion);
+        return { domicilio: v4.direccion, domicilio_clave: v4.predio, predio: v4.predio, unidad: v4.unidad, unidad_partes: v4.unidad_partes };
+      })() : {}),
     };
   };
 }
@@ -406,10 +484,22 @@ const NIVELES = {
     if (jw(usuario(a), usuario(b), 0.88)) return 4;
     return 5;
   },
-  domicilio: (l, r) => {
+  // v3: igual, misma cuadra, parecida (5 niveles). v4: predio y unidad (7 niveles).
+  domicilio: (l, r, niveles) => {
     const [a, b] = [l.domicilio, r.domicilio];
     if (nulo(a, b)) return 0;
     if (a === b) return 1;
+    if (niveles === 7) {
+      const mismoPredio = igual(l.predio, r.predio) === true;
+      const piso = (u) => u !== null && u.startsWith("PI");
+      const contieneTodo = (x, y) => x !== null && y !== null && y.every((e) => x.includes(e));
+      if (mismoPredio && ((l.unidad === null && piso(r.unidad)) || (r.unidad === null && piso(l.unidad)))) return 2;
+      if (mismoPredio && (l.unidad === null || r.unidad === null
+        || contieneTodo(l.unidad_partes, r.unidad_partes) || contieneTodo(r.unidad_partes, l.unidad_partes))) return 3;
+      if (mismoPredio) return 4;
+      if (jaroWinkler(l.predio ?? a, r.predio ?? b) >= 0.92) return 5;
+      return 6;
+    }
     if (igual(l.domicilio_clave, r.domicilio_clave)) return 2;
     if (jw(a, b, 0.9)) return 3;
     return 4;
