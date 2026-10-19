@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ficha de cliente único</title>
+<meta name="description" content="Ficha de cliente único: registros, registro de oro, datos compartidos, historia y alertas, con el modelo v4 y el grafo residencial. Datos sintéticos.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>
+  :root {
+    --fondo: #f8fafc; --tarjeta: #ffffff; --texto: #0f172a; --tenue: #64748b; --borde: #e2e8f0;
+    --acento: #2563eb; --fuerte: #334155; --debil: #cbd5e1;
+    --hogar: #16a34a; --convivencia: #0891b2; --multifamiliar: #3b82f6; --sospechoso: #dc2626;
+    --relleno: #7c3aed; --alerta: #fef2f2; --alerta-borde: #fecaca;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --fondo: #0b1020; --tarjeta: #111827; --texto: #e5e7eb; --tenue: #94a3b8; --borde: #1f2937;
+      --acento: #60a5fa; --fuerte: #cbd5e1; --debil: #475569; --alerta: #2a1215; --alerta-borde: #7f1d1d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 22px; margin: 4px 0 4px; }
+  h2 { font-size: 16px; margin: 0 0 8px; }
+  p { margin: 0 0 8px; }
+  a { color: var(--acento); }
+  .tenue { color: var(--tenue); font-size: 13px; }
+  .tarjeta { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 10px;
+    padding: 14px; margin: 12px 0; }
+  .buscador { position: relative; }
+  input[type=search] { width: 100%; font: inherit; padding: 10px 12px; border-radius: 8px;
+    border: 1px solid var(--borde); background: var(--tarjeta); color: var(--texto); }
+  #sugerencias { list-style: none; margin: 4px 0 0; padding: 0; border: 1px solid var(--borde);
+    border-radius: 8px; background: var(--tarjeta); max-height: 260px; overflow: auto; display: none; }
+  #sugerencias li { padding: 8px 12px; cursor: pointer; border-bottom: 1px solid var(--borde); }
+  #sugerencias li:hover, #sugerencias li:focus { background: var(--fondo); outline: none; }
+  .destacados { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  button.chip { font: inherit; font-size: 13px; padding: 6px 10px; border-radius: 999px;
+    border: 1px solid var(--borde); background: var(--tarjeta); color: var(--texto); cursor: pointer; }
+  button.chip:hover { border-color: var(--acento); }
+  .rejilla { display: grid; grid-template-columns: 1fr; gap: 0 12px; }
+  .rejilla > * { min-width: 0; }
+  td { overflow-wrap: anywhere; }
+  @media (min-width: 820px) { .rejilla { grid-template-columns: 1fr 1fr; } }
+  .tabla { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--borde); vertical-align: top; }
+  th { color: var(--tenue); font-weight: 600; }
+  .etiqueta { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px;
+    color: #fff; white-space: nowrap; }
+  .etiqueta.hogar { background: var(--hogar); } .etiqueta.convivencia { background: var(--convivencia); }
+  .etiqueta.multifamiliar { background: var(--multifamiliar); } .etiqueta.sospechoso { background: var(--sospechoso); }
+  .etiqueta.relleno { background: var(--relleno); }
+  .alerta { background: var(--alerta); border: 1px solid var(--alerta-borde); border-radius: 8px;
+    padding: 8px 10px; margin: 6px 0; font-size: 14px; }
+  svg { width: 100%; height: auto; display: block; }
+  .linea-tiempo { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--borde); }
+  .linea-tiempo li { margin: 0 0 6px; font-size: 13px; }
+  .boton-enlace { background: none; border: none; color: var(--acento); font: inherit; padding: 0;
+    cursor: pointer; text-decoration: underline; text-align: left; }
+  #vacio { color: var(--tenue); }
+</style>
+</head>
+<body>
+<main>
+  <p class="tenue"><a href="index.html">← Portada</a> · <a href="v11.html">v1.1</a> ·
+    <a href="v11_universo.html">Universo residencial</a></p>
+  <h1>Ficha de cliente único</h1>
+  <p class="tenue">Una muestra de clientes del escenario de prueba de la v1.1, reconstruidos por
+    el modelo v4 y clasificados por el grafo residencial, ambos congelados. Todos los datos
+    son sintéticos.</p>
+
+  <div class="tarjeta">
+    <div class="buscador">
+      <label for="busqueda" class="tenue">Buscar por nombre o documento</label>
+      <input id="busqueda" type="search" autocomplete="off" placeholder="Ej.: Montenegro, Ayala, 1064372368">
+      <ul id="sugerencias" role="listbox"></ul>
+    </div>
+    <div class="destacados" id="destacados"></div>
+  </div>
+
+  <div id="ficha"><p id="vacio" class="tarjeta">Cargando la muestra…</p></div>
+</main>
+<script>
+const COLOR = { hogar: "var(--hogar)", convivencia: "var(--convivencia)", multifamiliar: "var(--multifamiliar)",
+  sospechoso: "var(--sospechoso)", relleno: "var(--relleno)" };
+const NOMBRE_CATEGORIA = { hogar: "hogar", convivencia: "convivencia probable", multifamiliar: "multifamiliar",
+  sospechoso: "sospechoso", relleno: "relleno" };
+const NOMBRE_REGLA = { mas_reciente: "más reciente", validado: "validado más reciente",
+  fuente_confiable: "fuente más confiable", frecuente: "más frecuente" };
+const NOMBRE_CAMPO = { documento: "Documento", nombres: "Nombres", apellidos: "Apellidos",
+  fecha_nacimiento: "Fecha de nacimiento", celular: "Teléfono", correo: "Correo", direccion: "Dirección" };
+let datos = null, pesoUmbral = 0;
+
+const $ = (s) => document.querySelector(s);
+const esc = (t) => String(t ?? "—").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const sinTildes = (t) => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+function etiqueta(cat) { return `<span class="etiqueta ${cat}">${esc(NOMBRE_CATEGORIA[cat] || cat)}</span>`; }
+
+function grafo(f) {
+  const n = f.registros.length, W = 420, H = n > 1 ? 300 : 120, cx = W / 2, cy = H / 2, r = n > 1 ? Math.min(110, 40 + n * 12) : 0;
+  const pos = {};
+  f.registros.forEach((reg, i) => {
+    const a = -Math.PI / 2 + (2 * Math.PI * i) / n;
+    pos[reg.id] = [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  });
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Registros del cliente y la fuerza de sus enlaces">`;
+  for (const [a, b, w] of f.enlaces) {
+    if (!pos[a] || !pos[b]) continue;
+    const fuerte = w >= pesoUmbral, ancho = Math.max(1, Math.min(6, w / 12));
+    const [x1, y1] = pos[a], [x2, y2] = pos[b];
+    s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${fuerte ? "var(--fuerte)" : "var(--debil)"}" stroke-width="${ancho}" ${fuerte ? "" : 'stroke-dasharray="4 3"'}/>`;
+    if (n <= 4) s += `<text x="${(x1 + x2) / 2}" y="${(y1 + y2) / 2 - 3}" font-size="11" text-anchor="middle" fill="var(--tenue)">${w.toFixed(0)}</text>`;
+  }
+  for (const reg of f.registros) {
+    const [x, y] = pos[reg.id];
+    s += `<circle cx="${x}" cy="${y}" r="15" fill="var(--tarjeta)" stroke="var(--acento)" stroke-width="2"/>`;
+    s += `<text x="${x}" y="${y + 4}" font-size="10" text-anchor="middle" fill="var(--texto)">${reg.id}</text>`;
+  }
+  return s + "</svg>";
+}
+
+function mostrar(id) {
+  const f = datos.clientes[id];
+  if (!f) return;
+  $("#sugerencias").style.display = "none";
+  history.replaceState(null, "", "#" + id);
+  const alertas = f.alertas.length
+    ? f.alertas.map((a) => `<div class="alerta"><strong>${a.tipo === "puente_debil" ? "Puente débil" : a.tipo === "documento_compartido" ? "Documento compartido" : "Patrón sospechoso"}.</strong> ${esc(a.texto)}</div>`).join("")
+    : `<p class="tenue">Sin alertas.</p>`;
+  const registros = f.registros.map((r) => `<tr><td>${r.id}</td><td>${esc(r.fecha)}<br><span class="tenue">${esc(r.canal)}${r.validado ? " · validado" : ""}</span></td>
+    <td>${esc(r.nombres)} ${esc(r.apellidos)}<br><span class="tenue">${esc(r.documento)} · ${esc(r.fecha_nacimiento)}</span></td>
+    <td>${esc(r.celular)}<br><span class="tenue">${esc(r.correo)}</span></td><td>${esc(r.direccion)}<br><span class="tenue">${esc(r.ciudad)}</span></td></tr>`).join("");
+  const oro = f.oro.map((o) => `<tr><td>${esc(NOMBRE_CAMPO[o.campo] || o.campo)}</td><td><strong>${esc(o.valor)}</strong></td><td>${o.origen}</td><td>${esc(NOMBRE_REGLA[o.regla] || o.regla)}</td></tr>`).join("");
+  const comparte = f.comparte.length ? f.comparte.map((c) => `<tr><td>${esc(c.tipo)}<br><span class="tenue">${esc(c.valor)}</span></td>
+      <td>${etiqueta(c.categoria)}${c.tipo_predio ? `<br><span class="tenue">predio: ${esc(c.tipo_predio.replace("_", " de "))}</span>` : ""}</td>
+      <td>${c.clientes.map((o) => datos.clientes[o.id] ? `<button class="boton-enlace" data-id="${o.id}">${esc(o.nombre)}</button>` : esc(o.nombre)).join("<br>")}${c.mas ? `<br><span class="tenue">y ${c.mas} más</span>` : ""}</td></tr>`).join("")
+    : `<tr><td colspan="3" class="tenue">No comparte datos con otros clientes.</td></tr>`;
+  const historia = ["celular", "correo", "direccion"].map((campo) => {
+    const cambios = f.historia[campo] || [];
+    return `<h2>${NOMBRE_CAMPO[campo]}</h2><ul class="linea-tiempo">${cambios.length ? cambios.map((c) => `<li><strong>${esc(c.fecha)}</strong> · ${esc(c.valor)} <span class="tenue">(${esc(c.canal)}, registro ${c.registro})</span></li>`).join("") : '<li class="tenue">Sin dato.</li>'}</ul>`;
+  }).join("");
+  $("#ficha").innerHTML = `
+    <div class="tarjeta"><h2 style="font-size:20px">${esc(f.nombre)}</h2>
+      <p class="tenue">Documento ${esc(f.documento)} · ${f.registros.length} registro(s) · ${esc(f.escenario)}</p>${alertas}</div>
+    <div class="rejilla">
+      <div class="tarjeta"><h2>Registros y fuerza de cada enlace</h2>${grafo(f)}
+        <p class="tenue">Bits de coincidencia del v4 entre cada par de registros (el grosor; el número, con 4 registros o menos). Línea continua: sobre el umbral congelado (${pesoUmbral.toFixed(1)} bits); punteada: por debajo.</p></div>
+      <div class="tarjeta"><h2>Registro de oro</h2><div class="tabla"><table><thead><tr><th>Campo</th><th>Valor</th><th>Registro</th><th>Regla</th></tr></thead><tbody>${oro}</tbody></table></div>
+        <p class="tenue">Reglas de supervivencia elegidas en el desarrollo del hito 3; la dirección, con la estandarización v4.</p></div>
+    </div>
+    <div class="tarjeta"><h2>Comparte datos con</h2><div class="tabla"><table><thead><tr><th>Dato</th><th>Categoría</th><th>Clientes</th></tr></thead><tbody>${comparte}</tbody></table></div></div>
+    <div class="rejilla">
+      <div class="tarjeta">${historia}</div>
+      <div class="tarjeta"><h2>Registros originales</h2><div class="tabla"><table><thead><tr><th>#</th><th>Fecha</th><th>Nombre</th><th>Contacto</th><th>Dirección</th></tr></thead><tbody>${registros}</tbody></table></div></div>
+    </div>`;
+  document.querySelectorAll("#ficha .boton-enlace").forEach((b) => b.addEventListener("click", () => { mostrar(b.dataset.id); window.scrollTo({ top: 0, behavior: "smooth" }); }));
+}
+
+function buscar(texto) {
+  const lista = $("#sugerencias");
+  const q = sinTildes(texto.trim());
+  if (q.length < 2) { lista.style.display = "none"; return; }
+  const hallados = Object.values(datos.clientes)
+    .filter((f) => sinTildes(f.nombre).includes(q) || (f.documento || "").includes(q))
+    .slice(0, 20);
+  lista.innerHTML = hallados.length
+    ? hallados.map((f) => `<li role="option" tabindex="0" data-id="${f.id}">${esc(f.nombre)} <span class="tenue">${esc(f.documento)}</span></li>`).join("")
+    : `<li class="tenue">Sin resultados en la muestra.</li>`;
+  lista.style.display = "block";
+  lista.querySelectorAll("li[data-id]").forEach((li) => {
+    li.addEventListener("click", () => mostrar(li.dataset.id));
+    li.addEventListener("keydown", (e) => { if (e.key === "Enter") mostrar(li.dataset.id); });
+  });
+}
+
+fetch("resultados/v11/fichas.json").then((r) => r.json()).then((d) => {
+  datos = d;
+  pesoUmbral = Math.log2(d.meta.umbral / (1 - d.meta.umbral));
+  $("#destacados").innerHTML = d.destacados.map((x) => `<button class="chip" data-id="${x.id}">${esc(x.titulo)}</button>`).join("");
+  document.querySelectorAll("#destacados .chip").forEach((b) => b.addEventListener("click", () => mostrar(b.dataset.id)));
+  $("#busqueda").addEventListener("input", (e) => buscar(e.target.value));
+  const inicial = location.hash.slice(1);
+  mostrar(d.clientes[inicial] ? inicial : d.destacados[0].id);
+}).catch((e) => { $("#ficha").innerHTML = `<p class="tarjeta">No se pudo cargar la muestra: ${esc(e)}</p>`; });
+</script>
+</body>
+</html>
