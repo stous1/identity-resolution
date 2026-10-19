@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo: ¿son la misma persona?</title>
+<meta name="description" content="Compara dos registros con el modelo v3 congelado, en el navegador: probabilidad, banda de zona gris y explicación por campo.">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  :root {
+    --fondo: #f6f7f9; --panel: #ffffff; --texto: #1c2430; --suave: #5b6675; --borde: #dde2e8;
+    --acento: #2563eb; --positivo: #15803d; --negativo: #b91c1c; --gris: #b45309;
+    --pos-barra: #22a05a; --neg-barra: #dc4c4c; --previa: #8a94a3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #0d1117; --panel: #161b22; --texto: #e6edf3; --suave: #9aa6b2; --borde: #2d353f;
+      --acento: #60a5fa; --positivo: #4ade80; --negativo: #f87171; --gris: #fbbf24;
+      --pos-barra: #34c46f; --neg-barra: #ef6b6b; --previa: #6e7781;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 48px; }
+  a { color: var(--acento); }
+  h1 { font-size: 1.6rem; margin: 0.2em 0 0.3em; line-height: 1.25; }
+  h2 { font-size: 1.1rem; margin: 0 0 0.6em; }
+  .sub { color: var(--suave); margin: 0 0 1.2em; max-width: 70ch; }
+  .panel { background: var(--panel); border: 1px solid var(--borde); border-radius: 10px; padding: 16px; }
+  .ejemplos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+  button { font: inherit; border: 1px solid var(--borde); background: var(--panel); color: var(--texto);
+    border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+  button:hover, button:focus-visible { border-color: var(--acento); outline: none; }
+  .registros { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px) { .registros { grid-template-columns: 1fr; } }
+  label { display: block; font-size: 0.82rem; color: var(--suave); margin-top: 8px; }
+  input { width: 100%; font: inherit; padding: 7px 9px; border-radius: 6px; border: 1px solid var(--borde);
+    background: var(--fondo); color: var(--texto); }
+  input:focus { outline: 2px solid var(--acento); outline-offset: -1px; }
+  .resultado { margin-top: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 720px) { .resultado { grid-template-columns: 1fr; } }
+  .cifra { font-size: 1.7rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .etiqueta { font-size: 0.82rem; color: var(--suave); }
+  .banda-aceptar { color: var(--positivo); } .banda-revisar { color: var(--gris); } .banda-rechazar { color: var(--negativo); }
+  .cascada { margin-top: 14px; }
+  .cascada svg { width: 100%; height: auto; display: block; }
+  .cascada text { fill: var(--texto); font-size: 12px; }
+  .cascada .tenue { fill: var(--suave); }
+  .nota { font-size: 0.85rem; color: var(--suave); margin-top: 14px; }
+  details { margin-top: 14px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+  th, td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--borde); vertical-align: top; word-break: break-word; }
+  .error { color: var(--negativo); }
+  .fijo { display: none; }
+  @media (max-width: 720px) {
+    .cascada text { font-size: 11px; }
+    .fijo { display: flex; position: sticky; bottom: 0; z-index: 2; justify-content: space-between;
+      gap: 12px; align-items: center; margin: 14px -16px -16px; padding: 10px 16px;
+      background: var(--panel); border-top: 1px solid var(--borde); border-radius: 0 0 10px 10px; }
+    .fijo a { font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <p><a href="./">← Portada</a></p>
+  <h1>¿Son la misma persona?</h1>
+  <p class="sub">Escribe dos registros y el modelo v3 congelado los compara aquí mismo, en tu
+    navegador (no se envía nada a ningún servidor). Verás la probabilidad, la banda de zona
+    gris y cuánto suma o resta cada campo.</p>
+
+  <div class="panel">
+    <div class="ejemplos" role="group" aria-label="Ejemplos">
+      <button type="button" data-ejemplo="errores">Misma persona con errores</button>
+      <button type="button" data-ejemplo="mudanza">Se mudó y cambió de celular</button>
+      <button type="button" data-ejemplo="hermanos">Hermanos que viven juntos</button>
+      <button type="button" data-ejemplo="distintas">Personas distintas</button>
+    </div>
+    <p class="nota" id="nota-ejemplo" hidden></p>
+    <form class="registros" id="formulario" autocomplete="off">
+      <fieldset class="panel" data-registro="0" style="border-style:dashed"><legend>Registro A</legend></fieldset>
+      <fieldset class="panel" data-registro="1" style="border-style:dashed"><legend>Registro B</legend></fieldset>
+    </form>
+
+    <div class="resultado" id="resultado" aria-live="polite">
+      <div><div class="etiqueta">Probabilidad del modelo</div><div class="cifra" id="probabilidad">–</div></div>
+      <div><div class="etiqueta">Peso de coincidencia</div><div class="cifra" id="peso">–</div></div>
+      <div><div class="etiqueta">Banda</div><div class="cifra" id="banda">–</div><div class="etiqueta" id="banda-detalle"></div></div>
+    </div>
+
+    <div class="cascada">
+      <h2>Cascada: de la previa al peso final</h2>
+      <div id="cascada" role="img" aria-label="Aporte de cada campo al peso de coincidencia"></div>
+    </div>
+
+    <details>
+      <summary>Valores estandarizados</summary>
+      <div id="estandarizados"></div>
+    </details>
+    <p class="error" id="error" hidden></p>
+    <div class="fijo" aria-hidden="true"><b id="fijo-texto">–</b><a href="#resultado">Ver explicación ↓</a></div>
+  </div>
+
+  <p class="nota">Modelo v3 congelado (<code>hito6-congelado</code>), reimplementado en
+    JavaScript y verificado contra Splink sobre ~630 pares (mismos niveles y mismo peso).
+    No aplica el ajuste por frecuencia de términos, que depende de la base completa. Las bandas
+    vienen de la calibración ajustada en desarrollo: <b>aceptar</b> desde el umbral de operación
+    (19,9 bits), <b>revisar</b> desde 5,2 bits y <b>rechazar</b> por debajo. La probabilidad no
+    está calibrada: úsala como puntaje, no como frecuencia. Datos ficticios.
+    <a href="hito6.html">Detalle en el hito 6</a>.</p>
+</main>
+
+<script type="module">
+import { crearMotor } from "./demo/motor.js";
+
+const CAMPOS = [
+  ["numero_documento", "Documento"], ["nombres", "Nombres"], ["apellidos", "Apellidos"],
+  ["fecha_nacimiento", "Fecha de nacimiento"], ["celular", "Celular"], ["correo", "Correo"],
+  ["direccion", "Dirección"], ["ciudad", "Ciudad"],
+];
+const NOMBRES = {
+  documento: "Documento", nombres: "Nombres", primer_apellido: "Primer apellido",
+  segundo_apellido: "Segundo apellido", apellido_casada: "Apellido de casada",
+  fecha_nacimiento: "Fecha de nacimiento", telefonos: "Teléfonos", email: "Correo",
+  domicilio: "Dirección", municipio: "Municipio",
+};
+const EJEMPLOS = {
+  errores: [
+    { numero_documento: "1.023.456.789", nombres: "José Luis", apellidos: "Pérez Gómez", fecha_nacimiento: "1985-03-07",
+      celular: "+57 300 123 4567", correo: "jose.perez@gmail.com", direccion: "Calle 45 # 10-20", ciudad: "Medellín" },
+    { numero_documento: "1023456798", nombres: "Pepe", apellidos: "PEREZ GOMEZ", fecha_nacimiento: "07/03/1985",
+      celular: "3001234567", correo: "jose.perez@gmail.com", direccion: "CL 45 10 20", ciudad: "Medellin" },
+  ],
+  mudanza: [
+    { numero_documento: "52.876.123", nombres: "Ana María", apellidos: "Ramírez de Vargas", fecha_nacimiento: "1979-11-02",
+      celular: "3157654321", correo: "anamaria.ramirez@hotmail.com", direccion: "Carrera 7 # 72-15", ciudad: "Bogotá" },
+    { numero_documento: "52876123", nombres: "Ana Maria", apellidos: "Ramirez", fecha_nacimiento: "02 de noviembre de 1979",
+      celular: "3209988776", correo: "anamaria.ramirez@hotmail.com", direccion: "Avenida 30 # 5-40", ciudad: "Cali" },
+  ],
+  hermanos: [
+    { numero_documento: "1.098.765.432", nombres: "Carlos Andrés", apellidos: "Zapata Romero", fecha_nacimiento: "1992-06-15",
+      celular: "3112223344", correo: "carlos.zapata@gmail.com", direccion: "Calle 10 # 20-30", ciudad: "Pereira" },
+    { numero_documento: "1.098.765.987", nombres: "Camilo Andrés", apellidos: "Zapata Romero", fecha_nacimiento: "1995-01-20",
+      celular: "3112223344", correo: "camilo.zapata@gmail.com", direccion: "Calle 10 # 20-30", ciudad: "Pereira" },
+  ],
+  distintas: [
+    { numero_documento: "71.234.567", nombres: "Luis Fernando", apellidos: "Ospina Restrepo", fecha_nacimiento: "1968-09-30",
+      celular: "3014445566", correo: "lfospina@yahoo.com", direccion: "Carrera 50 # 30-12", ciudad: "Medellín" },
+    { numero_documento: "43.987.210", nombres: "Diana Carolina", apellidos: "Mejía Cárdenas", fecha_nacimiento: "1990-04-18",
+      celular: "3187778899", correo: "diana.mejia@gmail.com", direccion: "Calle 80 # 15-22", ciudad: "Barranquilla" },
+  ],
+};
+
+const NOTAS = {
+  hermanos: "Este ejemplo muestra el error conocido del modelo: dos hermanos con el mismo celular, " +
+    "la misma dirección y los mismos apellidos acumulan tanta evidencia que superan el umbral, " +
+    "aunque el documento y la fecha de nacimiento no coinciden. Fellegi-Sunter supone campos " +
+    "independientes y dentro de un hogar no lo son. La auditoría encontró que todos los falsos " +
+    "positivos a escala son familiares; por eso el error caro se vigila con la línea base y la revisión.",
+  mudanza: "Celular, dirección y ciudad nuevos restan, pero con el piso del v3 ningún campo resta " +
+    "más de 10 bits: el documento, el nombre, la fecha y el correo bastan.",
+};
+
+const fieldsets = [...document.querySelectorAll("fieldset[data-registro]")];
+for (const fs of fieldsets) {
+  const i = fs.dataset.registro;
+  for (const [campo, nombre] of CAMPOS) {
+    const id = `r${i}-${campo}`;
+    fs.insertAdjacentHTML("beforeend",
+      `<label for="${id}">${nombre}</label><input id="${id}" name="${campo}" inputmode="${campo === "celular" || campo === "numero_documento" ? "numeric" : "text"}">`);
+  }
+}
+
+const leer = (fs) => Object.fromEntries(CAMPOS.map(([c]) => {
+  const v = fs.querySelector(`[name="${c}"]`).value.trim();
+  return [c, v === "" ? null : v];
+}));
+const escribir = (fs, r) => CAMPOS.forEach(([c]) => { fs.querySelector(`[name="${c}"]`).value = r[c] ?? ""; });
+const fmt = (x, d = 1) => x.toLocaleString("es-CO", { minimumFractionDigits: d, maximumFractionDigits: d });
+const escapar = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function probabilidadTexto(p) {
+  if (p >= 0.999999) return "≥ 0,999999";
+  if (p < 0.000001) return "< 0,000001";
+  return p.toLocaleString("es-CO", { maximumSignificantDigits: 4 });
+}
+
+function cascada(r, bandas) {
+  const pasos = [{ nombre: "Previa (λ)", peso: r.previo, previa: true },
+    ...r.detalle.map((d) => ({ nombre: NOMBRES[d.columna] ?? d.columna, peso: d.peso, nivel: d.etiqueta }))];
+  let acumulado = 0;
+  const filas = pasos.map((p) => { const desde = acumulado; acumulado += p.peso; return { ...p, desde, hasta: acumulado }; });
+  const valores = filas.flatMap((f) => [f.desde, f.hasta]).concat([0, bandas.peso_desde_revisar, bandas.peso_desde_aceptar]);
+  const min = Math.min(...valores) - 2, max = Math.max(...valores) + 2;
+  const disponible = document.getElementById("cascada").clientWidth || 760;
+  const angosto = disponible < 560;
+  const W = Math.max(280, Math.min(760, disponible));
+  const izquierda = angosto ? 120 : 170, derecha = angosto ? 70 : 60, alto = 22, arriba = 34;
+  const H = arriba + filas.length * alto + 30;
+  const x = (v) => izquierda + ((v - min) / (max - min)) * (W - izquierda - derecha);
+  const css = getComputedStyle(document.documentElement);
+  const color = (n) => css.getPropertyValue(n).trim();
+  let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+  // Etiquetas escalonadas para que no se encimen cuando las líneas quedan cerca.
+  for (const [v, nombre, y] of [[bandas.peso_desde_revisar, "revisar", arriba - 20], [bandas.peso_desde_aceptar, "aceptar", arriba - 6]]) {
+    svg += `<line x1="${x(v)}" x2="${x(v)}" y1="${y + 3}" y2="${H - 24}" stroke="${color("--suave")}" stroke-dasharray="3 3"/>`;
+    svg += `<text x="${x(v)}" y="${y}" text-anchor="middle" class="tenue">${nombre}</text>`;
+  }
+  svg += `<line x1="${x(0)}" x2="${x(0)}" y1="${arriba}" y2="${H - 24}" stroke="${color("--borde")}"/>`;
+  filas.forEach((f, i) => {
+    const y = arriba + i * alto;
+    const x1 = x(Math.min(f.desde, f.hasta)), x2 = x(Math.max(f.desde, f.hasta));
+    const relleno = f.previa ? color("--previa") : f.peso >= 0 ? color("--pos-barra") : color("--neg-barra");
+    const titulo = f.nivel ? `${f.nombre}: ${f.nivel}` : f.nombre;
+    svg += `<g><title>${escapar(titulo)} (${f.peso >= 0 ? "+" : ""}${fmt(f.peso)} bits)</title>`;
+    svg += `<text x="${izquierda - 8}" y="${y + 15}" text-anchor="end">${escapar(f.nombre)}</text>`;
+    svg += `<rect x="${x1}" y="${y + 4}" width="${Math.max(1.5, x2 - x1)}" height="${alto - 8}" rx="2" fill="${relleno}"/>`;
+    svg += `<text x="${x2 + 4}" y="${y + 15}" class="tenue">${f.peso >= 0 ? "+" : ""}${fmt(f.peso)}</text></g>`;
+  });
+  const yf = arriba + filas.length * alto + 18;
+  svg += `<text x="${izquierda - 8}" y="${yf}" text-anchor="end" font-weight="600">Peso final</text>`;
+  svg += `<circle cx="${x(acumulado)}" cy="${yf - 4}" r="5" fill="${color("--acento")}"/>`;
+  const finalDerecha = x(acumulado) + 80 > W;
+  svg += `<text x="${x(acumulado) + (finalDerecha ? -9 : 9)}" y="${yf}" font-weight="600" text-anchor="${finalDerecha ? "end" : "start"}">${fmt(acumulado)} bits</text>`;
+  return svg + "</svg>";
+}
+
+let motor, modelo;
+function actualizar() {
+  if (!motor) return;
+  const r = motor.comparar(leer(fieldsets[0]), leer(fieldsets[1]));
+  const b = modelo.bandas;
+  const banda = r.peso >= b.peso_desde_aceptar ? "aceptar" : r.peso >= b.peso_desde_revisar ? "revisar" : "rechazar";
+  const texto = { aceptar: "Aceptar: mismo cliente", revisar: "Revisar: zona gris", rechazar: "Rechazar: distintos" };
+  document.getElementById("probabilidad").textContent = probabilidadTexto(r.probabilidad);
+  document.getElementById("peso").textContent = `${fmt(r.peso)} bits`;
+  const el = document.getElementById("banda");
+  el.textContent = banda[0].toUpperCase() + banda.slice(1);
+  el.className = `cifra banda-${banda}`;
+  document.getElementById("banda-detalle").textContent = texto[banda];
+  const fijo = document.getElementById("fijo-texto");
+  fijo.textContent = `${banda[0].toUpperCase() + banda.slice(1)} · ${fmt(r.peso)} bits`;
+  fijo.className = `banda-${banda}`;
+  document.getElementById("cascada").innerHTML = cascada(r, b);
+  const [l, d] = r.preparados;
+  const filas = Object.keys(l).map((k) => {
+    const v = (x) => (x === null ? "—" : Array.isArray(x) ? x.join(", ") : x);
+    return `<tr><td>${k}</td><td>${escapar(v(l[k]))}</td><td>${escapar(v(d[k]))}</td></tr>`;
+  }).join("");
+  document.getElementById("estandarizados").innerHTML =
+    `<table><thead><tr><th>Columna</th><th>A</th><th>B</th></tr></thead><tbody>${filas}</tbody></table>`;
+}
+
+document.querySelectorAll("[data-ejemplo]").forEach((b) => b.addEventListener("click", () => {
+  EJEMPLOS[b.dataset.ejemplo].forEach((r, i) => escribir(fieldsets[i], r));
+  const nota = document.getElementById("nota-ejemplo");
+  nota.textContent = NOTAS[b.dataset.ejemplo] ?? "";
+  nota.hidden = !NOTAS[b.dataset.ejemplo];
+  actualizar();
+}));
+document.getElementById("formulario").addEventListener("input", actualizar);
+let ancho = window.innerWidth;
+window.addEventListener("resize", () => { if (Math.abs(window.innerWidth - ancho) > 40) { ancho = window.innerWidth; actualizar(); } });
+
+try {
+  modelo = await (await fetch("./demo/modelo_demo_v3.json")).json();
+  motor = crearMotor(modelo);
+  EJEMPLOS.errores.forEach((r, i) => escribir(fieldsets[i], r));
+  actualizar();
+} catch (e) {
+  const el = document.getElementById("error");
+  el.hidden = false;
+  el.textContent = `No se pudo cargar el modelo: ${e.message}`;
+}
+</script>
+</body>
+</html>
