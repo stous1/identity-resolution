@@ -1,44 +1,44 @@
 motivo,detalle,ids_registros,cluster_id
-puente_debil,umbral 0.9: une 1 registro(s) con peso 5.8,843;2378,843
-puente_debil,umbral 0.9: une 1 registro(s) con peso 5.9,1157;2119,1157
-puente_debil,umbral 0.9: une 2 registro(s) con peso 3.9,1456;3127,1456
-puente_debil,umbral 0.9: une 1 registro(s) con peso 10.7,828;1529,828
-puente_debil,umbral 0.9: une 1 registro(s) con peso 7.6,1577;4566,1577
-puente_debil,umbral 0.9: une 1 registro(s) con peso 5.0,2587;3091,2587
-puente_debil,umbral 0.9: une 1 registro(s) con peso 4.0,3402;4558,3402
-grupo_sospechoso_celular,5 clientes comparten celular 3005860098; 0% con apellido común; 100% por canal digital,4721;4722;4723;4724;4725,699;1666;3228;3229;3818
-grupo_sospechoso_celular,5 clientes comparten celular 3010438099; 0% con apellido común; 100% por canal digital,4763;4764;4765;4766;4767,610;1686;3422;3840;4338
-grupo_sospechoso_celular,5 clientes comparten celular 3105094060; 0% con apellido común; 100% por canal digital,4795;4796;4797;4798;4799,584;2643;3554;3762;4612
-grupo_sospechoso_celular,3 clientes comparten celular 3117976950; 0% con apellido común; 100% por canal digital,4774;4775;4776,255;365;2130
-grupo_sospechoso_celular,6 clientes comparten celular 3126500766; 7% con apellido común; 100% por canal digital,4808;4809;4810;4811;4812;4813,1148;1628;3037;3298;3851;4396
-grupo_sospechoso_celular,5 clientes comparten celular 3152471352; 0% con apellido común; 100% por canal digital,4758;4759;4760;4761;4762,1089;2994;3278;4055;4090
-grupo_sospechoso_correo,3 clientes comparten correo pagos189@gmail.com; 0% con apellido común; 100% por canal digital,4751;4752;4753,2585;3998;4122
-grupo_sospechoso_correo,4 clientes comparten correo pagos313@yahoo.com; 0% con apellido común; 100% por canal digital,4804;4805;4806;4807,489;1421;1658;2296
-grupo_sospechoso_correo,4 clientes comparten correo pagos564@hotmail.com; 17% con apellido común; 100% por canal digital,4814;4815;4816;4817,3418;3456;3804;4061
-grupo_sospechoso_correo,6 clientes comparten correo pagos566@outlook.com; 0% con apellido común; 100% por canal digital,4768;4769;4770;4771;4772;4773,1445;2844;2893;3064;3140;3899
-grupo_sospechoso_correo,3 clientes comparten correo pagos621@outlook.com; 0% con apellido común; 100% por canal digital,4738;4739;4740,666;706;910
-grupo_sospechoso_correo,4 clientes comparten correo pagos733@yahoo.com; 0% con apellido común; 100% por canal digital,4800;4801;4802;4803,3176;3755;4044;4651
-grupo_sospechoso_correo,4 clientes comparten correo pagos836@gmail.com; 17% con apellido común; 100% por canal digital,4781;4782;4783;4784,1300;4189;4480;4707
-grupo_sospechoso_correo,3 clientes comparten correo pagos879@yahoo.com; 33% con apellido común; 100% por canal digital,4818;4819;4820,2760;2927;3651
-grupo_sospechoso_correo,4 clientes comparten correo pagos927@hotmail.com; 17% con apellido común; 100% por canal digital,4785;4786;4787;4788,876;2814;2852;3196
-grupo_sospechoso_correo,6 clientes comparten correo pagos943@yahoo.com; 0% con apellido común; 100% por canal digital,4732;4733;4734;4735;4736;4737,496;2326;3526;3843;3904;4466
-grupo_sospechoso_correo,6 clientes comparten correo pagos987@outlook.com; 0% con apellido común; 100% por canal digital,4715;4716;4717;4718;4719;4720,34;932;1001;1482;4035;4484
-grupo_sospechoso_direccion,4 clientes comparten direccion CL 10A # 65-24; 0% con apellido común; 100% por canal digital,4754;4755;4756;4757,916;1402;2424;2918
-grupo_sospechoso_direccion,6 clientes comparten direccion CL 116B # 33A-17; 7% con apellido común; 100% por canal digital,4821;4822;4823;4824;4825;4826,1403;1779;3083;3218;4118;4366
-grupo_sospechoso_direccion,6 clientes comparten direccion CL 124 # 51-48; 0% con apellido común; 100% por canal digital,4741;4742;4743;4744;4745;4746,837;869;1319;2801;3022;4074
-grupo_sospechoso_direccion,6 clientes comparten direccion CL 55 ESTE # 98B-61; 0% con apellido común; 100% por canal digital,4789;4790;4791;4792;4793;4794,284;756;1221;1755;3492;4384
-grupo_sospechoso_direccion,4 clientes comparten direccion KR 145A # 115B-52; 0% con apellido común; 100% por canal digital,4747;4748;4749;4750,318;1119;1484;4442
-grupo_sospechoso_direccion,6 clientes comparten direccion KR 5 # 41-64; 7% con apellido común; 100% por canal digital,4726;4727;4728;4729;4730;4731,50;67;345;1009;2999;4726
-grupo_sospechoso_direccion,4 clientes comparten direccion TV 130A # 30A-81; 0% con apellido común; 100% por canal digital,4777;4778;4779;4780,238;883;1014;2538
-grupo_sospechoso_documento,2 clientes comparten documento 1064372368; 0% con apellido común; 67% por canal digital,2530;2531;2532;2533;2534;4838,446;2530
-grupo_sospechoso_documento,2 clientes comparten documento 1067548886; 0% con apellido común; 100% por canal digital,3341;4834,2568;3341
-grupo_sospechoso_documento,2 clientes comparten documento 1094800822; 0% con apellido común; 50% por canal digital,593;4831,593;3695
-grupo_sospechoso_documento,2 clientes comparten documento 1103859905; 0% con apellido común; 50% por canal digital,4110;4835,2814;4110
-grupo_sospechoso_documento,2 clientes comparten documento 1108413410; 0% con apellido común; 100% por canal digital,476;4828,476;3791
-grupo_sospechoso_documento,2 clientes comparten documento 1108430803; 0% con apellido común; 50% por canal digital,1307;4827,435;1307
-grupo_sospechoso_documento,2 clientes comparten documento 20534055; 0% con apellido común; 50% por canal digital,3297;4829,655;3297
-grupo_sospechoso_documento,2 clientes comparten documento 27690400; 0% con apellido común; 100% por canal digital,2142;4830,56;2141
-grupo_sospechoso_documento,2 clientes comparten documento 36720843; 0% con apellido común; 67% por canal digital,265;266;4832,265;4832
-grupo_sospechoso_documento,2 clientes comparten documento 38056880; 0% con apellido común; 100% por canal digital,2497;4836,2497;4836
-grupo_sospechoso_documento,2 clientes comparten documento 65879930; 0% con apellido común; 67% por canal digital,2303;2304;4837,2303;3970
-grupo_sospechoso_documento,2 clientes comparten documento 92806902; 0% con apellido común; 60% por canal digital,3930;3931;3932;3933;4833,3277;3930
+puente_debil,umbral 0.9: une 1 registro(s) con peso 5.2,105;908,105
+puente_debil,umbral 0.9: une 2 registro(s) con peso 4.0,732;4468,731
+puente_debil,umbral 0.9: une 1 registro(s) con peso 9.2,1785;4078,1785
+puente_debil,umbral 0.9: une 1 registro(s) con peso 23.3,74;4867,74
+puente_debil,umbral 0.9: une 2 registro(s) con peso 3.8,4073;4296,4072
+puente_debil,umbral 0.9: une 1 registro(s) con peso 17.7,2656;4870,2656
+grupo_sospechoso_celular,6 clientes comparten celular 3000660290; 0% con apellido común; 100% por canal digital,4816;4817;4818;4819;4820;4821,346;1848;3035;3731;4303;4367
+grupo_sospechoso_celular,5 clientes comparten celular 3007259648; 0% con apellido común; 100% por canal digital,4765;4766;4767;4768;4769,2691;2951;3851;4481;4735
+grupo_sospechoso_celular,5 clientes comparten celular 3008243591; 0% con apellido común; 100% por canal digital,4803;4804;4805;4806;4807,182;1823;2594;3858;4043
+grupo_sospechoso_celular,5 clientes comparten celular 3009406055; 0% con apellido común; 100% por canal digital,4843;4844;4845;4846;4847,1552;1669;2348;2381;3591
+grupo_sospechoso_celular,3 clientes comparten celular 3014256275; 0% con apellido común; 100% por canal digital,4782;4783;4784,1386;2504;4137
+grupo_sospechoso_celular,6 clientes comparten celular 3043685469; 0% con apellido común; 100% por canal digital,4770;4771;4772;4773;4774;4775,1953;2415;2851;3671;3715;4295
+grupo_sospechoso_celular,2 clientes comparten celular 3115164628; 0% con apellido común; 0% por canal digital,1845;2946;2947;2948,1845;2946
+grupo_sospechoso_celular,5 clientes comparten celular 3117387637; 0% con apellido común; 100% por canal digital,4835;4836;4837;4838;4839,745;2652;2921;3641;4364
+grupo_sospechoso_celular,6 clientes comparten celular 3151650542; 0% con apellido común; 100% por canal digital,4759;4760;4761;4762;4763;4764,1031;1240;1839;3713;4005;4142
+grupo_sospechoso_correo,5 clientes comparten correo pagos245@hotmail.com; 0% con apellido común; 100% por canal digital,4852;4853;4854;4855;4856,483;2431;4438;4705;4741
+grupo_sospechoso_correo,4 clientes comparten correo pagos313@yahoo.com; 0% con apellido común; 100% por canal digital,4812;4813;4814;4815,1248;3180;3798;3877
+grupo_sospechoso_correo,4 clientes comparten correo pagos399@outlook.com; 0% con apellido común; 100% por canal digital,4848;4849;4850;4851,3072;3253;3311;4236
+grupo_sospechoso_correo,4 clientes comparten correo pagos564@hotmail.com; 0% con apellido común; 100% por canal digital,4822;4823;4824;4825,764;1103;2547;4310
+grupo_sospechoso_correo,6 clientes comparten correo pagos566@outlook.com; 0% con apellido común; 100% por canal digital,4776;4777;4778;4779;4780;4781,918;1389;1437;1453;2933;2937
+grupo_sospechoso_correo,3 clientes comparten correo pagos694@hotmail.com; 0% con apellido común; 100% por canal digital,4840;4841;4842,661;3986;4074
+grupo_sospechoso_correo,4 clientes comparten correo pagos733@yahoo.com; 0% con apellido común; 100% por canal digital,4808;4809;4810;4811,1294;2104;2326;2654
+grupo_sospechoso_correo,5 clientes comparten correo pagos800@hotmail.com; 0% con apellido común; 100% por canal digital,4754;4755;4756;4757;4758,903;1958;2573;3541;4479
+grupo_sospechoso_correo,4 clientes comparten correo pagos836@gmail.com; 0% con apellido común; 100% por canal digital,4789;4790;4791;4792,995;1501;1644;3183
+grupo_sospechoso_correo,3 clientes comparten correo pagos879@yahoo.com; 0% con apellido común; 100% por canal digital,4826;4827;4828,568;1664;1919
+grupo_sospechoso_correo,6 clientes comparten correo pagos926@hotmail.com; 7% con apellido común; 100% por canal digital,4857;4858;4859;4860;4861;4862,1095;2273;3521;3565;3912;4538
+grupo_sospechoso_correo,4 clientes comparten correo pagos927@hotmail.com; 17% con apellido común; 100% por canal digital,4793;4794;4795;4796,1763;3660;3923;4013
+grupo_sospechoso_direccion,6 clientes comparten direccion CL 124A # 49-78; 0% con apellido común; 100% por canal digital,4797;4798;4799;4800;4801;4802,1119;2248;2641;2964;4496;4561
+grupo_sospechoso_direccion,6 clientes comparten direccion CL 146B # 9B-70; 20% con apellido común; 100% por canal digital,4829;4830;4831;4832;4833;4834,360;1853;2422;3321;3322;4036
+grupo_sospechoso_direccion,3 clientes comparten direccion KR 116 # 43B-98; 0% con apellido común; 100% por canal digital,4863;4864;4865,1803;2170;3980
+grupo_sospechoso_direccion,4 clientes comparten direccion KR 61A # 101-36; 0% con apellido común; 100% por canal digital,4785;4786;4787;4788,3182;3286;3371;4002
+grupo_sospechoso_documento,2 clientes comparten documento 1031473402; 0% con apellido común; 50% por canal digital,519;4876,519;1159
+grupo_sospechoso_documento,2 clientes comparten documento 1042385335; 0% con apellido común; 100% por canal digital,1336;4867,74;1336
+grupo_sospechoso_documento,2 clientes comparten documento 1084984016; 0% con apellido común; 50% por canal digital,162;4866,162;2355
+grupo_sospechoso_documento,2 clientes comparten documento 1147888961; 0% con apellido común; 80% por canal digital,323;324;325;326;4868,323;2972
+grupo_sospechoso_documento,2 clientes comparten documento 14015240; 0% con apellido común; 67% por canal digital,3401;3402;3403;3404;3405;4869,2627;3401
+grupo_sospechoso_documento,2 clientes comparten documento 15656116; 0% con apellido común; 57% por canal digital,3429;3430;3431;3432;3433;3434;4875,3429;4180
+grupo_sospechoso_documento,2 clientes comparten documento 24886948; 0% con apellido común; 100% por canal digital,331;332;4877,331;1754
+grupo_sospechoso_documento,2 clientes comparten documento 27696338; 0% con apellido común; 50% por canal digital,1789;4870,1789;2656
+grupo_sospechoso_documento,2 clientes comparten documento 28119078; 0% con apellido común; 50% por canal digital,1610;1611;1612;4871,1277;1610
+grupo_sospechoso_documento,2 clientes comparten documento 63864981; 0% con apellido común; 100% por canal digital,4736;4874,4120;4736
+grupo_sospechoso_documento,2 clientes comparten documento 78488190; 0% con apellido común; 100% por canal digital,962;4873,962;4406
+grupo_sospechoso_documento,2 clientes comparten documento 86288417; 0% con apellido común; 100% por canal digital,4130;4872,2202;4130

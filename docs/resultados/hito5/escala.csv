@@ -1,9 +1,9 @@
 registros,etapa,segundos,memoria_pico_gb,precision_cluster,recall_cluster
-99088,Preparación,8.3,0.44,0.9815,0.9967
-99088,Entrenamiento,13.1,1.54,0.9815,0.9967
-99088,Predicción,1.1,1.03,0.9815,0.9967
-99088,Agrupación,0.8,1.11,0.9815,0.9967
-995688,Preparación,90.6,3.08,0.9714,0.9962
-995688,Entrenamiento,35.6,6.46,0.9714,0.9962
-995688,Predicción,1.9,7.74,0.9714,0.9962
-995688,Agrupación,5.8,9.08,0.9714,0.9962
+99837,Preparación,10.2,0.43,0.9813,0.9967
+99837,Entrenamiento,15.3,1.52,0.9813,0.9967
+99837,Predicción,1.2,1.03,0.9813,0.9967
+99837,Agrupación,0.9,1.11,0.9813,0.9967
+996688,Preparación,102.8,3.1,0.9702,0.9963
+996688,Entrenamiento,43.3,6.49,0.9702,0.9963
+996688,Predicción,2.4,7.75,0.9702,0.9963
+996688,Agrupación,6.7,9.1,0.9702,0.9963

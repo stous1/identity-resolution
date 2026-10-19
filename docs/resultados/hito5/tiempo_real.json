@@ -5,37 +5,36 @@
   },
   "zona_gris_desde": 0.9,
   "base": {
-    "clientes": 1351,
-    "registros_usados": 2916
+    "clientes": 1355,
+    "registros_usados": 2949
   },
   "consultas": 2000,
   "existentes": 1000,
   "nuevas": 1000,
   "precision": {
-    "valor": 0.9989939637826962,
-    "ic_inf": 0.9969386190058845,
+    "valor": 1.0,
+    "ic_inf": 1.0,
     "ic_sup": 1.0
   },
   "recall": {
-    "valor": 0.993,
-    "ic_inf": 0.9871411258336517,
-    "ic_sup": 0.9979550624463426
+    "valor": 0.992,
+    "ic_inf": 0.9858575112830432,
+    "ic_sup": 0.9969516048484549
   },
   "decisiones": {
     "existentes": {
-      "cliente": 993,
-      "nuevo": 7
+      "cliente": 992,
+      "nuevo": 8
     },
     "nuevas": {
-      "nuevo": 993,
-      "revisar": 6,
-      "cliente": 1
+      "nuevo": 992,
+      "revisar": 8
     }
   },
   "cliente_equivocado": 0,
   "latencia_ms": {
-    "mediana": 59.72,
-    "p95": 74.05399999999999,
-    "maxima": 162.16
+    "mediana": 67.645,
+    "p95": 89.25999999999998,
+    "maxima": 199.16
   }
 }

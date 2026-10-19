@@ -1,0 +1,259 @@
+{
+  "modelos": {
+    "v3": {
+      "umbral": 0.999999
+    },
+    "v4": {
+      "umbral": 0.999999
+    }
+  },
+  "descripcion": "Mismas consultas y misma base de registros para los dos modelos.",
+  "normal": {
+    "v3": {
+      "base": {
+        "clientes": 2768,
+        "registros_usados": 6006
+      },
+      "consultas": {
+        "existentes": 1500,
+        "nuevas": 1500
+      },
+      "mezcla_evaluada": {
+        "precision": 1.0,
+        "recall": 0.9886666666666667
+      },
+      "decisiones": {
+        "existentes": {
+          "cliente": 1483,
+          "nuevo": 16,
+          "revisar": 1
+        },
+        "nuevas": {
+          "nuevo": 1480,
+          "revisar": 20
+        }
+      },
+      "tasas": {
+        "aciertos_entre_existentes": 0.9886666666666667,
+        "cliente_equivocado_entre_existentes": 0.0,
+        "falsa_alarma_entre_nuevas": 0.0,
+        "falsas_alarmas": 0,
+        "nuevas": 1500
+      },
+      "precision": {
+        "0.01": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "0.1": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "0.5": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        }
+      },
+      "latencia_ms": {
+        "mediana": 83.07499999999999,
+        "p95": 101.38099999999999
+      }
+    },
+    "v4": {
+      "base": {
+        "clientes": 2768,
+        "registros_usados": 6006
+      },
+      "consultas": {
+        "existentes": 1500,
+        "nuevas": 1500
+      },
+      "mezcla_evaluada": {
+        "precision": 1.0,
+        "recall": 0.9886666666666667
+      },
+      "decisiones": {
+        "existentes": {
+          "cliente": 1483,
+          "nuevo": 16,
+          "revisar": 1
+        },
+        "nuevas": {
+          "nuevo": 1487,
+          "revisar": 13
+        }
+      },
+      "tasas": {
+        "aciertos_entre_existentes": 0.9886666666666667,
+        "cliente_equivocado_entre_existentes": 0.0,
+        "falsa_alarma_entre_nuevas": 0.0,
+        "falsas_alarmas": 0,
+        "nuevas": 1500
+      },
+      "precision": {
+        "0.01": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "0.1": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "0.5": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        }
+      },
+      "latencia_ms": {
+        "mediana": 112.515,
+        "p95": 142.71199999999993
+      }
+    }
+  },
+  "residencial": {
+    "v3": {
+      "base": {
+        "clientes": 2869,
+        "registros_usados": 6284
+      },
+      "consultas": {
+        "existentes": 1500,
+        "nuevas": 1500
+      },
+      "mezcla_evaluada": {
+        "precision": 1.0,
+        "recall": 0.9946666666666667
+      },
+      "decisiones": {
+        "existentes": {
+          "cliente": 1492,
+          "nuevo": 5,
+          "revisar": 3
+        },
+        "nuevas": {
+          "nuevo": 1500
+        }
+      },
+      "tasas": {
+        "aciertos_entre_existentes": 0.9946666666666667,
+        "cliente_equivocado_entre_existentes": 0.0,
+        "falsa_alarma_entre_nuevas": 0.0,
+        "falsas_alarmas": 0,
+        "nuevas": 1500
+      },
+      "precision": {
+        "0.01": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "0.1": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "0.5": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        }
+      },
+      "latencia_ms": {
+        "mediana": 214.3,
+        "p95": 536.2624999999994
+      }
+    },
+    "v4": {
+      "base": {
+        "clientes": 2867,
+        "registros_usados": 6284
+      },
+      "consultas": {
+        "existentes": 1500,
+        "nuevas": 1500
+      },
+      "mezcla_evaluada": {
+        "precision": 1.0,
+        "recall": 0.9966666666666667
+      },
+      "decisiones": {
+        "existentes": {
+          "cliente": 1495,
+          "nuevo": 5
+        },
+        "nuevas": {
+          "nuevo": 1499,
+          "revisar": 1
+        }
+      },
+      "tasas": {
+        "aciertos_entre_existentes": 0.9966666666666667,
+        "cliente_equivocado_entre_existentes": 0.0,
+        "falsa_alarma_entre_nuevas": 0.0,
+        "falsas_alarmas": 0,
+        "nuevas": 1500
+      },
+      "precision": {
+        "0.01": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "0.1": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        },
+        "0.5": {
+          "valor": 1.0,
+          "ic_inf": 1.0,
+          "ic_sup": 1.0
+        }
+      },
+      "latencia_ms": {
+        "mediana": 256.06,
+        "p95": 577.1949999999997
+      }
+    }
+  },
+  "resumen": {
+    "normal": {
+      "v3": {
+        "recall": 0.9887,
+        "precision_1%": 1.0,
+        "precision_10%": 1.0,
+        "precision_50%": 1.0,
+        "mediana_ms": 83.1
+      },
+      "v4": {
+        "recall": 0.9887,
+        "precision_1%": 1.0,
+        "precision_10%": 1.0,
+        "precision_50%": 1.0,
+        "mediana_ms": 112.5
+      }
+    },
+    "residencial": {
+      "v3": {
+        "recall": 0.9947,
+        "precision_1%": 1.0,
+        "precision_10%": 1.0,
+        "precision_50%": 1.0,
+        "mediana_ms": 214.3
+      },
+      "v4": {
+        "recall": 0.9967,
+        "precision_1%": 1.0,
+        "precision_10%": 1.0,
+        "precision_50%": 1.0,
+        "mediana_ms": 256.1
+      }
+    }
+  }
+}

@@ -42,22 +42,22 @@
         ],
         "reglas": {
           "documento": "fuente_confiable",
-          "nombres": "fuente_confiable",
-          "apellidos": "fuente_confiable",
+          "nombres": "frecuente",
+          "apellidos": "frecuente",
           "fecha_nacimiento": "mas_reciente",
           "celular": "validado",
           "correo": "validado",
-          "direccion": "frecuente"
+          "direccion": "fuente_confiable"
         },
-        "union_precision": 1.0,
-        "union_recall": 0.9977993764900055,
-        "oro_max_brecha_al_techo": 0.047334329845540646,
-        "grafo_exactitud": 1.0,
-        "grafo_grupos": 432,
-        "mezclados_umbral_congelado": 0,
-        "mezclados_0_9": 18,
-        "evitados_0_9": 7,
-        "fraccion_evitada_0_9": 0.3888888888888889
+        "union_precision": 0.9982059562253319,
+        "union_recall": 0.9994611101131669,
+        "oro_max_brecha_al_techo": 0.04500000000000004,
+        "grafo_exactitud": 0.9905882352941177,
+        "grafo_grupos": 425,
+        "mezclados_umbral_congelado": 2,
+        "mezclados_0_9": 10,
+        "evitados_0_9": 4,
+        "fraccion_evitada_0_9": 0.4
       },
       {
         "semillas": [
@@ -68,20 +68,20 @@
           "documento": "fuente_confiable",
           "nombres": "fuente_confiable",
           "apellidos": "frecuente",
-          "fecha_nacimiento": "mas_reciente",
+          "fecha_nacimiento": "frecuente",
           "celular": "validado",
           "correo": "validado",
           "direccion": "fuente_confiable"
         },
-        "union_precision": 0.9982541899441341,
-        "union_recall": 0.9979057591623036,
-        "oro_max_brecha_al_techo": 0.03742514970059874,
-        "grafo_exactitud": 0.9925925925925926,
-        "grafo_grupos": 405,
-        "mezclados_umbral_congelado": 2,
-        "mezclados_0_9": 18,
-        "evitados_0_9": 3,
-        "fraccion_evitada_0_9": 0.16666666666666666
+        "union_precision": 1.0,
+        "union_recall": 0.995286312849162,
+        "oro_max_brecha_al_techo": 0.03874813710879288,
+        "grafo_exactitud": 0.9799554565701559,
+        "grafo_grupos": 449,
+        "mezclados_umbral_congelado": 0,
+        "mezclados_0_9": 15,
+        "evitados_0_9": 5,
+        "fraccion_evitada_0_9": 0.3333333333333333
       },
       {
         "semillas": [
@@ -91,21 +91,21 @@
         "reglas": {
           "documento": "validado",
           "nombres": "frecuente",
-          "apellidos": "fuente_confiable",
-          "fecha_nacimiento": "mas_reciente",
-          "celular": "mas_reciente",
+          "apellidos": "frecuente",
+          "fecha_nacimiento": "frecuente",
+          "celular": "validado",
           "correo": "validado",
-          "direccion": "frecuente"
+          "direccion": "fuente_confiable"
         },
-        "union_precision": 0.998526974774443,
-        "union_recall": 0.9983431516936672,
-        "oro_max_brecha_al_techo": 0.04845154845154853,
-        "grafo_exactitud": 0.9924812030075187,
-        "grafo_grupos": 399,
-        "mezclados_umbral_congelado": 1,
-        "mezclados_0_9": 16,
-        "evitados_0_9": 2,
-        "fraccion_evitada_0_9": 0.125
+        "union_precision": 0.9986884017238149,
+        "union_recall": 0.9971936389148737,
+        "oro_max_brecha_al_techo": 0.03940149625935163,
+        "grafo_exactitud": 0.9850746268656716,
+        "grafo_grupos": 402,
+        "mezclados_umbral_congelado": 2,
+        "mezclados_0_9": 18,
+        "evitados_0_9": 8,
+        "fraccion_evitada_0_9": 0.4444444444444444
       },
       {
         "semillas": [
@@ -114,22 +114,22 @@
         ],
         "reglas": {
           "documento": "validado",
-          "nombres": "fuente_confiable",
-          "apellidos": "fuente_confiable",
-          "fecha_nacimiento": "frecuente",
+          "nombres": "frecuente",
+          "apellidos": "frecuente",
+          "fecha_nacimiento": "mas_reciente",
           "celular": "validado",
           "correo": "validado",
-          "direccion": "frecuente"
+          "direccion": "fuente_confiable"
         },
-        "union_precision": 0.997738409347908,
-        "union_recall": 0.9981146304675717,
-        "oro_max_brecha_al_techo": 0.042935596605092274,
-        "grafo_exactitud": 0.9782608695652174,
-        "grafo_grupos": 414,
+        "union_precision": 0.9988797610156833,
+        "union_recall": 0.9966467958271237,
+        "oro_max_brecha_al_techo": 0.043326693227091706,
+        "grafo_exactitud": 0.9856459330143541,
+        "grafo_grupos": 418,
         "mezclados_umbral_congelado": 2,
-        "mezclados_0_9": 15,
-        "evitados_0_9": 2,
-        "fraccion_evitada_0_9": 0.13333333333333333
+        "mezclados_0_9": 16,
+        "evitados_0_9": 5,
+        "fraccion_evitada_0_9": 0.3125
       },
       {
         "semillas": [
@@ -145,15 +145,15 @@
           "correo": "validado",
           "direccion": "frecuente"
         },
-        "union_precision": 0.9989727786337956,
-        "union_recall": 0.9976064284493076,
-        "oro_max_brecha_al_techo": 0.03736920777279529,
-        "grafo_exactitud": 0.977116704805492,
-        "grafo_grupos": 437,
-        "mezclados_umbral_congelado": 2,
-        "mezclados_0_9": 16,
-        "evitados_0_9": 3,
-        "fraccion_evitada_0_9": 0.1875
+        "union_precision": 0.9965415874113782,
+        "union_recall": 0.9958527734577501,
+        "oro_max_brecha_al_techo": 0.04719324391455537,
+        "grafo_exactitud": 0.9768518518518519,
+        "grafo_grupos": 432,
+        "mezclados_umbral_congelado": 1,
+        "mezclados_0_9": 25,
+        "evitados_0_9": 7,
+        "fraccion_evitada_0_9": 0.28
       },
       {
         "semillas": [
@@ -163,21 +163,21 @@
         "reglas": {
           "documento": "validado",
           "nombres": "frecuente",
-          "apellidos": "fuente_confiable",
-          "fecha_nacimiento": "frecuente",
+          "apellidos": "frecuente",
+          "fecha_nacimiento": "mas_reciente",
           "celular": "validado",
           "correo": "validado",
           "direccion": "frecuente"
         },
-        "union_precision": 0.9965431150374496,
-        "union_recall": 0.9975009611687813,
-        "oro_max_brecha_al_techo": 0.03594608087868201,
-        "grafo_exactitud": 0.9829683698296837,
-        "grafo_grupos": 411,
-        "mezclados_umbral_congelado": 4,
-        "mezclados_0_9": 15,
+        "union_precision": 0.9992389649923896,
+        "union_recall": 0.9960174473734117,
+        "oro_max_brecha_al_techo": 0.03738783649052846,
+        "grafo_exactitud": 0.976303317535545,
+        "grafo_grupos": 422,
+        "mezclados_umbral_congelado": 1,
+        "mezclados_0_9": 22,
         "evitados_0_9": 7,
-        "fraccion_evitada_0_9": 0.4666666666666667
+        "fraccion_evitada_0_9": 0.3181818181818182
       },
       {
         "semillas": [
@@ -191,17 +191,17 @@
           "fecha_nacimiento": "mas_reciente",
           "celular": "validado",
           "correo": "validado",
-          "direccion": "fuente_confiable"
+          "direccion": "frecuente"
         },
-        "union_precision": 0.9994703389830508,
-        "union_recall": 0.9989412387506618,
-        "oro_max_brecha_al_techo": 0.03946053946053951,
-        "grafo_exactitud": 0.9835294117647059,
-        "grafo_grupos": 425,
+        "union_precision": 0.9998233839632639,
+        "union_recall": 0.9966549295774648,
+        "oro_max_brecha_al_techo": 0.04091816367265466,
+        "grafo_exactitud": 0.9904076738609112,
+        "grafo_grupos": 417,
         "mezclados_umbral_congelado": 1,
-        "mezclados_0_9": 21,
-        "evitados_0_9": 10,
-        "fraccion_evitada_0_9": 0.47619047619047616
+        "mezclados_0_9": 20,
+        "evitados_0_9": 9,
+        "fraccion_evitada_0_9": 0.45
       },
       {
         "semillas": [
@@ -210,22 +210,22 @@
         ],
         "reglas": {
           "documento": "validado",
-          "nombres": "frecuente",
-          "apellidos": "fuente_confiable",
+          "nombres": "fuente_confiable",
+          "apellidos": "frecuente",
           "fecha_nacimiento": "mas_reciente",
           "celular": "validado",
           "correo": "validado",
           "direccion": "frecuente"
         },
-        "union_precision": 1.0,
-        "union_recall": 0.997308451462408,
-        "oro_max_brecha_al_techo": 0.03982080637132912,
-        "grafo_exactitud": 0.9788235294117648,
-        "grafo_grupos": 425,
-        "mezclados_umbral_congelado": 0,
-        "mezclados_0_9": 18,
-        "evitados_0_9": 10,
-        "fraccion_evitada_0_9": 0.5555555555555556
+        "union_precision": 0.9991498044550247,
+        "union_recall": 0.9969460468272819,
+        "oro_max_brecha_al_techo": 0.03736920777279529,
+        "grafo_exactitud": 0.9814814814814815,
+        "grafo_grupos": 432,
+        "mezclados_umbral_congelado": 2,
+        "mezclados_0_9": 25,
+        "evitados_0_9": 7,
+        "fraccion_evitada_0_9": 0.28
       }
     ],
     "v3": [
@@ -237,21 +237,21 @@
         "reglas": {
           "documento": "fuente_confiable",
           "nombres": "frecuente",
-          "apellidos": "fuente_confiable",
+          "apellidos": "frecuente",
           "fecha_nacimiento": "mas_reciente",
           "celular": "validado",
           "correo": "validado",
-          "direccion": "frecuente"
+          "direccion": "fuente_confiable"
         },
-        "union_precision": 1.0,
-        "union_recall": 0.9977993764900055,
-        "oro_max_brecha_al_techo": 0.047334329845540646,
-        "grafo_exactitud": 1.0,
-        "grafo_grupos": 432,
-        "mezclados_umbral_congelado": 0,
-        "mezclados_0_9": 24,
-        "evitados_0_9": 8,
-        "fraccion_evitada_0_9": 0.3333333333333333
+        "union_precision": 0.9982046678635548,
+        "union_recall": 0.9987425902640561,
+        "oro_max_brecha_al_techo": 0.044955044955044876,
+        "grafo_exactitud": 0.9859484777517564,
+        "grafo_grupos": 427,
+        "mezclados_umbral_congelado": 2,
+        "mezclados_0_9": 16,
+        "evitados_0_9": 10,
+        "fraccion_evitada_0_9": 0.625
       },
       {
         "semillas": [
@@ -267,15 +267,15 @@
           "correo": "validado",
           "direccion": "fuente_confiable"
         },
-        "union_precision": 0.9982541899441341,
-        "union_recall": 0.9979057591623036,
-        "oro_max_brecha_al_techo": 0.03742514970059874,
-        "grafo_exactitud": 0.9925925925925926,
-        "grafo_grupos": 405,
-        "mezclados_umbral_congelado": 2,
-        "mezclados_0_9": 28,
-        "evitados_0_9": 8,
-        "fraccion_evitada_0_9": 0.2857142857142857
+        "union_precision": 1.0,
+        "union_recall": 0.995286312849162,
+        "oro_max_brecha_al_techo": 0.03874813710879288,
+        "grafo_exactitud": 0.9799554565701559,
+        "grafo_grupos": 449,
+        "mezclados_umbral_congelado": 0,
+        "mezclados_0_9": 22,
+        "evitados_0_9": 7,
+        "fraccion_evitada_0_9": 0.3181818181818182
       },
       {
         "semillas": [
@@ -285,21 +285,21 @@
         "reglas": {
           "documento": "validado",
           "nombres": "frecuente",
-          "apellidos": "fuente_confiable",
+          "apellidos": "frecuente",
           "fecha_nacimiento": "mas_reciente",
-          "celular": "mas_reciente",
+          "celular": "validado",
           "correo": "validado",
-          "direccion": "frecuente"
+          "direccion": "fuente_confiable"
         },
         "union_precision": 1.0,
-        "union_recall": 0.998159057437408,
-        "oro_max_brecha_al_techo": 0.04840319361277445,
-        "grafo_exactitud": 0.9925187032418953,
-        "grafo_grupos": 401,
+        "union_recall": 0.9971936389148737,
+        "oro_max_brecha_al_techo": 0.03936223218734436,
+        "grafo_exactitud": 0.9851485148514851,
+        "grafo_grupos": 404,
         "mezclados_umbral_congelado": 0,
-        "mezclados_0_9": 19,
-        "evitados_0_9": 2,
-        "fraccion_evitada_0_9": 0.10526315789473684
+        "mezclados_0_9": 27,
+        "evitados_0_9": 10,
+        "fraccion_evitada_0_9": 0.37037037037037035
       },
       {
         "semillas": [
@@ -308,22 +308,22 @@
         ],
         "reglas": {
           "documento": "validado",
-          "nombres": "fuente_confiable",
-          "apellidos": "fuente_confiable",
+          "nombres": "frecuente",
+          "apellidos": "frecuente",
           "fecha_nacimiento": "mas_reciente",
           "celular": "validado",
           "correo": "validado",
-          "direccion": "frecuente"
+          "direccion": "fuente_confiable"
         },
-        "union_precision": 0.9984908507828711,
-        "union_recall": 0.9979260935143288,
-        "oro_max_brecha_al_techo": 0.04289276807980047,
-        "grafo_exactitud": 0.9759615384615384,
-        "grafo_grupos": 416,
+        "union_precision": 0.999252895031752,
+        "union_recall": 0.9966467958271237,
+        "oro_max_brecha_al_techo": 0.04330512692882027,
+        "grafo_exactitud": 0.9857142857142858,
+        "grafo_grupos": 420,
         "mezclados_umbral_congelado": 1,
-        "mezclados_0_9": 23,
-        "evitados_0_9": 5,
-        "fraccion_evitada_0_9": 0.21739130434782608
+        "mezclados_0_9": 28,
+        "evitados_0_9": 8,
+        "fraccion_evitada_0_9": 0.2857142857142857
       },
       {
         "semillas": [
@@ -339,15 +339,15 @@
           "correo": "validado",
           "direccion": "frecuente"
         },
-        "union_precision": 0.9996573582319684,
-        "union_recall": 0.9976064284493076,
-        "oro_max_brecha_al_techo": 0.03735059760956172,
-        "grafo_exactitud": 0.9772209567198178,
-        "grafo_grupos": 439,
-        "mezclados_umbral_congelado": 1,
-        "mezclados_0_9": 25,
-        "evitados_0_9": 8,
-        "fraccion_evitada_0_9": 0.32
+        "union_precision": 1.0,
+        "union_recall": 0.9949887679281147,
+        "oro_max_brecha_al_techo": 0.04714640198511166,
+        "grafo_exactitud": 0.9724770642201835,
+        "grafo_grupos": 436,
+        "mezclados_umbral_congelado": 0,
+        "mezclados_0_9": 33,
+        "evitados_0_9": 12,
+        "fraccion_evitada_0_9": 0.36363636363636365
       },
       {
         "semillas": [
@@ -357,21 +357,21 @@
         "reglas": {
           "documento": "validado",
           "nombres": "frecuente",
-          "apellidos": "fuente_confiable",
+          "apellidos": "frecuente",
           "fecha_nacimiento": "mas_reciente",
           "celular": "validado",
           "correo": "validado",
           "direccion": "frecuente"
         },
-        "union_precision": 0.9976927513939627,
-        "union_recall": 0.9975009611687813,
-        "oro_max_brecha_al_techo": 0.03592814371257491,
-        "grafo_exactitud": 0.9830097087378641,
-        "grafo_grupos": 412,
-        "mezclados_umbral_congelado": 3,
-        "mezclados_0_9": 19,
-        "evitados_0_9": 9,
-        "fraccion_evitada_0_9": 0.47368421052631576
+        "union_precision": 1.0,
+        "union_recall": 0.9960174473734117,
+        "oro_max_brecha_al_techo": 0.03736920777279529,
+        "grafo_exactitud": 0.976303317535545,
+        "grafo_grupos": 422,
+        "mezclados_umbral_congelado": 0,
+        "mezclados_0_9": 33,
+        "evitados_0_9": 8,
+        "fraccion_evitada_0_9": 0.24242424242424243
       },
       {
         "semillas": [
@@ -385,17 +385,17 @@
           "fecha_nacimiento": "mas_reciente",
           "celular": "validado",
           "correo": "validado",
-          "direccion": "fuente_confiable"
+          "direccion": "frecuente"
         },
         "union_precision": 1.0,
-        "union_recall": 0.9989412387506618,
-        "oro_max_brecha_al_techo": 0.039440838741887196,
-        "grafo_exactitud": 0.9836065573770492,
-        "grafo_grupos": 427,
+        "union_recall": 0.9966549295774648,
+        "oro_max_brecha_al_techo": 0.04089775561097264,
+        "grafo_exactitud": 0.9904534606205251,
+        "grafo_grupos": 419,
         "mezclados_umbral_congelado": 0,
-        "mezclados_0_9": 33,
+        "mezclados_0_9": 29,
         "evitados_0_9": 12,
-        "fraccion_evitada_0_9": 0.36363636363636365
+        "fraccion_evitada_0_9": 0.41379310344827586
       },
       {
         "semillas": [
@@ -404,80 +404,80 @@
         ],
         "reglas": {
           "documento": "validado",
-          "nombres": "frecuente",
-          "apellidos": "fuente_confiable",
+          "nombres": "fuente_confiable",
+          "apellidos": "frecuente",
           "fecha_nacimiento": "mas_reciente",
           "celular": "validado",
           "correo": "validado",
           "direccion": "frecuente"
         },
-        "union_precision": 1.0,
-        "union_recall": 0.9962318320473712,
-        "oro_max_brecha_al_techo": 0.04027846842366978,
-        "grafo_exactitud": 0.9719626168224299,
-        "grafo_grupos": 428,
-        "mezclados_umbral_congelado": 0,
-        "mezclados_0_9": 24,
-        "evitados_0_9": 13,
-        "fraccion_evitada_0_9": 0.5416666666666666
+        "union_precision": 0.9993197278911564,
+        "union_recall": 0.9969460468272819,
+        "oro_max_brecha_al_techo": 0.03735059760956172,
+        "grafo_exactitud": 0.9815242494226328,
+        "grafo_grupos": 433,
+        "mezclados_umbral_congelado": 1,
+        "mezclados_0_9": 32,
+        "evitados_0_9": 9,
+        "fraccion_evitada_0_9": 0.28125
       }
     ]
   },
   "resumen": {
     "v2": {
       "union_precision": {
-        "media": 0.9986882258400975,
-        "de": 0.001186363889224354,
-        "min": 0.9965431150374496,
+        "media": 0.9988159824733608,
+        "de": 0.0010870967931319317,
+        "min": 0.9965415874113782,
         "max": 1.0
       },
       "union_recall": {
-        "media": 0.9979399997055882,
-        "de": 0.0005236318445994297,
-        "min": 0.997308451462408,
-        "max": 0.9989412387506618
+        "media": 0.9967573818675293,
+        "de": 0.001258607526262642,
+        "min": 0.995286312849162,
+        "max": 0.9994611101131669
       },
       "oro_max_brecha_al_techo": {
-        "media": 0.041092907385765765,
-        "de": 0.004699415322119877,
-        "min": 0.03594608087868201,
-        "max": 0.04845154845154853
+        "media": 0.041168097305721255,
+        "de": 0.0036529223763812862,
+        "min": 0.03736920777279529,
+        "max": 0.04719324391455537
       },
       "grafo_exactitud": {
-        "media": 0.9857215851221219,
-        "de": 0.008336250801545573,
-        "min": 0.977116704805492,
-        "max": 1.0
+        "media": 0.9832885720592611,
+        "de": 0.005571794007809754,
+        "min": 0.976303317535545,
+        "max": 0.9905882352941177
       },
       "grafo_grupos": {
-        "media": 418.5,
-        "de": 13.352367366340482,
-        "min": 399.0,
-        "max": 437.0
+        "media": 424.625,
+        "de": 13.752272539475067,
+        "min": 402.0,
+        "max": 449.0
       },
       "mezclados_umbral_congelado": {
-        "media": 1.5,
-        "de": 1.3093073414159542,
+        "media": 1.375,
+        "de": 0.7440238091428449,
         "min": 0.0,
-        "max": 4.0
+        "max": 2.0
       },
       "mezclados_0_9": {
-        "media": 17.125,
-        "de": 2.03100960115899,
-        "min": 15.0,
-        "max": 21.0
+        "media": 18.875,
+        "de": 5.19443383412888,
+        "min": 10.0,
+        "max": 25.0
       },
       "evitados_0_9": {
-        "media": 5.5,
-        "de": 3.4226138716316967,
-        "min": 2.0,
-        "max": 10.0
+        "media": 6.5,
+        "de": 1.6903085094570331,
+        "min": 4.0,
+        "max": 9.0
       },
       "fraccion_evitada_0_9": {
-        "media": 0.31247519841269844,
-        "de": 0.17712888736465338,
-        "min": 0.125,
-        "max": 0.5555555555555556
+        "media": 0.3523074494949495,
+        "de": 0.06956351976332592,
+        "min": 0.28,
+        "max": 0.45
       },
       "reglas": {
         "documento": {
@@ -485,84 +485,82 @@
           "validado": 4
         },
         "nombres": {
-          "frecuente": 5,
-          "fuente_confiable": 3
+          "frecuente": 6,
+          "fuente_confiable": 2
         },
         "apellidos": {
-          "fuente_confiable": 5,
-          "frecuente": 3
+          "frecuente": 8
         },
         "fecha_nacimiento": {
           "mas_reciente": 6,
           "frecuente": 2
         },
         "celular": {
-          "validado": 7,
-          "mas_reciente": 1
+          "validado": 8
         },
         "correo": {
           "validado": 8
         },
         "direccion": {
-          "frecuente": 6,
-          "fuente_confiable": 2
+          "fuente_confiable": 4,
+          "frecuente": 4
         }
       }
     },
     "v3": {
       "union_precision": {
-        "media": 0.9992618937941171,
-        "de": 0.0009567637006880861,
-        "min": 0.9976927513939627,
+        "media": 0.9995971613483079,
+        "de": 0.0006487264029760232,
+        "min": 0.9982046678635548,
         "max": 1.0
       },
       "union_recall": {
-        "media": 0.997758843377521,
-        "de": 0.000758845650386797,
-        "min": 0.9962318320473712,
-        "max": 0.9989412387506618
+        "media": 0.996559566195186,
+        "de": 0.0011781454468411934,
+        "min": 0.9949887679281147,
+        "max": 0.9987425902640561
       },
       "oro_max_brecha_al_techo": {
-        "media": 0.04113168621580099,
-        "de": 0.0046774208629479916,
-        "min": 0.03592814371257491,
-        "max": 0.04840319361277445
+        "media": 0.04114181301980546,
+        "de": 0.0036417769301893004,
+        "min": 0.03735059760956172,
+        "max": 0.04714640198511166
       },
       "grafo_exactitud": {
-        "media": 0.9846090842441484,
-        "de": 0.009680904937032116,
-        "min": 0.9719626168224299,
-        "max": 1.0
+        "media": 0.9821906033358212,
+        "de": 0.005831134336093322,
+        "min": 0.9724770642201835,
+        "max": 0.9904534606205251
       },
       "grafo_grupos": {
-        "media": 420.0,
-        "de": 13.543580450847235,
-        "min": 401.0,
-        "max": 439.0
+        "media": 426.25,
+        "de": 13.435028842544403,
+        "min": 404.0,
+        "max": 449.0
       },
       "mezclados_umbral_congelado": {
-        "media": 0.875,
-        "de": 1.1259916264596033,
+        "media": 0.5,
+        "de": 0.7559289460184544,
         "min": 0.0,
-        "max": 3.0
+        "max": 2.0
       },
       "mezclados_0_9": {
-        "media": 24.375,
-        "de": 4.596194077712559,
-        "min": 19.0,
+        "media": 27.5,
+        "de": 5.9281411203561225,
+        "min": 16.0,
         "max": 33.0
       },
       "evitados_0_9": {
-        "media": 8.125,
-        "de": 3.5228843701879127,
-        "min": 2.0,
-        "max": 13.0
+        "media": 9.5,
+        "de": 1.8516401995451028,
+        "min": 7.0,
+        "max": 12.0
       },
       "fraccion_evitada_0_9": {
-        "media": 0.330086165264941,
-        "de": 0.13723753018150683,
-        "min": 0.10526315789473684,
-        "max": 0.5416666666666666
+        "media": 0.3625462729719195,
+        "de": 0.11980957903473435,
+        "min": 0.24242424242424243,
+        "max": 0.625
       },
       "reglas": {
         "documento": {
@@ -574,22 +572,20 @@
           "fuente_confiable": 2
         },
         "apellidos": {
-          "fuente_confiable": 5,
-          "frecuente": 3
+          "frecuente": 8
         },
         "fecha_nacimiento": {
           "mas_reciente": 8
         },
         "celular": {
-          "validado": 7,
-          "mas_reciente": 1
+          "validado": 8
         },
         "correo": {
           "validado": 8
         },
         "direccion": {
-          "frecuente": 6,
-          "fuente_confiable": 2
+          "fuente_confiable": 4,
+          "frecuente": 4
         }
       }
     }

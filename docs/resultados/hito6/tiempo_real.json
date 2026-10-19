@@ -7,82 +7,11 @@
     "zona_gris": {
       "criterio": "banda revisar de la calibración congelada en desarrollo",
       "peso_desde_revisar_desarrollo": 5.226974362503657,
-      "peso_desde_revisar_tiempo_real": 5.725614071818912
+      "peso_desde_revisar_tiempo_real": 5.69238657949114
     },
     "base": {
-      "clientes": 2705,
-      "registros_usados": 6012
-    },
-    "consultas": {
-      "existentes": 1500,
-      "nuevas": 1500
-    },
-    "mezcla_evaluada": {
-      "precision": 0.9993270524899058,
-      "recall": 0.99
-    },
-    "decisiones": {
-      "existentes": {
-        "cliente": 1485,
-        "nuevo": 13,
-        "revisar": 2
-      },
-      "nuevas": {
-        "nuevo": 1487,
-        "revisar": 12,
-        "cliente": 1
-      }
-    },
-    "decisiones_zona_gris_p_0_9": {
-      "existentes": {
-        "cliente": 1485,
-        "nuevo": 13,
-        "revisar": 2
-      },
-      "nuevas": {
-        "nuevo": 1481,
-        "revisar": 18,
-        "cliente": 1
-      }
-    },
-    "tasas": {
-      "aciertos_entre_existentes": 0.99,
-      "cliente_equivocado_entre_existentes": 0.0,
-      "falsa_alarma_entre_nuevas": 0.0006666666666666666,
-      "falsas_alarmas": 1,
-      "nuevas": 1500
-    },
-    "precision": {
-      "0.01": {
-        "valor": 0.9375000000000001,
-        "ic_inf": 0.8328620254680679,
-        "ic_sup": 1.0
-      },
-      "0.1": {
-        "valor": 0.9939759036144578,
-        "ic_inf": 0.9820833124040005,
-        "ic_sup": 1.0
-      },
-      "0.5": {
-        "valor": 0.9993270524899057,
-        "ic_inf": 0.9979770393747218,
-        "ic_sup": 1.0
-      }
-    },
-    "latencia_ms": {
-      "mediana": 125.885,
-      "p95": 154.154
-    }
-  },
-  "ciega_3": {
-    "zona_gris": {
-      "criterio": "banda revisar de la calibración congelada en desarrollo",
-      "peso_desde_revisar_desarrollo": 5.226974362503657,
-      "peso_desde_revisar_tiempo_real": 5.533102385309359
-    },
-    "base": {
-      "clientes": 3091,
-      "registros_usados": 6796
+      "clientes": 2768,
+      "registros_usados": 6006
     },
     "consultas": {
       "existentes": 1500,
@@ -90,32 +19,32 @@
     },
     "mezcla_evaluada": {
       "precision": 1.0,
-      "recall": 0.918
+      "recall": 0.9873333333333333
     },
     "decisiones": {
       "existentes": {
-        "cliente": 1377,
-        "revisar": 80,
-        "nuevo": 43
+        "cliente": 1481,
+        "nuevo": 18,
+        "revisar": 1
       },
       "nuevas": {
-        "nuevo": 1494,
-        "revisar": 6
+        "nuevo": 1482,
+        "revisar": 18
       }
     },
     "decisiones_zona_gris_p_0_9": {
       "existentes": {
-        "cliente": 1377,
-        "revisar": 84,
-        "nuevo": 39
+        "cliente": 1481,
+        "nuevo": 18,
+        "revisar": 1
       },
       "nuevas": {
-        "nuevo": 1491,
-        "revisar": 9
+        "nuevo": 1474,
+        "revisar": 26
       }
     },
     "tasas": {
-      "aciertos_entre_existentes": 0.918,
+      "aciertos_entre_existentes": 0.9873333333333333,
       "cliente_equivocado_entre_existentes": 0.0,
       "falsa_alarma_entre_nuevas": 0.0,
       "falsas_alarmas": 0,
@@ -139,22 +68,91 @@
       }
     },
     "latencia_ms": {
-      "mediana": 110.475,
-      "p95": 156.30599999999998
+      "mediana": 71.42,
+      "p95": 91.75249999999998
+    }
+  },
+  "ciega_3": {
+    "zona_gris": {
+      "criterio": "banda revisar de la calibración congelada en desarrollo",
+      "peso_desde_revisar_desarrollo": 5.226974362503657,
+      "peso_desde_revisar_tiempo_real": 5.537778872518832
+    },
+    "base": {
+      "clientes": 3081,
+      "registros_usados": 6691
+    },
+    "consultas": {
+      "existentes": 1500,
+      "nuevas": 1500
+    },
+    "mezcla_evaluada": {
+      "precision": 0.9992784992784993,
+      "recall": 0.9233333333333333
+    },
+    "decisiones": {
+      "existentes": {
+        "cliente": 1386,
+        "revisar": 79,
+        "nuevo": 35
+      },
+      "nuevas": {
+        "nuevo": 1492,
+        "revisar": 8
+      }
+    },
+    "decisiones_zona_gris_p_0_9": {
+      "existentes": {
+        "cliente": 1386,
+        "revisar": 81,
+        "nuevo": 33
+      },
+      "nuevas": {
+        "nuevo": 1490,
+        "revisar": 10
+      }
+    },
+    "tasas": {
+      "aciertos_entre_existentes": 0.9233333333333333,
+      "cliente_equivocado_entre_existentes": 0.0006666666666666666,
+      "falsa_alarma_entre_nuevas": 0.0,
+      "falsas_alarmas": 0,
+      "nuevas": 1500
+    },
+    "precision": {
+      "0.01": {
+        "valor": 0.9992784992784992,
+        "ic_inf": 0.9977923723846921,
+        "ic_sup": 1.0
+      },
+      "0.1": {
+        "valor": 0.9992784992784992,
+        "ic_inf": 0.997792372384692,
+        "ic_sup": 1.0
+      },
+      "0.5": {
+        "valor": 0.9992784992784992,
+        "ic_inf": 0.997792372384692,
+        "ic_sup": 1.0
+      }
+    },
+    "latencia_ms": {
+      "mediana": 83.15,
+      "p95": 103.0805
     }
   },
   "resumen": {
     "normal": {
-      "recall": 0.99,
-      "precision_1%": 0.9375,
-      "precision_10%": 0.994,
-      "precision_50%": 0.9993
-    },
-    "ciega_3": {
-      "recall": 0.918,
+      "recall": 0.9873,
       "precision_1%": 1.0,
       "precision_10%": 1.0,
       "precision_50%": 1.0
+    },
+    "ciega_3": {
+      "recall": 0.9233,
+      "precision_1%": 0.9993,
+      "precision_10%": 0.9993,
+      "precision_50%": 0.9993
     }
   }
 }

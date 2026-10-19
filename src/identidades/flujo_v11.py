@@ -1001,4 +1001,6 @@ ARCHIVOS_PUBLICABLES: list[str] = [
     "ciega4_grafo_residencial.csv",
     "universo_puntos.json",
     "universo_enlaces.json",
+    "fichas.json",
+    "tiempo_real_v4.json",
 ]

@@ -1,0 +1,59 @@
+{
+  "descripcion": "Modelo v1 congelado, sin reentrenar, en la prueba normal del hito 2 generada con la fecha de Faker fija (v1.1.1). Las cifras de metricas.json son de la corrida original, que dependía de la fecha del día.",
+  "modelo_congelado": {
+    "tag": "hito2-congelado-r1",
+    "commit": "b34b841ec5b242db290c23efbafdc8e4e438fe6f",
+    "tag_original": "hito2-congelado",
+    "cambio_respecto_al_original": "Corrección de robustez en estandarizacion.py para valores nulos: con el tag original el modelo fallaba con 66 de 6.032 registros de la prueba ciega (apellidos vacíos). Métricas del hito 2 idénticas.",
+    "archivos": [
+      "src/identidades/estandarizacion.py",
+      "src/identidades/modelo_co.py",
+      "docs/resultados/hito2/modelo.json"
+    ],
+    "sin_cambios": true
+  },
+  "umbral": 0.999999,
+  "datos": {
+    "registros": 1915,
+    "personas": 800
+  },
+  "clusters": {
+    "precision": {
+      "valor": 1.0,
+      "ic_inf": 1.0,
+      "ic_sup": 1.0
+    },
+    "recall": {
+      "valor": 1.0,
+      "ic_inf": 1.0,
+      "ic_sup": 1.0
+    },
+    "f1": {
+      "valor": 1.0,
+      "ic_inf": 1.0,
+      "ic_sup": 1.0
+    },
+    "pct_clusters_exactos": {
+      "valor": 1.0,
+      "ic_inf": 1.0,
+      "ic_sup": 1.0
+    }
+  },
+  "pares": {
+    "precision": {
+      "valor": 1.0,
+      "ic_inf": 1.0,
+      "ic_sup": 1.0
+    },
+    "recall": {
+      "valor": 0.9935334872979215,
+      "ic_inf": 0.9901498401915592,
+      "ic_sup": 0.9965487047316944
+    },
+    "f1": {
+      "valor": 0.9967562557924005,
+      "ic_inf": 0.9950505436276359,
+      "ic_sup": 0.9982713693570456
+    }
+  }
+}
