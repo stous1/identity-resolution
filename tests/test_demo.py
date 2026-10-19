@@ -1,4 +1,4 @@
-"""La demo en JavaScript da los mismos niveles y el mismo peso que Splink."""
+"""La demo en JavaScript da los mismos niveles y el mismo peso que Splink (v2 y v3)."""
 
 from __future__ import annotations
 
@@ -45,17 +45,27 @@ def muestra_de_pares(semilla: int = 11) -> list:
     return pares
 
 
-def test_exportacion_coincide_con_modelo_congelado(tmp_path: Path) -> None:
+@pytest.mark.parametrize("version", ["v2", "v3"])
+def test_exportacion_coincide_con_modelo_congelado(tmp_path: Path, version: str) -> None:
     ruta = tmp_path / "modelo.json"
-    demo.exportar_modelo(ruta)
+    demo.exportar_modelo(ruta, version)
     assert json.loads(ruta.read_text(encoding="utf-8")) == json.loads(
-        demo.RUTA_MODELO.read_text(encoding="utf-8")
+        demo.RUTAS[version].read_text(encoding="utf-8")
     )
+
+
+def test_modelo_v3_lleva_las_bandas_congeladas() -> None:
+    modelo = json.loads(demo.RUTA_MODELO_V3.read_text(encoding="utf-8"))
+    niveles = {c["columna"]: len(c["niveles"]) for c in modelo["comparaciones"]}
+
+    assert modelo["bandas"]["peso_desde_revisar"] < modelo["bandas"]["peso_desde_aceptar"]
+    assert niveles["apellido_casada"] == 4  # el v3 agrega Jaro-Winkler >= 0,88
 
 
 @pytest.mark.integracion
 @pytest.mark.skipif(NODE is None, reason="requiere Node.js")
-def test_demo_igual_a_splink(tmp_path: Path) -> None:
+@pytest.mark.parametrize("version", ["v2", "v3"])
+def test_demo_igual_a_splink(tmp_path: Path, version: str) -> None:
     pares = muestra_de_pares()
     ruta_pares = tmp_path / "pares.json"
     ruta_pares.write_text(json.dumps(pares, ensure_ascii=False), encoding="utf-8")
@@ -63,7 +73,7 @@ def test_demo_igual_a_splink(tmp_path: Path) -> None:
         [
             NODE,
             str(RAIZ / "tests" / "js" / "puntuar_demo.mjs"),
-            str(demo.RUTA_MODELO),
+            str(demo.RUTAS[version]),
             str(ruta_pares),
         ],
         capture_output=True,
@@ -72,7 +82,7 @@ def test_demo_igual_a_splink(tmp_path: Path) -> None:
         check=True,
     )
     js = json.loads(salida.stdout)
-    referencia = demo.Referencia()
+    referencia = demo.Referencia(version)
     diferencias = []
     for par, resultado in zip(pares, js, strict=True):
         esperado = referencia.puntuar(*par)

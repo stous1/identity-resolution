@@ -1,4 +1,4 @@
-// Motor de la demo: estandarización v2 y comparaciones del modelo v2 congelado, en JavaScript.
+// Motor de la demo: estandarización v2 y comparaciones de los modelos v2 y v3 congelados, en JavaScript.
 //
 // Reimplementa src/identidades/estandarizacion.py, estandarizacion_v2.py y la preparación de
 // modelo_co_v2.py, y evalúa los niveles de cada comparación con la misma lógica que el SQL
@@ -369,10 +369,13 @@ const NIVELES = {
     if (jw(a, b, 0.9)) return 2;
     return 3;
   },
-  apellido_casada: (l, r) => {
+  // v2: nulo, igual, distinto. v3 agrega Jaro-Winkler >= 0,88 (4 niveles).
+  apellido_casada: (l, r, niveles) => {
     const [a, b] = [l.apellido_casada, r.apellido_casada];
     if (nulo(a, b)) return 0;
-    return a === b ? 1 : 2;
+    if (a === b) return 1;
+    if (niveles === 4) return jw(a, b, 0.88) ? 2 : 3;
+    return 2;
   },
   fecha_nacimiento: (l, r) => {
     const [a, b] = [l.fecha_nacimiento, r.fecha_nacimiento];
@@ -426,7 +429,7 @@ export function crearMotor(modelo) {
   function comparar(crudo1, crudo2) {
     const l = preparar(crudo1), r = preparar(crudo2);
     const detalle = modelo.comparaciones.map((c) => {
-      const indice = NIVELES[c.columna](l, r);
+      const indice = NIVELES[c.columna](l, r, c.niveles.length);
       const nivel = c.niveles[indice];
       const gamma = nivel.nulo ? -1 : c.niveles.length - 1 - indice;
       const bf = nivel.nulo ? 1 : nivel.m / nivel.u;
