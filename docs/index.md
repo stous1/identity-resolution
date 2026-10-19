@@ -1,17 +1,46 @@
 # Resolución de identidades con Splink
 
-Caso de uso 1 de un portafolio de ciencia de datos y agentes aplicado a banca: detectar qué
-registros de una base de clientes corresponden a la misma persona, explicar cada decisión y
-medir su precisión contra la verdad conocida.
+**¿Cuáles registros de una base de clientes son la misma persona?** Un modelo probabilístico
+(Fellegi-Sunter con Splink y DuckDB) que lo decide, explica cada decisión y se mide contra
+la verdad conocida, con pruebas ciegas y una auditoría independiente. Todo con datos
+sintéticos.
 
-- [Descripción del caso](caso-01-identidades.md)
-- [Informe de la auditoría independiente](https://github.com/stous1/identity-resolution/blob/main/audit/INFORME.md)
-  y [qué cambió por ella](hito6.md)
-- Código: [github.com/stous1/identity-resolution](https://github.com/stous1/identity-resolution)
+[![Universo de registros en Cosmograph](resultados/portada.jpg)](hito3_universo.html)
+
+## En un minuto
+
+- **Prueba ciega 3** (modelo v3 congelado, errores de un generador independiente):
+  precisión **0,997** y recall **0,966** por clúster; 94,5 % de las personas reconstruidas
+  exactamente.
+- **Frente a reglas simples:** +0,065 de F1 sobre la mejor regla determinística; la
+  ganancia está donde el documento falta o viene alterado.
+- **1 millón de registros** en una máquina en 129 s (7,1 GB de pico), con precisión 0,998.
+- **"¿Ya es cliente?"** en unos 120 ms: precisión 0,999 si la mitad de las consultas son de
+  clientes, 0,938 si solo lo es el 1 %.
+- **Auditoría independiente:** sin fugas de etiquetas y con todas las cifras reproducibles;
+  sus hallazgos se corrigieron o matizaron en el [hito 6](hito6.md).
+
+| Prueba | Modelo | Precisión | Recall | F1 Splink | F1 mejor regla |
+|---|---|---|---|---|---|
+| **Ciega 3** | **v3** | **0,997** | **0,966** | **0,981** | 0,916 |
+| Ciega 2 | v2 | 0,998 | 1,000 | 0,999 | 0,990 |
+| Ciega 1 | v1 | 0,997 | 0,636 | 0,777 | 0,960 |
+| FEBRL3 | propio | 1,000 | 0,997 | 0,998 | 0,957 |
+| 1 millón de registros | v3 | 0,998 | 0,995 | 0,997 | 0,924 |
+
+Limitaciones: datos sintéticos, generadores de errores escritos por agentes de IA y sin
+validación con datos reales.
+
+**Más:** [descripción del caso](caso-01-identidades.md) ·
+[código e informe técnico](https://github.com/stous1/identity-resolution/blob/main/INFORME_TECNICO.md) ·
+[auditoría](https://github.com/stous1/identity-resolution/blob/main/audit/INFORME.md) ·
+[verificación del hito 6](https://github.com/stous1/identity-resolution/blob/main/audit/verificacion_hito6.md) ·
+[repositorio](https://github.com/stous1/identity-resolution)
 
 ## Hitos
 
-- [Hito 1: fake_1000](#hito-1-fake_1000): dataset de demostración de Splink.
+- [Hito 1: fake_1000](#hito-1-fake_1000): el flujo completo sobre el dataset de
+  demostración de Splink.
 - [Hito 2: clientes sintéticos colombianos y estandarización](hito2.md): en la prueba
   normal, precisión 1,000 y recall 0,998 por clúster. En la **prueba ciega** (modelo
   congelado, errores de un generador independiente), precisión 0,997 y recall 0,636: la

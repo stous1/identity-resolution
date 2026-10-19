@@ -1,7 +1,7 @@
 # Hito 3: registro de oro, grafo de identidad compartida y puentes
 
 [← Volver a la portada](index.md) ·
-[Detalle en el README](https://github.com/stous1/identity-resolution#hito-3-registro-de-oro-grafo-de-identidad-compartida-y-puentes)
+[Detalle en el informe técnico](https://github.com/stous1/identity-resolution/blob/main/INFORME_TECNICO.md#hito-3-registro-de-oro-grafo-de-identidad-compartida-y-puentes)
 
 **[Abrir el universo de registros en Cosmograph →](hito3_universo.html)**
 

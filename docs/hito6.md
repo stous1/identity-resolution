@@ -1,7 +1,7 @@
 # Hito 6: correcciones post-auditoría
 
 [← Volver a la portada](index.md) ·
-[Detalle en el README](https://github.com/stous1/identity-resolution#hito-6-correcciones-post-auditoría) ·
+[Detalle en el informe técnico](https://github.com/stous1/identity-resolution/blob/main/INFORME_TECNICO.md#hito-6-correcciones-post-auditoría) ·
 [Informe de auditoría](https://github.com/stous1/identity-resolution/blob/main/audit/INFORME.md)
 
 Una sesión de auditoría independiente revisó los hitos 1 a 5 sin haber escrito el código.

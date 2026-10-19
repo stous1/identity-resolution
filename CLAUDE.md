@@ -98,6 +98,8 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
 - `tests/`: pruebas con pytest. Las lentas se marcan con `@pytest.mark.integracion`.
 - `data/` (ignorada): datos descargados y caché local.
 - `reports/` (ignorada): salidas de trabajo (métricas, modelo, HTML, PNG).
+- `README.md` es la puerta de entrada corta; el detalle de cada hito, con todas las cifras,
+  está en `INFORME_TECNICO.md`. Las páginas de Pages enlazan sus anclas.
 - `docs/`: documentación y fuente de GitHub Pages (rama `main`, carpeta `/docs`).
   - `docs/resultados/`: tableros HTML y PNG finales, **versionados**. Solo se actualizan a
     propósito con `scripts/publicar_resultados.py`.

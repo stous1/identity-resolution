@@ -1,7 +1,7 @@
 # Hito 5: vinculación en tiempo real y escala
 
 [← Volver a la portada](index.md) ·
-[Detalle en el README](https://github.com/stous1/identity-resolution#hito-5-vinculación-en-tiempo-real-y-escala)
+[Detalle en el informe técnico](https://github.com/stous1/identity-resolution/blob/main/INFORME_TECNICO.md#hito-5-vinculación-en-tiempo-real-y-escala)
 
 **[Abrir el universo grande en Cosmograph →](hito5_universo.html)**
 

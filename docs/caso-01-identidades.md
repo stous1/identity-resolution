@@ -69,7 +69,7 @@ de casos dudosos con un agente.
    por umbral y recall perdido por el bloqueo) y tableros HTML de Splink. Bloqueo y umbral se
    eligen en desarrollo (60 % de las personas) y las métricas se miden en prueba (40 %), con
    intervalos de confianza por bootstrap. Resultados en el
-   [README](https://github.com/stous1/identity-resolution#hito-1-fake_1000-de-punta-a-punta)
+   [informe técnico](https://github.com/stous1/identity-resolution/blob/main/INFORME_TECNICO.md#hito-1-fake_1000-de-punta-a-punta)
    y en [los tableros publicados](index.md).
 2. **Sintéticos colombianos y estandarización** (completado): generador con Faker es_CO
    (errores de captura, familiares y datos de relleno), estandarización de nombres,
