@@ -1001,9 +1001,9 @@ Métricas completas en [docs/resultados/hito6/](docs/resultados/hito6/).
   regla "documento o nombre+fecha" pierde precisión a 1 millón (homónimos frente a
   documentos repetidos por el generador); validar con una muestra etiquetada el traslado
   de las bandas de zona gris a la previa 1/N del tiempo real; agregar meta viewport a los
-  tableros HTML de Splink en `docs/resultados/`, que desbordan en celular; fijar la fecha de
-  referencia de la muestra de pares de `tests/test_demo.py` (los generadores usan fechas
-  relativas a hoy, así que la muestra cambia cada día).
+  tableros HTML de Splink en `docs/resultados/`, que desbordan en celular. (Hecho después
+  de v1.0: la muestra de pares de `tests/test_demo.py` ya no cambia con la fecha, porque
+  fija el reloj de Faker.)
 
 ## Cómo correrlo
 

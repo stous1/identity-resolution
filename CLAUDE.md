@@ -113,6 +113,10 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
 - La lógica vive en `src/` como funciones reutilizables **con type hints**.
 - Los notebooks son solo para exploración; si algo sirve, se pasa a `src/` con su test.
 - Las funciones principales tienen pruebas en `tests/`. Las pruebas no dependen de internet.
+- **Las pruebas son deterministas**: el mismo código da el mismo resultado cualquier día y en
+  cualquier máquina. Semillas fijas y nada que dependa del reloj (fecha de hoy, hora, zona
+  horaria) sin fijarlo; por ejemplo, Faker calcula fechas desde `datetime.now()`, y
+  `tests/test_demo.py` lo fija con `HOY_FIJO`.
 - Documentación, docstrings y mensajes de commit **en español**.
 - Rutas centralizadas en `identidades.rutas`; **nunca rutas absolutas** en el código.
 - Commits pequeños y enfocados. No hacer commit sin mostrar antes qué se va a subir.
@@ -134,6 +138,12 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
 - Si un comando se traba, termina solo ese proceso por su identificador (el que lanzaste
   tú) o pregúntale al usuario.
 - Al delegar en un subagente, incluye esta regla en sus instrucciones.
+
+## Regla de credenciales (para Claude y cualquier subagente)
+
+- Las credenciales guardadas en la máquina (git, tokens, llaveros) solo se usan para
+  `git push`. Para cualquier otra cosa (leer logs de CI, llamar la API de GitHub u otro
+  servicio) hay que preguntarle antes al usuario.
 
 ## Regla dura de datos
 

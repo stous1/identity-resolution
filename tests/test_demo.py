@@ -6,7 +6,9 @@ import json
 import random
 import shutil
 import subprocess
+from datetime import datetime
 from pathlib import Path
+from unittest import mock
 
 import pandas as pd
 import pytest
@@ -16,6 +18,15 @@ from identidades import demo, errores_ciegos, errores_ciegos_2, sinteticos
 RAIZ = Path(__file__).resolve().parents[1]
 NODE = shutil.which("node")
 TOLERANCIA = 1e-9
+# Faker calcula las fechas de nacimiento desde datetime.now(): sin fijar el día, la muestra
+# cambia de un día a otro aunque la semilla sea la misma.
+HOY_FIJO = datetime(2026, 1, 15, 12, 0, 0)
+
+
+class _DatetimeFijo(datetime):
+    @classmethod
+    def now(cls, tz=None):  # noqa: ANN001, ANN206
+        return HOY_FIJO if tz is None else HOY_FIJO.replace(tzinfo=tz)
 
 
 def _pares(registros: pd.DataFrame, n_mismos: int, n_azar: int, rng: random.Random) -> list:
@@ -33,16 +44,34 @@ def _pares(registros: pd.DataFrame, n_mismos: int, n_azar: int, rng: random.Rand
 
 
 def muestra_de_pares(semilla: int = 11) -> list:
-    """~630 pares: de la misma persona y al azar, de los tres generadores sintéticos."""
+    """~630 pares: de la misma persona y al azar, de los tres generadores sintéticos.
+
+    Determinista: semilla fija y fecha de hoy fija (HOY_FIJO) para Faker.
+    """
     rng = random.Random(semilla)
-    normales, personas = sinteticos.generar(150, semilla)
-    ciegos_1, _ = errores_ciegos.capturar(personas, semilla=semilla)
-    _, personas_2 = sinteticos.generar(150, semilla + 1)
-    ciegos_2, _ = errores_ciegos_2.capturar(personas_2, semilla=semilla + 1)
+    with mock.patch("faker.providers.date_time.datetime", _DatetimeFijo):
+        normales, personas = sinteticos.generar(150, semilla)
+        ciegos_1, _ = errores_ciegos.capturar(personas, semilla=semilla)
+        _, personas_2 = sinteticos.generar(150, semilla + 1)
+        ciegos_2, _ = errores_ciegos_2.capturar(personas_2, semilla=semilla + 1)
     pares = []
     for registros in (normales, ciegos_1, ciegos_2):
         pares += _pares(registros, 150, 60, rng)
     return pares
+
+
+def test_muestra_de_pares_no_depende_de_la_fecha() -> None:
+    """Con el reloj de Faker cinco años después, la muestra sale idéntica."""
+
+    class _OtroDia(datetime):
+        @classmethod
+        def now(cls, tz=None):  # noqa: ANN001, ANN206
+            return datetime(2031, 7, 3, 8, 0, 0, tzinfo=tz)
+
+    referencia = muestra_de_pares()
+    with mock.patch("faker.providers.date_time.datetime", _OtroDia):
+        en_otro_dia = muestra_de_pares()
+    assert en_otro_dia == referencia
 
 
 @pytest.mark.parametrize("version", ["v2", "v3"])
