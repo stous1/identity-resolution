@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de impacto</title>
+<meta name="description" content="Convierte las métricas publicadas del modelo v3 en pesos al año con supuestos editables e ilustrativos.">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  :root {
+    --fondo: #f6f7f9; --panel: #ffffff; --texto: #1c2430; --suave: #5b6675; --borde: #dde2e8;
+    --acento: #2563eb; --barra: #2563eb; --barra-2: #94a3b8; --positivo: #15803d;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #0d1117; --panel: #161b22; --texto: #e6edf3; --suave: #9aa6b2; --borde: #2d353f;
+      --acento: #60a5fa; --barra: #60a5fa; --barra-2: #4b5563; --positivo: #4ade80;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 48px; }
+  a { color: var(--acento); }
+  h1 { font-size: 1.6rem; margin: 0.2em 0 0.3em; line-height: 1.25; }
+  h2 { font-size: 1.1rem; margin: 0 0 0.6em; }
+  .sub { color: var(--suave); margin: 0 0 1.2em; max-width: 70ch; }
+  .aviso { border-left: 4px solid var(--acento); padding: 8px 12px; background: var(--panel); margin: 0 0 16px; }
+  .rejilla { display: grid; grid-template-columns: 320px 1fr; gap: 16px; align-items: start; }
+  .rejilla > * { min-width: 0; }
+  @media (max-width: 820px) { .rejilla { grid-template-columns: 1fr; } }
+  .panel { background: var(--panel); border: 1px solid var(--borde); border-radius: 10px; padding: 16px; }
+  label { display: block; font-size: 0.85rem; color: var(--suave); margin-top: 10px; }
+  input, select { width: 100%; font: inherit; padding: 7px 9px; border-radius: 6px; border: 1px solid var(--borde);
+    background: var(--fondo); color: var(--texto); font-variant-numeric: tabular-nums; }
+  .ayuda { font-size: 0.78rem; color: var(--suave); margin: 2px 0 0; }
+  .grande { font-size: 1.8rem; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.2; }
+  .etiqueta { font-size: 0.82rem; color: var(--suave); }
+  .tarjetas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 520px) { .tarjetas { grid-template-columns: 1fr; } }
+  .tabla { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+  th, td { padding: 6px 8px; border-bottom: 1px solid var(--borde); text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; white-space: normal; }
+  tr.destacado td { font-weight: 650; }
+  .barra { height: 10px; border-radius: 3px; background: var(--barra); }
+  .barra.gris { background: var(--barra-2); }
+  .nota { font-size: 0.85rem; color: var(--suave); margin-top: 14px; }
+  .positivo { color: var(--positivo); }
+</style>
+</head>
+<body>
+<main>
+  <p><a href="./">← Portada</a></p>
+  <h1>Calculadora de impacto</h1>
+  <p class="sub">Convierte las métricas publicadas del modelo v3 en pesos al año. Los
+    errores salen de una prueba con verdad conocida y se escalan al volumen que elijas; los
+    costos los pones tú.</p>
+  <p class="aviso"><b>Supuestos ilustrativos.</b> Los costos por defecto no vienen de ningún
+    banco: son números de ejemplo para mostrar el orden de magnitud. Las tasas de error son
+    de datos sintéticos y suponen una base con la misma mezcla de duplicados que la prueba.</p>
+
+  <div class="rejilla">
+    <form class="panel" id="supuestos" autocomplete="off">
+      <h2>Supuestos</h2>
+      <label for="poblacion">Tasas de error de</label>
+      <select id="poblacion">
+        <option value="ciega_3">Prueba ciega 3 (la cifra honesta)</option>
+        <option value="prueba_normal">Prueba normal (optimista)</option>
+      </select>
+      <label for="registros">Registros en la base</label>
+      <input id="registros" type="number" min="1000" step="1000" value="1000000">
+      <p class="ayuda" id="ayuda-registros"></p>
+      <label for="c_dup">Costo anual de un cliente duplicado (COP)</label>
+      <input id="c_dup" type="number" min="0" step="1000" value="25000">
+      <p class="ayuda">Comunicaciones dobles, envíos físicos, atención repetida.</p>
+      <label for="c_fp">Costo de una unión errónea (COP)</label>
+      <input id="c_fp" type="number" min="0" step="10000" value="800000">
+      <p class="ayuda">Dos personas mezcladas: corrección, reclamos, riesgo de cumplimiento.</p>
+      <label for="c_rev">Costo de revisar un par a mano (COP)</label>
+      <input id="c_rev" type="number" min="0" step="500" value="6000">
+      <p class="ayuda">Solo el modelo tiene zona gris; se revisa una vez al año.</p>
+    </form>
+
+    <section>
+      <div class="tarjetas">
+        <div class="panel"><div class="etiqueta">Costo anual sin deduplicar</div><div class="grande" id="t-base">–</div></div>
+        <div class="panel"><div class="etiqueta" id="t-ahorro-etiqueta">Ahorro anual con el método de menor costo</div><div class="grande positivo" id="t-ahorro">–</div></div>
+      </div>
+      <div class="panel tabla">
+        <h2>Por método, al año</h2>
+        <table>
+          <thead><tr><th>Método</th><th>Duplicados</th><th>Uniones erróneas</th><th>Revisiones</th><th>Costo (millones)</th><th style="width:22%"></th></tr></thead>
+          <tbody id="tabla"></tbody>
+        </table>
+      </div>
+      <p class="nota" id="metodo-nota"></p>
+    </section>
+  </div>
+
+  <p class="nota"><b>Cómo se calcula.</b> De la prueba elegida se toman, para cada método,
+    los clústeres predichos y los pares unidos por error (por clúster), y para Splink los pares
+    de la banda "revisar". Duplicados = clientes predichos − personas reales (neto: una persona
+    partida en dos cuenta uno). Uniones erróneas = pares de registros de personas distintas que
+    quedaron en el mismo cliente. Todo se escala por registros en la base ÷ registros de la
+    prueba. "Sin deduplicar" deja un cliente por registro. Si Splink revisa la zona gris, se
+    supone que la revisión manual acierta en todos los pares verdaderos de esa banda (cota
+    optimista) y que los duplicados bajan en la misma proporción que los pares verdaderos
+    que el modelo no unía (en la ciega 3, 438 de 681: una aproximación, no una medición). Fuente: <a href="resultados/hito6/metricas.json">metricas.json</a> del
+    <a href="hito6.html">hito 6</a>.</p>
+</main>
+
+<script type="module">
+const METODOS = [
+  ["sin", "Sin deduplicar"],
+  ["documento", "Regla: mismo documento"],
+  ["documento_o_nombre_fecha", "Regla: documento o nombre+fecha"],
+  ["splink", "Splink v3"],
+  ["splink_revision", "Splink v3 + revisión de la zona gris"],
+  ["hibrido", "Híbrido: reglas y Splink"],
+];
+const $ = (id) => document.getElementById(id);
+const num = (id) => Math.max(0, Number($(id).value) || 0);
+const entero = (x) => Math.round(x).toLocaleString("es-CO");
+const millones = (x) => (x / 1e6).toLocaleString("es-CO", { maximumFractionDigits: x >= 1e9 ? 0 : 1 });
+const pesos = (x) => "$ " + Math.round(x).toLocaleString("es-CO");
+
+let metricas;
+
+function filas(poblacion) {
+  const p = metricas[poblacion];
+  const m = p.linea_base.metodos;
+  const registros = p.datos.registros, personas = p.datos.personas;
+  const revisar = p.calibracion.bandas.revisar;
+  const salida = { sin: { duplicados: registros - personas, fp: 0, revisiones: 0 } };
+  for (const k of ["documento", "documento_o_nombre_fecha", "splink", "hibrido"]) {
+    salida[k] = { duplicados: Math.max(0, m[k].clusters_predichos - m[k].clusters_reales), fp: m[k].fp, revisiones: 0 };
+  }
+  // Con revisión: se unen los pares verdaderos de la zona gris. Los duplicados de Splink bajan
+  // en la misma proporción que los pares verdaderos que no unía (aproximación).
+  const recuperado = Math.min(1, revisar.verdaderos / Math.max(1, p.v3.pares.fn));
+  salida.splink_revision = {
+    duplicados: salida.splink.duplicados * (1 - recuperado),
+    fp: m.splink.fp,
+    revisiones: revisar.pares,
+  };
+  return { salida, registros, personas };
+}
+
+function actualizar() {
+  if (!metricas) return;
+  const poblacion = $("poblacion").value;
+  const { salida, registros, personas } = filas(poblacion);
+  const escala = num("registros") / registros;
+  $("ayuda-registros").textContent =
+    `La prueba tiene ${entero(registros)} registros de ${entero(personas)} personas; todo se multiplica por ${escala.toLocaleString("es-CO", { maximumFractionDigits: 1 })}.`;
+  const costos = {};
+  for (const [k] of METODOS) {
+    const f = salida[k];
+    costos[k] = escala * (f.duplicados * num("c_dup") + f.fp * num("c_fp") + f.revisiones * num("c_rev"));
+  }
+  const maximo = Math.max(...Object.values(costos), 1);
+  const mejor = Object.entries(costos).filter(([k]) => k !== "sin").sort((a, b) => a[1] - b[1])[0][0];
+  $("tabla").innerHTML = METODOS.map(([k, nombre]) => {
+    const f = salida[k];
+    return `<tr class="${k === mejor ? "destacado" : ""}"><td>${nombre}</td><td>${entero(f.duplicados * escala)}</td>` +
+      `<td>${entero(f.fp * escala)}</td><td>${entero(f.revisiones * escala)}</td><td>${millones(costos[k])}</td>` +
+      `<td><div class="barra ${k === "sin" ? "gris" : ""}" style="width:${(100 * costos[k] / maximo).toFixed(1)}%"></div></td></tr>`;
+  }).join("");
+  $("t-base").textContent = pesos(costos.sin);
+  const nombreMejor = METODOS.find(([k]) => k === mejor)[1];
+  $("t-ahorro").textContent = pesos(costos.sin - costos[mejor]);
+  $("t-ahorro-etiqueta").textContent = `Ahorro anual con ${nombreMejor}`;
+  $("metodo-nota").textContent = `Con estos supuestos, el método de menor costo es: ${nombreMejor}. ` +
+    "Cambia el costo de una unión errónea para ver cuándo conviene una regla más agresiva y cuándo no.";
+}
+
+$("supuestos").addEventListener("input", actualizar);
+try {
+  metricas = await (await fetch("./resultados/hito6/metricas.json")).json();
+  actualizar();
+} catch (e) {
+  $("metodo-nota").textContent = `No se pudieron cargar las métricas: ${e.message}`;
+}
+</script>
+</body>
+</html>
