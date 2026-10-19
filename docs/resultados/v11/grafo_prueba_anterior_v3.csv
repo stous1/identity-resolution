@@ -1,0 +1,443 @@
+tipo,valor,clientes,registros,ids_clientes,frac_apellido_comun,frac_validado,frac_digital,dias,generico,etiqueta,prediccion
+celular,3000000000,29,29,"[3, 139, 261, 281, 409, 720, 1180, 1241, 1352, 1430, 1555, 1953, 2007, 2105, 2215, 2366, 2492, 2562, 2622, 2907, 2971, 3573, 3871, 3970, 4219, 4333, 4446, 4598, 4728]",0.03,0.0,0.6896551724137931,4442,True,relleno,relleno
+celular,3000040000,2,2,"[105, 4163]",0.0,0.0,0.5,2249,False,coincidencia,sospechoso
+celular,3001234567,23,23,"[342, 408, 794, 1180, 1248, 1367, 1654, 1784, 1967, 2105, 2168, 2427, 2480, 2644, 2992, 3240, 3547, 3666, 3785, 3939, 4342, 4428, 4612]",0.025,0.0,0.6521739130434783,4560,True,relleno,relleno
+celular,3004186901,5,5,"[718, 1021, 1120, 4423, 4937]",0.1,0.0,1.0,428,False,sospechoso,sospechoso
+celular,3009319463,3,3,"[698, 2761, 4220]",0.3333333333333333,0.0,1.0,143,False,sospechoso,hogar
+celular,3019394045,4,4,"[3047, 3610, 3626, 4936]",0.0,0.0,1.0,169,False,sospechoso,sospechoso
+celular,3042275244,3,3,"[256, 1309, 1428]",0.0,0.0,1.0,205,False,sospechoso,sospechoso
+celular,3046913860,4,4,"[763, 1311, 2530, 4953]",0.0,0.0,1.0,393,False,sospechoso,sospechoso
+celular,3111111111,27,27,"[29, 179, 242, 692, 868, 1127, 1241, 1281, 1346, 1528, 1542, 1569, 1714, 1839, 2076, 2243, 2325, 2422, 2558, 2670, 3109, 3202, 3435, 3939, 4267, 4515, 4941]",0.03,0.0,0.5555555555555556,4680,True,relleno,relleno
+celular,3119464567,3,3,"[1451, 1996, 3566]",0.0,0.0,1.0,340,False,sospechoso,sospechoso
+celular,3122474270,3,3,"[2089, 2882, 3098]",0.0,0.0,1.0,55,False,sospechoso,sospechoso
+celular,3127035777,3,3,"[336, 2706, 4141]",0.0,0.0,1.0,132,False,sospechoso,sospechoso
+celular,3129220056,6,6,"[260, 384, 1725, 2282, 2297, 3603]",0.06666666666666667,0.0,1.0,385,False,sospechoso,sospechoso
+celular,3503660355,4,4,"[2041, 4256, 4874, 4909]",0.0,0.0,1.0,373,False,sospechoso,sospechoso
+celular,6010162294,3,3,"[204, 206, 207]",0.6666666666666666,0.3333333333333333,0.6666666666666666,1218,False,hogar,hogar
+celular,6010290977,2,3,"[2309, 2313]",1.0,0.6666666666666666,0.6666666666666666,1803,False,hogar,hogar
+celular,6010321926,2,5,"[2887, 2893]",0.0,0.6,0.2,2764,False,convivencia,sospechoso
+celular,6010468258,2,3,"[1868, 1881]",1.0,0.3333333333333333,0.3333333333333333,723,False,hogar,hogar
+celular,6010612279,4,7,"[1214, 1220, 1222, 1225]",1.0,0.7142857142857143,0.7142857142857143,4518,False,hogar,hogar
+celular,6010685348,2,2,"[2351, 2355]",0.0,1.0,1.0,37,False,pareja,sospechoso
+celular,6011331537,2,2,"[4583, 4586]",1.0,0.0,0.0,1003,False,hogar,hogar
+celular,6011511209,2,2,"[3794, 3796]",1.0,0.0,0.0,968,False,hogar,hogar
+celular,6011584495,2,3,"[1472, 1475]",0.0,0.3333333333333333,0.6666666666666666,4087,False,pareja,sospechoso
+celular,6011674855,2,3,"[1969, 1973]",1.0,0.3333333333333333,0.6666666666666666,815,False,hogar,hogar
+celular,6011749578,3,5,"[3739, 3741, 3743]",0.6666666666666666,0.8,0.4,3431,False,hogar,hogar
+celular,6011994483,2,3,"[3287, 3293]",1.0,0.6666666666666666,0.3333333333333333,3266,False,hogar,hogar
+celular,6012011011,2,2,"[863, 874]",1.0,0.0,0.5,3708,False,hogar,hogar
+celular,6012059590,2,4,"[4889, 4891]",0.0,0.75,0.5,1551,False,pareja,sospechoso
+celular,6012070745,2,3,"[1533, 1534]",0.0,0.3333333333333333,1.0,4072,False,pareja,sospechoso
+celular,6012071392,2,2,"[4870, 4872]",1.0,0.5,0.0,372,False,hogar,hogar
+celular,6012087593,2,2,"[386, 395]",1.0,0.0,0.5,243,False,hogar,hogar
+celular,6012168817,2,4,"[4116, 4121]",0.0,0.25,0.75,3367,False,convivencia,sospechoso
+celular,6012577812,2,3,"[1860, 1863]",0.0,0.6666666666666666,0.3333333333333333,3259,False,pareja,sospechoso
+celular,6012780158,3,4,"[4127, 4131, 4133]",0.0,0.5,0.5,4049,False,convivencia,sospechoso
+celular,6012850644,2,3,"[1796, 1798]",0.0,0.6666666666666666,0.0,1045,False,pareja,sospechoso
+celular,6012894961,2,3,"[2163, 2168]",0.0,0.6666666666666666,0.3333333333333333,801,False,pareja,sospechoso
+celular,6013075303,2,3,"[4415, 4420]",1.0,0.6666666666666666,0.6666666666666666,2143,False,hogar,hogar
+celular,6013131853,2,2,"[3772, 3774]",0.0,1.0,0.5,1463,False,pareja,sospechoso
+celular,6013167596,2,2,"[4094, 4099]",1.0,0.5,1.0,1020,False,hogar,hogar
+celular,6013424828,2,2,"[3464, 3470]",0.0,0.5,0.5,3838,False,pareja,sospechoso
+celular,6013933800,2,2,"[4467, 4469]",0.0,1.0,0.0,1221,False,hogar,sospechoso
+celular,6014065341,2,3,"[4352, 4356]",0.0,0.3333333333333333,1.0,4189,False,pareja,sospechoso
+celular,6014692111,3,4,"[4283, 4284, 4285]",0.6666666666666666,0.25,0.5,3345,False,hogar,hogar
+celular,6014767639,4,6,"[1735, 1738, 1739, 1746]",0.8333333333333334,0.3333333333333333,0.5,3338,False,hogar,hogar
+celular,6014885371,2,2,"[2013, 2014]",0.0,1.0,0.0,1356,False,pareja,sospechoso
+celular,6014968806,2,3,"[710, 715]",1.0,1.0,0.6666666666666666,2763,False,hogar,hogar
+celular,6015096444,3,4,"[3331, 3336, 3341]",1.0,1.0,0.5,3316,False,hogar,hogar
+celular,6015112146,2,2,"[4006, 4009]",0.0,0.5,0.5,1781,False,convivencia,sospechoso
+celular,6015498893,2,2,"[1997, 2001]",0.0,0.0,0.0,1506,False,convivencia,sospechoso
+celular,6015513127,3,3,"[4460, 4461, 4465]",0.6666666666666666,0.3333333333333333,0.3333333333333333,4631,False,hogar,hogar
+celular,6015557301,2,4,"[3508, 3510]",0.0,1.0,0.25,2869,False,pareja,sospechoso
+celular,6015662633,2,4,"[613, 615]",1.0,0.75,0.25,2213,False,hogar,hogar
+celular,6015788113,2,2,"[4589, 4590]",0.0,0.0,1.0,590,False,convivencia,sospechoso
+celular,6015929108,3,5,"[1288, 1293, 1294]",1.0,0.8,0.6,853,False,hogar,hogar
+celular,6016067668,4,6,"[474, 477, 483, 489]",0.8333333333333334,0.6666666666666666,0.5,3748,False,hogar,hogar
+celular,6016356379,2,2,"[105, 108]",0.0,0.5,1.0,249,False,pareja,sospechoso
+celular,6016575633,2,3,"[3732, 3734]",0.0,0.0,0.6666666666666666,2050,False,pareja,sospechoso
+celular,6016650244,3,3,"[2180, 2183, 2185]",0.0,0.0,0.6666666666666666,2114,False,convivencia,sospechoso
+celular,6016719271,3,3,"[1438, 1441, 1444]",1.0,0.6666666666666666,1.0,970,False,hogar,hogar
+celular,6016719618,2,2,"[3302, 3304]",1.0,0.5,0.0,1776,False,hogar,hogar
+celular,6016815927,2,4,"[4040, 4043]",1.0,0.75,1.0,2587,False,hogar,hogar
+celular,6016944344,2,2,"[1689, 1691]",1.0,0.0,0.5,147,False,hogar,hogar
+celular,6017106278,2,4,"[372, 374]",0.0,0.5,0.5,1807,False,hogar,sospechoso
+celular,6017458940,2,6,"[3897, 3909]",1.0,0.8333333333333334,0.3333333333333333,3256,False,hogar,hogar
+celular,6017529427,2,2,"[3129, 3131]",1.0,0.5,1.0,1492,False,hogar,hogar
+celular,6017548404,2,2,"[2361, 2364]",1.0,0.0,0.5,1952,False,hogar,hogar
+celular,6017561095,3,4,"[310, 312, 314]",0.6666666666666666,0.75,0.0,865,False,hogar,hogar
+celular,6017624384,2,2,"[2035, 2038]",0.0,0.0,0.5,336,False,hogar,sospechoso
+celular,6017947604,2,2,"[4267, 4271]",1.0,0.5,0.0,1034,False,hogar,hogar
+celular,6017988853,2,2,"[2191, 2196]",0.0,1.0,0.0,1167,False,pareja,sospechoso
+celular,6017993590,2,4,"[625, 638]",1.0,0.5,0.5,981,False,hogar,hogar
+celular,6018236455,3,4,"[3113, 3116, 3125]",0.6666666666666666,0.25,0.75,2204,False,hogar,hogar
+celular,6018237245,2,4,"[951, 958]",0.0,0.5,0.5,3537,False,convivencia,sospechoso
+celular,6018303067,2,2,"[3992, 3994]",1.0,1.0,0.5,3268,False,hogar,hogar
+celular,6018336954,2,2,"[4439, 4440]",0.0,0.5,0.0,1431,False,pareja,sospechoso
+celular,6018599010,3,3,"[1056, 1059, 1062]",1.0,1.0,0.3333333333333333,1835,False,hogar,hogar
+celular,6018798072,3,4,"[2727, 2732, 2734]",1.0,0.75,0.0,2094,False,hogar,hogar
+celular,6018802614,2,3,"[2441, 2442]",0.0,0.3333333333333333,0.6666666666666666,2764,False,hogar,sospechoso
+celular,6019204791,3,4,"[187, 191, 195]",0.6666666666666666,0.25,0.75,3979,False,hogar,hogar
+celular,6019402063,2,2,"[1828, 1830]",0.0,1.0,0.5,2244,False,pareja,sospechoso
+celular,6019428126,2,3,"[2919, 2922]",1.0,0.6666666666666666,0.6666666666666666,4120,False,hogar,hogar
+celular,6019670739,3,4,"[641, 644, 648]",1.0,0.5,0.0,2893,False,hogar,hogar
+celular,6019783049,3,4,"[3360, 3361, 3364]",0.6666666666666666,0.5,0.25,2924,False,hogar,hogar
+celular,6019858362,4,5,"[2419, 2422, 2424, 2428]",0.8333333333333334,0.8,0.4,3150,False,hogar,hogar
+celular,6019923852,2,2,"[4087, 4091]",1.0,1.0,0.0,2311,False,hogar,hogar
+celular,6019933190,3,3,"[2143, 2145, 2149]",1.0,0.3333333333333333,0.3333333333333333,4473,False,hogar,hogar
+celular,6019952156,3,4,"[4718, 4724, 4726]",1.0,0.5,1.0,4736,False,hogar,hogar
+correo,familiabravo94@hotmail.com,2,6,"[131, 136]",0.0,0.8333333333333334,0.3333333333333333,1803,False,pareja,sospechoso
+correo,familiacantillo3@gmail.com,4,5,"[4046, 4048, 4052, 4055]",0.8333333333333334,0.4,0.8,3241,False,hogar,hogar
+correo,familiacarrillo66@yahoo.com,2,2,"[3175, 3178]",0.0,0.0,0.0,962,False,pareja,sospechoso
+correo,familiacorrea20@yahoo.com,2,3,"[4062, 4064]",0.0,0.6666666666666666,0.6666666666666666,2289,False,pareja,sospechoso
+correo,familiadiaz28@outlook.com,2,4,"[584, 587]",1.0,0.0,1.0,4840,False,hogar,hogar
+correo,familiaduran54@yahoo.com,3,4,"[4814, 4817, 4820]",0.6666666666666666,0.75,0.75,2249,False,hogar,hogar
+correo,familiaduran60@yahoo.com,3,8,"[609, 613, 615]",0.6666666666666666,0.5,0.625,4236,False,hogar,hogar
+correo,familiagalindo33@gmail.com,4,10,"[2727, 2730, 2732, 2734]",0.8333333333333334,0.6,0.4,3278,False,hogar,hogar
+correo,familiagomez15@gmail.com,4,9,"[1703, 1706, 1709, 1714]",1.0,0.3333333333333333,0.6666666666666666,4238,False,hogar,hogar
+correo,familiahernandez46@outlook.com,4,4,"[4267, 4270, 4275, 4276]",0.8333333333333334,0.5,0.25,1908,False,hogar,hogar
+correo,familiahernandez54@gmail.com,2,2,"[1350, 1352]",0.0,0.5,0.5,2003,False,pareja,sospechoso
+correo,familiahernandez88@gmail.com,3,3,"[2030, 2031, 2034]",0.6666666666666666,0.6666666666666666,0.3333333333333333,2608,False,hogar,hogar
+correo,familiahernandez92@yahoo.com,2,3,"[1297, 1307]",1.0,0.3333333333333333,0.6666666666666666,2756,False,hogar,hogar
+correo,familiamontes11@gmail.com,2,2,"[119, 120]",1.0,0.5,0.5,2196,False,hogar,hogar
+correo,familiamorales96@gmail.com,2,2,"[3137, 3139]",0.0,0.0,0.5,2624,False,pareja,sospechoso
+correo,familiarojas27@gmail.com,2,5,"[2373, 2376]",0.0,0.4,0.2,2756,False,pareja,sospechoso
+correo,familiaruiz15@gmail.com,3,3,"[4727, 4728, 4729]",0.6666666666666666,0.6666666666666666,1.0,2750,False,hogar,hogar
+correo,familiasalazar15@gmail.com,2,6,"[2606, 2610]",1.0,0.3333333333333333,0.5,1622,False,hogar,hogar
+correo,familiavargas79@gmail.com,2,4,"[848, 851]",0.0,1.0,0.25,1875,False,pareja,sospechoso
+correo,hernando.gutierrez45@hotmail.com,2,2,"[3788, 5069]",1.0,0.0,1.0,3822,False,misma_persona,hogar
+correo,jmarin42@hotmail.com,2,2,"[2977, 3729]",1.0,0.0,0.5,2879,False,coincidencia,hogar
+correo,mcontreras8@yahoo.com,2,2,"[2355, 4219]",1.0,0.5,0.5,577,False,coincidencia,hogar
+correo,n@ana.com,2,2,"[998, 1110]",0.0,0.0,0.0,669,False,coincidencia,sospechoso
+correo,na@na.com,31,32,"[99, 197, 248, 264, 317, 399, 408, 830, 983, 1029, 1082, 1204, 1502, 1569, 1608, 1777, 2173, 2177, 2215, 2243, 2249, 2369, 2825, 3141, 3210, 3566, 3617, 3871, 4145, 4324, 4669]",0.01,0.0,0.5625,4633,True,relleno,relleno
+correo,notiene@gmail.com,31,31,"[15, 99, 187, 386, 395, 497, 580, 601, 778, 1302, 1622, 1698, 2016, 2041, 2159, 2403, 2659, 2832, 2985, 3073, 3164, 3357, 3458, 3592, 4003, 4192, 4226, 4493, 4695, 4821, 4948]",0.015,0.0,0.7419354838709677,4826,True,relleno,relleno
+correo,pagos129@yahoo.com,4,4,"[354, 2515, 3835, 4115]",0.0,0.0,1.0,374,False,sospechoso,sospechoso
+correo,pagos417@yahoo.com,3,3,"[432, 1975, 2283]",0.0,0.0,1.0,107,False,sospechoso,sospechoso
+correo,pagos612@gmail.com,4,4,"[104, 128, 701, 1789]",0.0,0.0,1.0,400,False,sospechoso,sospechoso
+correo,pagos751@outlook.com,6,6,"[2323, 2334, 3608, 3925, 4485, 4592]",0.0,0.0,1.0,464,False,sospechoso,sospechoso
+correo,pagos801@outlook.com,4,4,"[1984, 3547, 4445, 4911]",0.16666666666666666,0.0,1.0,277,False,sospechoso,sospechoso
+correo,pagos807@yahoo.com,3,3,"[2344, 3576, 3888]",0.0,0.0,1.0,223,False,sospechoso,sospechoso
+correo,pagos945@gmail.com,4,4,"[139, 800, 2661, 2930]",0.0,0.0,1.0,353,False,sospechoso,sospechoso
+correo,sincorreo@hotmail.com,21,22,"[109, 139, 213, 1472, 1857, 1896, 1986, 2364, 2581, 2723, 3137, 3145, 3211, 3240, 3479, 3757, 3931, 4133, 4428, 4814, 4830]",0.02,0.0,0.7272727272727273,4813,True,relleno,relleno
+direccion,AV 106B # 76B-16,6,6,"[451, 968, 1497, 3482, 3762, 4550]",0.06666666666666667,0.0,1.0,508,False,sospechoso,sospechoso
+direccion,AV 118B # 48-54,2,2,"[2017, 2018]",0.0,1.0,0.5,725,False,pareja,sospechoso
+direccion,AV 135 # 66-93,2,9,"[877, 881]",0.0,0.4444444444444444,0.3333333333333333,3662,False,pareja,sospechoso
+direccion,AV 135 # 66-93 P 3,2,2,"[892, 896]",0.0,1.0,1.0,666,True,pareja,relleno
+direccion,AV 142A # 74-53,2,2,"[4776, 4782]",0.0,1.0,0.0,915,False,pareja,sospechoso
+direccion,AV 142A # 74-53 BLOQUE 1 APTO 201,2,2,"[4776, 4789]",1.0,0.0,0.5,1438,True,hogar,relleno
+direccion,AV 20 ESTE # 15A-33,4,5,"[2136, 2145, 2150, 2163]",0.16666666666666666,0.4,1.0,2654,False,multifamiliar,sospechoso
+direccion,AV 25 # 62-50,3,4,"[1318, 1320, 1322]",0.6666666666666666,1.0,0.0,2991,False,hogar,hogar
+direccion,AV 2A # 91B-76,2,4,"[4452, 4454]",0.0,0.25,0.5,4625,False,pareja,sospechoso
+direccion,AV 4 # 3-35,3,5,"[1969, 1972, 1973]",1.0,0.4,0.6,3212,False,hogar,hogar
+direccion,AV 45 # 52B-17,3,6,"[1837, 1839, 1843]",0.6666666666666666,0.5,0.6666666666666666,2515,False,hogar,hogar
+direccion,AV 72 # 102-33,2,2,"[1362, 1393]",1.0,0.0,0.0,4072,False,multifamiliar,hogar
+direccion,AV 76C # 44-26,3,5,"[1650, 1654, 1665]",0.0,0.8,0.6,3878,False,multifamiliar,sospechoso
+direccion,AV 83A # 30 - 47 PISO 3,2,2,"[2977, 2978]",1.0,0.0,1.0,436,True,pareja,relleno
+direccion,AV 83A # 30-47,4,10,"[2965, 2970, 2971, 2975]",0.3333333333333333,0.5,0.8,3925,False,hogar,hogar
+direccion,AV 83B # 73-67,4,4,"[1622, 1623, 1625, 1627]",0.3333333333333333,0.75,0.5,2863,False,hogar,hogar
+direccion,AV 90 # 65-69,3,3,"[473, 1967, 3100]",0.3333333333333333,0.0,1.0,2,False,sospechoso,hogar
+direccion,AV 90B # 84B-73,3,8,"[3772, 3774, 3776]",0.6666666666666666,0.375,0.375,4189,False,hogar,hogar
+direccion,AV 96C # 76B-27,3,4,"[2943, 2951, 2962]",0.0,0.25,0.75,3572,False,multifamiliar,sospechoso
+direccion,AV 96C # 76B-27 AP 602,2,2,"[2956, 2959]",0.0,1.0,0.5,2126,True,pareja,relleno
+direccion,AVENIDA 118B # 48-54 TERCER PISO,2,2,"[2024, 2028]",0.0,1.0,0.0,400,True,pareja,relleno
+direccion,AVENIDA 72 # 102-33 APT 304,2,2,"[1362, 1367]",0.0,0.0,0.5,2834,True,pareja,relleno
+direccion,BARRIO CENTRO,19,19,"[520, 851, 1187, 1384, 1498, 1513, 1789, 2180, 2530, 2943, 2971, 3470, 3524, 3632, 3718, 3948, 4797, 4807, 4833]",0.005847953216374269,0.0,0.5263157894736842,4538,True,relleno,relleno
+direccion,CALLE 140 # 15B - 66 CASA 118,2,2,"[1268, 1273]",0.0,0.5,1.0,817,True,convivencia,relleno
+direccion,CALLE 72 # 82-1 CASA 92,2,2,"[1052, 1059]",1.0,0.5,0.5,674,True,hogar,relleno
+direccion,CARRERA 29C # 112B-30 APTO 801,2,2,"[3840, 3845]",1.0,1.0,0.0,2924,True,hogar,relleno
+direccion,CARRERA 93 # 32-87 PISO 3,2,2,"[2415, 2417]",0.0,1.0,0.0,745,True,pareja,relleno
+direccion,CENTRO,20,20,"[395, 525, 735, 796, 1016, 1128, 1151, 1418, 1569, 2265, 2470, 2923, 3059, 3268, 3276, 3583, 3765, 4087, 4170, 4633]",0.02631578947368421,0.0,0.75,4437,True,relleno,relleno
+direccion,CL 100 # 86B-18,3,4,"[3782, 3785, 3786]",1.0,0.25,0.25,4327,False,hogar,hogar
+direccion,CL 100 ESTE # 33-90,4,6,"[4470, 4471, 4473, 4476]",0.3333333333333333,0.6666666666666666,0.16666666666666666,4154,False,hogar,hogar
+direccion,CL 104 ESTE # 120A-1,4,8,"[1947, 1949, 1953, 1955]",0.8333333333333334,0.5,0.25,2597,False,hogar,hogar
+direccion,CL 104B # 56-19,3,6,"[3416, 3420, 3421]",0.6666666666666666,0.6666666666666666,0.8333333333333334,2928,False,hogar,hogar
+direccion,CL 104C # 18B-6,3,11,"[2002, 2007, 2010]",0.6666666666666666,0.36363636363636365,0.45454545454545453,4706,False,hogar,hogar
+direccion,CL 105 # 115-19,2,2,"[3158, 3159]",1.0,0.5,1.0,899,False,hogar,hogar
+direccion,CL 105 # 115-19 APT 403,2,2,"[3160, 3164]",0.0,0.0,0.5,743,True,pareja,relleno
+direccion,CL 105 ESTE # 118-42,2,2,"[1458, 1459]",0.0,0.5,0.5,1502,False,pareja,sospechoso
+direccion,CL 105C # 54-82,2,4,"[4653, 4656]",0.0,0.75,0.0,2613,False,pareja,sospechoso
+direccion,CL 107C SUR # 10B-2,3,3,"[735, 742, 747]",0.3333333333333333,0.3333333333333333,0.3333333333333333,498,False,multifamiliar,hogar
+direccion,CL 110 BIS # 63-60,3,3,"[2657, 2658, 2659]",0.0,0.6666666666666666,0.6666666666666666,1601,False,multifamiliar,sospechoso
+direccion,CL 111 BIS # 90A-89,4,8,"[1350, 1352, 1354, 1355]",0.8333333333333334,0.625,0.5,4643,False,hogar,hogar
+direccion,CL 111 BIS SUR # 1A-90,2,3,"[3549, 3569]",0.0,1.0,0.3333333333333333,3015,False,multifamiliar,sospechoso
+direccion,CL 112A # 38-25,2,8,"[2433, 2436]",0.0,0.5,0.125,2682,False,pareja,sospechoso
+direccion,CL 115A # 98-66,4,9,"[3661, 3662, 3666, 3670]",0.3333333333333333,0.6666666666666666,0.7777777777777778,4357,False,hogar,hogar
+direccion,CL 115C # 25B-34,2,2,"[312, 333]",0.0,1.0,0.0,2845,False,multifamiliar,sospechoso
+direccion,CL 116C # 86A-98,5,18,"[829, 830, 835, 839, 844]",0.9,0.4444444444444444,0.5555555555555556,4278,False,hogar,hogar
+direccion,CL 117 BIS # 55A-68,3,5,"[4094, 4097, 4099]",0.6666666666666666,0.4,0.8,2105,False,hogar,hogar
+direccion,CL 117C # 47-93,2,3,"[2887, 2893]",0.0,0.6666666666666666,0.3333333333333333,1116,False,convivencia,sospechoso
+direccion,CL 119 ESTE # 54B-59,2,3,"[3018, 3020]",0.0,0.6666666666666666,0.6666666666666666,1408,False,pareja,sospechoso
+direccion,CL 12 # 11-84,2,8,"[4073, 4079]",0.0,0.875,0.0,3281,False,pareja,sospechoso
+direccion,CL 120 # 53B-70,2,4,"[2912, 2913]",1.0,0.75,0.5,2488,False,hogar,hogar
+direccion,CL 122B ESTE # 87-89,3,6,"[1751, 1755, 1759]",0.0,0.6666666666666666,0.8333333333333334,1538,False,convivencia,sospechoso
+direccion,CL 123C # 49A-97,2,2,"[1602, 4910]",0.0,0.0,1.0,4356,False,convivencia,sospechoso
+direccion,CL 124C # 58 - 53 APTO 803,2,3,"[1493, 1496]",0.0,1.0,0.3333333333333333,1651,True,pareja,relleno
+direccion,CL 125 # 100A-84,2,2,"[3141, 3145]",1.0,0.5,0.0,414,False,misma_persona,hogar
+direccion,CL 127B ESTE # 119-96,2,2,"[1603, 1604]",0.0,1.0,0.0,1224,False,pareja,sospechoso
+direccion,CL 128 # 46-31,4,14,"[4675, 4678, 4680, 4685]",0.8333333333333334,0.6428571428571429,0.6428571428571429,4130,False,hogar,hogar
+direccion,CL 129 # 49-89,2,5,"[4284, 4285]",1.0,0.6,1.0,3839,False,hogar,hogar
+direccion,CL 13 # 52B-26,3,10,"[4751, 4755, 4758]",0.6666666666666666,0.4,0.4,2798,False,hogar,hogar
+direccion,CL 130 # 60B-26,2,2,"[2068, 2069]",0.0,0.5,0.5,737,False,pareja,sospechoso
+direccion,CL 134B # 52-66 AP 903,2,3,"[105, 109]",1.0,1.0,1.0,648,True,hogar,relleno
+direccion,CL 137 # 100-62,2,4,"[2265, 2269]",0.0,0.5,0.0,4793,False,pareja,sospechoso
+direccion,CL 137 # 105A-24,2,3,"[4658, 4660]",0.0,0.3333333333333333,1.0,1949,False,pareja,sospechoso
+direccion,CL 138C # 57-63,3,6,"[4765, 4769, 4771]",0.6666666666666666,0.5,0.6666666666666666,2927,False,hogar,hogar
+direccion,CL 13A # 29-46,3,4,"[4318, 4319, 4322]",0.6666666666666666,0.5,0.5,2242,False,hogar,hogar
+direccion,CL 14 ESTE # 53 - 94 AP 1701,2,3,"[273, 281]",1.0,0.0,0.3333333333333333,320,True,hogar,relleno
+direccion,CL 140C SUR # 107-77,2,3,"[2180, 2185]",0.0,0.0,1.0,2380,False,convivencia,sospechoso
+direccion,CL 143C # 28-57,2,2,"[4594, 4609]",0.0,1.0,1.0,612,False,multifamiliar,sospechoso
+direccion,CL 144 # 28-71,3,9,"[4558, 4560, 4563]",0.6666666666666666,0.6666666666666666,0.5555555555555556,4050,False,hogar,hogar
+direccion,CL 145 # 111-23,3,5,"[3061, 3062, 3063]",0.6666666666666666,0.6,0.4,1343,False,hogar,hogar
+direccion,CL 145B SUR # 76A-58,3,4,"[3680, 3698, 3705]",0.3333333333333333,0.75,0.5,1923,False,multifamiliar,hogar
+direccion,CL 147B # 89-46,4,9,"[2508, 2509, 2514, 2515]",0.3333333333333333,0.4444444444444444,0.4444444444444444,4478,False,multifamiliar,hogar
+direccion,CL 148 SUR # 36-61,4,5,"[3531, 3532, 3533, 3534]",0.3333333333333333,0.6,0.6,3189,False,hogar,hogar
+direccion,CL 148C # 49A-25,3,6,"[4863, 4866, 4868]",0.6666666666666666,0.5,0.5,3770,False,hogar,hogar
+direccion,CL 149B # 119-87,2,3,"[4278, 4280]",0.0,0.3333333333333333,0.3333333333333333,2574,False,convivencia,sospechoso
+direccion,CL 149B ESTE # 120B-57,3,3,"[4137, 4161, 4948]",0.0,0.6666666666666666,0.6666666666666666,4241,False,multifamiliar,sospechoso
+direccion,CL 149B ESTE # 120B-57 APT 1903,2,3,"[4152, 4157]",1.0,0.0,0.6666666666666666,576,True,hogar,relleno
+direccion,CL 17 # 97-16,2,2,"[4267, 4271]",1.0,0.0,0.5,1706,False,hogar,hogar
+direccion,CL 18 # 111-42,3,3,"[3614, 3622, 3636]",0.0,0.3333333333333333,0.6666666666666666,1134,False,multifamiliar,sospechoso
+direccion,CL 1A # 70B-24,4,10,"[2678, 2683, 2684, 2688]",1.0,0.2,0.7,4027,False,hogar,hogar
+direccion,CL 2 SUR # 40A-35,2,5,"[2755, 2760]",0.0,0.0,0.6,2299,False,pareja,sospechoso
+direccion,CL 23 # 69-77,2,4,"[2747, 2750]",0.0,0.75,0.25,3351,False,pareja,sospechoso
+direccion,CL 26B BIS SUR # 105-53,4,4,"[2171, 2173, 2176, 2177]",0.0,0.5,0.5,867,False,convivencia,sospechoso
+direccion,CL 27 ESTE # 111B-18,2,2,"[925, 930]",0.0,1.0,1.0,667,False,multifamiliar,sospechoso
+direccion,CL 27B # 7A-94,2,3,"[1519, 1537]",0.0,0.6666666666666666,0.3333333333333333,3943,False,multifamiliar,sospechoso
+direccion,CL 27B # 7A-94 CASA 80,2,2,"[1519, 1528]",1.0,0.5,0.5,897,True,hogar,relleno
+direccion,CL 28 # 115-94,4,5,"[4364, 4365, 4366, 4367]",0.3333333333333333,0.4,0.6,3314,False,hogar,hogar
+direccion,CL 28C # 43-37,3,3,"[204, 213, 223]",0.0,0.6666666666666666,1.0,1502,False,multifamiliar,sospechoso
+direccion,CL 35 ESTE # 69A-77,5,5,"[3431, 3435, 3458, 3464, 3476]",0.0,1.0,0.4,4313,False,multifamiliar,sospechoso
+direccion,CL 35 ESTE # 69A-77 BL 4 APT 501,2,2,"[3464, 3470]",0.0,0.5,0.5,212,True,pareja,relleno
+direccion,CL 35C SUR # 74-23,3,6,"[4610, 4612, 4616]",0.6666666666666666,0.6666666666666666,0.6666666666666666,4794,False,hogar,hogar
+direccion,CL 36 # 59A-23,2,4,"[2981, 2985]",0.0,0.5,0.5,643,False,pareja,sospechoso
+direccion,CL 37B # 25-14,2,3,"[3192, 3194]",1.0,0.6666666666666666,0.0,2006,False,hogar,hogar
+direccion,CL 39 # 98A-17,7,8,"[1155, 1180, 1206, 1222, 1225, 1236, 1243]",0.09523809523809523,0.375,0.625,3860,False,multifamiliar,relleno
+direccion,CL 39 # 98A-17 TORRE 3 APT 902,2,2,"[1176, 1187]",1.0,0.5,0.0,475,True,hogar,relleno
+direccion,CL 39C ESTE # 77-46,4,5,"[1812, 1813, 1814, 1818]",0.3333333333333333,0.4,0.8,3490,False,hogar,hogar
+direccion,CL 4 # 101A-43,7,8,"[2534, 2537, 2554, 2565, 2574, 2576, 4917]",0.09523809523809523,0.625,0.5,3973,False,multifamiliar,relleno
+direccion,CL 45B # 97A-77,4,9,"[2516, 2517, 2522, 2525]",0.8333333333333334,0.6666666666666666,0.4444444444444444,4758,False,hogar,hogar
+direccion,CL 46 # 13-71,4,11,"[1735, 1739, 1745, 1746]",1.0,0.45454545454545453,0.45454545454545453,3540,False,hogar,hogar
+direccion,CL 46 # 5B-48,3,7,"[4486, 4487, 4493]",0.6666666666666666,0.2857142857142857,0.42857142857142855,3940,False,hogar,hogar
+direccion,CL 48A # 23A-23,3,3,"[2013, 2014, 2015]",0.6666666666666666,0.6666666666666666,0.3333333333333333,1358,False,hogar,hogar
+direccion,CL 5 # 31B-69 BLOQUE 1 AP 804,2,2,"[3598, 3599]",0.0,0.0,0.5,586,True,pareja,relleno
+direccion,CL 51B # 17-24,3,6,"[2447, 2448, 2452]",0.6666666666666666,0.6666666666666666,0.5,3811,False,hogar,hogar
+direccion,CL 54 # 51-12,3,3,"[3863, 3877, 3888]",0.0,0.0,0.6666666666666666,3715,False,multifamiliar,sospechoso
+direccion,CL 54 SUR # 10-43,3,8,"[2210, 2213, 2215]",0.6666666666666666,0.5,0.625,3471,False,hogar,hogar
+direccion,CL 54A BIS # 116-5,2,3,"[2279, 2296]",0.0,0.0,0.3333333333333333,872,False,multifamiliar,sospechoso
+direccion,CL 56 SUR # 115-34,2,5,"[2652, 2656]",0.0,0.4,0.8,4233,False,pareja,sospechoso
+direccion,CL 60 # 116-72,3,3,"[724, 725, 726]",1.0,0.6666666666666666,0.3333333333333333,2674,False,hogar,hogar
+direccion,CL 61B # 84A-4,3,4,"[702, 704, 705]",0.3333333333333333,0.25,0.75,1549,False,hogar,hogar
+direccion,CL 62C SUR # 59-81,2,5,"[2877, 2880]",0.0,0.0,0.2,2790,False,pareja,sospechoso
+direccion,CL 63 SUR # 88-90,4,13,"[2197, 2202, 2205, 2209]",0.8333333333333334,0.6923076923076923,0.5384615384615384,3954,False,hogar,hogar
+direccion,CL 64 # 2-73,2,4,"[3047, 4932]",0.0,0.25,0.5,2952,False,convivencia,sospechoso
+direccion,CL 66C # 48-66,2,3,"[794, 796]",0.0,0.3333333333333333,1.0,1295,False,pareja,sospechoso
+direccion,CL 68 # 55-8,3,5,"[1642, 1644, 1647]",0.6666666666666666,0.8,0.8,2280,False,hogar,hogar
+direccion,CL 6C ESTE # 3B-48,4,4,"[1441, 1445, 1446, 4904]",0.0,0.75,0.25,1881,False,multifamiliar,sospechoso
+direccion,CL 6C SUR # 101-69,2,4,"[1616, 1618]",1.0,0.0,0.75,3056,False,hogar,hogar
+direccion,CL 7 # 55A-81,3,7,"[4661, 4666, 4667]",0.6666666666666666,0.42857142857142855,0.7142857142857143,4083,False,hogar,hogar
+direccion,CL 71B # 46-81,4,6,"[4745, 4746, 4747, 4748]",0.8333333333333334,0.5,0.3333333333333333,4854,False,hogar,hogar
+direccion,CL 71C # 92B - 63 APT 1201,2,2,"[4546, 4547]",1.0,1.0,1.0,3498,True,hogar,relleno
+direccion,CL 72 # 82-1,3,4,"[1025, 1032, 1062]",0.0,0.5,0.75,3502,False,multifamiliar,sospechoso
+direccion,CL 72 # 82-1 CASA 107,2,4,"[1039, 1045]",0.0,0.75,1.0,4482,True,pareja,relleno
+direccion,CL 72 # 82-1 CASA 92,3,5,"[1052, 1056, 1059]",0.6666666666666666,1.0,0.6,1921,True,hogar,relleno
+direccion,CL 73 ESTE # 105-93,2,2,"[1998, 2001]",0.0,0.5,0.0,2557,False,convivencia,sospechoso
+direccion,CL 73B ESTE # 55-22,2,2,"[1330, 1339]",0.0,1.0,0.0,229,False,multifamiliar,sospechoso
+direccion,CL 74B SUR # 106-9,4,8,"[4460, 4461, 4465, 4467]",0.8333333333333334,0.5,0.125,4786,False,hogar,hogar
+direccion,CL 75 BIS # 114A-12,3,7,"[2780, 2783, 2784]",0.6666666666666666,0.2857142857142857,0.42857142857142855,4370,False,hogar,hogar
+direccion,CL 77 ESTE # 1-86,5,6,"[3200, 3206, 3214, 3226, 3234]",0.1,0.6666666666666666,0.8333333333333334,4537,False,multifamiliar,sospechoso
+direccion,CL 77 ESTE # 1-86 APTO 1204,2,2,"[3214, 3219]",1.0,0.0,1.0,3340,True,hogar,relleno
+direccion,CL 78A # 60B-77,4,4,"[2351, 2355, 2366, 2385]",0.0,0.5,1.0,4250,False,multifamiliar,sospechoso
+direccion,CL 78A # 60B-77 CS 79,2,2,"[2351, 2357]",1.0,0.5,0.5,2304,True,hogar,relleno
+direccion,CL 78C # 63B-2,5,13,"[2419, 2422, 2424, 2427, 2428]",0.9,0.7692307692307693,0.23076923076923078,4294,False,hogar,hogar
+direccion,CL 79B # 92-95,2,4,"[3184, 3188]",0.0,1.0,1.0,486,False,convivencia,sospechoso
+direccion,CL 80 # 67-38 AP 704,2,2,"[1986, 1989]",1.0,0.0,0.5,924,True,hogar,relleno
+direccion,CL 82 # 76A-62,2,7,"[3, 7]",0.0,0.2857142857142857,0.5714285714285714,3959,False,pareja,sospechoso
+direccion,CL 82 # 92-85,3,6,"[356, 359, 360]",0.6666666666666666,0.3333333333333333,0.3333333333333333,3090,False,hogar,hogar
+direccion,CL 84B # 59-2,3,3,"[86, 89, 93]",0.0,0.6666666666666666,1.0,463,False,multifamiliar,sospechoso
+direccion,CL 85 SUR # 56A-87,4,9,"[3851, 3852, 3853, 3856]",0.8333333333333334,0.3333333333333333,0.7777777777777778,3117,False,hogar,hogar
+direccion,CL 86B # 12B-85,2,4,"[2708, 2714]",0.0,1.0,0.25,2130,False,convivencia,sospechoso
+direccion,CL 88 # 3B-6,2,3,"[3422, 3424]",0.0,0.6666666666666666,0.3333333333333333,1262,False,pareja,sospechoso
+direccion,CL 89A # 81-92,3,8,"[4622, 4625, 4626]",0.6666666666666666,0.375,0.75,3141,False,hogar,hogar
+direccion,CL 8B ESTE # 26-72,2,4,"[29, 32]",0.0,0.75,0.25,3808,False,pareja,sospechoso
+direccion,CL 9 # 26B-50,2,3,"[4636, 4638]",0.0,0.6666666666666666,1.0,1276,False,convivencia,sospechoso
+direccion,CL 91A # 103B-96,3,4,"[261, 263, 264]",0.3333333333333333,0.25,1.0,3987,False,pareja,hogar
+direccion,CL 91C # 52-99,4,6,"[1066, 1070, 1071, 1072]",0.5,0.5,0.5,3602,False,hogar,hogar
+direccion,CL 92A # 36-44,2,5,"[3175, 3178]",0.0,0.4,0.4,4258,False,pareja,sospechoso
+direccion,CL 93 SUR # 111-18,5,15,"[47, 50, 53, 56, 59]",0.9,0.5333333333333333,0.4666666666666667,4499,False,hogar,hogar
+direccion,CL 96A # 92A-21,2,6,"[3925, 4946]",0.0,0.6666666666666666,0.6666666666666666,3169,False,convivencia,sospechoso
+direccion,CL 96B SUR # 35-98,4,9,"[2727, 2730, 2732, 2734]",0.8333333333333334,0.5555555555555556,0.4444444444444444,4358,False,hogar,hogar
+direccion,CL 97 # 91-90,3,4,"[4886, 4891, 4963]",0.0,0.5,0.5,4607,False,multifamiliar,sospechoso
+direccion,CL 98 # 40-67,2,2,"[3808, 3812]",0.0,1.0,0.5,13,False,multifamiliar,sospechoso
+direccion,CL 98C # 85-94,2,5,"[4022, 4026]",0.0,0.6,0.4,2990,False,pareja,sospechoso
+direccion,CLL 71C # 92B - 63 APTO 101,2,2,"[4514, 4520]",1.0,1.0,0.0,2168,True,hogar,relleno
+direccion,CLL 72 # 82-1 CASA 34,2,2,"[1029, 1032]",1.0,0.5,1.0,573,True,hogar,relleno
+direccion,CLL 72 # 82-1 CS 34,2,2,"[1032, 1037]",1.0,0.5,1.0,635,True,hogar,relleno
+direccion,CLL 78A # 60B-77 CS 2,2,2,"[2361, 2364]",1.0,0.0,0.5,1952,True,hogar,relleno
+direccion,CONOCIDA,22,22,"[99, 191, 256, 757, 1158, 1228, 2177, 2185, 2505, 2590, 2761, 2870, 3160, 3313, 3331, 3981, 4163, 4414, 4583, 4695, 4724, 4836]",0.055,0.0,0.7272727272727273,4653,True,relleno,relleno
+direccion,CONOCIIDA,2,2,"[1227, 3617]",0.0,0.0,0.5,2729,True,coincidencia,relleno
+direccion,CR 60 # 34-97 APARTAMENTO 704,2,2,"[1706, 1714]",1.0,0.0,1.0,3480,True,hogar,relleno
+direccion,CR 60 # 34-97 APTO 902,2,2,"[1682, 1691]",1.0,0.5,0.5,149,True,hogar,relleno
+direccion,CR 66 BIS # 94-75 APTO 1403,2,2,"[144, 148]",0.0,0.0,0.5,83,True,pareja,relleno
+direccion,CRA 104 SUR # 1B - 67 CS 27,2,2,"[677, 683]",0.0,1.0,0.5,1111,True,pareja,relleno
+direccion,CRA 13 # 16-61 BLQ 6 APTO 803,2,2,"[978, 985]",1.0,0.0,0.0,2643,True,hogar,relleno
+direccion,CRA 131B # 59B-13 APTO 1002,2,2,"[2873, 2875]",1.0,0.5,0.5,3166,True,hogar,relleno
+direccion,CRA 135A # 5-33 APTO 601,2,2,"[115, 119]",0.0,0.5,0.5,680,True,pareja,relleno
+direccion,CRA 136C # 109-52 BLQ 8 AP 402,2,2,"[3331, 3339]",1.0,0.5,0.5,457,True,hogar,relleno
+direccion,CRA 21B BIS # 71-40 2DO PISO,2,2,"[2616, 2620]",0.0,0.0,1.0,2241,True,hogar,relleno
+direccion,CRA 78 # 61B-1 PISO 2,2,2,"[3911, 3913]",0.0,0.5,0.5,486,True,hogar,relleno
+direccion,CRA 96A # 23-89 APTO 704,2,2,"[4415, 4420]",1.0,1.0,0.5,1320,True,hogar,relleno
+direccion,DG 113B # 55-97,3,6,"[2084, 2086, 2089]",0.0,0.5,0.6666666666666666,3790,False,multifamiliar,sospechoso
+direccion,DG 135C # 55A-97,3,5,"[951, 957, 958]",0.0,0.6,0.8,1226,False,convivencia,sospechoso
+direccion,DG 142 # 58-94,2,3,"[4672, 4674]",0.0,1.0,0.3333333333333333,834,False,convivencia,sospechoso
+direccion,DG 149 # 102-5,3,5,"[164, 169, 170]",1.0,0.6,0.4,1586,False,hogar,hogar
+direccion,DG 149 # 117-18,2,3,"[3647, 3649]",0.0,0.3333333333333333,0.6666666666666666,1324,False,pareja,sospechoso
+direccion,DG 17A SUR # 46-23,3,4,"[3814, 3817, 3818]",0.6666666666666666,0.5,0.25,3476,False,hogar,hogar
+direccion,DG 3A BIS # 103-81,3,7,"[3523, 3524, 3529]",1.0,0.7142857142857143,0.2857142857142857,4170,False,hogar,hogar
+direccion,DG 44A # 30-28,5,13,"[417, 420, 422, 425, 431]",0.5,0.38461538461538464,0.46153846153846156,4125,False,hogar,hogar
+direccion,DG 44A SUR # 38B-39,3,4,"[3408, 3409, 3410]",0.6666666666666666,0.75,0.5,2726,False,hogar,hogar
+direccion,DG 55 # 28-59,2,10,"[2897, 2903]",0.0,0.3,0.8,3200,False,pareja,sospechoso
+direccion,DG 72C # 107-78,2,2,"[2767, 2768]",0.0,1.0,0.5,2248,False,pareja,sospechoso
+direccion,EDIFICIO MONACO CALLE 145B SUR # 76A-58,2,2,"[3696, 3708]",0.0,1.0,0.5,4484,True,multifamiliar,relleno
+direccion,KR 100 # 89-76,5,13,"[13, 15, 21, 22, 23]",0.9,0.5384615384615384,0.6153846153846154,3478,False,hogar,hogar
+direccion,KR 100 # 9B-49,4,4,"[1553, 2659, 3892, 4407]",0.0,0.0,1.0,441,False,sospechoso,sospechoso
+direccion,KR 100A # 116-30,3,6,"[4228, 4229, 4230]",0.6666666666666666,0.5,0.3333333333333333,3907,False,hogar,hogar
+direccion,KR 104 SUR # 1B-67,2,2,"[677, 687]",0.0,0.0,1.0,1783,False,multifamiliar,sospechoso
+direccion,KR 106 SUR # 20-55,2,2,"[2044, 2052]",0.0,1.0,0.0,1972,False,multifamiliar,sospechoso
+direccion,KR 107 # 90-27,4,4,"[763, 772, 778, 779]",0.16666666666666666,0.25,0.5,3565,False,multifamiliar,sospechoso
+direccion,KR 108A # 8A-67,4,6,"[2774, 2775, 2777, 2778]",0.8333333333333334,0.3333333333333333,0.3333333333333333,3657,False,hogar,hogar
+direccion,KR 109 # 102A-2,3,4,"[3402, 3404, 3405]",0.6666666666666666,0.25,0.5,2717,False,hogar,hogar
+direccion,KR 111B # 54-43,3,6,"[4582, 4583, 4586]",0.6666666666666666,0.5,0.5,3081,False,hogar,hogar
+direccion,KR 112A # 107-4,3,4,"[4052, 4056, 4062]",0.0,0.75,1.0,2587,False,multifamiliar,sospechoso
+direccion,KR 112A # 107-4 CS 26,2,2,"[4036, 4043]",1.0,0.5,0.5,1652,True,hogar,relleno
+direccion,KR 114 # 91-31,2,3,"[1633, 1634]",0.0,0.6666666666666666,0.3333333333333333,374,False,convivencia,sospechoso
+direccion,KR 115A SUR # 101-50,3,3,"[3106, 3121, 3129]",0.0,0.3333333333333333,0.3333333333333333,2082,False,multifamiliar,sospechoso
+direccion,KR 116 # 29-39,2,5,"[1729, 1731]",0.0,0.4,0.6,4836,False,pareja,sospechoso
+direccion,KR 116 # 82-8,2,4,"[2337, 2340]",0.0,0.75,0.25,1410,False,pareja,sospechoso
+direccion,KR 117 # 40B-99,2,6,"[536, 539]",1.0,0.5,1.0,3267,False,hogar,hogar
+direccion,KR 117B # 102B-6,4,5,"[368, 369, 370, 374]",0.3333333333333333,0.8,0.4,2837,False,hogar,hogar
+direccion,KR 12 # 27B-40,5,5,"[772, 1336, 2243, 3981, 4945]",0.1,0.0,1.0,210,False,sospechoso,sospechoso
+direccion,KR 120 # 14-40,4,5,"[3051, 3052, 3056, 3060]",0.0,0.2,0.6,2534,False,multifamiliar,sospechoso
+direccion,KR 120 BIS # 66A-18,3,5,"[710, 713, 715]",0.6666666666666666,0.8,0.8,1431,False,hogar,hogar
+direccion,KR 123 SUR # 75-87,2,4,"[3517, 3521]",1.0,0.25,0.5,2821,False,hogar,hogar
+direccion,KR 124 # 100-53,3,9,"[3950, 3955, 3957]",0.6666666666666666,0.6666666666666666,0.1111111111111111,3418,False,hogar,hogar
+direccion,KR 125 ESTE # 113B-68,3,8,"[4730, 4732, 4735]",0.6666666666666666,0.5,0.125,4371,False,hogar,hogar
+direccion,KR 126 # 29A-72,4,5,"[4495, 4496, 4497, 4500]",0.6666666666666666,0.8,0.6,4314,False,hogar,hogar
+direccion,KR 127 # 74-21,2,4,"[2717, 2721]",0.0,1.0,0.25,1644,False,convivencia,sospechoso
+direccion,KR 129 # 70-82,5,5,"[577, 587, 598, 606, 4898]",0.0,0.4,0.6,4499,False,multifamiliar,sospechoso
+direccion,KR 129A SUR # 20-74,2,6,"[2041, 4911]",0.0,0.0,0.5,4643,False,convivencia,sospechoso
+direccion,KR 12C # 17-68,3,6,"[1472, 1475, 1478]",0.0,0.6666666666666666,0.16666666666666666,4087,False,multifamiliar,sospechoso
+direccion,KR 12C # 29-52,4,14,"[1762, 1765, 1768, 1773]",0.8333333333333334,0.5,0.5714285714285714,3202,False,hogar,hogar
+direccion,KR 13 # 16-61,4,4,"[990, 997, 1004, 1011]",0.3333333333333333,0.5,0.75,3335,False,multifamiliar,hogar
+direccion,KR 131 # 57-78,3,9,"[2788, 2790, 2795]",0.6666666666666666,0.3333333333333333,0.5555555555555556,4399,False,hogar,hogar
+direccion,KR 132 # 39B-89,2,5,"[1894, 1896]",1.0,0.4,0.4,1495,False,hogar,hogar
+direccion,KR 133A # 69-9,4,7,"[2120, 2124, 2125, 2127]",0.5,0.5714285714285714,0.2857142857142857,3895,False,hogar,hogar
+direccion,KR 135 # 109B-64,5,11,"[4081, 4085, 4087, 4091, 4092]",0.9,0.5454545454545454,0.5454545454545454,4557,False,hogar,hogar
+direccion,KR 135 # 111A-68,2,4,"[4104, 4107]",1.0,1.0,0.5,3524,False,hogar,hogar
+direccion,KR 135B # 97-65,4,6,"[4027, 4028, 4029, 4032]",0.8333333333333334,0.6666666666666666,0.6666666666666666,2026,False,hogar,hogar
+direccion,KR 136 # 56-51,2,4,"[377, 378]",0.0,0.75,0.5,2008,False,pareja,sospechoso
+direccion,KR 138 # 71-74,2,2,"[3515, 3516]",0.0,1.0,1.0,1486,False,pareja,sospechoso
+direccion,KR 138 SUR # 115B-14,5,9,"[4639, 4643, 4644, 4648, 4652]",0.2,0.6666666666666666,0.4444444444444444,3966,False,multifamiliar,sospechoso
+direccion,KR 139B # 3A-34,2,2,"[434, 451]",0.0,0.0,0.5,3420,False,multifamiliar,sospechoso
+direccion,KR 140C ESTE # 13-20,4,9,"[2853, 2854, 2856, 2859]",0.8333333333333334,0.2222222222222222,0.5555555555555556,4681,False,hogar,hogar
+direccion,KR 143 # 27-88,2,2,"[2803, 2804]",0.0,0.0,0.5,263,False,pareja,sospechoso
+direccion,KR 143 SUR # 67-71,2,3,"[3137, 3139]",0.0,0.0,0.6666666666666666,2624,False,pareja,sospechoso
+direccion,KR 143C # 36-31,4,8,"[4236, 4238, 4240, 4242]",0.8333333333333334,0.625,0.5,3724,False,hogar,hogar
+direccion,KR 144 # 55-53,2,5,"[3718, 3723]",0.0,0.6,0.6,3939,False,pareja,sospechoso
+direccion,KR 144 # 70-85,3,8,"[301, 304, 306]",0.6666666666666666,0.375,0.625,4606,False,hogar,hogar
+direccion,KR 145 # 47-93,2,5,"[789, 793]",1.0,0.2,0.6,4369,False,hogar,hogar
+direccion,KR 147A SUR # 110B-61,5,8,"[1607, 1608, 1610, 1611, 1614]",0.9,0.375,0.5,2771,False,hogar,hogar
+direccion,KR 147B # 66B-97,3,3,"[1104, 1114, 1121]",0.0,0.3333333333333333,0.3333333333333333,3771,False,multifamiliar,sospechoso
+direccion,KR 14B # 58B-53,2,5,"[4508, 4511]",0.0,0.8,0.6,3479,False,pareja,sospechoso
+direccion,KR 14C ESTE # 76-30,3,5,"[2932, 2936, 2937]",0.6666666666666666,0.4,1.0,3675,False,hogar,hogar
+direccion,KR 15B BIS # 5B-73,2,3,"[1868, 1891]",0.0,1.0,0.0,2395,False,multifamiliar,sospechoso
+direccion,KR 15C # 57-92,2,4,"[899, 902]",0.0,0.25,0.5,2313,False,pareja,sospechoso
+direccion,KR 16 ESTE # 34B-74,3,5,"[2916, 2919, 2922]",0.6666666666666666,0.6,0.6,4120,False,hogar,hogar
+direccion,KR 20C # 58-1,3,3,"[2071, 2072, 2076]",0.3333333333333333,0.3333333333333333,0.6666666666666666,2686,False,multifamiliar,hogar
+direccion,KR 21B BIS # 71-40,3,9,"[2606, 2608, 2610]",0.6666666666666666,0.5555555555555556,0.3333333333333333,2827,False,hogar,hogar
+direccion,KR 22 # 58-99,3,5,"[3960, 3961, 3964]",0.6666666666666666,0.4,0.4,3246,False,hogar,hogar
+direccion,KR 25 # 51-50,3,8,"[2843, 2844, 2850]",0.6666666666666666,0.75,0.125,4577,False,hogar,hogar
+direccion,KR 27 SUR # 13-70,3,8,"[1407, 1411, 1415]",0.6666666666666666,0.875,0.5,4440,False,hogar,hogar
+direccion,KR 28 # 52A-26,2,2,"[2305, 2313]",1.0,1.0,0.0,255,False,hogar,hogar
+direccion,KR 28 SUR # 113-54,3,6,"[1462, 1467, 1470]",0.0,1.0,0.8333333333333334,1777,False,convivencia,sospechoso
+direccion,KR 28C SUR # 91B-78,2,7,"[39, 45]",0.0,0.8571428571428571,0.2857142857142857,4184,False,pareja,sospechoso
+direccion,KR 30B # 40B-33,2,2,"[2080, 2082]",0.0,0.0,0.5,222,False,pareja,sospechoso
+direccion,KR 32B SUR # 82-50,2,7,"[3650, 3657]",1.0,0.7142857142857143,0.42857142857142855,4106,False,hogar,hogar
+direccion,KR 35 # 27-10,4,6,"[2251, 2252, 2254, 2255]",0.3333333333333333,0.3333333333333333,0.6666666666666666,4231,False,hogar,hogar
+direccion,KR 35A SUR # 62-51,2,4,"[520, 523]",1.0,0.5,0.5,4562,False,hogar,hogar
+direccion,KR 36 # 25-80,2,2,"[3035, 3036]",1.0,0.5,0.5,1102,False,hogar,hogar
+direccion,KR 42B # 30A-27,2,3,"[1344, 1346]",0.0,0.3333333333333333,1.0,979,False,convivencia,sospechoso
+direccion,KR 43 # 46-3,2,2,"[4012, 4019]",0.0,0.5,1.0,437,False,multifamiliar,sospechoso
+direccion,KR 43 # 75-89,2,5,"[4446, 4450]",0.0,0.8,0.4,3146,False,pareja,sospechoso
+direccion,KR 45 # 13-84,2,5,"[4826, 4830]",0.0,0.6,1.0,3576,False,pareja,sospechoso
+direccion,KR 45A BIS # 110B-10,2,2,"[4294, 4298]",0.0,0.0,0.5,11,False,multifamiliar,sospechoso
+direccion,KR 46B # 78-38,3,5,"[4223, 4225, 4226]",1.0,0.4,0.8,2170,False,hogar,hogar
+direccion,KR 47B # 106-97,2,2,"[4840, 4841]",0.0,1.0,0.5,2333,False,pareja,sospechoso
+direccion,KR 50C # 54A-19,2,3,"[3168, 3172]",0.0,0.3333333333333333,0.6666666666666666,965,False,pareja,sospechoso
+direccion,KR 51A # 65-43,4,8,"[2031, 2034, 2035, 2038]",0.5,0.375,0.625,4067,False,hogar,hogar
+direccion,KR 60A # 104A-2,3,6,"[3395, 3396, 3398]",0.6666666666666666,0.6666666666666666,0.6666666666666666,4373,False,hogar,hogar
+direccion,KR 62 # 40B-47,3,7,"[1777, 1779, 1782]",0.6666666666666666,0.42857142857142855,0.5714285714285714,4515,False,hogar,hogar
+direccion,KR 62 ESTE # 59-74,2,2,"[2092, 2096]",0.0,0.5,0.5,1925,False,pareja,sospechoso
+direccion,KR 63 # 77A-56,3,8,"[959, 963, 964]",1.0,0.25,0.375,2801,False,hogar,hogar
+direccion,KR 65 # 25-42,2,8,"[3579, 3584]",1.0,0.625,0.375,2968,False,hogar,hogar
+direccion,KR 65 # 5B-92,2,3,"[4832, 4833]",0.0,1.0,0.3333333333333333,2179,False,pareja,sospechoso
+direccion,KR 65 ESTE # 13-73,3,3,"[1903, 1904, 1907]",0.0,0.6666666666666666,0.6666666666666666,2868,False,multifamiliar,sospechoso
+direccion,KR 66 BIS # 94-75,2,2,"[131, 139]",0.0,0.5,0.5,1439,False,multifamiliar,sospechoso
+direccion,KR 6A # 55A-26,2,4,"[3768, 3771]",1.0,0.75,0.5,1599,False,hogar,hogar
+direccion,KR 6A # 58A-77,2,6,"[2930, 4923]",0.0,0.6666666666666666,0.3333333333333333,3235,False,convivencia,sospechoso
+direccion,KR 7 # 72-23,3,3,"[2466, 2470, 2475]",0.0,0.3333333333333333,0.3333333333333333,1477,False,multifamiliar,sospechoso
+direccion,KR 70 # 49-85,4,6,"[3252, 3257, 3258, 3259]",0.8333333333333334,0.5,0.6666666666666666,3167,False,hogar,hogar
+direccion,KR 70C SUR # 61A-93,4,5,"[4503, 4504, 4506, 4507]",0.8333333333333334,0.6,0.2,3065,False,hogar,hogar
+direccion,KR 72 # 100B-55,3,6,"[2622, 2625, 2628]",0.6666666666666666,0.6666666666666666,0.5,4209,False,hogar,hogar
+direccion,KR 72 # 11-49,2,2,"[628, 663]",0.0,0.0,1.0,76,False,multifamiliar,sospechoso
+direccion,KR 72 BIS # 68-18,3,3,"[1074, 1926, 4904]",0.0,0.0,1.0,259,False,sospechoso,sospechoso
+direccion,KR 74B # 47-74,4,4,"[1076, 1088, 1099, 1102]",0.0,0.5,0.25,3448,False,multifamiliar,sospechoso
+direccion,KR 75A # 36-65,3,8,"[4309, 4310, 4315]",1.0,0.875,0.25,4157,False,hogar,hogar
+direccion,KR 77A BIS # 57-85,2,6,"[2992, 2996]",0.0,0.8333333333333334,0.5,3367,False,pareja,sospechoso
+direccion,KR 77A ESTE # 16-84,2,4,"[3919, 3924]",1.0,0.5,0.75,2328,False,hogar,hogar
+direccion,KR 78 # 61B-1,4,15,"[3897, 3903, 3909, 3911]",0.8333333333333334,0.8,0.3333333333333333,3752,False,hogar,hogar
+direccion,KR 79 # 24-14,2,8,"[4116, 4121]",0.0,0.25,0.5,2205,False,convivencia,sospechoso
+direccion,KR 79 # 51-2,4,10,"[63, 67, 68, 70]",0.8333333333333334,0.6,0.5,4321,False,hogar,hogar
+direccion,KR 80B # 12-45,3,4,"[4551, 4553, 4555]",1.0,0.5,0.25,3092,False,hogar,hogar
+direccion,KR 81B # 47-69,2,8,"[3240, 3244]",0.0,0.5,0.375,4449,False,pareja,sospechoso
+direccion,KR 83 SUR # 35-9,2,6,"[1978, 1982]",0.0,0.5,0.16666666666666666,3228,False,pareja,sospechoso
+direccion,KR 84 # 112-43,3,6,"[544, 546, 549]",0.6666666666666666,0.8333333333333334,0.16666666666666666,2544,False,hogar,hogar
+direccion,KR 85A # 105-77,3,7,"[940, 945, 947]",0.0,0.42857142857142855,1.0,4085,False,multifamiliar,sospechoso
+direccion,KR 87 # 65A-89,2,4,"[4432, 4434]",0.0,0.5,0.5,4602,False,pareja,sospechoso
+direccion,KR 88 ESTE # 109-96,3,3,"[1923, 1936, 1940]",0.0,0.3333333333333333,1.0,1818,False,multifamiliar,sospechoso
+direccion,KR 8A # 8-38,3,3,"[440, 720, 4916]",0.0,0.0,1.0,198,False,sospechoso,sospechoso
+direccion,KR 8B # 15-61,6,6,"[1547, 3727, 3820, 3943, 4234, 4941]",0.0,0.0,1.0,278,False,sospechoso,sospechoso
+direccion,KR 9 # 30A-21,3,6,"[4326, 4327, 4331]",1.0,0.3333333333333333,0.5,3519,False,hogar,hogar
+direccion,KR 92 # 61A-77 APARTAMENTO 1702,2,2,"[4220, 4953]",0.0,1.0,1.0,4575,True,convivencia,relleno
+direccion,KR 93 # 32-87,2,4,"[2403, 2405]",0.0,0.25,0.5,3487,False,pareja,sospechoso
+direccion,KR 99B # 47-38,3,3,"[3072, 3095, 4936]",0.0,1.0,1.0,962,False,multifamiliar,sospechoso
+direccion,KR 9A # 8B-87,3,4,"[4870, 4871, 4872]",1.0,0.25,0.25,3240,False,hogar,hogar
+direccion,KRA 28 # 52A-26 AP 2004,2,2,"[2299, 2302]",1.0,0.0,0.5,1423,True,hogar,relleno
+direccion,SIN DIRECCION,19,19,"[229, 271, 990, 1281, 1863, 1963, 1965, 2682, 2838, 3109, 3261, 3440, 3782, 3877, 4203, 4234, 4256, 4656, 4814]",0.029239766081871343,0.0,0.5263157894736842,4684,True,relleno,relleno
+direccion,TRANS 129 # 34-37 INT 3 APTO 1104,2,2,"[1297, 1301]",1.0,0.5,0.0,3160,True,pareja,relleno
+direccion,TRANSVERSAL 143A # 63-63 APTO 402,2,2,"[386, 393]",1.0,1.0,0.5,215,True,hogar,relleno
+direccion,TV 123 # 79-77,3,6,"[187, 191, 195]",0.6666666666666666,0.5,0.6666666666666666,4746,False,hogar,hogar
+direccion,TV 126B # 118-71,3,4,"[3968, 3970, 3972]",0.6666666666666666,0.5,0.75,2649,False,hogar,hogar
+direccion,TV 128C ESTE # 11B-68,2,5,"[1844, 1848]",0.0,0.6,0.6,2960,False,pareja,sospechoso
+direccion,TV 129 # 34-37,2,2,"[1304, 1316]",0.0,0.5,0.0,92,False,multifamiliar,sospechoso
+direccion,TV 13 # 54-94,3,7,"[4478, 4480, 4483]",0.6666666666666666,0.5714285714285714,0.42857142857142855,4212,False,hogar,hogar
+direccion,TV 139 # 82A-9,4,12,"[2815, 2820, 2821, 2825]",0.3333333333333333,0.08333333333333333,0.5833333333333334,3298,False,hogar,hogar
+direccion,TV 22 # 111 - 3 AP 1902,2,2,"[4386, 4393]",1.0,0.5,1.0,222,True,hogar,relleno
+direccion,TV 52B ESTE # 38B-98,3,4,"[2317, 2319, 2320]",0.6666666666666666,1.0,0.5,1624,False,hogar,hogar
+direccion,TV 56B # 52A-34,3,5,"[2327, 2328, 2331]",0.6666666666666666,0.6,0.6,2754,False,hogar,hogar
+direccion,TV 62B # 101A-66,4,16,"[474, 477, 483, 489]",0.8333333333333334,0.625,0.4375,4684,False,hogar,hogar
+direccion,TV 65 # 95B-9,3,9,"[172, 177, 179]",0.6666666666666666,0.3333333333333333,0.7777777777777778,4636,False,hogar,hogar
+direccion,TV 6C ESTE # 100-12,2,2,"[154, 159]",0.0,1.0,0.0,188,False,pareja,sospechoso
+direccion,TV 76C # 83B-39,2,2,"[3787, 5069]",0.0,0.0,1.0,692,False,convivencia,sospechoso
+direccion,TV 95C # 3A-67,2,3,"[3195, 3197]",0.0,0.6666666666666666,0.3333333333333333,508,False,pareja,sospechoso
+documento,1005995826,2,2,"[2098, 2869]",1.0,0.5,1.0,4229,False,sospechoso,sospechoso
+documento,1023533324,2,4,"[2405, 3589]",0.0,0.5,0.75,2812,False,sospechoso,sospechoso
+documento,1058059413,2,3,"[3178, 4246]",0.0,0.6666666666666666,0.6666666666666666,2958,False,sospechoso,sospechoso
+documento,1060751504,2,5,"[2734, 4338]",0.0,0.6,0.2,4298,False,sospechoso,sospechoso
+documento,1085316267,2,5,"[144, 2684]",0.0,0.6,0.8,4594,False,sospechoso,sospechoso
+documento,1127345619,2,3,"[3647, 4000]",0.0,0.3333333333333333,0.6666666666666666,3952,False,sospechoso,sospechoso
+documento,22747053,2,4,"[432, 768]",0.0,0.25,1.0,3776,False,sospechoso,sospechoso
+documento,3446989,2,2,"[3230, 3298]",0.0,0.0,1.0,3384,False,sospechoso,sospechoso
+documento,57320749,2,3,"[2297, 3156]",0.0,0.0,1.0,3466,False,sospechoso,sospechoso
+documento,75108944,2,5,"[877, 3790]",0.0,0.4,0.4,3079,False,sospechoso,sospechoso
+documento,76837271,2,3,"[240, 747]",0.0,0.0,0.6666666666666666,1921,False,sospechoso,sospechoso
+documento,84642259,2,4,"[248, 5069]",0.0,0.25,0.75,3971,False,sospechoso,sospechoso

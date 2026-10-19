@@ -1,0 +1,3949 @@
+{
+  "semillas": [
+    [
+      4040,
+      4141
+    ],
+    [
+      4011,
+      4111
+    ],
+    [
+      4022,
+      4122
+    ],
+    [
+      4033,
+      4133
+    ],
+    [
+      4044,
+      4144
+    ],
+    [
+      4055,
+      4155
+    ],
+    [
+      4066,
+      4166
+    ],
+    [
+      4077,
+      4177
+    ]
+  ],
+  "corridas": [
+    {
+      "semillas": [
+        4040,
+        4141
+      ],
+      "union_prueba": {
+        "v3": {
+          "precision": 1.0,
+          "recall": 0.9969666329625885,
+          "f1": 0.9984810126582278,
+          "pct_clusters_exactos": 0.9955730447614363
+        },
+        "v4": {
+          "precision": 1.0,
+          "recall": 0.9969666329625885,
+          "f1": 0.9984810126582278,
+          "pct_clusters_exactos": 0.9955730447614363
+        }
+      },
+      "parametros": {
+        "anterior": {
+          "max_clientes": 6,
+          "min_apellido": 0.25
+        },
+        "residencial_v3": {
+          "max_convivencia": 4,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.4,
+          "max_contacto": 6
+        },
+        "residencial_v4": {
+          "max_convivencia": 4,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.4,
+          "max_contacto": 6
+        }
+      },
+      "tipo_predio": {
+        "grupos": 308,
+        "acierto": 0.8733766233766234,
+        "confusion": {
+          "casa": {
+            "casa": 129,
+            "casa_pisos": 0,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "casa_pisos": {
+            "casa": 30,
+            "casa_pisos": 45,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "conjunto": {
+            "casa": 6,
+            "casa_pisos": 3,
+            "conjunto": 43,
+            "edificio": 0
+          },
+          "edificio": {
+            "casa": 0,
+            "casa_pisos": 0,
+            "conjunto": 0,
+            "edificio": 52
+          }
+        }
+      },
+      "verdad_prueba": {
+        "celular": {
+          "coincidencia": 1,
+          "convivencia": 8,
+          "hogar": 48,
+          "multifamiliar": 0,
+          "pareja": 17,
+          "relleno": 3,
+          "sospechoso": 10
+        },
+        "correo": {
+          "coincidencia": 3,
+          "convivencia": 0,
+          "hogar": 12,
+          "multifamiliar": 0,
+          "pareja": 7,
+          "relleno": 3,
+          "sospechoso": 7
+        },
+        "direccion": {
+          "coincidencia": 1,
+          "convivencia": 22,
+          "hogar": 109,
+          "multifamiliar": 125,
+          "pareja": 39,
+          "relleno": 4,
+          "sospechoso": 7
+        },
+        "documento": {
+          "coincidencia": 0,
+          "convivencia": 0,
+          "hogar": 0,
+          "multifamiliar": 0,
+          "pareja": 0,
+          "relleno": 0,
+          "sospechoso": 12
+        }
+      },
+      "anterior_v3": {
+        "grupos": 442,
+        "exactitud": 0.5113122171945701,
+        "exactitud_balanceada": 0.48534561040281865,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 193,
+          "precision": 0.17616580310880828,
+          "recall": 0.9444444444444444
+        },
+        "falsa_sospecha": {
+          "benignos": 394,
+          "marcados": 159,
+          "tasa": 0.4035532994923858,
+          "por_etiqueta": {
+            "hogar": 0.019138755980861243,
+            "pareja": 0.8260869565217391,
+            "convivencia": 0.9375,
+            "multifamiliar": 0.8392857142857143,
+            "coincidencia": 0.4
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 5,
+            "aciertos": 0.6
+          },
+          "convivencia": {
+            "grupos": 32,
+            "aciertos": 0.0
+          },
+          "hogar": {
+            "grupos": 209,
+            "aciertos": 0.8421052631578947
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 56,
+            "aciertos": 0.0
+          },
+          "pareja": {
+            "grupos": 92,
+            "aciertos": 0.010869565217391304
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 0.9444444444444444
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "hogar": 2,
+            "relleno": 1,
+            "sospechoso": 2
+          },
+          "convivencia": {
+            "hogar": 0,
+            "relleno": 2,
+            "sospechoso": 30
+          },
+          "hogar": {
+            "hogar": 176,
+            "relleno": 29,
+            "sospechoso": 4
+          },
+          "misma_persona": {
+            "hogar": 2,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "hogar": 6,
+            "relleno": 3,
+            "sospechoso": 47
+          },
+          "pareja": {
+            "hogar": 1,
+            "relleno": 15,
+            "sospechoso": 76
+          },
+          "relleno": {
+            "hogar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "hogar": 2,
+            "relleno": 0,
+            "sospechoso": 34
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 891,
+          "inocentes_marcadas": 327,
+          "tasa_inocentes_marcadas": 0.367003367003367,
+          "personas_en_patrones": 118,
+          "detectadas": 112,
+          "recall_personas": 0.9491525423728814
+        }
+      },
+      "residencial_v3": {
+        "grupos": 440,
+        "exactitud": 0.9363636363636364,
+        "exactitud_balanceada": 0.9035413865743536,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 39,
+          "precision": 0.9230769230769231,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 392,
+          "marcados": 3,
+          "tasa": 0.007653061224489796,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.015873015873015872,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.4
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 5,
+            "aciertos": 0.6
+          },
+          "convivencia": {
+            "grupos": 30,
+            "aciertos": 0.9
+          },
+          "hogar": {
+            "grupos": 169,
+            "aciertos": 0.9526627218934911
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 125,
+            "aciertos": 0.888
+          },
+          "pareja": {
+            "grupos": 63,
+            "aciertos": 0.9841269841269841
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 1,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "convivencia": {
+            "convivencia": 27,
+            "hogar": 3,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 5,
+            "hogar": 161,
+            "multifamiliar": 3,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "convivencia": 6,
+            "hogar": 8,
+            "multifamiliar": 111,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 37,
+            "hogar": 25,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1603,
+          "inocentes_marcadas": 6,
+          "tasa_inocentes_marcadas": 0.0037429819089207735,
+          "personas_en_patrones": 118,
+          "detectadas": 118,
+          "recall_personas": 1.0
+        }
+      },
+      "residencial_v4": {
+        "grupos": 440,
+        "exactitud": 0.9363636363636364,
+        "exactitud_balanceada": 0.9035413865743536,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 39,
+          "precision": 0.9230769230769231,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 392,
+          "marcados": 3,
+          "tasa": 0.007653061224489796,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.015873015873015872,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.4
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 5,
+            "aciertos": 0.6
+          },
+          "convivencia": {
+            "grupos": 30,
+            "aciertos": 0.9
+          },
+          "hogar": {
+            "grupos": 169,
+            "aciertos": 0.9526627218934911
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 125,
+            "aciertos": 0.888
+          },
+          "pareja": {
+            "grupos": 63,
+            "aciertos": 0.9841269841269841
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 1,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "convivencia": {
+            "convivencia": 27,
+            "hogar": 3,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 5,
+            "hogar": 161,
+            "multifamiliar": 3,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "convivencia": 6,
+            "hogar": 8,
+            "multifamiliar": 111,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 37,
+            "hogar": 25,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1603,
+          "inocentes_marcadas": 6,
+          "tasa_inocentes_marcadas": 0.0037429819089207735,
+          "personas_en_patrones": 118,
+          "detectadas": 118,
+          "recall_personas": 1.0
+        }
+      },
+      "intervalos": {
+        "anterior_v3": {
+          "exactitud": {
+            "ic_inf": 0.4638009049773756,
+            "ic_sup": 0.5565610859728507
+          },
+          "recall_sospechoso": {
+            "ic_inf": 0.8666666666666667,
+            "ic_sup": 1.0
+          },
+          "falsa_sospecha": {
+            "ic_inf": 0.35967588958660385,
+            "ic_sup": 0.45454545454545453
+          }
+        },
+        "residencial_v4": {
+          "exactitud": {
+            "ic_inf": 0.9113636363636364,
+            "ic_sup": 0.9590909090909091
+          },
+          "recall_sospechoso": {
+            "ic_inf": 1.0,
+            "ic_sup": 1.0
+          },
+          "falsa_sospecha": {
+            "ic_inf": 0.0,
+            "ic_sup": 0.017679010921396704
+          }
+        }
+      }
+    },
+    {
+      "semillas": [
+        4011,
+        4111
+      ],
+      "union_prueba": {
+        "v3": {
+          "precision": 1.0,
+          "recall": 0.998422712933754,
+          "f1": 0.9992107340173638,
+          "pct_clusters_exactos": 0.997037037037037
+        },
+        "v4": {
+          "precision": 1.0,
+          "recall": 0.9985979670522257,
+          "f1": 0.9992984917572781,
+          "pct_clusters_exactos": 0.9975308641975309
+        }
+      },
+      "parametros": {
+        "anterior": {
+          "max_clientes": 6,
+          "min_apellido": 0.5
+        },
+        "residencial_v3": {
+          "max_convivencia": 4,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.5,
+          "max_contacto": 6
+        },
+        "residencial_v4": {
+          "max_convivencia": 4,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.5,
+          "max_contacto": 6
+        }
+      },
+      "tipo_predio": {
+        "grupos": 297,
+        "acierto": 0.8821548821548821,
+        "confusion": {
+          "casa": {
+            "casa": 118,
+            "casa_pisos": 3,
+            "conjunto": 0,
+            "edificio": 1
+          },
+          "casa_pisos": {
+            "casa": 23,
+            "casa_pisos": 46,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "conjunto": {
+            "casa": 6,
+            "casa_pisos": 0,
+            "conjunto": 62,
+            "edificio": 0
+          },
+          "edificio": {
+            "casa": 1,
+            "casa_pisos": 1,
+            "conjunto": 0,
+            "edificio": 36
+          }
+        }
+      },
+      "verdad_prueba": {
+        "celular": {
+          "coincidencia": 1,
+          "convivencia": 15,
+          "hogar": 28,
+          "multifamiliar": 0,
+          "pareja": 16,
+          "relleno": 3,
+          "sospechoso": 8
+        },
+        "correo": {
+          "coincidencia": 0,
+          "convivencia": 0,
+          "hogar": 8,
+          "multifamiliar": 0,
+          "pareja": 3,
+          "relleno": 3,
+          "sospechoso": 5
+        },
+        "direccion": {
+          "coincidencia": 2,
+          "convivencia": 19,
+          "hogar": 97,
+          "multifamiliar": 130,
+          "pareja": 33,
+          "relleno": 4,
+          "sospechoso": 11
+        },
+        "documento": {
+          "coincidencia": 0,
+          "convivencia": 0,
+          "hogar": 0,
+          "multifamiliar": 0,
+          "pareja": 0,
+          "relleno": 0,
+          "sospechoso": 12
+        }
+      },
+      "anterior_v3": {
+        "grupos": 416,
+        "exactitud": 0.4495192307692308,
+        "exactitud_balanceada": 0.4836309523809524,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 201,
+          "precision": 0.1791044776119403,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 369,
+          "marcados": 165,
+          "tasa": 0.44715447154471544,
+          "por_etiqueta": {
+            "hogar": 0.06770833333333333,
+            "pareja": 0.84,
+            "convivencia": 0.85,
+            "multifamiliar": 0.9152542372881356,
+            "coincidencia": 0.3333333333333333
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 3,
+            "aciertos": 0.6666666666666666
+          },
+          "convivencia": {
+            "grupos": 40,
+            "aciertos": 0.0
+          },
+          "hogar": {
+            "grupos": 192,
+            "aciertos": 0.71875
+          },
+          "misma_persona": {
+            "grupos": 1,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 59,
+            "aciertos": 0.0
+          },
+          "pareja": {
+            "grupos": 75,
+            "aciertos": 0.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "hogar": 0,
+            "relleno": 2,
+            "sospechoso": 1
+          },
+          "convivencia": {
+            "hogar": 0,
+            "relleno": 6,
+            "sospechoso": 34
+          },
+          "hogar": {
+            "hogar": 138,
+            "relleno": 41,
+            "sospechoso": 13
+          },
+          "misma_persona": {
+            "hogar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "hogar": 2,
+            "relleno": 3,
+            "sospechoso": 54
+          },
+          "pareja": {
+            "hogar": 0,
+            "relleno": 12,
+            "sospechoso": 63
+          },
+          "relleno": {
+            "hogar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "hogar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 859,
+          "inocentes_marcadas": 376,
+          "tasa_inocentes_marcadas": 0.43771827706635624,
+          "personas_en_patrones": 137,
+          "detectadas": 137,
+          "recall_personas": 1.0
+        }
+      },
+      "residencial_v3": {
+        "grupos": 400,
+        "exactitud": 0.9425,
+        "exactitud_balanceada": 0.8786813510829433,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 38,
+          "precision": 0.9473684210526315,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 352,
+          "marcados": 2,
+          "tasa": 0.005681818181818182,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.0,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.6666666666666666
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 3,
+            "aciertos": 0.3333333333333333
+          },
+          "convivencia": {
+            "grupos": 34,
+            "aciertos": 0.9705882352941176
+          },
+          "hogar": {
+            "grupos": 133,
+            "aciertos": 0.9699248120300752
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 130,
+            "aciertos": 0.8769230769230769
+          },
+          "pareja": {
+            "grupos": 52,
+            "aciertos": 1.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 1,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "convivencia": {
+            "convivencia": 33,
+            "hogar": 1,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 3,
+            "hogar": 129,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "convivencia": 4,
+            "hogar": 12,
+            "multifamiliar": 114,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 28,
+            "hogar": 24,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1541,
+          "inocentes_marcadas": 4,
+          "tasa_inocentes_marcadas": 0.0025957170668397143,
+          "personas_en_patrones": 137,
+          "detectadas": 137,
+          "recall_personas": 1.0
+        }
+      },
+      "residencial_v4": {
+        "grupos": 400,
+        "exactitud": 0.9425,
+        "exactitud_balanceada": 0.8786813510829433,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 38,
+          "precision": 0.9473684210526315,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 352,
+          "marcados": 2,
+          "tasa": 0.005681818181818182,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.0,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.6666666666666666
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 3,
+            "aciertos": 0.3333333333333333
+          },
+          "convivencia": {
+            "grupos": 34,
+            "aciertos": 0.9705882352941176
+          },
+          "hogar": {
+            "grupos": 133,
+            "aciertos": 0.9699248120300752
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 130,
+            "aciertos": 0.8769230769230769
+          },
+          "pareja": {
+            "grupos": 52,
+            "aciertos": 1.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 1,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "convivencia": {
+            "convivencia": 33,
+            "hogar": 1,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 3,
+            "hogar": 129,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "convivencia": 4,
+            "hogar": 12,
+            "multifamiliar": 114,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 28,
+            "hogar": 24,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1541,
+          "inocentes_marcadas": 4,
+          "tasa_inocentes_marcadas": 0.0025957170668397143,
+          "personas_en_patrones": 137,
+          "detectadas": 137,
+          "recall_personas": 1.0
+        }
+      }
+    },
+    {
+      "semillas": [
+        4022,
+        4122
+      ],
+      "union_prueba": {
+        "v3": {
+          "precision": 1.0,
+          "recall": 0.9967626512182655,
+          "f1": 0.9983787012543732,
+          "pct_clusters_exactos": 0.9955730447614363
+        },
+        "v4": {
+          "precision": 1.0,
+          "recall": 0.9969330379962514,
+          "f1": 0.9984641638225257,
+          "pct_clusters_exactos": 0.9960649286768323
+        }
+      },
+      "parametros": {
+        "anterior": {
+          "max_clientes": 6,
+          "min_apellido": 0.25
+        },
+        "residencial_v3": {
+          "max_convivencia": 4,
+          "max_casa": 6,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.4,
+          "max_contacto": 6
+        },
+        "residencial_v4": {
+          "max_convivencia": 4,
+          "max_casa": 6,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.4,
+          "max_contacto": 6
+        }
+      },
+      "tipo_predio": {
+        "grupos": 296,
+        "acierto": 0.8918918918918919,
+        "confusion": {
+          "casa": {
+            "casa": 114,
+            "casa_pisos": 0,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "casa_pisos": {
+            "casa": 23,
+            "casa_pisos": 43,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "conjunto": {
+            "casa": 3,
+            "casa_pisos": 4,
+            "conjunto": 53,
+            "edificio": 0
+          },
+          "edificio": {
+            "casa": 2,
+            "casa_pisos": 0,
+            "conjunto": 0,
+            "edificio": 54
+          }
+        }
+      },
+      "verdad_prueba": {
+        "celular": {
+          "coincidencia": 0,
+          "convivencia": 10,
+          "hogar": 36,
+          "multifamiliar": 0,
+          "pareja": 14,
+          "relleno": 3,
+          "sospechoso": 10
+        },
+        "correo": {
+          "coincidencia": 3,
+          "convivencia": 0,
+          "hogar": 11,
+          "multifamiliar": 0,
+          "pareja": 6,
+          "relleno": 3,
+          "sospechoso": 8
+        },
+        "direccion": {
+          "coincidencia": 1,
+          "convivencia": 20,
+          "hogar": 92,
+          "multifamiliar": 138,
+          "pareja": 34,
+          "relleno": 4,
+          "sospechoso": 6
+        },
+        "documento": {
+          "coincidencia": 0,
+          "convivencia": 0,
+          "hogar": 0,
+          "multifamiliar": 0,
+          "pareja": 0,
+          "relleno": 0,
+          "sospechoso": 12
+        }
+      },
+      "anterior_v3": {
+        "grupos": 420,
+        "exactitud": 0.4738095238095238,
+        "exactitud_balanceada": 0.5342655580750819,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 190,
+          "precision": 0.17894736842105263,
+          "recall": 0.9444444444444444
+        },
+        "falsa_sospecha": {
+          "benignos": 372,
+          "marcados": 154,
+          "tasa": 0.41397849462365593,
+          "por_etiqueta": {
+            "hogar": 0.015873015873015872,
+            "pareja": 0.8148148148148148,
+            "convivencia": 0.9333333333333333,
+            "multifamiliar": 0.8382352941176471,
+            "coincidencia": 0.0
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 4,
+            "aciertos": 1.0
+          },
+          "convivencia": {
+            "grupos": 30,
+            "aciertos": 0.0
+          },
+          "hogar": {
+            "grupos": 189,
+            "aciertos": 0.783068783068783
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 68,
+            "aciertos": 0.0
+          },
+          "pareja": {
+            "grupos": 81,
+            "aciertos": 0.012345679012345678
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 0.9444444444444444
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "hogar": 2,
+            "relleno": 2,
+            "sospechoso": 0
+          },
+          "convivencia": {
+            "hogar": 2,
+            "relleno": 0,
+            "sospechoso": 28
+          },
+          "hogar": {
+            "hogar": 148,
+            "relleno": 38,
+            "sospechoso": 3
+          },
+          "misma_persona": {
+            "hogar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "multifamiliar": {
+            "hogar": 11,
+            "relleno": 0,
+            "sospechoso": 57
+          },
+          "pareja": {
+            "hogar": 1,
+            "relleno": 14,
+            "sospechoso": 66
+          },
+          "relleno": {
+            "hogar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "hogar": 2,
+            "relleno": 0,
+            "sospechoso": 34
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 836,
+          "inocentes_marcadas": 338,
+          "tasa_inocentes_marcadas": 0.4043062200956938,
+          "personas_en_patrones": 128,
+          "detectadas": 122,
+          "recall_personas": 0.953125
+        }
+      },
+      "residencial_v3": {
+        "grupos": 414,
+        "exactitud": 0.9516908212560387,
+        "exactitud_balanceada": 0.966006325374483,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 36,
+          "precision": 0.9444444444444444,
+          "recall": 0.9444444444444444
+        },
+        "falsa_sospecha": {
+          "benignos": 365,
+          "marcados": 0,
+          "tasa": 0.0,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.0,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.0
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 4,
+            "aciertos": 1.0
+          },
+          "convivencia": {
+            "grupos": 30,
+            "aciertos": 0.9333333333333333
+          },
+          "hogar": {
+            "grupos": 139,
+            "aciertos": 0.9712230215827338
+          },
+          "misma_persona": {
+            "grupos": 3,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 138,
+            "aciertos": 0.9130434782608695
+          },
+          "pareja": {
+            "grupos": 54,
+            "aciertos": 1.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 0.9444444444444444
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 1,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 1,
+            "sospechoso": 0
+          },
+          "convivencia": {
+            "convivencia": 28,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 3,
+            "hogar": 135,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 1,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "multifamiliar": {
+            "convivencia": 2,
+            "hogar": 10,
+            "multifamiliar": 126,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 17,
+            "hogar": 37,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 1,
+            "hogar": 0,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 34
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1561,
+          "inocentes_marcadas": 1,
+          "tasa_inocentes_marcadas": 0.0006406149903907751,
+          "personas_en_patrones": 128,
+          "detectadas": 119,
+          "recall_personas": 0.9296875
+        }
+      },
+      "residencial_v4": {
+        "grupos": 413,
+        "exactitud": 0.9515738498789347,
+        "exactitud_balanceada": 0.966006325374483,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 35,
+          "precision": 0.9714285714285714,
+          "recall": 0.9444444444444444
+        },
+        "falsa_sospecha": {
+          "benignos": 365,
+          "marcados": 0,
+          "tasa": 0.0,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.0,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.0
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 4,
+            "aciertos": 1.0
+          },
+          "convivencia": {
+            "grupos": 30,
+            "aciertos": 0.9333333333333333
+          },
+          "hogar": {
+            "grupos": 139,
+            "aciertos": 0.9712230215827338
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 138,
+            "aciertos": 0.9130434782608695
+          },
+          "pareja": {
+            "grupos": 54,
+            "aciertos": 1.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 0.9444444444444444
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 1,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 1,
+            "sospechoso": 0
+          },
+          "convivencia": {
+            "convivencia": 28,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 3,
+            "hogar": 135,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 1,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "multifamiliar": {
+            "convivencia": 2,
+            "hogar": 10,
+            "multifamiliar": 126,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 17,
+            "hogar": 37,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 1,
+            "hogar": 0,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 34
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1561,
+          "inocentes_marcadas": 0,
+          "tasa_inocentes_marcadas": 0.0,
+          "personas_en_patrones": 128,
+          "detectadas": 119,
+          "recall_personas": 0.9296875
+        }
+      }
+    },
+    {
+      "semillas": [
+        4033,
+        4133
+      ],
+      "union_prueba": {
+        "v3": {
+          "precision": 1.0,
+          "recall": 0.9958173579644476,
+          "f1": 0.9979042961928047,
+          "pct_clusters_exactos": 0.9940973930152484
+        },
+        "v4": {
+          "precision": 1.0,
+          "recall": 0.997037295224817,
+          "f1": 0.9985164499520027,
+          "pct_clusters_exactos": 0.9955730447614363
+        }
+      },
+      "parametros": {
+        "anterior": {
+          "max_clientes": 6,
+          "min_apellido": 0.25
+        },
+        "residencial_v3": {
+          "max_convivencia": 4,
+          "max_casa": 6,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.4,
+          "max_contacto": 6
+        },
+        "residencial_v4": {
+          "max_convivencia": 4,
+          "max_casa": 6,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.4,
+          "max_contacto": 6
+        }
+      },
+      "tipo_predio": {
+        "grupos": 324,
+        "acierto": 0.904320987654321,
+        "confusion": {
+          "casa": {
+            "casa": 152,
+            "casa_pisos": 1,
+            "conjunto": 0,
+            "edificio": 1
+          },
+          "casa_pisos": {
+            "casa": 25,
+            "casa_pisos": 47,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "conjunto": {
+            "casa": 1,
+            "casa_pisos": 1,
+            "conjunto": 44,
+            "edificio": 0
+          },
+          "edificio": {
+            "casa": 2,
+            "casa_pisos": 0,
+            "conjunto": 0,
+            "edificio": 50
+          }
+        }
+      },
+      "verdad_prueba": {
+        "celular": {
+          "convivencia": 19,
+          "hogar": 37,
+          "multifamiliar": 0,
+          "pareja": 13,
+          "relleno": 3,
+          "sospechoso": 5
+        },
+        "correo": {
+          "convivencia": 0,
+          "hogar": 10,
+          "multifamiliar": 0,
+          "pareja": 13,
+          "relleno": 3,
+          "sospechoso": 13
+        },
+        "direccion": {
+          "convivencia": 22,
+          "hogar": 118,
+          "multifamiliar": 119,
+          "pareja": 53,
+          "relleno": 4,
+          "sospechoso": 6
+        },
+        "documento": {
+          "convivencia": 0,
+          "hogar": 0,
+          "multifamiliar": 0,
+          "pareja": 0,
+          "relleno": 0,
+          "sospechoso": 12
+        }
+      },
+      "anterior_v3": {
+        "grupos": 460,
+        "exactitud": 0.48478260869565215,
+        "exactitud_balanceada": 0.46791862284820035,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 214,
+          "precision": 0.16822429906542055,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 409,
+          "marcados": 175,
+          "tasa": 0.4278728606356968,
+          "por_etiqueta": {
+            "hogar": 0.018779342723004695,
+            "pareja": 0.898989898989899,
+            "convivencia": 0.9767441860465116,
+            "multifamiliar": 0.7407407407407407
+          }
+        },
+        "por_etiqueta": {
+          "convivencia": {
+            "grupos": 43,
+            "aciertos": 0.0
+          },
+          "hogar": {
+            "grupos": 213,
+            "aciertos": 0.8075117370892019
+          },
+          "misma_persona": {
+            "grupos": 5,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 54,
+            "aciertos": 0.0
+          },
+          "pareja": {
+            "grupos": 99,
+            "aciertos": 0.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "convivencia": {
+            "hogar": 0,
+            "relleno": 1,
+            "sospechoso": 42
+          },
+          "hogar": {
+            "hogar": 172,
+            "relleno": 37,
+            "sospechoso": 4
+          },
+          "misma_persona": {
+            "hogar": 1,
+            "relleno": 1,
+            "sospechoso": 3
+          },
+          "multifamiliar": {
+            "hogar": 14,
+            "relleno": 0,
+            "sospechoso": 40
+          },
+          "pareja": {
+            "hogar": 0,
+            "relleno": 10,
+            "sospechoso": 89
+          },
+          "relleno": {
+            "hogar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "hogar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 933,
+          "inocentes_marcadas": 362,
+          "tasa_inocentes_marcadas": 0.3879957127545552,
+          "personas_en_patrones": 130,
+          "detectadas": 130,
+          "recall_personas": 1.0
+        }
+      },
+      "residencial_v3": {
+        "grupos": 455,
+        "exactitud": 0.9516483516483516,
+        "exactitud_balanceada": 0.9569342948258917,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 39,
+          "precision": 0.8974358974358975,
+          "recall": 0.9722222222222222
+        },
+        "falsa_sospecha": {
+          "benignos": 404,
+          "marcados": 1,
+          "tasa": 0.0024752475247524753,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.012658227848101266,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0
+          }
+        },
+        "por_etiqueta": {
+          "convivencia": {
+            "grupos": 41,
+            "aciertos": 0.9024390243902439
+          },
+          "hogar": {
+            "grupos": 165,
+            "aciertos": 0.9636363636363636
+          },
+          "misma_persona": {
+            "grupos": 5,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 119,
+            "aciertos": 0.9159663865546218
+          },
+          "pareja": {
+            "grupos": 79,
+            "aciertos": 0.9873417721518988
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 0.9722222222222222
+          }
+        },
+        "confusion": {
+          "convivencia": {
+            "convivencia": 37,
+            "hogar": 4,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 3,
+            "hogar": 159,
+            "multifamiliar": 3,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 3
+          },
+          "multifamiliar": {
+            "convivencia": 4,
+            "hogar": 6,
+            "multifamiliar": 109,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 37,
+            "hogar": 41,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 1,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 35
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1588,
+          "inocentes_marcadas": 3,
+          "tasa_inocentes_marcadas": 0.001889168765743073,
+          "personas_en_patrones": 130,
+          "detectadas": 126,
+          "recall_personas": 0.9692307692307692
+        }
+      },
+      "residencial_v4": {
+        "grupos": 452,
+        "exactitud": 0.9513274336283186,
+        "exactitud_balanceada": 0.9569342948258917,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 36,
+          "precision": 0.9722222222222222,
+          "recall": 0.9722222222222222
+        },
+        "falsa_sospecha": {
+          "benignos": 404,
+          "marcados": 1,
+          "tasa": 0.0024752475247524753,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.012658227848101266,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0
+          }
+        },
+        "por_etiqueta": {
+          "convivencia": {
+            "grupos": 41,
+            "aciertos": 0.9024390243902439
+          },
+          "hogar": {
+            "grupos": 165,
+            "aciertos": 0.9636363636363636
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 119,
+            "aciertos": 0.9159663865546218
+          },
+          "pareja": {
+            "grupos": 79,
+            "aciertos": 0.9873417721518988
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 0.9722222222222222
+          }
+        },
+        "confusion": {
+          "convivencia": {
+            "convivencia": 37,
+            "hogar": 4,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 3,
+            "hogar": 159,
+            "multifamiliar": 3,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "convivencia": 4,
+            "hogar": 6,
+            "multifamiliar": 109,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 37,
+            "hogar": 41,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 1,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 35
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1588,
+          "inocentes_marcadas": 2,
+          "tasa_inocentes_marcadas": 0.0012594458438287153,
+          "personas_en_patrones": 130,
+          "detectadas": 126,
+          "recall_personas": 0.9692307692307692
+        }
+      }
+    },
+    {
+      "semillas": [
+        4044,
+        4144
+      ],
+      "union_prueba": {
+        "v3": {
+          "precision": 1.0,
+          "recall": 0.997186071051706,
+          "f1": 0.9985910531877422,
+          "pct_clusters_exactos": 0.9960687960687961
+        },
+        "v4": {
+          "precision": 1.0,
+          "recall": 0.997186071051706,
+          "f1": 0.9985910531877422,
+          "pct_clusters_exactos": 0.9960687960687961
+        }
+      },
+      "parametros": {
+        "anterior": {
+          "max_clientes": 6,
+          "min_apellido": 0.25
+        },
+        "residencial_v3": {
+          "max_convivencia": 3,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.5,
+          "max_contacto": 6
+        },
+        "residencial_v4": {
+          "max_convivencia": 3,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.5,
+          "max_contacto": 6
+        }
+      },
+      "tipo_predio": {
+        "grupos": 282,
+        "acierto": 0.8900709219858156,
+        "confusion": {
+          "casa": {
+            "casa": 108,
+            "casa_pisos": 0,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "casa_pisos": {
+            "casa": 25,
+            "casa_pisos": 36,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "conjunto": {
+            "casa": 2,
+            "casa_pisos": 3,
+            "conjunto": 57,
+            "edificio": 0
+          },
+          "edificio": {
+            "casa": 0,
+            "casa_pisos": 1,
+            "conjunto": 0,
+            "edificio": 50
+          }
+        }
+      },
+      "verdad_prueba": {
+        "celular": {
+          "coincidencia": 0,
+          "convivencia": 10,
+          "hogar": 33,
+          "multifamiliar": 0,
+          "pareja": 16,
+          "relleno": 3,
+          "sospechoso": 6
+        },
+        "correo": {
+          "coincidencia": 0,
+          "convivencia": 0,
+          "hogar": 9,
+          "multifamiliar": 0,
+          "pareja": 9,
+          "relleno": 3,
+          "sospechoso": 13
+        },
+        "direccion": {
+          "coincidencia": 3,
+          "convivencia": 11,
+          "hogar": 105,
+          "multifamiliar": 130,
+          "pareja": 24,
+          "relleno": 4,
+          "sospechoso": 5
+        },
+        "documento": {
+          "coincidencia": 0,
+          "convivencia": 0,
+          "hogar": 0,
+          "multifamiliar": 0,
+          "pareja": 0,
+          "relleno": 0,
+          "sospechoso": 12
+        }
+      },
+      "anterior_v3": {
+        "grupos": 397,
+        "exactitud": 0.5113350125944585,
+        "exactitud_balanceada": 0.5438329458616987,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 167,
+          "precision": 0.2155688622754491,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 351,
+          "marcados": 131,
+          "tasa": 0.3732193732193732,
+          "por_etiqueta": {
+            "hogar": 0.04145077720207254,
+            "pareja": 0.7887323943661971,
+            "convivencia": 0.9,
+            "multifamiliar": 0.765625,
+            "coincidencia": 0.0
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 3,
+            "aciertos": 1.0
+          },
+          "convivencia": {
+            "grupos": 20,
+            "aciertos": 0.0
+          },
+          "hogar": {
+            "grupos": 193,
+            "aciertos": 0.7927461139896373
+          },
+          "multifamiliar": {
+            "grupos": 64,
+            "aciertos": 0.0
+          },
+          "pareja": {
+            "grupos": 71,
+            "aciertos": 0.014084507042253521
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "hogar": 0,
+            "relleno": 3,
+            "sospechoso": 0
+          },
+          "convivencia": {
+            "hogar": 2,
+            "relleno": 0,
+            "sospechoso": 18
+          },
+          "hogar": {
+            "hogar": 153,
+            "relleno": 32,
+            "sospechoso": 8
+          },
+          "multifamiliar": {
+            "hogar": 12,
+            "relleno": 3,
+            "sospechoso": 49
+          },
+          "pareja": {
+            "hogar": 1,
+            "relleno": 14,
+            "sospechoso": 56
+          },
+          "relleno": {
+            "hogar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "hogar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 824,
+          "inocentes_marcadas": 292,
+          "tasa_inocentes_marcadas": 0.35436893203883496,
+          "personas_en_patrones": 130,
+          "detectadas": 130,
+          "recall_personas": 1.0
+        }
+      },
+      "residencial_v3": {
+        "grupos": 396,
+        "exactitud": 0.9217171717171717,
+        "exactitud_balanceada": 0.9020109142558121,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 38,
+          "precision": 0.9473684210526315,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 350,
+          "marcados": 2,
+          "tasa": 0.005714285714285714,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.02040816326530612,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.3333333333333333
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 3,
+            "aciertos": 0.6666666666666666
+          },
+          "convivencia": {
+            "grupos": 21,
+            "aciertos": 0.8571428571428571
+          },
+          "hogar": {
+            "grupos": 147,
+            "aciertos": 0.9183673469387755
+          },
+          "multifamiliar": {
+            "grupos": 130,
+            "aciertos": 0.8923076923076924
+          },
+          "pareja": {
+            "grupos": 49,
+            "aciertos": 0.9795918367346939
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 2,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "convivencia": {
+            "convivencia": 18,
+            "hogar": 3,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 11,
+            "hogar": 135,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "convivencia": 2,
+            "hogar": 12,
+            "multifamiliar": 116,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 25,
+            "hogar": 23,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1582,
+          "inocentes_marcadas": 4,
+          "tasa_inocentes_marcadas": 0.0025284450063211127,
+          "personas_en_patrones": 130,
+          "detectadas": 130,
+          "recall_personas": 1.0
+        }
+      },
+      "residencial_v4": {
+        "grupos": 396,
+        "exactitud": 0.9217171717171717,
+        "exactitud_balanceada": 0.9020109142558121,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 38,
+          "precision": 0.9473684210526315,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 350,
+          "marcados": 2,
+          "tasa": 0.005714285714285714,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.02040816326530612,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.3333333333333333
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 3,
+            "aciertos": 0.6666666666666666
+          },
+          "convivencia": {
+            "grupos": 21,
+            "aciertos": 0.8571428571428571
+          },
+          "hogar": {
+            "grupos": 147,
+            "aciertos": 0.9183673469387755
+          },
+          "multifamiliar": {
+            "grupos": 130,
+            "aciertos": 0.8923076923076924
+          },
+          "pareja": {
+            "grupos": 49,
+            "aciertos": 0.9795918367346939
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 2,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "convivencia": {
+            "convivencia": 18,
+            "hogar": 3,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 11,
+            "hogar": 135,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "convivencia": 2,
+            "hogar": 12,
+            "multifamiliar": 116,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 25,
+            "hogar": 23,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1582,
+          "inocentes_marcadas": 4,
+          "tasa_inocentes_marcadas": 0.0025284450063211127,
+          "personas_en_patrones": 130,
+          "detectadas": 130,
+          "recall_personas": 1.0
+        }
+      }
+    },
+    {
+      "semillas": [
+        4055,
+        4155
+      ],
+      "union_prueba": {
+        "v3": {
+          "precision": 1.0,
+          "recall": 0.9967897271268058,
+          "f1": 0.9983922829581994,
+          "pct_clusters_exactos": 0.9965551181102362
+        },
+        "v4": {
+          "precision": 1.0,
+          "recall": 0.9975031210986267,
+          "f1": 0.99875,
+          "pct_clusters_exactos": 0.9970472440944882
+        }
+      },
+      "parametros": {
+        "anterior": {
+          "max_clientes": 6,
+          "min_apellido": 0.25
+        },
+        "residencial_v3": {
+          "max_convivencia": 4,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.5,
+          "max_contacto": 6
+        },
+        "residencial_v4": {
+          "max_convivencia": 4,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.5,
+          "max_contacto": 6
+        }
+      },
+      "tipo_predio": {
+        "grupos": 306,
+        "acierto": 0.8529411764705882,
+        "confusion": {
+          "casa": {
+            "casa": 111,
+            "casa_pisos": 1,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "casa_pisos": {
+            "casa": 32,
+            "casa_pisos": 36,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "conjunto": {
+            "casa": 7,
+            "casa_pisos": 2,
+            "conjunto": 57,
+            "edificio": 0
+          },
+          "edificio": {
+            "casa": 3,
+            "casa_pisos": 0,
+            "conjunto": 0,
+            "edificio": 57
+          }
+        }
+      },
+      "verdad_prueba": {
+        "celular": {
+          "convivencia": 8,
+          "hogar": 33,
+          "multifamiliar": 0,
+          "pareja": 13,
+          "relleno": 3,
+          "sospechoso": 8
+        },
+        "correo": {
+          "convivencia": 0,
+          "hogar": 11,
+          "multifamiliar": 0,
+          "pareja": 10,
+          "relleno": 3,
+          "sospechoso": 6
+        },
+        "direccion": {
+          "convivencia": 10,
+          "hogar": 109,
+          "multifamiliar": 137,
+          "pareja": 36,
+          "relleno": 4,
+          "sospechoso": 10
+        },
+        "documento": {
+          "convivencia": 0,
+          "hogar": 0,
+          "multifamiliar": 0,
+          "pareja": 0,
+          "relleno": 0,
+          "sospechoso": 12
+        }
+      },
+      "anterior_v3": {
+        "grupos": 397,
+        "exactitud": 0.5314861460957179,
+        "exactitud_balanceada": 0.46745158864448205,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 163,
+          "precision": 0.2147239263803681,
+          "recall": 0.9722222222222222
+        },
+        "falsa_sospecha": {
+          "benignos": 349,
+          "marcados": 126,
+          "tasa": 0.36103151862464183,
+          "por_etiqueta": {
+            "hogar": 0.01015228426395939,
+            "pareja": 0.8734177215189873,
+            "convivencia": 0.7142857142857143,
+            "multifamiliar": 0.7692307692307693
+          }
+        },
+        "por_etiqueta": {
+          "convivencia": {
+            "grupos": 21,
+            "aciertos": 0.0
+          },
+          "hogar": {
+            "grupos": 197,
+            "aciertos": 0.8324873096446701
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 52,
+            "aciertos": 0.0
+          },
+          "pareja": {
+            "grupos": 79,
+            "aciertos": 0.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 0.9722222222222222
+          }
+        },
+        "confusion": {
+          "convivencia": {
+            "hogar": 3,
+            "relleno": 3,
+            "sospechoso": 15
+          },
+          "hogar": {
+            "hogar": 164,
+            "relleno": 31,
+            "sospechoso": 2
+          },
+          "misma_persona": {
+            "hogar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "multifamiliar": {
+            "hogar": 10,
+            "relleno": 2,
+            "sospechoso": 40
+          },
+          "pareja": {
+            "hogar": 0,
+            "relleno": 10,
+            "sospechoso": 69
+          },
+          "relleno": {
+            "hogar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "hogar": 1,
+            "relleno": 0,
+            "sospechoso": 35
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 832,
+          "inocentes_marcadas": 279,
+          "tasa_inocentes_marcadas": 0.33533653846153844,
+          "personas_en_patrones": 130,
+          "detectadas": 128,
+          "recall_personas": 0.9846153846153847
+        }
+      },
+      "residencial_v3": {
+        "grupos": 415,
+        "exactitud": 0.9566265060240964,
+        "exactitud_balanceada": 0.9687056025758896,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 40,
+          "precision": 0.9,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 367,
+          "marcados": 2,
+          "tasa": 0.005449591280653951,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.01694915254237288,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0072992700729927005
+          }
+        },
+        "por_etiqueta": {
+          "convivencia": {
+            "grupos": 18,
+            "aciertos": 0.9444444444444444
+          },
+          "hogar": {
+            "grupos": 153,
+            "aciertos": 0.9869281045751634
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 137,
+            "aciertos": 0.8978102189781022
+          },
+          "pareja": {
+            "grupos": 59,
+            "aciertos": 0.9830508474576272
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "convivencia": {
+            "convivencia": 17,
+            "hogar": 1,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 1,
+            "hogar": 151,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "multifamiliar": {
+            "convivencia": 3,
+            "hogar": 10,
+            "multifamiliar": 123,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "pareja": {
+            "convivencia": 27,
+            "hogar": 31,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1554,
+          "inocentes_marcadas": 6,
+          "tasa_inocentes_marcadas": 0.003861003861003861,
+          "personas_en_patrones": 130,
+          "detectadas": 130,
+          "recall_personas": 1.0
+        }
+      },
+      "residencial_v4": {
+        "grupos": 415,
+        "exactitud": 0.9566265060240964,
+        "exactitud_balanceada": 0.9687056025758896,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 40,
+          "precision": 0.9,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 367,
+          "marcados": 2,
+          "tasa": 0.005449591280653951,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.01694915254237288,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0072992700729927005
+          }
+        },
+        "por_etiqueta": {
+          "convivencia": {
+            "grupos": 18,
+            "aciertos": 0.9444444444444444
+          },
+          "hogar": {
+            "grupos": 153,
+            "aciertos": 0.9869281045751634
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 137,
+            "aciertos": 0.8978102189781022
+          },
+          "pareja": {
+            "grupos": 59,
+            "aciertos": 0.9830508474576272
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "convivencia": {
+            "convivencia": 17,
+            "hogar": 1,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 1,
+            "hogar": 151,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "multifamiliar": {
+            "convivencia": 3,
+            "hogar": 10,
+            "multifamiliar": 123,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "pareja": {
+            "convivencia": 27,
+            "hogar": 31,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1554,
+          "inocentes_marcadas": 6,
+          "tasa_inocentes_marcadas": 0.003861003861003861,
+          "personas_en_patrones": 130,
+          "detectadas": 130,
+          "recall_personas": 1.0
+        }
+      }
+    },
+    {
+      "semillas": [
+        4066,
+        4166
+      ],
+      "union_prueba": {
+        "v3": {
+          "precision": 1.0,
+          "recall": 0.9972933958859618,
+          "f1": 0.9986448640346915,
+          "pct_clusters_exactos": 0.9950714637752588
+        },
+        "v4": {
+          "precision": 1.0,
+          "recall": 0.9978347167087694,
+          "f1": 0.9989161849710984,
+          "pct_clusters_exactos": 0.996057171020207
+        }
+      },
+      "parametros": {
+        "anterior": {
+          "max_clientes": 6,
+          "min_apellido": 0.25
+        },
+        "residencial_v3": {
+          "max_convivencia": 3,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.5,
+          "max_contacto": 6
+        },
+        "residencial_v4": {
+          "max_convivencia": 3,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.6,
+          "anillo_max_exclusividad": 0.5,
+          "max_contacto": 6
+        }
+      },
+      "tipo_predio": {
+        "grupos": 316,
+        "acierto": 0.8575949367088608,
+        "confusion": {
+          "casa": {
+            "casa": 132,
+            "casa_pisos": 2,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "casa_pisos": {
+            "casa": 33,
+            "casa_pisos": 40,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "conjunto": {
+            "casa": 4,
+            "casa_pisos": 1,
+            "conjunto": 48,
+            "edificio": 0
+          },
+          "edificio": {
+            "casa": 4,
+            "casa_pisos": 1,
+            "conjunto": 0,
+            "edificio": 51
+          }
+        }
+      },
+      "verdad_prueba": {
+        "celular": {
+          "coincidencia": 0,
+          "convivencia": 7,
+          "hogar": 31,
+          "multifamiliar": 0,
+          "pareja": 14,
+          "relleno": 3,
+          "sospechoso": 6
+        },
+        "correo": {
+          "coincidencia": 1,
+          "convivencia": 0,
+          "hogar": 15,
+          "multifamiliar": 0,
+          "pareja": 8,
+          "relleno": 3,
+          "sospechoso": 7
+        },
+        "direccion": {
+          "coincidencia": 1,
+          "convivencia": 10,
+          "hogar": 128,
+          "multifamiliar": 120,
+          "pareja": 41,
+          "relleno": 4,
+          "sospechoso": 11
+        },
+        "documento": {
+          "coincidencia": 0,
+          "convivencia": 0,
+          "hogar": 0,
+          "multifamiliar": 0,
+          "pareja": 0,
+          "relleno": 0,
+          "sospechoso": 12
+        }
+      },
+      "anterior_v3": {
+        "grupos": 440,
+        "exactitud": 0.5181818181818182,
+        "exactitud_balanceada": 0.5342857142857144,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 171,
+          "precision": 0.19883040935672514,
+          "recall": 0.9444444444444444
+        },
+        "falsa_sospecha": {
+          "benignos": 391,
+          "marcados": 136,
+          "tasa": 0.34782608695652173,
+          "por_etiqueta": {
+            "hogar": 0.017777777777777778,
+            "pareja": 0.8160919540229885,
+            "convivencia": 0.8421052631578947,
+            "multifamiliar": 0.7758620689655172,
+            "coincidencia": 0.0
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "convivencia": {
+            "grupos": 19,
+            "aciertos": 0.0
+          },
+          "hogar": {
+            "grupos": 225,
+            "aciertos": 0.7955555555555556
+          },
+          "misma_persona": {
+            "grupos": 3,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 58,
+            "aciertos": 0.0
+          },
+          "pareja": {
+            "grupos": 87,
+            "aciertos": 0.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 0.9444444444444444
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "hogar": 1,
+            "relleno": 1,
+            "sospechoso": 0
+          },
+          "convivencia": {
+            "hogar": 1,
+            "relleno": 2,
+            "sospechoso": 16
+          },
+          "hogar": {
+            "hogar": 179,
+            "relleno": 42,
+            "sospechoso": 4
+          },
+          "misma_persona": {
+            "hogar": 2,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "multifamiliar": {
+            "hogar": 10,
+            "relleno": 3,
+            "sospechoso": 45
+          },
+          "pareja": {
+            "hogar": 0,
+            "relleno": 16,
+            "sospechoso": 71
+          },
+          "relleno": {
+            "hogar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "hogar": 2,
+            "relleno": 0,
+            "sospechoso": 34
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 900,
+          "inocentes_marcadas": 295,
+          "tasa_inocentes_marcadas": 0.3277777777777778,
+          "personas_en_patrones": 127,
+          "detectadas": 122,
+          "recall_personas": 0.9606299212598425
+        }
+      },
+      "residencial_v3": {
+        "grupos": 426,
+        "exactitud": 0.9436619718309859,
+        "exactitud_balanceada": 0.9019919462037688,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 40,
+          "precision": 0.9,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 376,
+          "marcados": 3,
+          "tasa": 0.007978723404255319,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.031746031746031744,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.5
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 2,
+            "aciertos": 0.5
+          },
+          "convivencia": {
+            "grupos": 17,
+            "aciertos": 1.0
+          },
+          "hogar": {
+            "grupos": 174,
+            "aciertos": 0.9540229885057471
+          },
+          "misma_persona": {
+            "grupos": 4,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 120,
+            "aciertos": 0.8916666666666667
+          },
+          "pareja": {
+            "grupos": 63,
+            "aciertos": 0.9682539682539683
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 0,
+            "hogar": 1,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "convivencia": {
+            "convivencia": 17,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 6,
+            "hogar": 166,
+            "multifamiliar": 2,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 3,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "multifamiliar": {
+            "convivencia": 5,
+            "hogar": 8,
+            "multifamiliar": 107,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 28,
+            "hogar": 33,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1551,
+          "inocentes_marcadas": 5,
+          "tasa_inocentes_marcadas": 0.003223726627981947,
+          "personas_en_patrones": 127,
+          "detectadas": 127,
+          "recall_personas": 1.0
+        }
+      },
+      "residencial_v4": {
+        "grupos": 424,
+        "exactitud": 0.9433962264150944,
+        "exactitud_balanceada": 0.9019919462037688,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 39,
+          "precision": 0.9230769230769231,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 376,
+          "marcados": 3,
+          "tasa": 0.007978723404255319,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.031746031746031744,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.5
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 2,
+            "aciertos": 0.5
+          },
+          "convivencia": {
+            "grupos": 17,
+            "aciertos": 1.0
+          },
+          "hogar": {
+            "grupos": 174,
+            "aciertos": 0.9540229885057471
+          },
+          "misma_persona": {
+            "grupos": 2,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 120,
+            "aciertos": 0.8916666666666667
+          },
+          "pareja": {
+            "grupos": 63,
+            "aciertos": 0.9682539682539683
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 0,
+            "hogar": 1,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "convivencia": {
+            "convivencia": 17,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 6,
+            "hogar": 166,
+            "multifamiliar": 2,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "convivencia": 5,
+            "hogar": 8,
+            "multifamiliar": 107,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 28,
+            "hogar": 33,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 2
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1551,
+          "inocentes_marcadas": 5,
+          "tasa_inocentes_marcadas": 0.003223726627981947,
+          "personas_en_patrones": 127,
+          "detectadas": 127,
+          "recall_personas": 1.0
+        }
+      }
+    },
+    {
+      "semillas": [
+        4077,
+        4177
+      ],
+      "union_prueba": {
+        "v3": {
+          "precision": 1.0,
+          "recall": 0.995999304226822,
+          "f1": 0.9979956427015251,
+          "pct_clusters_exactos": 0.9960745829244357
+        },
+        "v4": {
+          "precision": 1.0,
+          "recall": 0.9961732475213081,
+          "f1": 0.9980829557337051,
+          "pct_clusters_exactos": 0.9960745829244357
+        }
+      },
+      "parametros": {
+        "anterior": {
+          "max_clientes": 6,
+          "min_apellido": 0.25
+        },
+        "residencial_v3": {
+          "max_convivencia": 4,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.75,
+          "anillo_max_exclusividad": 0.5,
+          "max_contacto": 6
+        },
+        "residencial_v4": {
+          "max_convivencia": 4,
+          "max_casa": 5,
+          "max_por_unidad": 6,
+          "min_familia": 0.75,
+          "anillo_max_validado": 0.1,
+          "anillo_min_digital": 0.75,
+          "anillo_max_exclusividad": 0.5,
+          "max_contacto": 6
+        }
+      },
+      "tipo_predio": {
+        "grupos": 296,
+        "acierto": 0.8817567567567568,
+        "confusion": {
+          "casa": {
+            "casa": 125,
+            "casa_pisos": 1,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "casa_pisos": {
+            "casa": 27,
+            "casa_pisos": 33,
+            "conjunto": 0,
+            "edificio": 0
+          },
+          "conjunto": {
+            "casa": 4,
+            "casa_pisos": 2,
+            "conjunto": 61,
+            "edificio": 0
+          },
+          "edificio": {
+            "casa": 1,
+            "casa_pisos": 0,
+            "conjunto": 0,
+            "edificio": 42
+          }
+        }
+      },
+      "verdad_prueba": {
+        "celular": {
+          "coincidencia": 0,
+          "convivencia": 10,
+          "hogar": 35,
+          "multifamiliar": 0,
+          "pareja": 10,
+          "relleno": 3,
+          "sospechoso": 12
+        },
+        "correo": {
+          "coincidencia": 1,
+          "convivencia": 0,
+          "hogar": 8,
+          "multifamiliar": 0,
+          "pareja": 6,
+          "relleno": 3,
+          "sospechoso": 6
+        },
+        "direccion": {
+          "coincidencia": 2,
+          "convivencia": 16,
+          "hogar": 107,
+          "multifamiliar": 128,
+          "pareja": 33,
+          "relleno": 4,
+          "sospechoso": 6
+        },
+        "documento": {
+          "coincidencia": 0,
+          "convivencia": 0,
+          "hogar": 0,
+          "multifamiliar": 0,
+          "pareja": 0,
+          "relleno": 0,
+          "sospechoso": 12
+        }
+      },
+      "anterior_v3": {
+        "grupos": 413,
+        "exactitud": 0.5157384987893463,
+        "exactitud_balanceada": 0.5473760932944607,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 166,
+          "precision": 0.21686746987951808,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 366,
+          "marcados": 129,
+          "tasa": 0.3524590163934426,
+          "por_etiqueta": {
+            "hogar": 0.01020408163265306,
+            "pareja": 0.8028169014084507,
+            "convivencia": 0.7575757575757576,
+            "multifamiliar": 0.7142857142857143,
+            "coincidencia": 0.0
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 3,
+            "aciertos": 1.0
+          },
+          "convivencia": {
+            "grupos": 33,
+            "aciertos": 0.0
+          },
+          "hogar": {
+            "grupos": 196,
+            "aciertos": 0.8316326530612245
+          },
+          "misma_persona": {
+            "grupos": 1,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 63,
+            "aciertos": 0.0
+          },
+          "pareja": {
+            "grupos": 71,
+            "aciertos": 0.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "hogar": 0,
+            "relleno": 3,
+            "sospechoso": 0
+          },
+          "convivencia": {
+            "hogar": 3,
+            "relleno": 5,
+            "sospechoso": 25
+          },
+          "hogar": {
+            "hogar": 163,
+            "relleno": 31,
+            "sospechoso": 2
+          },
+          "misma_persona": {
+            "hogar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "multifamiliar": {
+            "hogar": 14,
+            "relleno": 4,
+            "sospechoso": 45
+          },
+          "pareja": {
+            "hogar": 0,
+            "relleno": 14,
+            "sospechoso": 57
+          },
+          "relleno": {
+            "hogar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "hogar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 842,
+          "inocentes_marcadas": 277,
+          "tasa_inocentes_marcadas": 0.32897862232779096,
+          "personas_en_patrones": 128,
+          "detectadas": 128,
+          "recall_personas": 1.0
+        }
+      },
+      "residencial_v3": {
+        "grupos": 403,
+        "exactitud": 0.9528535980148883,
+        "exactitud_balanceada": 0.92402586996337,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 38,
+          "precision": 0.9473684210526315,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 356,
+          "marcados": 1,
+          "tasa": 0.0028089887640449437,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.0,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.3333333333333333
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 3,
+            "aciertos": 0.6666666666666666
+          },
+          "convivencia": {
+            "grupos": 26,
+            "aciertos": 0.9230769230769231
+          },
+          "hogar": {
+            "grupos": 150,
+            "aciertos": 0.98
+          },
+          "misma_persona": {
+            "grupos": 1,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 128,
+            "aciertos": 0.8984375
+          },
+          "pareja": {
+            "grupos": 49,
+            "aciertos": 1.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 1,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 1,
+            "sospechoso": 1
+          },
+          "convivencia": {
+            "convivencia": 24,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 2,
+            "hogar": 147,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 1
+          },
+          "multifamiliar": {
+            "convivencia": 4,
+            "hogar": 9,
+            "multifamiliar": 115,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 24,
+            "hogar": 25,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1580,
+          "inocentes_marcadas": 2,
+          "tasa_inocentes_marcadas": 0.0012658227848101266,
+          "personas_en_patrones": 128,
+          "detectadas": 128,
+          "recall_personas": 1.0
+        }
+      },
+      "residencial_v4": {
+        "grupos": 403,
+        "exactitud": 0.9528535980148883,
+        "exactitud_balanceada": 0.92402586996337,
+        "sospechoso": {
+          "reales": 36,
+          "predichos": 37,
+          "precision": 0.972972972972973,
+          "recall": 1.0
+        },
+        "falsa_sospecha": {
+          "benignos": 356,
+          "marcados": 1,
+          "tasa": 0.0028089887640449437,
+          "por_etiqueta": {
+            "hogar": 0.0,
+            "pareja": 0.0,
+            "convivencia": 0.0,
+            "multifamiliar": 0.0,
+            "coincidencia": 0.3333333333333333
+          }
+        },
+        "por_etiqueta": {
+          "coincidencia": {
+            "grupos": 3,
+            "aciertos": 0.6666666666666666
+          },
+          "convivencia": {
+            "grupos": 26,
+            "aciertos": 0.9230769230769231
+          },
+          "hogar": {
+            "grupos": 150,
+            "aciertos": 0.98
+          },
+          "misma_persona": {
+            "grupos": 1,
+            "aciertos": 1.0
+          },
+          "multifamiliar": {
+            "grupos": 128,
+            "aciertos": 0.8984375
+          },
+          "pareja": {
+            "grupos": 49,
+            "aciertos": 1.0
+          },
+          "relleno": {
+            "grupos": 10,
+            "aciertos": 1.0
+          },
+          "sospechoso": {
+            "grupos": 36,
+            "aciertos": 1.0
+          }
+        },
+        "confusion": {
+          "coincidencia": {
+            "convivencia": 1,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 1,
+            "sospechoso": 1
+          },
+          "convivencia": {
+            "convivencia": 24,
+            "hogar": 2,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "hogar": {
+            "convivencia": 2,
+            "hogar": 147,
+            "multifamiliar": 1,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "misma_persona": {
+            "convivencia": 0,
+            "hogar": 1,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "multifamiliar": {
+            "convivencia": 4,
+            "hogar": 9,
+            "multifamiliar": 115,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "pareja": {
+            "convivencia": 24,
+            "hogar": 25,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 0
+          },
+          "relleno": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 10,
+            "sospechoso": 0
+          },
+          "sospechoso": {
+            "convivencia": 0,
+            "hogar": 0,
+            "multifamiliar": 0,
+            "relleno": 0,
+            "sospechoso": 36
+          }
+        },
+        "personas": {
+          "personas_en_grupos_benignos": 1580,
+          "inocentes_marcadas": 2,
+          "tasa_inocentes_marcadas": 0.0012658227848101266,
+          "personas_en_patrones": 128,
+          "detectadas": 128,
+          "recall_personas": 1.0
+        }
+      }
+    }
+  ],
+  "resumen": {
+    "anterior_v3": {
+      "exactitud_balanceada": {
+        "media": 0.5080133857241762,
+        "de": 0.03499603227115838,
+        "min": 0.46745158864448205,
+        "max": 0.5473760932944607
+      },
+      "recall_sospechoso": {
+        "media": 0.9756944444444444,
+        "de": 0.027528644693475424,
+        "min": 0.9444444444444444,
+        "max": 1.0
+      },
+      "precision_sospechoso": {
+        "media": 0.19355407701241029,
+        "de": 0.020249387438075077,
+        "min": 0.16822429906542055,
+        "max": 0.21686746987951808
+      },
+      "falsa_sospecha": {
+        "media": 0.3908868901863042,
+        "de": 0.03734411689774085,
+        "min": 0.34782608695652173,
+        "max": 0.44715447154471544
+      },
+      "inocentes_marcadas": {
+        "media": 0.3679356809407393,
+        "de": 0.03959215523752729,
+        "min": 0.3277777777777778,
+        "max": 0.43771827706635624
+      },
+      "falsa_sospecha_por_etiqueta": {
+        "coincidencia": {
+          "media": 0.12222222222222223,
+          "de": 0.19051586888313607,
+          "min": 0.0,
+          "max": 0.4
+        },
+        "convivencia": {
+          "media": 0.8639430317999014,
+          "de": 0.09152084294948704,
+          "min": 0.7142857142857143,
+          "max": 0.9767441860465116
+        },
+        "hogar": {
+          "media": 0.025135546098334738,
+          "de": 0.0197931076716392,
+          "min": 0.01015228426395939,
+          "max": 0.06770833333333333
+        },
+        "multifamiliar": {
+          "media": 0.7948149423642797,
+          "de": 0.06507511064675038,
+          "min": 0.7142857142857143,
+          "max": 0.9152542372881356
+        },
+        "pareja": {
+          "media": 0.8326188302053845,
+          "de": 0.0369770395099339,
+          "min": 0.7887323943661971,
+          "max": 0.898989898989899
+        }
+      }
+    },
+    "residencial_v3": {
+      "exactitud_balanceada": {
+        "media": 0.9252372113570639,
+        "de": 0.03438387144592283,
+        "min": 0.8786813510829433,
+        "max": 0.9687056025758896
+      },
+      "recall_sospechoso": {
+        "media": 0.9895833333333333,
+        "de": 0.020667328031745702,
+        "min": 0.9444444444444444,
+        "max": 1.0
+      },
+      "precision_sospechoso": {
+        "media": 0.925882816014395,
+        "de": 0.02356258615144771,
+        "min": 0.8974358974358975,
+        "max": 0.9473684210526315
+      },
+      "falsa_sospecha": {
+        "media": 0.004720214511787548,
+        "de": 0.0027421942558134983,
+        "min": 0.0,
+        "max": 0.007978723404255319
+      },
+      "inocentes_marcadas": {
+        "media": 0.002468435126501423,
+        "de": 0.001151194207407259,
+        "min": 0.0006406149903907751,
+        "max": 0.003861003861003861
+      },
+      "falsa_sospecha_por_etiqueta": {
+        "coincidencia": {
+          "media": 0.37222222222222223,
+          "de": 0.22152668930418762,
+          "min": 0.0,
+          "max": 0.6666666666666666
+        },
+        "convivencia": {
+          "media": 0.0,
+          "de": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "hogar": {
+          "media": 0.0,
+          "de": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "multifamiliar": {
+          "media": 0.0009124087591240876,
+          "de": 0.0025806816831625825,
+          "min": 0.0,
+          "max": 0.0072992700729927005
+        },
+        "pareja": {
+          "media": 0.012204323909353486,
+          "de": 0.011539971650572963,
+          "min": 0.0,
+          "max": 0.031746031746031744
+        }
+      }
+    },
+    "residencial_v4": {
+      "exactitud_balanceada": {
+        "media": 0.9252372113570639,
+        "de": 0.03438387144592283,
+        "min": 0.8786813510829433,
+        "max": 0.9687056025758896
+      },
+      "recall_sospechoso": {
+        "media": 0.9895833333333333,
+        "de": 0.020667328031745702,
+        "min": 0.9444444444444444,
+        "max": 1.0
+      },
+      "precision_sospechoso": {
+        "media": 0.9446893068603595,
+        "de": 0.027304356496241865,
+        "min": 0.9,
+        "max": 0.972972972972973
+      },
+      "falsa_sospecha": {
+        "media": 0.004720214511787548,
+        "de": 0.0027421942558134983,
+        "min": 0.0,
+        "max": 0.007978723404255319
+      },
+      "inocentes_marcadas": {
+        "media": 0.0023096428874632815,
+        "de": 0.0013603239117122078,
+        "min": 0.0,
+        "max": 0.003861003861003861
+      },
+      "falsa_sospecha_por_etiqueta": {
+        "coincidencia": {
+          "media": 0.37222222222222223,
+          "de": 0.22152668930418762,
+          "min": 0.0,
+          "max": 0.6666666666666666
+        },
+        "convivencia": {
+          "media": 0.0,
+          "de": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "hogar": {
+          "media": 0.0,
+          "de": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "multifamiliar": {
+          "media": 0.0009124087591240876,
+          "de": 0.0025806816831625825,
+          "min": 0.0,
+          "max": 0.0072992700729927005
+        },
+        "pareja": {
+          "media": 0.012204323909353486,
+          "de": 0.011539971650572963,
+          "min": 0.0,
+          "max": 0.031746031746031744
+        }
+      }
+    },
+    "union": {
+      "v3": {
+        "precision": {
+          "media": 1.0,
+          "de": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recall": {
+          "media": 0.9969047316712939,
+          "de": 0.0008083407995665314,
+          "min": 0.9958173579644476,
+          "max": 0.998422712933754
+        },
+        "f1": {
+          "media": 0.998449823375616,
+          "de": 0.00040535588284000085,
+          "min": 0.9979042961928047,
+          "max": 0.9992107340173638
+        }
+      },
+      "v4": {
+        "precision": {
+          "media": 1.0,
+          "de": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recall": {
+          "media": 0.9972790112020367,
+          "de": 0.0007177080402342115,
+          "min": 0.9961732475213081,
+          "max": 0.9985979670522257
+        },
+        "f1": {
+          "media": 0.9986375390103225,
+          "de": 0.0003597807142566674,
+          "min": 0.9980829557337051,
+          "max": 0.9992984917572781
+        }
+      }
+    },
+    "tipo_predio_acierto": {
+      "media": 0.8792635221249674,
+      "de": 0.01738545133473018,
+      "min": 0.8529411764705882,
+      "max": 0.904320987654321
+    }
+  },
+  "clasificador_congelado": {
+    "max_convivencia": 4,
+    "max_casa": 5,
+    "max_por_unidad": 6,
+    "min_familia": 0.75,
+    "anillo_max_validado": 0.1,
+    "anillo_min_digital": 0.75,
+    "anillo_max_exclusividad": 0.4,
+    "max_contacto": 6
+  }
+}

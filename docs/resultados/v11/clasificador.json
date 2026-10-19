@@ -1,0 +1,27 @@
+{
+  "parametros": {
+    "max_convivencia": 4,
+    "max_casa": 5,
+    "max_por_unidad": 6,
+    "min_familia": 0.75,
+    "anillo_max_validado": 0.1,
+    "anillo_min_digital": 0.75,
+    "anillo_max_exclusividad": 0.4,
+    "max_contacto": 6
+  },
+  "criterio": "mayor exactitud balanceada media en los 8 escenarios de desarrollo (clústeres del v4 congelado); empate: menor falsa sospecha",
+  "semillas_desarrollo": [
+    4040,
+    4011,
+    4022,
+    4033,
+    4044,
+    4055,
+    4066,
+    4077
+  ],
+  "parametros_grafo_hito3": {
+    "max_clientes": 15,
+    "min_apellido": 0.5
+  }
+}
