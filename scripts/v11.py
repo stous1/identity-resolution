@@ -32,9 +32,7 @@ def main() -> None:
     elif args.fase == "desarrollar":
         resumen = flujo_v11.desarrollar_v4(directorio)
         salida = {
-            "piso_m": {
-                k: v["costo"] for k, v in resumen["piso_m"]["candidatos"].items()
-            }
+            "piso_m": {k: v["costo"] for k, v in resumen["piso_m"]["candidatos"].items()}
             | {"elegido": resumen["piso_m"]["max_bits_en_contra"]},
             "umbral": resumen["umbral"],
             "pesos_domicilio": resumen["pesos_domicilio"],
