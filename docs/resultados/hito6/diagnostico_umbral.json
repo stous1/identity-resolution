@@ -1,0 +1,222 @@
+{
+  "descripcion": "Diagnóstico en la prueba ciega 3 (ya mirada): v3 congelado con el umbral del v2. No es una cifra principal ni cambia el umbral congelado.",
+  "modelos": {
+    "v3 a 0.999999": {
+      "umbral": 0.999999,
+      "clusters": {
+        "precision": {
+          "valor": 0.9969102425459602,
+          "ic_inf": 0.9868030346092731,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.9661625991914957,
+          "ic_inf": 0.9580951495017486,
+          "ic_sup": 0.9735061925121239
+        },
+        "f1": {
+          "valor": 0.9812956204379562,
+          "ic_inf": 0.9750851480141126,
+          "ic_sup": 0.9861206154847367
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.9445,
+          "ic_inf": 0.9345,
+          "ic_sup": 0.954
+        }
+      },
+      "pares": {
+        "tp": 5998,
+        "fp": 3,
+        "fn": 681,
+        "precision": 0.9995000833194467,
+        "recall": 0.8980386285372062
+      },
+      "vetos": {
+        "pares_verdaderos": 6679,
+        "vetados": 257,
+        "por_campo": {
+          "fecha_nacimiento": 103,
+          "documento": 53,
+          "nombres": 30,
+          "email": 19,
+          "telefonos": 15,
+          "segundo_apellido": 13,
+          "municipio": 10,
+          "primer_apellido": 7,
+          "domicilio": 7
+        },
+        "peor_aporte_en_verdaderos": -10.0
+      }
+    },
+    "v3 a 0.9999": {
+      "umbral": 0.9999,
+      "clusters": {
+        "precision": {
+          "valor": 0.9903556359252562,
+          "ic_inf": 0.9740385381234462,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.9839796376703099,
+          "ic_inf": 0.978967749461533,
+          "ic_sup": 0.9884935377087767
+        },
+        "f1": {
+          "valor": 0.9871573413443485,
+          "ic_inf": 0.9783575981074005,
+          "ic_sup": 0.9926423051739063
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.9615,
+          "ic_inf": 0.9529875,
+          "ic_sup": 0.97
+        }
+      },
+      "pares": {
+        "tp": 6278,
+        "fp": 10,
+        "fn": 401,
+        "precision": 0.9984096692111959,
+        "recall": 0.9399610720167689
+      },
+      "vetos": {
+        "pares_verdaderos": 6679,
+        "vetados": 145,
+        "por_campo": {
+          "fecha_nacimiento": 74,
+          "documento": 24,
+          "primer_apellido": 12,
+          "nombres": 11,
+          "municipio": 8,
+          "telefonos": 6,
+          "segundo_apellido": 5,
+          "email": 5
+        },
+        "peor_aporte_en_verdaderos": -10.0
+      }
+    },
+    "v2 a 0.9999": {
+      "umbral": 0.9999,
+      "clusters": {
+        "precision": {
+          "valor": 0.9934570906877663,
+          "ic_inf": 0.9789043798686287,
+          "ic_sup": 1.0
+        },
+        "recall": {
+          "valor": 0.9775415481359485,
+          "ic_inf": 0.9709740326170557,
+          "ic_sup": 0.9829186488309768
+        },
+        "f1": {
+          "valor": 0.9854350615047921,
+          "ic_inf": 0.9776763693880763,
+          "ic_sup": 0.9903164447268097
+        },
+        "pct_clusters_exactos": {
+          "valor": 0.956,
+          "ic_inf": 0.947,
+          "ic_sup": 0.965
+        }
+      },
+      "pares": {
+        "tp": 6212,
+        "fp": 8,
+        "fn": 467,
+        "precision": 0.9987138263665595,
+        "recall": 0.9300793531965863
+      },
+      "vetos": {
+        "pares_verdaderos": 6679,
+        "vetados": 197,
+        "por_campo": {
+          "fecha_nacimiento": 104,
+          "documento": 26,
+          "nombres": 15,
+          "apellido_casada": 13,
+          "primer_apellido": 11,
+          "telefonos": 9,
+          "email": 8,
+          "municipio": 6,
+          "segundo_apellido": 5
+        },
+        "peor_aporte_en_verdaderos": -72.6482332275472
+      }
+    }
+  },
+  "diferencias_pareadas": {
+    "v3 a 0.999999 - v2 a 0.9999": {
+      "precision": {
+        "valor": 0.003453151858193837,
+        "ic_inf": -9.461321837498648e-05,
+        "ic_sup": 0.014719325849048096,
+        "significativa": false
+      },
+      "recall": {
+        "valor": -0.011378948944452794,
+        "ic_inf": -0.017507840091678602,
+        "ic_sup": -0.006332267766263501,
+        "significativa": true
+      },
+      "f1": {
+        "valor": -0.004139441066835947,
+        "ic_inf": -0.008118449272776489,
+        "ic_sup": 0.0020483956211590393,
+        "significativa": false
+      },
+      "pct_clusters_exactos": {
+        "valor": -0.011499999999999955,
+        "ic_inf": -0.018000000000000016,
+        "ic_sup": -0.0050000000000000044,
+        "significativa": true
+      }
+    },
+    "v3 a 0.9999 - v2 a 0.9999": {
+      "precision": {
+        "valor": -0.003101454762510114,
+        "ic_inf": -0.012582648985915974,
+        "ic_sup": 0.00010180423277519885,
+        "significativa": false
+      },
+      "recall": {
+        "valor": 0.006438089534361424,
+        "ic_inf": 0.002719995628773559,
+        "ic_sup": 0.010899035084063301,
+        "significativa": true
+      },
+      "f1": {
+        "valor": 0.0017222798395564176,
+        "ic_inf": -0.003243096626704533,
+        "ic_sup": 0.005000142982108172,
+        "significativa": false
+      },
+      "pct_clusters_exactos": {
+        "valor": 0.00550000000000006,
+        "ic_inf": 0.0010000000000000009,
+        "ic_sup": 0.010000000000000009,
+        "significativa": true
+      }
+    }
+  },
+  "resumen": {
+    "v3 a 0.999999": {
+      "precision": 0.9969,
+      "recall": 0.9662,
+      "f1": 0.9813,
+      "pct_clusters_exactos": 0.9445
+    },
+    "v3 a 0.9999": {
+      "precision": 0.9904,
+      "recall": 0.984,
+      "f1": 0.9872,
+      "pct_clusters_exactos": 0.9615
+    },
+    "v2 a 0.9999": {
+      "precision": 0.9935,
+      "recall": 0.9775,
+      "f1": 0.9854,
+      "pct_clusters_exactos": 0.956
+    }
+  }
+}
