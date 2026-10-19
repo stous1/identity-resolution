@@ -38,9 +38,11 @@ correcto**.
 | Latencia máxima | 162 ms | |
 
 *Corrección de la auditoría:* esa precisión supone 50 % de consultas de clientes
-existentes. Con 10 % de clientes, la precisión esperada es 0,994, y con 1 %, **0,94**: una
-falsa alarma cada 1.500 personas nuevas pesa mucho más cuando casi todas las consultas son
-nuevas. Ver el [hito 6](hito6.md).
+existentes. Con las tasas de esta misma evaluación (993 aciertos entre 1.000 existentes y
+1 falsa alarma entre 1.000 nuevas), con 10 % de clientes la precisión sería **0,991** y con
+1 %, **0,909**: una falsa alarma cada 1.000 personas nuevas pesa mucho más cuando casi
+todas las consultas son nuevas. Las cifras de 0,994 y 0,94 del [hito 6](hito6.md) son del
+modelo v3, con otra base y otro umbral.
 
 | Decisión | Existentes | Nuevas |
 |---|---|---|
@@ -55,7 +57,9 @@ vuelve a ejecutar en DuckDB (sin esto, unos 280 ms por consulta).
 **Servicio local:** `uv run python scripts/servicio_local.py` levanta una API con FastAPI
 en `http://127.0.0.1:8000/docs`. `POST /consultar` recibe un registro crudo y devuelve la
 decisión, la probabilidad, el cliente encontrado y la explicación por campo (peso de cada
-comparación). Es solo para uso local: no se publica ningún servicio.
+comparación). Es solo para uso local: no se publica ningún servicio. *Desde el hito 6, el
+servicio usa por defecto el modelo v3 con la zona gris por bandas de peso;
+`--modelo v2` reproduce el de esta página (zona gris p ≥ 0,9).*
 
 ## Escala con DuckDB
 

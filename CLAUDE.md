@@ -44,6 +44,7 @@ uv run python scripts/hito6.py evaluar       # v3 congelado: prueba normal y cie
 uv run python scripts/hito6.py tiempo-real   # precisión con 1 %, 10 % y 50 % de clientes
 uv run python scripts/hito6.py hito3         # hito 3 con 8 pares de semillas (v2 y v3)
 uv run python scripts/hito6.py escala        # 100 mil y 1 millón con el v3 congelado
+uv run python scripts/hito6.py diagnostico-umbral  # v3 con el umbral del v2 en la ciega 3
 uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3, 5, 6 -> docs/resultados/
 ```
 
@@ -83,7 +84,12 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
     `docs/resultados/hito6/{modelo,desarrollo,calibracion}.json` (lo verifica
     `tests/test_hito6.py`). `errores_ciegos_3.py` es la tercera prueba ciega, escrita después
     de congelar. Las ciegas 1, 2 y 3 ya se miraron: la próxima corrección necesita una ciega 4.
-  - `audit/` es el registro de una auditoría independiente: no se modifica.
+  - `audit/` es el registro de una auditoría independiente: sus archivos existentes no se
+    modifican. Sí se pueden agregar archivos nuevos de verificaciones posteriores (por
+    ejemplo, `audit/verificacion_hito6.md`), sin tocar los anteriores.
+  - Tiempo real con el v3: la zona gris sale de las bandas congeladas
+    (`calibracion.json`), trasladadas a la previa 1/N (`tiempo_real.peso_con_otra_previa`).
+    `scripts/servicio_local.py` usa el v3 por defecto; `--modelo v2` reproduce el hito 5.
   - Demo: `demo.py` exporta el modelo v2 a `docs/demo/modelo_demo.json`; `docs/demo/motor.js`
     lo reimplementa en JavaScript y `tests/test_demo.py` (con Node.js) verifica que da los
     mismos niveles y pesos que Splink.

@@ -26,18 +26,21 @@ medir su precisión contra la verdad conocida.
 - [Hito 3: registro de oro, grafo de identidad compartida y puentes](hito3.md): registro de
   oro a menos de 5 puntos del techo alcanzable, grupos de datos compartidos clasificados
   en relleno, hogar o sospechoso (98,6 % ± 0,8 en 8 semillas), puentes que evitan en
-  promedio 3 de cada 10 mezclas sin perder recall, y el
+  promedio 3 de cada 10 mezclas (sin perder recall con la semilla publicada), y el
   [universo de registros en Cosmograph](hito3_universo.html).
 - [Hito 5: vinculación en tiempo real y escala](hito5.md): "¿ya es cliente?" contra la base
   de registros de oro con precisión 0,999, recall 0,993 y 60 ms de mediana por consulta;
   1 millón de registros en DuckDB en 134 s con 9,1 GB de pico, y el
   [universo grande en Cosmograph](hito5_universo.html) (200 mil registros desde Parquet).
-  *Con 1 % de clientes existentes en las consultas, la precisión baja a 0,94.*
-- [Hito 6: correcciones post-auditoría](hito6.md): modelo v3 sin vetos (ningún campo resta
-  más de 10 bits), generador con mudanzas, **prueba ciega 3** (v3: precisión 0,997 y recall
-  0,966; v2: 0,994 y 0,978; v1: 0,989 y 0,693), línea base determinística (Splink aporta
-  +0,065 de F1 donde el documento falla), calibración y zona gris por bandas de peso,
-  escala con el modelo congelado y hito 3 con varias semillas.
+  *Con las mismas tasas, la precisión sería 0,991 con 10 % de clientes existentes en las
+  consultas y 0,909 con 1 %.*
+- [Hito 6: correcciones post-auditoría](hito6.md): modelo v3 sin vetos extremos (ningún
+  campo resta más de 10 bits), generador con mudanzas, **prueba ciega 3** (v3: precisión
+  0,997 y recall 0,966; v2: 0,994 y 0,978; v1: 0,989 y 0,693; con el umbral del v2, el v3
+  tendría más recall), línea base determinística (Splink aporta +0,065 de F1 global sobre
+  la mejor regla, sobre todo donde el documento falla), calibración y zona gris por bandas
+  de peso (también en "¿ya es cliente?"), escala con el modelo congelado y hito 3 con
+  varias semillas.
 
 ## Hito 1: fake_1000
 

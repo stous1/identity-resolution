@@ -24,7 +24,8 @@ Repetido con 8 pares (hito 6, media ± DE):
 | Mezclas evitadas cortando puentes (umbral 0,9) | 39 % | 31 % ± 18 % (13 – 56) |
 
 La regla de supervivencia elegida para documento, nombres, apellidos y dirección cambia con
-la semilla; la de celular y correo ("validado") es estable. Detalle en
+la semilla; la de celular y correo ("validado") es estable. El recall perdido al cortar
+puentes solo se midió con la semilla publicada (tabla de abajo). Detalle en
 [hito3_semillas.json](resultados/hito6/hito3_semillas.json).
 
 ## Registro de oro (prueba, semilla publicada)
