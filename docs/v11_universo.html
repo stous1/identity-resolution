@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Universo residencial · v1.1</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>
+  :root { --fondo: #0b1020; --texto: #e2e8f0; --tenue: #94a3b8; --panel: rgba(15, 23, 42, 0.86); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--fondo); color: var(--texto);
+    font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  #grafo { position: fixed; inset: 0; }
+  .panel { position: fixed; top: 16px; left: 16px; max-width: min(400px, calc(100vw - 32px));
+    max-height: calc(100vh - 32px); overflow: auto;
+    background: var(--panel); border: 1px solid #1e293b; border-radius: 10px; padding: 14px 16px; }
+  .panel h1 { font-size: 16px; margin: 0 0 6px; }
+  .panel p { margin: 0 0 10px; color: var(--tenue); }
+  .leyenda { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .leyenda li { display: flex; align-items: center; gap: 8px; }
+  .punto { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .linea { width: 16px; height: 3px; border-radius: 2px; flex: none; }
+  #estado { margin-top: 8px; color: var(--tenue); font-size: 12px; }
+  a { color: #93c5fd; }
+</style>
+</head>
+<body>
+<div id="grafo"></div>
+<div class="panel">
+  <h1>Universo residencial (escenario de prueba de la v1.1)</h1>
+  <p>Cada punto gris es un registro; los enlaces del modelo v4 los agrupan en clientes. Las
+    estrellas son datos compartidos por clientes distintos, con la clase del grafo
+    residencial: la dirección se agrupa por predio. <a href="v11.html">Volver</a></p>
+  <ul class="leyenda">
+    <li><span class="punto" style="background:#94a3b8"></span>Registro</li>
+    <li><span class="punto" style="background:#7c3aed"></span>Dato de relleno</li>
+    <li><span class="punto" style="background:#16a34a"></span>Hogar o familia (apellido, apellido de casada, convención de los hijos)</li>
+    <li><span class="punto" style="background:#06b6d4"></span>Convivencia probable (pocos clientes, solo la dirección)</li>
+    <li><span class="punto" style="background:#3b82f6"></span>Multifamiliar (varios hogares en un edificio, conjunto o casa de pisos)</li>
+    <li><span class="punto" style="background:#dc2626"></span>Dato sospechoso, o registro de quien usa un documento ajeno</li>
+    <li><span class="punto" style="background:#f59e0b"></span>Registro de la víctima (dueña del documento compartido)</li>
+    <li><span class="linea" style="background:#64748b"></span>Coincidencia sobre el umbral congelado</li>
+    <li><span class="linea" style="background:#cbd5e1"></span>Coincidencia débil (0,9 al umbral)</li>
+  </ul>
+  <div id="estado">Cargando…</div>
+</div>
+<script type="module">
+  import { Cosmograph, prepareCosmographData } from "https://esm.sh/@cosmograph/cosmograph@2.5.1";
+
+  const COLORES = {
+    registro: "#94a3b8", registro_sospechoso: "#dc2626", registro_suplantador: "#dc2626",
+    registro_victima: "#f59e0b",
+    valor_relleno: "#7c3aed", valor_hogar: "#16a34a", valor_convivencia: "#06b6d4",
+    valor_multifamiliar: "#3b82f6", valor_sospechoso: "#dc2626",
+    enlace_fuerte: "#64748b", enlace_debil: "#cbd5e1",
+    enlace_relleno: "#a78bfa", enlace_hogar: "#86efac", enlace_convivencia: "#67e8f9",
+    enlace_multifamiliar: "#93c5fd", enlace_sospechoso: "#f87171",
+  };
+  const estado = document.getElementById("estado");
+  try {
+    const [puntos, enlaces] = await Promise.all([
+      fetch("resultados/v11/universo_puntos.json").then((r) => r.json()),
+      fetch("resultados/v11/universo_enlaces.json").then((r) => r.json()),
+    ]);
+    const configDatos = {
+      points: { pointIdBy: "id", pointColorBy: "categoria", pointSizeBy: "tamano", pointLabelBy: "etiqueta" },
+      links: { linkSourceBy: "origen", linkTargetsBy: ["destino"], linkColorBy: "categoria" },
+    };
+    const preparado = await prepareCosmographData(configDatos, puntos, enlaces);
+    const { points, links, cosmographConfig } = preparado;
+    window.cosmograph = new Cosmograph(document.getElementById("grafo"), {
+      points, links, ...cosmographConfig,
+      pointColorByFn: (v) => COLORES[v] ?? "#94a3b8",
+      linkColorByFn: (v) => COLORES[v] ?? "#475569",
+      pointSizeStrategy: "direct",
+      backgroundColor: "#0b1020",
+      linkWidthScale: 1.5,
+      showDynamicLabels: false,
+      fitViewOnInit: true,
+      simulationRepulsion: 0.6,
+      simulationGravity: 0.2,
+    });
+    estado.textContent = `${puntos.length.toLocaleString("es-CO")} puntos y ${enlaces.length.toLocaleString("es-CO")} enlaces. Rueda para acercar; arrastra para mover.`;
+  } catch (error) {
+    estado.textContent = "No se pudo cargar la visualización: " + error;
+    console.error(error);
+  }
+</script>
+</body>
+</html>
