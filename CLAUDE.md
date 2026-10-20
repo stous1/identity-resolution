@@ -53,6 +53,7 @@ uv run python scripts/v11.py universo        # universo de Cosmograph de la v1.1
 uv run python scripts/v111.py hito2          # v1 congelado en la prueba normal con fecha fija
 uv run python scripts/v111.py fichas         # datos de la ficha de cliente único (tras --hito 3)
 uv run python scripts/v111.py tiempo-real    # "¿ya es cliente?" con el v4 y el v3
+uv run python scripts/laboratorio.py         # datos del laboratorio -> docs/resultados/laboratorio/
 uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3, 5, 6, v11 -> docs/resultados/
 ```
 
@@ -104,6 +105,9 @@ uv run python scripts/publicar_resultados.py --hito 1  # o 2, validacion, 2b, 3,
     JavaScript y `tests/test_demo.py` (con Node.js) verifica que da los mismos niveles y
     pesos que Splink. `docs/demo.html` (v4 desde la v1.1.1) y `docs/calculadora.html` (lee
     `docs/resultados/hito6/metricas.json`) son páginas estáticas, sin servidor.
+  - Laboratorio: `laboratorio.py` exporta los pares de la ciega 1 (v1, con el aporte de los
+    vetos) y de la ciega 3 (v3); `docs/laboratorio.html` los recalcula con
+    `docs/laboratorio/motor.js`, que `tests/test_laboratorio.py` compara con Python (Node).
   - GIF: `gifs.py` y `scripts/gifs.py` graban con Playwright el recorrido por Cosmograph
     (requiere internet) y el antes y después, en `docs/resultados/gifs/`.
   - v1.1 (realidad residencial): `diagnostico_v11.py` (diagnóstico previo),

@@ -4,6 +4,18 @@ Historia por hitos del caso 1 (calidad del dato y resolución de identidades). T
 cambios están en la rama `main`; los modelos congelados tienen su tag. El hito 4 (agente de
 revisión de la zona gris) está pendiente.
 
+## Laboratorio interactivo
+
+- [docs/laboratorio.html](docs/laboratorio.html): **la auditoría en vivo** (un interruptor
+  quita los vetos de ciudad y dirección del v1 en la prueba ciega 1: recall de 0,635 a
+  0,944; brecha del apellido de casada de −18,4 puntos, significativa, a −3,6, no
+  significativa) y **el umbral en tus manos** (v3 en la ciega 3: precisión, recall, costo,
+  uniones erróneas directas y por transitividad, puentes y clientes mezclados que cuelgan
+  de un puente, con la curva de costo).
+- Sin servidor: el motor (`docs/laboratorio/motor.js`) recalcula clústeres, métricas y
+  puentes sobre los pares exportados por `laboratorio.py`, y `tests/test_laboratorio.py`
+  verifica con Node que da lo mismo que Python. GIF nuevo en el README.
+
 ## v1.1.2: generadores iguales en Windows y en Linux
 
 - Faker sortea los segundos de una fecha con `randint` en Windows y con `uniform` en Linux;

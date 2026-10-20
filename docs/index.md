@@ -8,6 +8,7 @@ sintéticos.
 [![Universo de registros en Cosmograph](resultados/portada.jpg)](hito3_universo.html)
 
 **[Probar la demo →](demo.html)** · **[Ficha de cliente único →](ficha.html)** ·
+**[Laboratorio →](laboratorio.html)** ·
 **[Calculadora de impacto →](calculadora.html)** · [universo residencial](v11_universo.html)
 
 <sub>Cifras de la v1.1.1: los generadores usan una fecha fija y todas las evaluaciones se
@@ -84,6 +85,10 @@ validación con datos reales.
   generador con predios y hogares, modelo v4 con la dirección en predio y unidad, grafo
   residencial (convivencia probable, multifamiliar, parejas por apellido de casada y por la
   convención de los hijos) y **prueba ciega 4**; [universo residencial](v11_universo.html).
+- [Laboratorio](laboratorio.html): **la auditoría en vivo** (al quitar los vetos de ciudad y
+  dirección, el recall de la ciega 1 sube de 0,635 a 0,944 y la brecha del apellido de
+  casada deja de ser significativa) y **el umbral en tus manos** (uniones erróneas por
+  transitividad, costo y puentes en la ciega 3 con el v3), recalculados en el navegador.
 - [v1.1.1: reproducibilidad](v111.md): fecha fija en todos los generadores, todas las
   evaluaciones recalculadas (con la tabla de lo que cambió), demo y "¿ya es cliente?" con
   el v4, y la [ficha de cliente único](ficha.html).

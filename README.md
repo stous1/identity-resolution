@@ -20,6 +20,7 @@ sospechosos. [Abrir el universo interactivo →](https://stous1.github.io/identi
 
 **[Probar la demo](https://stous1.github.io/identity-resolution/demo.html)** ·
 **[Ficha de cliente único](https://stous1.github.io/identity-resolution/ficha.html)** ·
+**[Laboratorio](https://stous1.github.io/identity-resolution/laboratorio.html)** ·
 **[Calculadora de impacto](https://stous1.github.io/identity-resolution/calculadora.html)** ·
 **[Tableros](https://stous1.github.io/identity-resolution/)**
 
@@ -64,10 +65,13 @@ generados con una fecha fija: [qué cambió](https://stous1.github.io/identity-r
 
 ## Qué se puede ver
 
+<p align="center"><a href="https://stous1.github.io/identity-resolution/laboratorio.html"><img src="docs/resultados/gifs/laboratorio.gif" width="520" alt="Laboratorio: al quitar los vetos de ciudad y dirección, el recall de la prueba ciega 1 sube de 0,635 a 0,944; al mover el umbral cambian el costo y las uniones por transitividad"></a></p>
+
 | Enlace | Qué es |
 |---|---|
 | [Portada de los tableros](https://stous1.github.io/identity-resolution/) | Resumen navegable de todos los hitos en GitHub Pages |
 | [Demo: ¿son la misma persona?](https://stous1.github.io/identity-resolution/demo.html) | Escribe dos registros y mira la probabilidad, la banda y la explicación con el v4, en el navegador |
+| [Laboratorio](https://stous1.github.io/identity-resolution/laboratorio.html) | La auditoría en vivo (quita los vetos de ciudad y dirección y mira el recall y la brecha de equidad) y el umbral en tus manos (uniones por transitividad, costo y puentes) |
 | [Ficha de cliente único](https://stous1.github.io/identity-resolution/ficha.html) | Busca un cliente y mira sus registros, su registro de oro, con quién comparte datos, su historia y sus alertas |
 | [Calculadora de impacto](https://stous1.github.io/identity-resolution/calculadora.html) | Las métricas del v3 convertidas en pesos al año, con supuestos editables |
 | [Hito 1: fake_1000](https://stous1.github.io/identity-resolution/#hito-1-fake_1000) | El flujo completo sobre el dataset de demostración de Splink |

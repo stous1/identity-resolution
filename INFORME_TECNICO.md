@@ -1367,6 +1367,26 @@ sin validar, en un valor que los clientes casi no usan en sus otros registros, c
 personas sin relación) y no solo por su tamaño, y reservar "relleno" para valores
 genéricos o compartidos por muchos clientes sin esa forma. Necesita una prueba ciega 5.
 
+## Laboratorio interactivo
+
+[docs/laboratorio.html](https://stous1.github.io/identity-resolution/laboratorio.html)
+recalcula en el navegador, sin servidor, dos decisiones del proyecto a partir de los pares
+puntuados por modelos congelados (`laboratorio.py` los exporta; `docs/laboratorio/motor.js`
+los procesa; `tests/test_laboratorio.py` comprueba con Node que da lo mismo que Python):
+
+- **La auditoría en vivo** (v1 en la prueba ciega 1, datos de fecha fija): al restar el
+  aporte de domicilio y municipio a cada par, como en `audit/a5_ablacion.py`, el recall por
+  clúster pasa de 0,635 a 0,944 (la auditoría publicó 0,636 y 0,943 con los datos
+  anteriores), las personas exactas de 60,5 % a 92,2 % y los clientes mezclados de 7 a 0.
+  La brecha del apellido de casada en personas exactas pasa de −18,4 puntos [−26,4, −9,6]
+  a −3,6 [−8,8, +1,4] (no significativa); la de los apodos, de −15,6 a −8,7 (sigue
+  significativa).
+- **El umbral en tus manos** (v3 en la ciega 3): al umbral congelado (19,9 bits), 24 pares
+  unidos por error, 22 de ellos solo por transitividad; con 5 bits, 133 (105 por
+  transitividad) y 8 de los 14 clientes mezclados cuelgan de un puente. El umbral de menor
+  costo en esta prueba es 23 bits (costo 402 frente a 528 del congelado), pero solo se
+  conoce después de mirar la verdad.
+
 ## Trabajo futuro
 
 - **Quinta prueba ciega:** las ciegas 1 a 4 ya se miraron. Cualquier corrección nueva
