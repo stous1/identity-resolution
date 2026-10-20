@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laboratorio de resolución de identidades</title>
+<meta name="description" content="La auditoría en vivo (quitar los vetos de ciudad y dirección) y el umbral en tus manos (uniones por transitividad, costo y puentes), recalculados en el navegador con modelos congelados. Datos sintéticos.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="laboratorio/estilo.css">
+</head>
+<body>
+<header class="cabecera">
+  <div class="contenedor">
+    <p class="volver"><a href="index.html">← Portada</a> · <a href="demo.html">Demo de pares</a> ·
+      <a href="ficha.html">Ficha de cliente único</a> · <a href="calculadora.html">Calculadora</a></p>
+    <h1>Laboratorio</h1>
+    <p class="bajada">Dos decisiones que mueven las cifras de este proyecto, recalculadas aquí
+      mismo sobre los pares que puntuaron los modelos congelados.</p>
+    <nav class="pestanas" role="tablist">
+      <button role="tab" id="tab-auditoria" aria-selected="true" aria-controls="panel-auditoria">La auditoría en vivo</button>
+      <button role="tab" id="tab-umbral" aria-selected="false" aria-controls="panel-umbral">El umbral en tus manos</button>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+  <section id="panel-auditoria" role="tabpanel" aria-labelledby="tab-auditoria">
+    <p class="contexto">La <strong>prueba ciega 1</strong> dio un recall de 0,64 con el modelo v1
+      congelado. Una <a href="https://github.com/stous1/identity-resolution/blob/main/audit/INFORME.md">auditoría
+      independiente</a> encontró la causa: el generador nunca mudaba a nadie, así que el modelo
+      aprendió que "municipio distinto" y "dirección distinta" casi nunca ocurren en la misma
+      persona y los convirtió en <strong>vetos</strong> de hasta −48 bits. Quítalos y mira qué pasa.</p>
+    <label class="interruptor">
+      <input type="checkbox" id="sin-vetos">
+      <span class="riel" aria-hidden="true"></span>
+      <span>Quitar los vetos de ciudad y dirección</span>
+    </label>
+    <div id="auditoria" aria-live="polite"><p class="cargando">Cargando los pares de la ciega 1…</p></div>
+  </section>
+
+  <section id="panel-umbral" role="tabpanel" aria-labelledby="tab-umbral" hidden>
+    <p class="contexto">El modelo da a cada par un peso (bits de evidencia). Los pares sobre el
+      <strong>umbral</strong> se unen, y los clientes salen de unir en cadena: si A se parece a B
+      y B a C, A y C quedan juntos aunque no se parezcan (<strong>transitividad</strong>). Mueve
+      el umbral sobre la <strong>prueba ciega 3</strong> con el modelo v3 congelado.</p>
+    <div class="control-umbral">
+      <label for="umbral">Umbral: <strong id="umbral-valor"></strong></label>
+      <input type="range" id="umbral" min="0" max="40" step="0.5" value="20">
+      <div class="chips" id="marcas"></div>
+    </div>
+    <div id="umbral-resultado" aria-live="polite"><p class="cargando">Cargando los pares de la ciega 3…</p></div>
+    <div class="tarjeta">
+      <h2>Costo por umbral (10 por cada falso positivo, 1 por cada falso negativo)</h2>
+      <div id="curva"><p class="cargando">Calculando la curva…</p></div>
+      <p class="nota">Elegir el umbral mirando esta curva sería hacer trampa: el congelado se
+        eligió en desarrollo, antes de ver esta prueba. Aquí se ve cuánto cuesta esa decisión
+        con datos nuevos.</p>
+    </div>
+  </section>
+
+  <p class="pie">Todo se calcula en el navegador con los pares publicados en
+    <a href="https://github.com/stous1/identity-resolution/tree/main/docs/resultados/laboratorio">docs/resultados/laboratorio</a>
+    (cifras de la v1.1.1, con los datos de fecha fija). El motor
+    (<code>laboratorio/motor.js</code>) se verifica contra Python en <code>tests/test_laboratorio.py</code>.
+    Datos sintéticos.</p>
+</main>
+
+<script src="laboratorio/motor.js"></script>
+<script src="laboratorio/app.js"></script>
+</body>
+</html>

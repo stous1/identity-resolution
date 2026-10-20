@@ -6,6 +6,7 @@
   modelo v3 congelado agrupa en clientes; se dibujan en una página local y se capturan
   cuadro por cuadro (la animación depende de un parámetro, no del reloj, así que el GIF
   sale igual en cada corrida).
+- ``grabar_laboratorio``: el laboratorio (quitar los vetos y mover el umbral).
 
 Los GIF se reducen de tamaño y de paleta para que pesen poco.
 """
@@ -271,3 +272,44 @@ def grabar_agrupacion(
             duraciones.append(2200 if i == 0 else 2800 if i == pasos else 70)
         navegador.close()
     return guardar_gif(cuadros, ruta_gif, duraciones, colores=64)
+
+
+def grabar_laboratorio(
+    raiz: Path,
+    ruta_gif: Path,
+    pagina: str = "laboratorio.html",
+    ancho: int = 760,
+    alto: int = 620,
+    puerto: int = 8767,
+    ancho_gif: int = 520,
+) -> Path:
+    """El laboratorio: el interruptor de los vetos y el control de umbral, cuadro por cuadro.
+
+    No depende de internet ni del reloj: la página es local y cada cuadro se toma después de
+    una acción del usuario simulada.
+    """
+    from playwright.sync_api import sync_playwright
+
+    with servir(raiz, puerto) as base, sync_playwright() as p:
+        navegador = p.chromium.launch()
+        web = navegador.new_page(viewport={"width": ancho, "height": alto})
+        web.goto(f"{base}/{pagina}")
+        web.wait_for_selector("#auditoria .cifras")
+        web.evaluate("window.scrollTo(0, 330)")
+        cuadros, duraciones = [_cuadro(web)], [1800]
+        web.click(".interruptor")
+        web.wait_for_timeout(450)
+        cuadros.append(_cuadro(web))
+        duraciones.append(2600)
+        web.click("#tab-umbral")
+        web.wait_for_selector("#curva svg")
+        web.evaluate("window.scrollTo(0, 250)")
+        for peso in (20, 15, 10, 5, 2, 10, 20, 30, 38, 23):
+            web.fill("#umbral", str(peso))
+            web.dispatch_event("#umbral", "input")
+            web.wait_for_timeout(120)
+            cuadros.append(_cuadro(web))
+            duraciones.append(650)
+        duraciones[-1] = 2200
+        navegador.close()
+    return guardar_gif(cuadros, ruta_gif, duraciones, ancho=ancho_gif, colores=64)

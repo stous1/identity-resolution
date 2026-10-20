@@ -1,0 +1,70 @@
+:root {
+  --fondo: #f8fafc; --papel: #ffffff; --texto: #0f172a; --suave: #64748b; --borde: #e2e8f0;
+  --acento: #2563eb; --bien: #16a34a; --mal: #dc2626; --aviso: #d97706; --gris: #94a3b8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #0b1020; --papel: #111827; --texto: #e5e7eb; --suave: #94a3b8; --borde: #1f2937;
+    --acento: #60a5fa; --bien: #4ade80; --mal: #f87171; --aviso: #fbbf24; --gris: #475569;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fondo); color: var(--texto);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--acento); }
+code { font-size: 0.9em; }
+.contenedor { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+.cabecera { background: var(--papel); border-bottom: 1px solid var(--borde); padding-top: 12px; }
+.volver { margin: 0; font-size: 14px; color: var(--suave); }
+h1 { font-size: clamp(28px, 6vw, 38px); margin: 8px 0 4px; }
+h2 { font-size: 16px; margin: 0 0 10px; }
+.bajada { margin: 0 0 12px; color: var(--suave); max-width: 46em; }
+.pestanas { display: flex; gap: 4px; overflow-x: auto; }
+.pestanas button { font: inherit; font-weight: 600; background: none; border: 0; color: var(--suave);
+  padding: 10px 14px; border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; }
+.pestanas button[aria-selected="true"] { color: var(--texto); border-bottom-color: var(--acento); }
+.contexto { max-width: 48em; margin: 20px 0 12px; }
+.cargando, .nota, .pie { color: var(--suave); font-size: 14px; }
+.pie { margin: 28px 0 40px; }
+.tarjeta { background: var(--papel); border: 1px solid var(--borde); border-radius: 10px;
+  padding: 14px; margin: 14px 0; }
+
+.interruptor { display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+  font-weight: 600; margin: 4px 0 8px; user-select: none; }
+.interruptor input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.riel { width: 46px; height: 26px; border-radius: 999px; background: var(--gris); position: relative;
+  transition: background .2s; flex: none; }
+.riel::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px;
+  border-radius: 50%; background: #fff; transition: transform .2s; }
+.interruptor input:checked + .riel { background: var(--bien); }
+.interruptor input:checked + .riel::after { transform: translateX(20px); }
+.interruptor input:focus-visible + .riel { outline: 2px solid var(--acento); outline-offset: 2px; }
+
+.cifras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 12px 0; }
+@media (max-width: 640px) { .cifras { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.cifra { background: var(--papel); border: 1px solid var(--borde); border-radius: 10px; padding: 10px 12px; }
+.cifra .valor { font-size: clamp(22px, 5vw, 30px); font-weight: 700; line-height: 1.15; }
+.cifra .etiqueta { font-size: 13px; color: var(--suave); }
+.cifra .antes { font-size: 12px; color: var(--suave); }
+.sube { color: var(--bien); } .baja { color: var(--mal); }
+
+.barras { display: grid; gap: 8px; }
+.barra { display: grid; grid-template-columns: 9.5em 1fr 3.5em; align-items: center; gap: 8px; font-size: 14px; }
+@media (max-width: 520px) { .barra { grid-template-columns: 7em 1fr 3em; font-size: 13px; } }
+.barra .pista { height: 14px; background: var(--borde); border-radius: 7px; overflow: hidden; }
+.barra .relleno { height: 100%; background: var(--acento); border-radius: 7px; transition: width .35s; }
+.barra .relleno.grupo { background: var(--aviso); }
+
+.tabla { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--borde); vertical-align: top; }
+th { color: var(--suave); font-weight: 600; }
+
+.control-umbral { background: var(--papel); border: 1px solid var(--borde); border-radius: 10px; padding: 12px 14px; }
+.control-umbral input[type=range] { width: 100%; margin: 10px 0 6px; accent-color: var(--acento); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { font: inherit; font-size: 13px; border: 1px solid var(--borde); background: var(--fondo);
+  color: var(--texto); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+.chips button:hover { border-color: var(--acento); }
+svg { width: 100%; height: auto; display: block; }
